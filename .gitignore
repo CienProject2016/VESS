@@ -19,13 +19,17 @@ Thumbs.db
 *.cache
 *.ilk
 *.log
+*.obj
+*.sdf
 [Bb]in
 [Dd]ebug*/
 *.sbr
 obj/
-[Rr]elease*/
+[Rr]elease*/	
 _ReSharper*/
 [Tt]est[Rr]esult*
+[Dd]ebugPublic/
+[Rr]eleases/
 
 # Ignore files build by ndk and eclipse
 libs/
