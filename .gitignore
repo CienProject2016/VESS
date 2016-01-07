@@ -21,6 +21,9 @@ Thumbs.db
 *.log
 *.obj
 *.sdf
+*.tlog
+*.write.1.tlog
+
 [Bb]in
 [Dd]ebug*/
 *.sbr

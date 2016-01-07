@@ -18,9 +18,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>win32</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src\Vess</Filter>
     </ClCompile>
@@ -30,20 +27,11 @@
     <ClCompile Include="..\Classes\GameScene.cpp">
       <Filter>src\View</Filter>
     </ClCompile>
-    <ClCompile Include="monster.cpp">
-      <Filter>win32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\TestScene.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\hero.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="main.h">
-      <Filter>win32</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>src\Vess</Filter>
     </ClInclude>
@@ -53,16 +41,7 @@
     <ClInclude Include="..\Classes\GameScene.h">
       <Filter>src\View</Filter>
     </ClInclude>
-    <ClInclude Include="monster.h">
-      <Filter>win32</Filter>
-    </ClInclude>
-    <ClInclude Include="unit.h">
-      <Filter>win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\TestScene.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\hero.h">
+    <ClInclude Include="main.h">
       <Filter>win32</Filter>
     </ClInclude>
   </ItemGroup>
