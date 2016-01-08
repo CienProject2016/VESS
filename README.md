@@ -4,8 +4,7 @@ VeryExpensiveSword&amp;Shield (VESS)
 
 # How to setup
 1. 해당 git을 clone 받는다.
-2. vess/cocos2d 폴더에 있는 external.zip파일을 압축 푼 후 덮어씌운다.
-3. visual studio를 실행 후 빌드한다.
+2. visual studio를 실행 후 빌드한다.
 
 #Android-Studio setting
 1. cmd를 킨 뒤 프로젝트 최상단 경로로 들어간다.
