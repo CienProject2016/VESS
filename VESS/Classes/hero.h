@@ -1,15 +1,14 @@
-#include "unit.h"
+#include "Unit.h"
+
 #ifndef __HERO_H__
 #define __HERO_H__
+
 class Hero: public Unit {
-private:
-	int monsterNumber;
-	double monsterHP;
 
 public:
 	Hero();
 	~Hero();
-	virtual void getHP();
+	virtual int getHP();
 	virtual void setHP();
 };
 #endif
