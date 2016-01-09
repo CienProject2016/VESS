@@ -1,7 +1,7 @@
 #pragma once
-class healthState {
+class HealthState {
 private:
 public:
-	healthState();
-	~healthState();
+	HealthState();
+	~HealthState();
 };
