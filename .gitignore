@@ -58,3 +58,4 @@ build/
 *.xcworkspacedata
 *.xcuserstate
 xcschememanagement.*
+*.opendb
