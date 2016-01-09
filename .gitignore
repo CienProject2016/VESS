@@ -23,6 +23,7 @@ Thumbs.db
 *.sdf
 *.tlog
 *.write.1.tlog
+*.opendb
 
 [Bb]in
 [Dd]ebug*/
@@ -57,3 +58,4 @@ build/
 *.xcworkspacedata
 *.xcuserstate
 xcschememanagement.*
+*.opendb
