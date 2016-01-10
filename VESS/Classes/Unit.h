@@ -5,7 +5,9 @@ class Unit {
 protected:
 	int hp;
 public:
+	Unit();
+	~Unit();
 	virtual int getHP();
 	virtual void setHP(int);
 };
-#endif
+#endif // __UNIT_H__

@@ -162,6 +162,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Monster.h" />
     <ClInclude Include="..\Classes\StartScene.h" />
     <ClInclude Include="..\Classes\Unit.h" />
+    <ClInclude Include="catch.hpp" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

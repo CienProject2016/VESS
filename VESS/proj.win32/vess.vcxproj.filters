@@ -68,6 +68,9 @@
     <ClInclude Include="..\Classes\Monster.h">
       <Filter>src\Model</Filter>
     </ClInclude>
+    <ClInclude Include="catch.hpp">
+      <Filter>win32</Filter>
+    </ClInclude>
     <ClInclude Include="..\Classes\Unit.h">
       <Filter>src\Model</Filter>
     </ClInclude>
