@@ -1,39 +1,38 @@
 #include "Monster.h"
-#include "Unit.h"
 #include <iostream>
 using namespace std;
 
 Monster::Monster()
 {
 	cout << "만들 몬스터의 번호를 입력(1번부터 5번까지):";
-	cin >> monsterNumber;
-	createMonster(monsterNumber);
+	cin >> monster_number;
+	createMonster(monster_number);
 }
 
 Monster::~Monster()
 {}
 
-void Monster::createMonster(int monsterNumber)
+void Monster::createMonster(int monster_number)
 {
 	double init = 0;
-	switch (monsterNumber)
+	switch (monster_number)
 	{
 	case 1:
-		hp = 10;
+		hp_ = 10;
 		break;
 	case 2:
-		hp = 100;
+		hp_ = 100;
 		break;
 	case 3:
-		hp = 1000;
+		hp_ = 1000;
 		break;
 	case 4:
-		hp = 10000;
+		hp_ = 10000;
 		break;
 	case 5:
-		hp = 20000;
+		hp_ = 20000;
 		break;
 
 	}
-	cout << monsterNumber << "번 몬스터가 생성되었습니다" << endl;
+	cout << monster_number << "번 몬스터가 생성되었습니다" << endl;
 }

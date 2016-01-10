@@ -1,11 +1,9 @@
 #ifndef __UNIT_H__
 #define __UNIT_H__
-
+#include "cocos2d.h"
 class Unit {
 protected:
-	int hp;
-public:
-	virtual int getHP();
-	virtual void setHP(int);
+	CC_SYNTHESIZE(int, hp_, HP);
+	
 };
 #endif

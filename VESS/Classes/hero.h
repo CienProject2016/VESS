@@ -8,7 +8,5 @@ class Hero: public Unit {
 public:
 	Hero();
 	~Hero();
-	virtual int getHP();
-	virtual void setHP();
 };
 #endif
