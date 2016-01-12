@@ -57,13 +57,13 @@ bool StartScene::init()
     // create and initialize a label
     
 
-    auto label = Label::createWithTTF("Vess", "fonts/arial.ttf", 24);
+    auto label = Label::createWithTTF("Vess", "fonts/arial.ttf", 100);
     
     // position the label on the center of the screen
     label->setPosition(Vec2(origin.x + visibleSize.width/2,
                             origin.y + visibleSize.height - label->getContentSize().height));
 
-	auto touchLabel = Label::createWithSystemFont("시작하시려면 화면을 터치하세요", "Arial", 18);
+	auto touchLabel = Label::createWithSystemFont("시작하시려면 화면을 터치하세요", "Arial", 70);
 	touchLabel->setPosition(Vec2(origin.x + visibleSize.width/2 + 10,
 		origin.y + visibleSize.height - touchLabel->getContentSize().height + 10));
 
@@ -76,7 +76,7 @@ bool StartScene::init()
 
     // position the sprite on the center of the screen
     sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-	sprite->setScale(0.2f);
+	sprite->setScale(1.0f);
 
 
 	setTouchListener();
