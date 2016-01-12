@@ -40,7 +40,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto glview = director->getOpenGLView();
     if(!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-        glview = GLViewImpl::createWithRect("vess", Rect(0, 0, 1920, 1080));
+        glview = GLViewImpl::createWithRect("vess", Rect(0, 0, 960, 540));
 #else
         glview = GLViewImpl::create("vess");
 #endif
