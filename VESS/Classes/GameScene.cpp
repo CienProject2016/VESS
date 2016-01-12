@@ -36,7 +36,7 @@ bool GameScene::init()
 	{
 		return false;
 	}
-
+	
 	auto refinementLayer = RefinementLayer::create();
 	auto fightLayer = FightLayer::create();
 	this->addChild(refinementLayer);
