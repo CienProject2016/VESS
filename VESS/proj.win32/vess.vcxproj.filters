@@ -45,6 +45,9 @@
     <ClCompile Include="..\Classes\Unit.cpp">
       <Filter>src\Model</Filter>
     </ClCompile>
+    <ClCompile Include="TestSpriteScene.cpp">
+      <Filter>src\View</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -70,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Unit.h">
       <Filter>src\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="TestSpriteScene.h">
+      <Filter>src\View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
