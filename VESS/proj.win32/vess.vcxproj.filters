@@ -48,7 +48,7 @@
     <ClCompile Include="..\Classes\Unit.cpp">
       <Filter>src\Model</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Hero.cpp\Hero.cpp">
+    <ClCompile Include="..\Classes\Hero.cpp">
       <Filter>src\Model</Filter>
     </ClCompile>
   </ItemGroup>
@@ -79,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Monster.h">
       <Filter>src\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="catch.hpp">
+      <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Unit.h">
       <Filter>src\Model</Filter>
