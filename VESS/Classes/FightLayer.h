@@ -11,6 +11,7 @@ class FightLayer : public Layer
 public :
 	virtual bool init();
 	CREATE_FUNC(FightLayer);
+	void monsterAction();
 
 };
 

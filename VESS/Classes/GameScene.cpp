@@ -13,11 +13,11 @@ Scene* GameScene::createScene()
 	auto refinementLayer = RefinementLayer::create();
 	auto fightLayer = FightLayer::create();
 
-	refinementLayer->setContentSize(Size(480, 780));
+	refinementLayer->setContentSize(Size(960, 1080));
 	refinementLayer->setPosition(Vec2(0, 0));
 
-	fightLayer->setContentSize(Size(480, 780));
-	fightLayer->setPosition(Vec2(240, 0));
+	fightLayer->setContentSize(Size(960, 1080));
+	fightLayer->setPosition(Vec2(960, 0));
 
 	// add layer as a child to scene
 	scene->addChild(refinementLayer);
@@ -36,7 +36,7 @@ bool GameScene::init()
 	{
 		return false;
 	}
-
+	
 	auto refinementLayer = RefinementLayer::create();
 	auto fightLayer = FightLayer::create();
 	this->addChild(refinementLayer);

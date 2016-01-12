@@ -1,13 +1,15 @@
+
+#include "cocos2d.h"
 #ifndef __UNIT_H__
 #define __UNIT_H__
 
-class Unit {
+USING_NS_CC;
+
+class Unit: public Node{
 protected:
-	int hp;
-public:
+	CC_SYNTHESIZE(int, hp_, HP);
+public:	
 	Unit();
 	~Unit();
-	virtual int getHP();
-	virtual void setHP(int);
 };
 #endif // __UNIT_H__
