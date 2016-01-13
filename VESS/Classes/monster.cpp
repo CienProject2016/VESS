@@ -16,7 +16,7 @@ bool Monster::init() {
 
 bool Monster::init(const std::string& filename)
 {
-	CCLOG("fileName %s", filename);
+	CCLOG("monsterName : %s", filename.c_str());
 	if (filename.empty())
 	{
 		CCLOG("Call Sprite::initWithFile with blank resource filename.");
