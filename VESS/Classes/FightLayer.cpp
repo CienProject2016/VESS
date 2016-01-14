@@ -2,6 +2,7 @@
 #include "FightLayer.h"
 #include "Monster.h"
 
+
 bool FightLayer::init()
 {
 	if (!Layer::init()) {
@@ -25,4 +26,7 @@ bool FightLayer::init()
 	// add the sprite as a child to this layer
 	this->addChild(daughterImage, 0);
 	this->addChild(enemyImage, 1);
+
+	
+	return true;
 }
