@@ -8,10 +8,13 @@ USING_NS_CC;
 
 class FightLayer : public Layer
 {
+private:
+
 public :
 	virtual bool init();
 	CREATE_FUNC(FightLayer);
-	void monsterAction();
+	void attackCallback(cocos2d::Ref* pSender);
+	void dodgeCallback(cocos2d::Ref* pSender);
 
 };
 
