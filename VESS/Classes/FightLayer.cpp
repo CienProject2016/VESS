@@ -15,17 +15,14 @@ bool FightLayer::init()
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	log("fightLayer origin.x : %f, origin.y : %f", origin.x, origin.y);
 
-
 	// µşÀÌ »ı¼ºµÊ
 	auto daughter = Hero::create();
-
 	//¸ó½ºÅÍ°¡ »ı¼ºµÊ
 	auto monster = Monster::create("slime");
 
 	// add the unit as a child to this layer
 	this->addChild(daughter, 0);
 	this->addChild(monster, 1);
-
 	
 	return true;
 }

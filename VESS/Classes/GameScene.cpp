@@ -3,6 +3,7 @@
 #include "RefinementLayer.h"
 #include "FightLayer.h"
 #include "GameData.h"
+#include "Stage.h"
 
 USING_NS_CC;
 using namespace std;
@@ -15,7 +16,7 @@ Scene* GameScene::createScene()
 
 	//스테이지 정보를 게임데이터에서 얻어온다.
 	Document data = getGameData();
-	GameData::getInstance()->setStage(data["stage"].GetInt());
+	GameData::getInstance()->getStage().setStageLevel(data["stage"].GetInt());
 	log("stage : %d", GameData::getInstance()->getStage());
 
 
