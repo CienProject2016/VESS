@@ -1,6 +1,7 @@
 #pragma once
 #include "FightLayer.h"
 #include "Monster.h"
+#include "Hero.h"
 
 
 bool FightLayer::init()
@@ -15,17 +16,15 @@ bool FightLayer::init()
 	log("fightLayer origin.x : %f, origin.y : %f", origin.x, origin.y);
 
 
-	// ÀüÅõ »ùÇÃ ÀÌ¹ÌÁö
-	auto daughterImage = Sprite::create("Images/daughter.png");
-	// position the sprite on the center of the screen	
-	daughterImage->setPosition(Vec2(origin.x, origin.y + visibleSize.height*0.5f));
-	daughterImage->setScale(1.0f);
-	//daughterImage->setAnchorPoint(ccp(0, 0.5f));
+	// µşÀÌ »ı¼ºµÊ
+	auto daughter = Hero::create();
 
-	Monster* enemyImage = Monster::create("slime");
-	// add the sprite as a child to this layer
-	this->addChild(daughterImage, 0);
-	this->addChild(enemyImage, 1);
+	//¸ó½ºÅÍ°¡ »ı¼ºµÊ
+	auto monster = Monster::create("slime");
+
+	// add the unit as a child to this layer
+	this->addChild(daughter, 0);
+	this->addChild(monster, 1);
 
 	
 	return true;

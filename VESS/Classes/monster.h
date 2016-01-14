@@ -6,7 +6,6 @@
 using namespace std;
 
 class Monster : public Unit {
-private:
 
 public:
 	Monster();
@@ -15,4 +14,4 @@ public:
 	virtual bool init(const std::string&);
 	virtual bool init();
 };
-#endif
+#endif // __MONSTER_H__
