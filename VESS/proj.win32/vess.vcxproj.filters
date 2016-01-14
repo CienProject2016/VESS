@@ -33,8 +33,11 @@
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Hero.cpp">
-      <Filter>src\Model</Filter>
+    <ClCompile Include="..\Classes\RefinementLayer.cpp">
+      <Filter>src\View</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FightLayer.cpp">
+      <Filter>src\View</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Item.cpp">
       <Filter>src\Model</Filter>
@@ -43,6 +46,12 @@
       <Filter>src\Model</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Unit.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Hero.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameData.cpp">
       <Filter>src\Model</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,6 +68,12 @@
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\RefinementLayer.h">
+      <Filter>src\View</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FightLayer.h">
+      <Filter>src\View</Filter>
+    </ClInclude>
     <ClInclude Include="..\Classes\Hero.h">
       <Filter>src\Model</Filter>
     </ClInclude>
@@ -69,6 +84,9 @@
       <Filter>src\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Unit.h">
+      <Filter>src\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameData.h">
       <Filter>src\Model</Filter>
     </ClInclude>
   </ItemGroup>

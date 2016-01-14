@@ -1,17 +1,37 @@
 #include "GameScene.h"
 
+#include "RefinementLayer.h"
+#include "FightLayer.h"
+#include "GameData.h"
+
 USING_NS_CC;
+using namespace std;
+
 
 Scene* GameScene::createScene()
 {
 	// 'scene' is an autorelease object
 	auto scene = Scene::create();
 
+	//스테이지 정보를 게임데이터에서 얻어온다.
+	Document data = getGameData();
+	GameData::getInstance()->setStage(data["stage"].GetInt());
+	log("stage : %d", GameData::getInstance()->getStage());
+
+
 	// 'layer' is an autorelease object
-	auto layer = GameScene::create();
+	auto refinementLayer = RefinementLayer::create();
+	auto fightLayer = FightLayer::create();
+
+	refinementLayer->setContentSize(Size(960, 1080));
+	refinementLayer->setPosition(Vec2(0, 0));
+
+	fightLayer->setContentSize(Size(960, 1080));
+	fightLayer->setPosition(Vec2(960, 0));
 
 	// add layer as a child to scene
-	scene->addChild(layer);
+	scene->addChild(refinementLayer);
+	scene->addChild(fightLayer);
 
 	// return the scene
 	return scene;
@@ -22,72 +42,41 @@ bool GameScene::init()
 {
 	//////////////////////////////
 	// 1. super init first
+	
 	if (!Layer::init())
 	{
+		
 		return false;
 	}
-
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-	/////////////////////////////
-	// 2. add a menu item with "X" image, which is clicked to quit the program
-	//    you may modify it.
-
-	// add a "close" icon to exit the progress. it's an autorelease object
-	auto closeItem = MenuItemImage::create(
-		"CloseNormal.png",
-		"CloseSelected.png",
-		CC_CALLBACK_1(GameScene::menuCloseCallback, this));
-
-	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width / 2,
-		origin.y + closeItem->getContentSize().height / 2));
-
-	// create menu, it's an autorelease object
-	auto menu = Menu::create(closeItem, NULL);
-	menu->setPosition(Vec2::ZERO);
-	this->addChild(menu, 1);
-
-	/////////////////////////////
-	// 3. add your codes below...
-
-	// add a label shows "Hello World"
-	// create and initialize a label
-
-
-	auto label = Label::create("게임 화면", "Arial", 24);
-
-	// position the label on the center of the screen
-	label->setPosition(Vec2(origin.x + visibleSize.width / 2,
-		origin.y + visibleSize.height - label->getContentSize().height));
-
-	
-	// add the label as a child to this layer
-	this->addChild(label, 1);
-
-	// add "HelloWorld" splash screen"
-	auto songokuLeft = Sprite::create("Images/songoku.png");
-
-	// position the sprite on the center of the screen
-	songokuLeft->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
-	songokuLeft->setScale(0.2f);
-
-	auto songokuRight = Sprite::create("Images/songoku.png");
-
-	songokuRight->setPosition(Vec2(visibleSize.width / 2 + origin.x + 200, visibleSize.height / 2 + origin.y));
-	songokuRight->setScale(0.2f);
-
-
 	
 
-
-	// add the sprite as a child to this layer
-	this->addChild(songokuLeft, 0);
-	this->addChild(songokuRight);
+	auto refinementLayer = RefinementLayer::create();
+	auto fightLayer = FightLayer::create();
+	this->addChild(refinementLayer);
+	this->addChild(fightLayer);	
 
 	return true;
 }
 
+Document GameScene::getGameData()
+{
+	// 1. Json을 Dom구조로 파싱하기
+	const char* json = "{\"stage\" : 1}";
+	Document document;
+	document.Parse(json);
+
+	// 2. Dom구조로 고치기
+	rapidjson::Value& s = document["stage"];
+	s.SetInt(s.GetInt() + 1);
+
+	
+	// 3. Stringify the DOM
+	StringBuffer buffer;
+	Writer<StringBuffer> writer(buffer);
+	document.Accept(writer);
+
+	return document;
+}
 
 void GameScene::menuCloseCallback(Ref* pSender)
 {

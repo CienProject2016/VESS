@@ -6,7 +6,7 @@
 class Hero: public Unit {
 
 public:
-	Hero();
-	~Hero();
+	static Hero* create();
+	virtual bool init();
 };
 #endif

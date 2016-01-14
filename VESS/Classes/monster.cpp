@@ -1,38 +1,58 @@
 #include "Monster.h"
-#include <iostream>
 using namespace std;
 
-Monster::Monster()
-{
-	cout << "만들 몬스터의 번호를 입력(1번부터 5번까지):";
-	cin >> monster_number;
-	createMonster(monster_number);
+Monster::Monster() {
 }
 
-Monster::~Monster()
-{}
+Monster::~Monster() {
 
-void Monster::createMonster(int monster_number)
+}
+
+bool Monster::init() {
+	auto sprite = Sprite::create("Images/slime.png");
+	return true;
+}
+
+bool Monster::init(const std::string& filename)
 {
-	double init = 0;
-	switch (monster_number)
+	CCLOG("monsterName : %s", filename.c_str());
+	if (filename.empty())
 	{
-	case 1:
-		hp_ = 10;
-		break;
-	case 2:
-		hp_ = 100;
-		break;
-	case 3:
-		hp_ = 1000;
-		break;
-	case 4:
-		hp_ = 10000;
-		break;
-	case 5:
-		hp_ = 20000;
-		break;
-
+		CCLOG("Call Sprite::initWithFile with blank resource filename.");
+		return false;
 	}
-	cout << monster_number << "번 몬스터가 생성되었습니다" << endl;
+
+	if (Unit::init())
+	{
+		Size visibleSize = Director::getInstance()->getVisibleSize();
+		Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+		auto sprite = Sprite::create("Images/" + filename + ".png");
+		sprite->setPosition(Vec2(origin.x + visibleSize.width*0.5f, origin.y + visibleSize.height*0.5f));
+		sprite->setScale(4.0f);
+		sprite->setVisible(true);
+		this->addChild(sprite);
+		auto enemyMove = MoveTo::create(4, ccp(origin.x, origin.y + visibleSize.height*0.5f));
+		auto enemyRelocate = MoveTo::create(0, ccp(origin.x + visibleSize.width*0.5f, origin.y + visibleSize.height*0.5f));
+
+		auto seq = CCSequence::create(enemyMove, CCDelayTime::create(2), enemyRelocate, CCDelayTime::create(2), NULL);
+		auto rep = CCRepeatForever::create(seq); //무한반복
+		sprite->runAction(rep);
+		return true;
+	}	
+	return false;
 }
+
+Monster* Monster::create(const std::string& filename)
+{
+	Monster *monster = new Monster();
+	if(monster && monster->init(filename))
+	{
+		monster->autorelease();
+
+		return monster;
+	}
+	CC_SAFE_DELETE(monster);
+	return nullptr;
+}
+
