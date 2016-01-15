@@ -11,6 +11,7 @@ private:
 	CC_SYNTHESIZE(int, hero_hp_, HeroHp);
 	CC_SYNTHESIZE(int, gold_, Gold);
 	CC_SYNTHESIZE(int, costume_, Costume);
+	CC_SYNTHESIZE(int, moving_distance_, MovingDistance);
 	GameData();
 	~GameData();
 public:

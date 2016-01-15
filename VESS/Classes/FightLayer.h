@@ -10,8 +10,8 @@ class FightLayer : public Layer
 {
 public :
 	virtual bool init();
+	void spawnMonster(float);
 	CREATE_FUNC(FightLayer);
-	void monsterAction();
 
 };
 

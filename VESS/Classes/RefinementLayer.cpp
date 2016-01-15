@@ -1,6 +1,7 @@
 #pragma once
 #include "RefinementLayer.h"
 
+
 bool RefinementLayer::init()
 {
 	if (!Layer::init()) {
@@ -20,6 +21,7 @@ bool RefinementLayer::init()
 	smithImage->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y+visibleSize.height*0.4f));
 	smithImage->setScale(1.0f);
 
+	
 	// add the sprite as a child to this layer
 	this->addChild(smithImage, 0);
 }

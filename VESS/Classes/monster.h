@@ -6,8 +6,8 @@
 using namespace std;
 
 class Monster : public Unit {
-
 public:
+	bool isDead();
 	Monster();
 	~Monster();
 	static Monster* create(const std::string&);
