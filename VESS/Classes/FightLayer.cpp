@@ -3,7 +3,6 @@
 #include "Monster.h"
 #include "Hero.h"
 
-
 bool FightLayer::init()
 {
 	if (!Layer::init()) {
@@ -26,6 +25,57 @@ bool FightLayer::init()
 	this->addChild(daughter, 0);
 	this->addChild(monster, 1);
 
+
+	//인풋을 받을 controller 생성
+	controller = new BattleOperator();
+	this->addChild(controller, 1000000);
+	
+	setTouchListener();
 	
 	return true;
+}
+
+void FightLayer::setTouchListener()
+{
+	// make touch listener
+
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = CC_CALLBACK_2(FightLayer::onTouchBegan, this);
+	listener->onTouchMoved = CC_CALLBACK_2(FightLayer::onTouchMoved, this);
+	listener->onTouchCancelled = CC_CALLBACK_2(FightLayer::onTouchCancelled, this);
+	listener->onTouchEnded = CC_CALLBACK_2(FightLayer::onTouchEnded, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+}
+
+bool FightLayer::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event)
+{
+	if (this->getBoundingBox().containsPoint(touch->getLocation())) {
+		int min_x = this->boundingBox().getMinX();
+		Vec2 pos = touch->getLocation();
+		pos.x -= min_x;
+		controller->startController(pos);
+		return true;
+	}
+	return false;
+}
+
+void FightLayer::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_event)
+{
+	if (this->getBoundingBox().containsPoint(touch->getLocation())) {
+		int min_x = this->boundingBox().getMinX();
+		Vec2 pos = touch->getLocation();
+		pos.x -= min_x;
+		controller->setTouchPos(pos);
+	}
+}
+
+void FightLayer::onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event)
+{
+
+}
+
+void FightLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
+{
+	controller->endController();
 }
