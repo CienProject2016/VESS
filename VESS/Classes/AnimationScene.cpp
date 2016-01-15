@@ -31,12 +31,14 @@ bool AnimationScene::init()
 
 	
 	
-	Node* node = CSLoader::createNode("Hero.csb"); this->addChild(node); //get animation data 
-	cocostudio::timeline::ActionTimeline* action = CSLoader::createTimeline("Hero.csb");
+	Node* node = CSLoader::createNode("animation/Hero.csb"); 
+	this->addChild(node); //get animation data 
+	cocostudio::timeline::ActionTimeline* action = CSLoader::createTimeline("animation/Hero.csb");
 	node->setPosition(Vec2(origin.x + visibleSize.width / 2,
 		origin.y ));
 	
-	node->runAction(action); action->gotoFrameAndPlay(0,32, true);
+	node->runAction(action); 
+	action->gotoFrameAndPlay(0,32, true);
 
 
 

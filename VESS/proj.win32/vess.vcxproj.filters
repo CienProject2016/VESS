@@ -66,6 +66,9 @@
     <ClCompile Include="..\Classes\BattleOperator.cpp">
       <Filter>src\Model</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\AnimationScene.cpp">
+      <Filter>src\View</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -109,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\BattleOperator.h">
       <Filter>src\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AnimationScene.h">
+      <Filter>src\View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
