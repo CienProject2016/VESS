@@ -24,12 +24,6 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src\Vess</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\StartScene.cpp">
-      <Filter>src\View</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GameScene.cpp">
-      <Filter>src\View</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
@@ -45,16 +39,22 @@
     <ClCompile Include="..\Classes\Unit.cpp">
       <Filter>src\Model</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\EnterScene.cpp">
+      <Filter>src\Vess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameScene.cpp">
+      <Filter>src\Vess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StageScene.cpp">
+      <Filter>src\Vess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StartScene.cpp">
+      <Filter>src\Vess</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>src\Vess</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\StartScene.h">
-      <Filter>src\View</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameScene.h">
-      <Filter>src\View</Filter>
     </ClInclude>
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
@@ -70,6 +70,18 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Unit.h">
       <Filter>src\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EnterScene.h">
+      <Filter>src\Vess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameScene.h">
+      <Filter>src\Vess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StageScene.h">
+      <Filter>src\Vess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StartScene.h">
+      <Filter>src\Vess</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
