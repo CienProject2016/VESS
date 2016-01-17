@@ -1,6 +1,6 @@
 #include "GameScene.h"
 
-#include "RefinementLayer.h"
+#include "UpgradeLayer.h"
 #include "FightLayer.h"
 #include "GameData.h"
 
@@ -20,18 +20,18 @@ Scene* GameScene::createScene()
 
 
 	// 'layer' is an autorelease object
-	auto refinementLayer = RefinementLayer::create();
-	auto fightLayer = FightLayer::create();
+	auto upgrade_layer = UpgradeLayer::create();
+	auto fight_layer = FightLayer::create();
 
-	refinementLayer->setContentSize(Size(960, 1080));
-	refinementLayer->setPosition(Vec2(0, 0));
+	upgrade_layer->setContentSize(Size(960, 1080));
+	upgrade_layer->setPosition(Vec2(0, 0));
 
-	fightLayer->setContentSize(Size(960, 1080));
-	fightLayer->setPosition(Vec2(960, 0));
+	fight_layer->setContentSize(Size(960, 1080));
+	fight_layer->setPosition(Vec2(960, 0));
 
 	// add layer as a child to scene
-	scene->addChild(refinementLayer);
-	scene->addChild(fightLayer);
+	scene->addChild(upgrade_layer);
+	scene->addChild(fight_layer);
 
 	// return the scene
 	return scene;
@@ -50,10 +50,10 @@ bool GameScene::init()
 	}
 	
 
-	auto refinementLayer = RefinementLayer::create();
-	auto fightLayer = FightLayer::create();
-	this->addChild(refinementLayer);
-	this->addChild(fightLayer);	
+	auto upgrade_layer = UpgradeLayer::create();
+	auto fight_layer = FightLayer::create();
+	this->addChild(upgrade_layer);
+	this->addChild(fight_layer);	
 
 	return true;
 }

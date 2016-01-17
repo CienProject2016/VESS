@@ -33,9 +33,6 @@
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\RefinementLayer.cpp">
-      <Filter>src\View</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\FightLayer.cpp">
       <Filter>src\View</Filter>
     </ClCompile>
@@ -54,6 +51,9 @@
     <ClCompile Include="..\Classes\GameData.cpp">
       <Filter>src\Model</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\UpgraderLayer.cpp">
+      <Filter>src\View</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -67,9 +67,6 @@
     </ClInclude>
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\RefinementLayer.h">
-      <Filter>src\View</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\FightLayer.h">
       <Filter>src\View</Filter>
@@ -88,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameData.h">
       <Filter>src\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UpgradeLayer.h">
+      <Filter>src\View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
