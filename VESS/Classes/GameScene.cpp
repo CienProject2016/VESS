@@ -5,6 +5,7 @@
 #include "GameData.h"
 #include "Stage.h"
 #include "WindowSize.h"
+#include "DialogLayer.h"
 
 USING_NS_CC;
 using namespace std;
@@ -24,6 +25,7 @@ Scene* GameScene::createScene()
 	// 'layer' is an autorelease object
 	auto refinementLayer = RefinementLayer::create();
 	auto fightLayer = FightLayer::create();
+	auto dialogLayer = DialogLayer::create();
 
 	refinementLayer->setContentSize(refinementLayerSize);
 	refinementLayer->setPosition(Vec2(0, 0));
@@ -31,9 +33,11 @@ Scene* GameScene::createScene()
 	fightLayer->setContentSize(fightLayerSize);
 	fightLayer->setPosition(Vec2(refinementLayerSize.width, 0));
 
+
 	// add layer as a child to scene
 	scene->addChild(refinementLayer);
 	scene->addChild(fightLayer);
+	scene->addChild(dialogLayer);
 
 	// return the scene
 	return scene;
@@ -54,6 +58,7 @@ bool GameScene::init()
 
 	auto refinementLayer = RefinementLayer::create();
 	auto fightLayer = FightLayer::create();
+	auto dialogLayer = DialogLayer::create();
 	this->addChild(refinementLayer);
 	this->addChild(fightLayer);	
 
