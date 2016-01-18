@@ -34,3 +34,5 @@ static Size refinementLayerSize = Size(
 static Size fightLayerSize = Size(
 	designResolutionSize.width * (1 - criticalPoint_refinementLayer_from_fightLayer),
 	designResolutionSize.height);
+static Vec2 refinementLayerOrigin = Vec2(0, 0);
+static Vec2 fightLayerOrigin = Vec2(refinementLayerSize.width, 0);

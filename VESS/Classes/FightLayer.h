@@ -4,6 +4,7 @@
 
 #include "cocos2d.h"
 #include "BattleOperator.h"
+#include "Hero.h"
 
 USING_NS_CC;
 
@@ -11,7 +12,7 @@ class FightLayer : public Layer
 {
 private : 
 	BattleOperator* controller;
-
+	Hero* daughter;
 	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 	virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 	virtual void onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event);

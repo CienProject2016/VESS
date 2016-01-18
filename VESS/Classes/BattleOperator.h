@@ -25,9 +25,8 @@ private:
 	void initMainImage();
 	void setMenu();
 	Sprite *main_image;
-
-	enum MenuState { CANCEL, ATTACK, JUMP, AVOID, SIT};
-	MenuState menu_state;
+	enum OperatorState { CANCEL = 0, ATTACK = 1, JUMP = 2, AVOID = 3, SIT = 4};
+	OperatorState menu_state;
 	bool is_open;
 public:
 	Vec2 pos, first_touch;
@@ -36,4 +35,5 @@ public:
 	void startController(Vec2 first_touch);
 	void setTouchPos(Vec2 touch_pos);
 	void endController();
+	int getState();
 };

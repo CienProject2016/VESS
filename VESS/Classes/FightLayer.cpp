@@ -1,7 +1,6 @@
 #pragma once
 #include "FightLayer.h"
 #include "Monster.h"
-#include "Hero.h"
 #include "MonsterSpawnScheduler.h"
 #include "GameData.h"
 #include "Stage.h"
@@ -18,7 +17,7 @@ bool FightLayer::init()
 	log("fightLayer origin.x : %f, origin.y : %f", origin.x, origin.y);
 
 	// µþÀÌ »ý¼ºµÊ
-	auto daughter = Hero::create();
+	daughter = Hero::create();
 	//¸ó½ºÅÍ°¡ »ý¼ºµÊ
 	
 
@@ -88,5 +87,21 @@ void FightLayer::onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_
 
 void FightLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
+	switch (controller->getState()) {
+	case 0:		//CANCEL
+		break;
+	case 1:		//ATTACK
+		daughter->attack();
+		break;
+	case 2:		//JUMP
+		daughter->jump();
+		break;
+	case 3:		//AVOID
+		daughter->avoid();
+		break;
+	case 4:		//SIT
+		daughter->sitDown();
+		break;
+	}
 	controller->endController();
 }

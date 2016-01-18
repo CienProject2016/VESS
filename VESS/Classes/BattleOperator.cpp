@@ -82,6 +82,10 @@ void BattleOperator::setMenu() {
 	}
 }
 
+int BattleOperator::getState() {
+	return menu_state;
+}
+
 void BattleOperator::startController(Vec2 first_touch) {
 	is_open = true;
 	this->first_touch = first_touch;
