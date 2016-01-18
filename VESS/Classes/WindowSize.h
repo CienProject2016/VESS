@@ -7,6 +7,8 @@
 보니까 AppDelegate.cpp 안에 윈도우 사이즈를 정의하고 있던데,
 다른데서는 찾을 수가 없었어.
 그래서 빼두고 헤더파일로 만들어둠.
+
+그런데 아래 네가지 중에서 우리는 designResolutionSize 만 쓰더라. 다들 이것만 쓰셈.
 */
 using namespace cocos2d;
 static Size designResolutionSize = Size(1920, 1080);
@@ -16,9 +18,9 @@ static Size largeResolutionSize = Size(1920, 1080);
 
 /*	by. hyobin
 visibleSize <- 이런걸로 해당 레이어의 크기를 알아오고 싶었는데
-정말 눈에 보이는 전체 윈도우 크기를 리턴해 버리는 바람에
+전체 윈도우 크기를 리턴해 버리는 바람에
 각각의 레이어 크기를 따로 준비하는게 좋을 것 같았음
-그래서 refinementLayerSize 와 fightLayerSize 를 static 으로 선언 후
+그래서 아래의 refinementLayerSize 와 fightLayerSize 를 static 으로 선언 후
 그 사이의 임계점을 둬서
 임계점만 조절하면 나누어 지도록 해봄.
 임계점은 0과 1사이의 값으로 설정 가능함.

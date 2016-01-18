@@ -117,28 +117,34 @@ void Hero::update(float dt) {
 	}
 }
 
+
+//해당 state 가 시작할 때의 위치를 적어놓고 싶었으나.
+//막상쓰는 위치는 STAY 뿐이네.. 그래도 나중에 이펙트 펑펑 터질때 위치를 알아야 할 수 도 있으니 냄겨두자.
 void Hero::setPos(HeroState state) {
 	switch (state) {
 	case STAY:
-		this->setPosition( Vec2(window_size.width * 0.3f, window_size.height * 0.4f));
-		break;
-	case ATTACK_S:
-		break;
-	case JUMP_S:
-		break;
-	case AVOID_S:
-		break;
-	case SIT_S:
-		break;
-	case ATTACK_E:
-		break;
-	case JUMP_E:
-		break;
-	case AVOID_E:
-		break;
-	case SIT_E:
+		this->setPosition(getStatePos(state));
 		break;
 	}
+}
+
+//각 state 가 시작할 때 위치를 리턴,
+//그러니까 지금은 공격, 회피, 점프할 때의 최고점 위치를 리턴
+Vec2 Hero::getStatePos(HeroState state) {
+	switch (state) {
+	float v;
+	case ATTACK_E:
+		return Vec2(window_size.width * 0.3f + attackDistance, window_size.height * 0.4f);
+		break;
+	case JUMP_E:
+		v = max_jump_time * window_size.height * 0.2f / 2;
+		return Vec2(window_size.width * 0.3f, window_size.height * 0.4f + v * max_jump_time * 0.25f);
+		break;
+	case AVOID_E:
+		return Vec2(window_size.width * 0.3f + avoidDistance, window_size.height * 0.4f);
+		break;
+	}
+	return Vec2(window_size.width * 0.3f, window_size.height * 0.4f);
 }
 
 Hero* Hero::create()
@@ -163,14 +169,14 @@ void Hero::attack() {
 	if (isAvailableCommend()) {
 		state = ATTACK_S;
 		work_timer = 0;
-		vertical_velocity = max_attack_time * window_size.height * 0.2f / 2;
+		vertical_velocity = max_attack_time * window_size.height * 0.2f / 2;	//수직 속도를 설정
 	}
 }
 void Hero::avoid() {
 	if (isAvailableCommend()) {
 		state = AVOID_S;
 		work_timer = 0;
-		vertical_velocity = max_avoid_time * window_size.height * 0.2f / 2;
+		vertical_velocity = max_avoid_time * window_size.height * 0.2f / 2;	//수직 속도를 설정
 	}
 }
 void Hero::sitDown() {
@@ -183,6 +189,6 @@ void Hero::jump() {
 	if (isAvailableCommend()) {
 		state = JUMP_S;
 		work_timer = 0;
-		vertical_velocity = max_jump_time * window_size.height * 0.2f / 2;
+		vertical_velocity = max_jump_time * window_size.height * 0.2f / 2;	//수직 속도를 설정
 	}
 }
