@@ -116,6 +116,9 @@
     <ClInclude Include="..\Classes\AnimationScene.h">
       <Filter>src\View</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\WindowSize.h">
+      <Filter>src\Vess</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

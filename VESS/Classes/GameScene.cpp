@@ -4,6 +4,7 @@
 #include "FightLayer.h"
 #include "GameData.h"
 #include "Stage.h"
+#include "WindowSize.h"
 
 USING_NS_CC;
 using namespace std;
@@ -24,11 +25,11 @@ Scene* GameScene::createScene()
 	auto refinementLayer = RefinementLayer::create();
 	auto fightLayer = FightLayer::create();
 
-	refinementLayer->setContentSize(Size(960, 1080));
+	refinementLayer->setContentSize(refinementLayerSize);
 	refinementLayer->setPosition(Vec2(0, 0));
 
-	fightLayer->setContentSize(Size(960, 1080));
-	fightLayer->setPosition(Vec2(960, 0));
+	fightLayer->setContentSize(fightLayerSize);
+	fightLayer->setPosition(Vec2(refinementLayerSize.width, 0));
 
 	// add layer as a child to scene
 	scene->addChild(refinementLayer);

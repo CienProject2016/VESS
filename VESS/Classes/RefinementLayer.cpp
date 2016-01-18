@@ -1,5 +1,6 @@
 #pragma once
 #include "RefinementLayer.h"
+#include "WindowSize.h"
 
 
 bool RefinementLayer::init()
@@ -18,8 +19,10 @@ bool RefinementLayer::init()
 	auto smithImage = Sprite::create("Images/smith.png");
 
 	// position the sprite on the center of the screen
-	smithImage->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y+visibleSize.height*0.4f));
-	smithImage->setScale(1.0f);
+	int smith_width = smithImage->getTexture()->getPixelsWide();
+	float smith_size = refinementLayerSize.width/ smith_width;
+	smithImage->setPosition(Vec2(origin.x + smith_size * smith_width * 0.5f, origin.y + visibleSize.height*0.4f));
+	smithImage->setScale(smith_size);
 
 	
 	// add the sprite as a child to this layer

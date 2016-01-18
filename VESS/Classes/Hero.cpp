@@ -9,13 +9,13 @@ bool Hero::init()
 		Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 
-		Node* node = CSLoader::createNode("animation/Hero.csb");
+		Node* node = CSLoader::createNode("Hero.csb");
 		this->addChild(node); //get animation data 
-		timeline::ActionTimeline* action = CSLoader::createTimeline("animation/Hero.csb");
+		timeline::ActionTimeline* action = CSLoader::createTimeline("Hero.csb");
 		node->setPosition(Vec2(0 ,0));
 
 		node->runAction(action);
-		action->gotoFrameAndPlay(0, 32, true);
+		action->gotoFrameAndPlay(26, 32, true);
 		
 		return true;
 	}
