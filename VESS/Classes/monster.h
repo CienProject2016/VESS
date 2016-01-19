@@ -6,13 +6,12 @@
 using namespace std;
 
 class Monster : public Unit {
-private:
-
 public:
+	bool isDead();
 	Monster();
 	~Monster();
 	static Monster* create(const std::string&);
 	virtual bool init(const std::string&);
 	virtual bool init();
 };
-#endif
+#endif // __MONSTER_H__

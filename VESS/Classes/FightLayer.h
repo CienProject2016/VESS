@@ -3,15 +3,26 @@
 #define __FIGHT_LAYER_H__
 
 #include "cocos2d.h"
+#include "BattleOperator.h"
+#include "Hero.h"
 
 USING_NS_CC;
 
 class FightLayer : public Layer
 {
-private:
+private : 
+	BattleOperator* controller;
+	Hero* daughter;
+	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event);
+	virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_event);
+	virtual void onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event);
+	virtual void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event);
+
+	void setTouchListener();
 
 public :
 	virtual bool init();
+	void spawnMonster(float);
 	CREATE_FUNC(FightLayer);
 	void attackCallback(cocos2d::Ref* pSender);
 	void dodgeCallback(cocos2d::Ref* pSender);
