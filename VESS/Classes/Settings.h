@@ -14,7 +14,9 @@ public:
 	~Settings();
 	static cocos2d::Scene* createScene();
 	virtual bool init();
-	void menuClicked(Ref* pSender);
+	void bgmClicked(Ref* pSender);
+	void effectClicked(Ref* pSender);
+	void Settings::exitClicked(Ref* pSender);
 	CREATE_FUNC(Settings);
 };
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "StartScene.h"
 #include "GameScene.h"
+#include "Settings.h"
 
 USING_NS_CC;
 
@@ -42,16 +43,23 @@ bool StartScene::init()
                                            "CloseSelected.png",
                                            CC_CALLBACK_1(StartScene::menuCloseCallback, this));
     
-	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
-                                origin.y + closeItem->getContentSize().height/2));
+	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width / 2,
+		origin.y + closeItem->getContentSize().height / 2));
+
+	/**/
 
     // create menu, it's an autorelease object
     auto menu = Menu::create(closeItem, NULL);
     menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
+    this->addChild(menu, 2);
+	
+	auto openSetting = MenuItemImage::create("setting.png", "CloseSelected.png", CC_CALLBACK_1(StartScene::settingClicked, this));
+	openSetting->setPosition(Vec2(origin.x + visibleSize.width - openSetting->getContentSize().width / 2,
+		origin.y + visibleSize.height - openSetting->getContentSize().height));
 
-    /////////////////////////////
-    // 3. add your codes below...
+	auto setting = Menu::create(openSetting, NULL);
+	setting->setPosition(Vec2::ZERO);
+	this->addChild(setting, 1);
 
     // add a label shows "Hello World"
     // create and initialize a label
@@ -131,4 +139,12 @@ void StartScene::menuCloseCallback(Ref* pSender)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
 #endif
+}
+
+void StartScene::settingClicked(Ref* pSender)
+{
+	Scene *settingScene=Settings::createScene();
+	Director::getInstance()->replaceScene(TransitionFade::create(0.5, settingScene, Color3B(0, 255, 255)));
+	log("Touched");
+	
 }

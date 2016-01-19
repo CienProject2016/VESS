@@ -20,6 +20,7 @@ public:
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
+	void settingClicked(cocos2d::Ref* pSender);
 
     
     // implement the "static create()" method manually

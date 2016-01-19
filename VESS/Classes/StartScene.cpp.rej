@@ -1,0 +1,10 @@
+diff a/VESS/Classes/StartScene.cpp b/VESS/Classes/StartScene.cpp	(rejected hunks)
+@@ -90,7 +90,7 @@
+     return true;
+ }
+ 
+-void StartScene::setTouchListener() 
++void StartScene::setTouchListener()   
+ {
+ 	// make touch listener
+ 
