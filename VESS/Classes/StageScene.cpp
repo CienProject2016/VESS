@@ -1,11 +1,14 @@
  #include "StageScene.h"
 #include "GameScene.h"
+#include "DialogLayer.h"
 USING_NS_CC;
 
 Scene* StageScene::createScene()
 {
 	auto scene = Scene::create(); //Scene생성
 	auto layer = StageScene::create();//Layer생성
+	auto dialogLayer = DialogLayer::create();
+	scene->addChild(dialogLayer);
 	scene->addChild(layer);//Layer을 Scene의 자식으로 함
 	return scene;
 }
@@ -74,7 +77,7 @@ bool StageScene::init()
 	// add the sprite as a child to this layer
 	this->addChild(sprite, 0);
 
-
+	
 	return true;
 }
 

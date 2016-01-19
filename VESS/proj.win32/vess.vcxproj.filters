@@ -48,6 +48,24 @@
     <ClCompile Include="..\Classes\GameData.cpp">
       <Filter>src\Model</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Item.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Stage.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MonsterSpawnScheduler.cpp">
+      <Filter>src\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BattleOperator.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Hero.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameData.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\Stage.cpp">
       <Filter>src\Model</Filter>
     </ClCompile>
@@ -90,8 +108,14 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src\Vess</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\AnimationScene.cpp">
+      <Filter>src\View\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>src\Vess</Filter>
+    </ClInclude>
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
     </ClInclude>
@@ -118,6 +142,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\BattleOperator.h">
       <Filter>src\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\WindowSize.h">
+      <Filter>src\Vess</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\DialogLayer.h">
       <Filter>src\View\Layer</Filter>
@@ -154,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\WindowSize.h">
       <Filter>src\Vess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AnimationScene.h">
+      <Filter>src\View\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
