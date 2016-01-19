@@ -1,6 +1,6 @@
 #pragma once
 #include "StartScene.h"
-#include "GameScene.h"
+#include "EnterScene.h"
 
 USING_NS_CC;
 
@@ -90,7 +90,7 @@ bool StartScene::init()
     return true;
 }
 
-void StartScene::setTouchListener() 
+void StartScene::setTouchListener()   
 {
 	// make touch listener
 
@@ -120,8 +120,8 @@ void StartScene::onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_
 
 void StartScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
-	Scene *gameScene = GameScene::createScene();
-	Director::getInstance()->replaceScene(TransitionFade::create(0.5, gameScene, Color3B(0, 255, 255)));
+	Scene *EnterScene = EnterScene::createScene();
+	Director::getInstance()->replaceScene(TransitionFade::create(0.5, EnterScene, Color3B(0, 255, 255)));
 	log("Touched");
 }
 
