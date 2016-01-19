@@ -2,7 +2,7 @@
 
 GameData* GameData::instance_ = nullptr;
 
-GameData::GameData() : stage_(1)
+GameData::GameData() : moving_distance_(0), stage_(), hero_hp_(100), gold_(150), costume_(0)
 {
 
 }
