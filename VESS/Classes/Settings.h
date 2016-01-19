@@ -3,17 +3,18 @@
 
 #include "SimpleAudioEngine.h"
 #include "cocos2d.h"
+#include <string>
 
-using namespace cocos2d;
+USING_NS_CC;
+
 class Settings : public cocos2d::CCLayer
 {
 public:
 	Settings();
 	~Settings();
 	static cocos2d::Scene* createScene();
-	void menuClicked(Ref*);
 	virtual bool init();
-
+	void menuClicked(Ref* pSender);
 	CREATE_FUNC(Settings);
 };
 

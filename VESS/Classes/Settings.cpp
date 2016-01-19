@@ -8,6 +8,10 @@ Settings::Settings()
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("effect.wav");
 }
 
+Settings::~Settings() {
+
+}
+
 Scene* Settings::createScene()
 {
 	auto scene = Scene::create();
@@ -22,21 +26,22 @@ bool Settings::init()
 	if (!Layer::init())
 	{
 		return false;
-	}
-	
-	auto bgm = MenuItemFont::create("BGM",NULL);
-	auto bgm_on = MenuItemImage::create("CloseNormal.png","CloseSelected",CC_CALLBACK_1(Settings::menuClicked, this));
-	
-	auto effect = MenuItemFont::create("Effect", NULL);
-	auto effect_on = MenuItemImage::create("CloseNormal.png","CloseSelected",CC_CALLBACK_1(Settings::menuClicked, this));
-	
-	
+	}	
+
+
+	MenuItemFont* bgm = MenuItemFont::create("BGM", NULL, NULL);
+	MenuItemImage* bgm_on = MenuItemImage::create("CloseNormal.png", "CloseSelected", CC_CALLBACK_1(Settings::menuClicked, this));
+
+	MenuItemFont* effect = MenuItemFont::create("Effect", NULL, NULL);
+	MenuItemImage* effect_on = MenuItemImage::create("CloseNormal.png", "CloseSelected", CC_CALLBACK_1(Settings::menuClicked, this));
+
 	bgm_on->setTag(1);
 	effect_on->setTag(2);
-	
-	auto menu = Menu::create(bgm, bgm_on, NULL);
+
+
+	Menu* menu = Menu::create(bgm, bgm_on, NULL);
 	menu->alignItemsHorizontally();
-	auto menu2 = Menu::create(effect, effect_on, NULL);
+	Menu* menu2 = Menu::create(effect, effect_on, NULL);
 	menu2->alignItemsHorizontally();
 
 	this->addChild(menu);
@@ -48,13 +53,13 @@ bool Settings::init()
 void Settings::menuClicked(Ref* pSender)
 {
 
-	
-	switch (1)
+	log("id : %d", pSender->_ID);
+	switch (pSender->_ID)
 	{
-		case 1:CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("bgm.wav", true);
-		   break;
-		case 2:CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("effect.wav");
-			break;
+	case 1:CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("bgm.wav", true);
+		break;
+	case 2:CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("effect.wav");
+		break;
 
 	}
 }
