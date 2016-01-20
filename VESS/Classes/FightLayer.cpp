@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "FightLayer.h"
 
 #define Print 2000
@@ -8,15 +8,20 @@ bool FightLayer::init()
 	if (!Layer::init()) {
 		return false;
 	}
+	
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	// µþÀÌ »ý¼ºµÊ
+	// ë”¸ì´ ìƒì„±ë¨
 	daughter = Hero::create();
 	daughter->setReciever(this);
-	//¸ó½ºÅÍ°¡ »ý¼ºµÊ
+	//ëª¬ìŠ¤í„°ê°€ ìƒì„±ë¨
 	
-	//°ø°Ý¹öÆ°
+	auto background_image = Sprite::create("Images/fight_background.png");
+	background_image->setScale(2.0f);
+	background_image->setAnchorPoint(Vec2(0, 0));
+
+	//ê³µê²©ë²„íŠ¼
 	auto attack_Button = MenuItemImage::create("Images/AttackButton.png", "Images/AttackButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::attackCallback, this));
 	auto dodge_Button = MenuItemImage::create("Images/DodgeButton.png", "Images/DodgeButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::dodgeCallback, this));
 	attack_Button->setScale(2.0f);
@@ -47,6 +52,7 @@ bool FightLayer::init()
 
 	this->schedule(schedule_selector(FightLayer::spawnMonster));
 
+	this->addChild(background_image, 0);
 	// add the sprite as a child to this layer
 	this->addChild(battle_Menu, 2);
 	this->addChild(attackMessage, 3);
@@ -54,7 +60,7 @@ bool FightLayer::init()
 
 	// add the unit as a child to this layer
 	this->addChild(daughter, 0);
-	//ÀÎÇ²À» ¹ÞÀ» controller »ý¼º
+	//ì¸í’‹ì„ ë°›ì„ controller ìƒì„±
 	controller = new BattleOperator();
 	this->addChild(controller, 1000000);
 	

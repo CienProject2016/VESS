@@ -1,4 +1,4 @@
-#include "AppDelegate.h"
+﻿#include "AppDelegate.h"
 #include "StartScene.h"
 #include "WindowSize.h"
 

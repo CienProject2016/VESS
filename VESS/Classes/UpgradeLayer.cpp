@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "UpgradeLayer.h"
 #define tag_number 50
 
@@ -19,7 +19,7 @@ bool UpgradeLayer::init()
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(UpgradeLayer::onTouchBegan, this);
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
-	// °­È­ »ùÇÃ ÀÌ¹ÌÁö
+	// ê°•í™” ìƒ˜í”Œ ì´ë¯¸ì§€
 	
 
 	auto background_image = Sprite::create("Images/background_image.png");
@@ -37,7 +37,7 @@ bool UpgradeLayer::init()
 	auto repair_image = Sprite::create("Images/repair_button.png");
 	// position the sprite on the center of the screen
 	background_image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.4f));
-	background_image->setScale(2.0f);
+	background_image->setScale(2.4f);
 
 	background2_image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.4f));
 	background2_image->setScale(2.0f);
@@ -103,7 +103,7 @@ bool UpgradeLayer::init()
 
 
 	
-	// ºÒ¼Ó¼º ÀÌ¹ÌÁö
+	// ë¶ˆì†ì„± ì´ë¯¸ì§€
 
 	//if (location_ != NULL) {
 	//CCRect rect = CCRectMake(0, 0, jewel_slot->getContentSize().width, jewel_slot->getContentSize().height);
@@ -119,7 +119,7 @@ bool UpgradeLayer::init()
 bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 {
 
-	// 0, 1, 2, 3  ½½·Ô
+	// 0, 1, 2, 3  ìŠ¬ë¡¯
 	Point p = touch_->getLocation();
 	auto ingredient_slot = (Sprite*) this->getChildByTag(tag_number);
 	Rect rect = ingredient_slot->getBoundingBox();
@@ -170,7 +170,7 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 	}
 
 
-	// 4, 5, 6  °­È­ÀÌ¹ÌÁö
+	// 4, 5, 6  ê°•í™”ì´ë¯¸ì§€
 	auto smelting = (Sprite*) this->getChildByTag(tag_number + 4);
 	Rect rect3 = smelting->getBoundingBox();
 	if (rect3.containsPoint(p)) {
@@ -207,7 +207,7 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 		quenching->setScale(1);
 	}
 
-	// 7, 8, 9 °­È­,µµ°¨,¼ö¸®
+	// 7, 8, 9 ê°•í™”,ë„ê°,ìˆ˜ë¦¬
 	auto upgrade = (Sprite*) this->getChildByTag(tag_number + 7);
 	Rect rect6 = upgrade->getBoundingBox();
 	if (rect6.containsPoint(p)) {

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "EnterScene.h"
 #include "StageScene.h"
 #include "ui/CocosGUI.h"
@@ -7,9 +7,9 @@ USING_NS_CC;
 
 Scene* EnterScene::createScene()
 {
-	auto scene = Scene::create(); //Scene»ý¼º
-	auto layer = EnterScene::create();//Layer»ý¼º
-	scene->addChild(layer);//LayerÀ» SceneÀÇ ÀÚ½ÄÀ¸·Î ÇÔ
+	auto scene = Scene::create(); //Sceneìƒì„±
+	auto layer = EnterScene::create();//Layerìƒì„±
+	scene->addChild(layer);//Layerì„ Sceneì˜ ìžì‹ìœ¼ë¡œ í•¨
 	return scene;
 }
 
@@ -40,7 +40,7 @@ bool EnterScene::init()
 	auto menu = Menu::create(closeItem, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 3);
-	//»õ ½ºÇÁ¶óÀÌÆ®µé ¸¸µé¾î¼­ Å©±â,À§Ä¡ ÁöÁ¤
+	//ìƒˆ ìŠ¤í”„ë¼ì´íŠ¸ë“¤ ë§Œë“¤ì–´ì„œ í¬ê¸°,ìœ„ì¹˜ ì§€ì •
 	auto enterButton = Sprite::create("Images/EnterButton.png");
 	enterButton->setPosition(Vec2(visibleSize.width / 5 + origin.x, visibleSize.height / 5 + origin.y));
 	enterButton->setScale(0.15f);
