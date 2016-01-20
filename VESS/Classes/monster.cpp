@@ -1,5 +1,7 @@
-#include "Monster.h"
 
+#include "Monster.h"
+#include "GameData.h"
+using namespace std;
 
 Monster::Monster() {
 }
@@ -48,6 +50,25 @@ Monster* Monster::create()
 	return nullptr;
 }
 
+void Monster::dropItem()
+{
+	log("dropItem");
+	
+
+	int ingredientType = cocos2d::RandomHelper::random_int(0, 2);
+	
+	Ingredient ingredient(ingredientType);
+
+	vector<Ingredient>& ingredientList = GameData::getInstance()->getIngredientList();
+	ingredientList.push_back(ingredient);
+	//1. 랜덤함수 (0,1,2) *
+
+	//2. 재료 Material material = new Material(random);  *
+
+	//3. GameData에 등록 vector<Material> materialList& = GameData::getInstance()->getMaterials();
+	//materialList.push_back(material)
+}
+
 void Monster::damage(int dam) {
 	hp_ -= dam;
 	log("monster HP is : %d", hp_);
@@ -55,4 +76,3 @@ void Monster::damage(int dam) {
 		this->reciever->send(EVENT::MonsterDead);
 	}
 }
-

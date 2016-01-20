@@ -75,6 +75,9 @@
     <ClCompile Include="..\Classes\BattleOperator.cpp">
       <Filter>src\Model</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\AnimationScene.cpp">
+      <Filter>src\View</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\DialogLayer.cpp">
       <Filter>src\View\Layer</Filter>
     </ClCompile>
@@ -113,6 +116,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\UpgradeLayer.cpp">
       <Filter>src\View\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Ingredient.cpp">
+		<Filter>src\Model</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AnimationScene.cpp">
       <Filter>src\View\Scene</Filter>
@@ -196,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\UpgradeLayer.h">
       <Filter>src\View\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Ingredient.h">
+		<Filter>src\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Event.h">
       <Filter>src\Model</Filter>

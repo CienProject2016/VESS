@@ -1,15 +1,15 @@
- #include "StageScene.h"
+ï»¿ #include "StageScene.h"
 #include "GameScene.h"
 #include "DialogLayer.h"
 USING_NS_CC;
 
 Scene* StageScene::createScene()
 {
-	auto scene = Scene::create(); //Scene»ý¼º
-	auto layer = StageScene::create();//Layer»ý¼º
+	auto scene = Scene::create(); //Sceneìƒì„±
+	auto layer = StageScene::create();//Layerìƒì„±
 	auto dialogLayer = DialogLayer::create();
 	scene->addChild(dialogLayer);
-	scene->addChild(layer);//LayerÀ» SceneÀÇ ÀÚ½ÄÀ¸·Î ÇÔ
+	scene->addChild(layer);//Layerì„ Sceneì˜ ìžì‹ìœ¼ë¡œ í•¨
 	return scene;
 }
 
@@ -56,7 +56,7 @@ bool StageScene::init()
 	label->setPosition(Vec2(origin.x + visibleSize.width / 2,
 		origin.y + visibleSize.height - label->getContentSize().height));
 
-	auto touchLabel = Label::createWithSystemFont("½ÃÀÛÇÏ½Ã·Á¸é È­¸éÀ» ÅÍÄ¡ÇÏ¼¼¿ä", "Arial", 18);
+	auto touchLabel = Label::createWithSystemFont("ì‹œìž‘í•˜ì‹œë ¤ë©´ í™”ë©´ì„ í„°ì¹˜í•˜ì„¸ìš”", "Arial", 18);
 	touchLabel->setPosition(Vec2(origin.x + visibleSize.width / 2 + 10,
 		origin.y + visibleSize.height - touchLabel->getContentSize().height + 10));
 

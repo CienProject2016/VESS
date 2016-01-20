@@ -4,6 +4,8 @@
 
 #include "WindowSize.h"
 #include "Unit.h"
+#include <string>
+#include "Ingredient.h"
 #include "cocostudio\CocoStudio.h"
 using namespace std;
 using namespace cocostudio;
@@ -18,8 +20,10 @@ public:
 	bool isDead();
 	Monster();
 	~Monster();
-	static Monster* create();
+	void dropItem();
 	virtual bool init();
+
+	static Monster* create();
 	void damage(int dam);
 };
 #endif // __MONSTER_H__
