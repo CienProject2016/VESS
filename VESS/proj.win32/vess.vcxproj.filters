@@ -75,6 +75,9 @@
     <ClCompile Include="..\Classes\BattleOperator.cpp">
       <Filter>src\Model</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\AnimationScene.cpp">
+      <Filter>src\View</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\DialogLayer.cpp">
       <Filter>src\View\Layer</Filter>
     </ClCompile>
@@ -90,6 +93,9 @@
     <ClCompile Include="..\Classes\RefinementLayer.cpp">
       <Filter>src\View\Layer</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\EVENT.cpp">
+      <Filter>src\Model</Filter>
+	</ClCompile>
     <ClCompile Include="..\Classes\EnterScene.cpp">
       <Filter>src\View\Scene</Filter>
     </ClCompile>
@@ -161,6 +167,9 @@
     <ClInclude Include="..\Classes\RefinementLayer.h">
       <Filter>src\View\Layer</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\EVENT.h">
+      <Filter>src\Model</Filter>
+	</ClInclude>
     <ClInclude Include="..\Classes\EnterScene.h">
       <Filter>src\View\Scene</Filter>
     </ClInclude>
