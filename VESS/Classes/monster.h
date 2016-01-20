@@ -3,6 +3,7 @@
 #define __MONSTER_H__
 #include "Unit.h"
 #include <string>
+#include "Ingredient.h"
 using namespace std;
 
 class Monster : public Unit {
@@ -10,8 +11,10 @@ public:
 	bool isDead();
 	Monster();
 	~Monster();
+	void dropItem();
 	static Monster* create(const std::string&);
 	virtual bool init(const std::string&);
 	virtual bool init();
+
 };
 #endif // __MONSTER_H__

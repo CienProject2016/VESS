@@ -1,49 +1,50 @@
 #include "Item.h"
 
+
 Sword::Sword() {
-	name = "wooden sword";
-	damage = 10;
+	name_ = "wooden sword";
+	damage_ = 10;
 }
 
 Sword::~Sword() {
 }
 
 char* Sword::getName() {
-	return name;
+	return name_;
 }
 
 void Sword::setName(char val[]) {
-	name = val;
+	name_ = val;
 }
 
 int Sword::getDamage() {
-	return damage;
+	return damage_;
 }
 
 void Sword::setDamage(int val) {
-	damage = val;
+	damage_ = val;
 }
 
 Shield::Shield() {
-	name = "wooden shield";
-	defense = 10;
+	name_ = "wooden shield";
+	defense_ = 10;
 }
 
 Shield::~Shield() {
 }
 
 char* Shield::getName() {
-	return name;
+	return name_;
 }
 
 void Shield::setName(char val[]) {
-	name = val;
+	name_ = val;
 }
 
 int Shield::getDefense() {
-	return defense;
+	return defense_;
 }
 
 void Shield::setDefense(int val) {
-	defense = val;
+	defense_ = val;
 }

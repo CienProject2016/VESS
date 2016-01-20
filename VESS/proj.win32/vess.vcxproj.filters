@@ -21,7 +21,7 @@
     </Filter>
     <Filter Include="src\Controller">
       <UniqueIdentifier>{f09d2b73-f3fe-45ad-8189-652a7562352e}</UniqueIdentifier>
-	</Filter>
+    </Filter>
     <Filter Include="src\View\Scene">
       <UniqueIdentifier>{b42ac0e9-d65e-4272-a835-93a800e9d95f}</UniqueIdentifier>
     </Filter>
@@ -62,7 +62,7 @@
     </ClCompile>
     <ClCompile Include="..\Classes\AnimationScene.cpp">
       <Filter>src\View</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Classes\DialogLayer.cpp">
       <Filter>src\View\Layer</Filter>
     </ClCompile>
@@ -77,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\RefinementLayer.cpp">
       <Filter>src\View\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Ingredient.cpp">
+      <Filter>src\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,7 +118,7 @@
     </ClInclude>
     <ClInclude Include="..\Classes\WindowSize.h">
       <Filter>src\Vess</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Classes\DialogLayer.h">
       <Filter>src\View\Layer</Filter>
     </ClInclude>
@@ -130,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\RefinementLayer.h">
       <Filter>src\View\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Ingredient.h">
+      <Filter>src\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
