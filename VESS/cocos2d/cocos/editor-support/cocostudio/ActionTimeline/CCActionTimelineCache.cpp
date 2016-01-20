@@ -139,7 +139,7 @@ ActionTimeline* ActionTimelineCache::createAction(const std::string& filename)
     std::string path = filename;
     size_t pos = path.find_last_of('.');
     std::string suffix = path.substr(pos + 1, path.length());
-    CCLOG("suffix = %s", suffix.c_str());
+    //CCLOG("suffix = %s", suffix.c_str());
     
     ActionTimelineCache* cache = ActionTimelineCache::getInstance();
     
@@ -507,7 +507,7 @@ Timeline* ActionTimelineCache::loadTimelineWithFlatBuffers(const flatbuffers::Ti
     if(property == "")
         return nullptr;
     
-    CCLOG("property = %s", property.c_str());
+    //CCLOG("property = %s", property.c_str());
     
     if(property != "")
     {
