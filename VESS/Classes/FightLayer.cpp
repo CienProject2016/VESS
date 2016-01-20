@@ -1,9 +1,5 @@
 #pragma once
 #include "FightLayer.h"
-#include "Monster.h"
-#include "MonsterSpawnScheduler.h"
-#include "GameData.h"
-#include "Stage.h"
 
 bool FightLayer::init()
 {
@@ -11,13 +7,11 @@ bool FightLayer::init()
 		return false;
 	}
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	log("fightLayer visibleWidthSize : %f", visibleSize.width);
-	log("fightLayer visibleHeightSize : %f", visibleSize.height);
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	log("fightLayer origin.x : %f, origin.y : %f", origin.x, origin.y);
 
 	// µþÀÌ »ý¼ºµÊ
 	daughter = Hero::create();
+	daughter->setReciever(this);
 	//¸ó½ºÅÍ°¡ »ý¼ºµÊ
 	
 
@@ -38,11 +32,19 @@ void FightLayer::spawnMonster(float delta)
 	int moving_distance = GameData::getInstance()->getMovingDistance();
 	Stage stage_data = GameData::getInstance()->getStage();
 	vector<int> distance_data = stage_data.getMonsterLengthInfo();
-	if (MonsterSpawnScheduler::isMonsterSpawnTime(moving_distance, distance_data)) {
-		auto monster = Monster::create("slime");
+	if (MonsterSpawnScheduler::isMonsterSpawnTime(moving_distance, distance_data) && this->monster == NULL) {
+		monster = Monster::create();
+		monster->setReciever(this);
 		this->addChild(monster, 1);
+		GameData::getInstance()->setMovingDistance(moving_distance + 1);
 	}
-	GameData::getInstance()->setMovingDistance(moving_distance + 1);
+	if (monster == NULL) {
+		moving_distance_real += delta * moving_velocity;
+	}
+	if (1 <= moving_distance_real) {
+		GameData::getInstance()->setMovingDistance(moving_distance + (int)moving_distance_real);
+		moving_distance_real -= (int)moving_distance_real;
+	}
 }
 
 void FightLayer::setTouchListener()
@@ -104,4 +106,16 @@ void FightLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_even
 		break;
 	}
 	controller->endController();
+}
+
+void FightLayer::send(EVENT::All e) {
+	if (e == EVENT::HeroAttack) {
+		log("fightlayerAttack");
+		monster->damage(30);
+	}
+	if (e == EVENT::MonsterDead) {
+		log("fightlayerDead");
+		this->removeChild(monster);
+		monster = NULL;
+	}
 }

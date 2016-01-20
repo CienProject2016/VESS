@@ -1,15 +1,10 @@
 #include "Hero.h"
-#include "cocostudio\CocoStudio.h"
-
 
 using namespace cocostudio;
 bool Hero::init()
 {
 	if (Unit::init())
 	{
-		//Size visibleSize = Director::getInstance()->getVisibleSize();
-		//Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
 		window_size = fightLayerSize;
 		origin = fightLayerOrigin;
 		Node* node = CSLoader::createNode("Hero.csb");
@@ -18,7 +13,6 @@ bool Hero::init()
 		node->setPosition(0, 0);
 		node->runAction(action);
 		action->gotoFrameAndPlay(26, 32, true);
-
 		this->scheduleUpdate();
 		setPos(STAY);
 
@@ -51,6 +45,8 @@ void Hero::update(float dt) {
 				state = ATTACK_E;
 				setPos(state);
 				work_timer = 0;
+				reciever->send(EVENT::HeroAttack);
+				attackEffect();
 			}
 			break;
 		case JUMP_S:
@@ -191,4 +187,8 @@ void Hero::jump() {
 		work_timer = 0;
 		vertical_velocity = max_jump_time * window_size.height * 0.2f / 2;	//수직 속도를 설정
 	}
+}
+
+void Hero::attackEffect() {
+
 }

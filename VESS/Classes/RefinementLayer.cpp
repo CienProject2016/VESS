@@ -10,10 +10,7 @@ bool RefinementLayer::init()
 	}
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	log("refinementLayer visibleWidthSize : %f", visibleSize.width);
-	log("refinementLayer visibleHeightSize : %f", visibleSize.height);
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	log("refinementLayer origin.x : %f, origin.y : %f", origin.x, origin.y);
 
 	// 강화 샘플 이미지
 	auto smithImage = Sprite::create("Images/smith.png");

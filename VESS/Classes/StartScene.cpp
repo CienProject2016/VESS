@@ -120,7 +120,6 @@ void StartScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_even
 {
 	Scene *gameScene = GameScene::createScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(0.5, gameScene, Color3B(0, 255, 255)));
-	log("Touched");
 }
 
 
