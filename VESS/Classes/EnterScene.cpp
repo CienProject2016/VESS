@@ -208,7 +208,7 @@ bool EnterScene::init()
 	});
 	this->addChild(enterStage9);
 
-	auto backButton = Sprite::create("Images/back.jpg");
+	auto backButton = Sprite::create("Images/back.png");
 	backButton->setPosition(Vec2(visibleSize.width / 5, (visibleSize.height / 5) * 4 + origin.y));
 	backButton->setScale(0.3f);
 	this->addChild(backButton,0);
