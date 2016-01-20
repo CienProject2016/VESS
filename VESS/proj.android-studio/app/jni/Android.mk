@@ -22,6 +22,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../../Classes/GameScene.cpp \
                    ../../../Classes/healthState.cpp \
                    ../../../Classes/Hero.cpp \
+                   ../../../Classes/Ingredient.cpp \
                    ../../../Classes/Item.cpp \
                    ../../../Classes/monster.cpp \
                    ../../../Classes/MonsterSpawnScheduler.cpp \
