@@ -30,9 +30,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>src\Vess</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
@@ -43,6 +40,24 @@
       <Filter>src\Model</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Unit.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Hero.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameData.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Item.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Stage.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MonsterSpawnScheduler.cpp">
+      <Filter>src\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BattleOperator.cpp">
       <Filter>src\Model</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Hero.cpp">
@@ -75,10 +90,40 @@
     <ClCompile Include="..\Classes\StartScene.cpp">
       <Filter>src\View\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\RefinementLayer.cpp">
+    <ClCompile Include="..\Classes\EnterScene.cpp">
+      <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameScene.cpp">
+      <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StageScene.cpp">
+      <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StartScene.cpp">
+      <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AnimationScene.cpp">
+      <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>src\Vess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AnimationScene.cpp">
+      <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FightLayer.cpp">
+      <Filter>src\View\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UpgradeLayer.cpp">
       <Filter>src\View\Layer</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Ingredient.cpp">
+		<Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AnimationScene.cpp">
+      <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Event.cpp">
       <Filter>src\Model</Filter>
     </ClCompile>
   </ItemGroup>
@@ -113,9 +158,6 @@
     <ClInclude Include="..\Classes\BattleOperator.h">
       <Filter>src\Model</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\AnimationScene.h">
-      <Filter>src\View</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\WindowSize.h">
       <Filter>src\Vess</Filter>
     </ClInclude>
@@ -131,10 +173,40 @@
     <ClInclude Include="..\Classes\StartScene.h">
       <Filter>src\View\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\RefinementLayer.h">
+    <ClInclude Include="..\Classes\EnterScene.h">
+      <Filter>src\View\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameScene.h">
+      <Filter>src\View\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StageScene.h">
+      <Filter>src\View\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StartScene.h">
+      <Filter>src\View\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AnimationScene.h">
+      <Filter>src\View\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>src\Vess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\WindowSize.h">
+      <Filter>src\Vess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AnimationScene.h">
+      <Filter>src\View\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FightLayer.h">
+      <Filter>src\View\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UpgradeLayer.h">
       <Filter>src\View\Layer</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Ingredient.h">
+		<Filter>src\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Event.h">
       <Filter>src\Model</Filter>
     </ClInclude>
   </ItemGroup>

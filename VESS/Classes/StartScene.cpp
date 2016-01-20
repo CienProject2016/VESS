@@ -1,6 +1,6 @@
 #pragma once
 #include "StartScene.h"
-#include "GameScene.h"
+#include "EnterScene.h"
 
 USING_NS_CC;
 
@@ -57,26 +57,28 @@ bool StartScene::init()
     // create and initialize a label
     
 
-    auto label = Label::createWithTTF("Vess", "fonts/arial.ttf", 100);
-    
-    // position the label on the center of the screen
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - label->getContentSize().height));
+	auto label = Label::createWithTTF("V   E        S   S", "fonts/arial.ttf", 250);
 
-	auto touchLabel = Label::createWithSystemFont("시작하시려면 화면을 터치하세요", "Arial", 70);
-	touchLabel->setPosition(Vec2(origin.x + visibleSize.width/2 + 10,
-		origin.y + visibleSize.height - touchLabel->getContentSize().height + 10));
+	// position the label on the center of the screen
+	label->setPosition(Vec2(origin.x + visibleSize.width / 2,
+		origin.y + visibleSize.height - label->getContentSize().height*2.5));
 
-    // add the label as a child to this layer
-    this->addChild(label, 1);
+	\
+
+		auto touchLabel = Label::createWithSystemFont("시작하시려면 화면을 터치하세요", "Arial", 70);
+	touchLabel->setPosition(Vec2(origin.x + visibleSize.width / 2 + 10,
+		origin.y + visibleSize.height - touchLabel->getContentSize().height * 12));
+
+	// add the label as a child to this layer
+	this->addChild(label, 1);
 	this->addChild(touchLabel, 2);
 
-    // add "StartScene" splash screen"
-    auto sprite = Sprite::create("Images/songoku.png");
+	// add "StartScene" splash screen"
+	auto sprite = Sprite::create("Images/daughter.png");
 
-    // position the sprite on the center of the screen
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-	sprite->setScale(1.0f);
+	// position the sprite on the center of the screen
+	sprite->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+	sprite->setScale(1.5f);
 
 
 	setTouchListener();
@@ -88,7 +90,7 @@ bool StartScene::init()
     return true;
 }
 
-void StartScene::setTouchListener() 
+void StartScene::setTouchListener()   
 {
 	// make touch listener
 
@@ -118,8 +120,8 @@ void StartScene::onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_
 
 void StartScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
-	Scene *gameScene = GameScene::createScene();
-	Director::getInstance()->replaceScene(TransitionFade::create(0.5, gameScene, Color3B(0, 255, 255)));
+	Scene *EnterScene = EnterScene::createScene();
+	Director::getInstance()->replaceScene(TransitionFade::create(0.5, EnterScene, Color3B(0, 255, 255)));
 	log("Touched");
 }
 

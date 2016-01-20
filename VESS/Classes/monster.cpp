@@ -9,35 +9,20 @@ Monster::~Monster() {
 
 }
 
-bool Monster::init() {
-	auto sprite = Sprite::create("Images/slime.png");
-	return true;
-}
-
-bool Monster::init(const std::string& filename)
+bool Monster::init()
 {
-	CCLOG("monsterName : %s", filename.c_str());
-	if (filename.empty())
-	{
-		CCLOG("Call Sprite::initWithFile with blank resource filename.");
-		return false;
-	}
-
 	if (Unit::init())
 	{
-		Size visibleSize = Director::getInstance()->getVisibleSize();
-		Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-		auto sprite = Sprite::create("Images/" + filename + ".png");
-		sprite->setPosition(Vec2(origin.x + visibleSize.width*0.5f, origin.y + visibleSize.height*0.5f));
-		sprite->setScale(4.0f);	
-		sprite->setVisible(true);
-		this->addChild(sprite);
-		auto enemy_move = MoveTo::create(4, ccp(origin.x, origin.y + visibleSize.height*0.5f));
-		auto enemy_fade = CCFadeOut::create(2);
-
-		auto seq = CCSequence::create(enemy_move, CCDelayTime::create(1), enemy_fade, CCCallFunc::create(this, callfunc_selector(Monster::dropItem)), NULL);
-		sprite->runAction(seq);
+		hp_ = 100;
+		window_size = fightLayerSize;
+		origin = fightLayerOrigin;
+		Node* node = CSLoader::createNode("Tauren.csb");
+		this->addChild(node); //get animation data 
+		timeline::ActionTimeline* action = CSLoader::createTimeline("Tauren.csb");
+		node->setPosition(0, 0);
+		node->runAction(action);
+		action->gotoFrameAndPlay(26, 32, true);
+		this->setPosition(Vec2(window_size.width * 0.7f, window_size.height * 0.4f));
 		return true;
 	}	
 	return false;
@@ -52,13 +37,12 @@ bool Monster::isDead()
 	return false;
 }
 
-Monster* Monster::create(const std::string& file_name)
+Monster* Monster::create()
 {
 	Monster *monster = new Monster();
-	if(monster && monster->init(file_name))
+	if(monster && monster->init())
 	{
 		monster->autorelease();
-
 		return monster;
 	}
 	CC_SAFE_DELETE(monster);
@@ -82,4 +66,12 @@ void Monster::dropItem()
 
 	//3. GameData¿¡ µî·Ï vector<Material> materialList& = GameData::getInstance()->getMaterials();
 	//materialList.push_back(material)
+}
+
+void Monster::damage(int dam) {
+	hp_ -= dam;
+	log("monster HP is : %d", hp_);
+	if (hp_ <= 0) {
+		this->reciever->send(EVENT::MonsterDead);
+	}
 }
