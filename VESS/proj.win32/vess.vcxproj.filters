@@ -19,16 +19,19 @@
     <Filter Include="src\Model">
       <UniqueIdentifier>{af51a6b4-3c5b-4b2f-91fc-fb6fdaea2585}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Controller">
+      <UniqueIdentifier>{f09d2b73-f3fe-45ad-8189-652a7562352e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\View\Scene">
+      <UniqueIdentifier>{b42ac0e9-d65e-4272-a835-93a800e9d95f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\View\Layer">
+      <UniqueIdentifier>{a06d470e-42a3-4461-b789-bff58896dbad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>src\Vess</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Hero.cpp">
-      <Filter>src\Model</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Item.cpp">
       <Filter>src\Model</Filter>
@@ -39,17 +42,74 @@
     <ClCompile Include="..\Classes\Unit.cpp">
       <Filter>src\Model</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\EnterScene.cpp">
-      <Filter>src\Vess</Filter>
+    <ClCompile Include="..\Classes\Hero.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameData.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Item.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Stage.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MonsterSpawnScheduler.cpp">
+      <Filter>src\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BattleOperator.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Hero.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameData.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Stage.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MonsterSpawnScheduler.cpp">
+      <Filter>src\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BattleOperator.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DialogLayer.cpp">
+      <Filter>src\View\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FightLayer.cpp">
+      <Filter>src\View\Layer</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameScene.cpp">
-      <Filter>src\Vess</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\StageScene.cpp">
-      <Filter>src\Vess</Filter>
+      <Filter>src\View\Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\StartScene.cpp">
+      <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RefinementLayer.cpp">
+      <Filter>src\View\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EnterScene.cpp">
+      <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameScene.cpp">
+      <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StageScene.cpp">
+      <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StartScene.cpp">
+      <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AnimationScene.cpp">
+      <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src\Vess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AnimationScene.cpp">
+      <Filter>src\View\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -71,17 +131,59 @@
     <ClInclude Include="..\Classes\Unit.h">
       <Filter>src\Model</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\EnterScene.h">
+    <ClInclude Include="..\Classes\GameData.h">
+      <Filter>src\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Stage.h">
+      <Filter>src\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MonsterSpawnScheduler.h">
+      <Filter>src\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BattleOperator.h">
+      <Filter>src\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\WindowSize.h">
       <Filter>src\Vess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DialogLayer.h">
+      <Filter>src\View\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FightLayer.h">
+      <Filter>src\View\Layer</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameScene.h">
-      <Filter>src\Vess</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\StageScene.h">
-      <Filter>src\Vess</Filter>
+      <Filter>src\View\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\StartScene.h">
+      <Filter>src\View\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RefinementLayer.h">
+      <Filter>src\View\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EnterScene.h">
+      <Filter>src\View\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameScene.h">
+      <Filter>src\View\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StageScene.h">
+      <Filter>src\View\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StartScene.h">
+      <Filter>src\View\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AnimationScene.h">
+      <Filter>src\View\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>src\Vess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\WindowSize.h">
+      <Filter>src\Vess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AnimationScene.h">
+      <Filter>src\View\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

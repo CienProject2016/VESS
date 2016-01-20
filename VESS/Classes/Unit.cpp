@@ -1,11 +1,12 @@
+
 #include "Unit.h"
 
-int Unit::getHP() 
+Unit::Unit() : hp_(100)
 {
-	return hp;
+
 }
 
-void Unit::setHP(int hp) 
+Unit::~Unit()
 {
-	this->hp = hp;
+
 }
