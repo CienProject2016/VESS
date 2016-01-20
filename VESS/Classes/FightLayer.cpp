@@ -110,8 +110,8 @@ void FightLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_even
 
 void FightLayer::send(EVENT::All e) {
 	if (e == EVENT::HeroAttack) {
-		log("fightlayerAttack");
-		monster->damage(30);
+		if(monster != NULL)
+			monster->damage(30);
 	}
 	if (e == EVENT::MonsterDead) {
 		log("fightlayerDead");
