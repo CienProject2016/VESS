@@ -22,11 +22,13 @@ bool UpgradeLayer::init()
 	// 강화 샘플 이미지
 	
 
-	
+	auto background_image = Sprite::create("images/background_image.png");
+	auto background2_image = Sprite::create("images/background2_image.png");
 	auto smith_image = Sprite::create("Images/smith_image.png");
-	auto fire_image = Sprite::create("Images/fire_button.png");
-	auto grass_image = Sprite::create("Images/grass_button.png");
-	auto water_image = Sprite::create("Images/water_button.png");
+	auto ingredient_slot = Sprite::create("Images/ingredient_slot.png");
+	auto ingredient2_slot = Sprite::create("Images/ingredient_slot.png");
+	auto jewel_slot = Sprite::create("Images/jewel_slot.png");
+	auto inventory_slot = Sprite::create("Images/inventory_slot.png");
 	auto smelting_image = Sprite::create("Images/smelting_button.png");
 	auto hammering_image = Sprite::create("Images/hammering_button.png");
 	auto quenching_image = Sprite::create("Images/quenching_button.png");
@@ -34,17 +36,26 @@ bool UpgradeLayer::init()
 	auto upgrade_image = Sprite::create("Images/upgrade_button.png");
 	auto repair_image = Sprite::create("images/repair_button.png");
 	// position the sprite on the center of the screen
+	background_image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.4f));
+	background_image->setScale(2.0f);
+
+	background2_image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.4f));
+	background2_image->setScale(2.0f);
+
 	smith_image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.4f));
-	smith_image->setScale(1.0f);
+	smith_image->setScale(2.0f);
 
-	fire_image->setPosition(Vec2(origin.x + visibleSize.width * 0.1f, origin.y + visibleSize.height*0.6f));
-	fire_image->setScale(1.0f);
+	ingredient_slot->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.1f));
+	ingredient_slot->setScale(1.0f);
 
-	grass_image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.7f));
-	grass_image->setScale(1.0f);
+	ingredient2_slot->setPosition(Vec2(origin.x + visibleSize.width * 0.26f, origin.y + visibleSize.height*0.1f));
+	ingredient2_slot->setScale(1.0f);
 
-	water_image->setPosition(Vec2(origin.x + visibleSize.width * 0.3f, origin.y + visibleSize.height*0.6f));
-	water_image->setScale(1.0f);
+	jewel_slot->setPosition(Vec2(origin.x + visibleSize.width * 0.32f, origin.y + visibleSize.height*0.1f));
+	jewel_slot->setScale(1.0f);
+
+	inventory_slot->setPosition(Vec2(origin.x + visibleSize.width * 0.05f, origin.y + visibleSize.height*0.4f));
+	inventory_slot->setScale(1.0f);
 
 	smelting_image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.2f));
 	smelting_image->setScale(1.0f);
@@ -65,20 +76,24 @@ bool UpgradeLayer::init()
 	repair_image->setScale(1.0f);
 
 
-	fire_image->setTag(tag_number);
-	grass_image->setTag(tag_number+1);
-	water_image->setTag(tag_number+2);
-	smelting_image->setTag(tag_number+3);
-	hammering_image->setTag(tag_number+4);
-	quenching_image->setTag(tag_number+5);
-	list_image->setTag(tag_number+6);
-	upgrade_image->setTag(tag_number+7);
-	repair_image->setTag(tag_number + 8);
+	ingredient_slot->setTag(tag_number);
+	ingredient2_slot->setTag(tag_number+1);
+	jewel_slot->setTag(tag_number+2);
+	inventory_slot->setTag(tag_number+3);
+	smelting_image->setTag(tag_number+4);
+	hammering_image->setTag(tag_number+5);
+	quenching_image->setTag(tag_number+6);
+	list_image->setTag(tag_number+7);
+	upgrade_image->setTag(tag_number+8);
+	repair_image->setTag(tag_number + 9);
 	// add the sprite as a child to this layer
+	this->addChild(background_image);
+	this->addChild(background2_image);
 	this->addChild(smith_image);
-	this->addChild(fire_image);
-	this->addChild(grass_image);
-	this->addChild(water_image);
+	this->addChild(ingredient_slot);
+	this->addChild(ingredient2_slot);
+	this->addChild(jewel_slot);
+	this->addChild(inventory_slot);
 	this->addChild(smelting_image);
 	this->addChild(hammering_image);
 	this->addChild(quenching_image);
@@ -91,7 +106,7 @@ bool UpgradeLayer::init()
 	// 불속성 이미지
 
 	//if (location_ != NULL) {
-	//CCRect rect = CCRectMake(0, 0, grass_image->getContentSize().width, grass_image->getContentSize().height);
+	//CCRect rect = CCRectMake(0, 0, jewel_slot->getContentSize().width, jewel_slot->getContentSize().height);
 	//if (rect.containsPoint(location_)) {
 	//	log("grass");
 	//	}
@@ -104,47 +119,59 @@ bool UpgradeLayer::init()
 bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 {
 
-	// 0, 1, 2  속성이미지
+	// 0, 1, 2, 3  슬롯
 	Point p = touch_->getLocation();
-	auto fire_image = (Sprite*) this->getChildByTag(tag_number);
-	Rect rect = fire_image->getBoundingBox();
+	auto ingredient_slot = (Sprite*) this->getChildByTag(tag_number);
+	Rect rect = ingredient_slot->getBoundingBox();
 	if (rect.containsPoint(p)) {
 
-		fire_image->setScale(2.0);
+		ingredient_slot->setScale(2.0);
 
 	}
 	else {
 
-		fire_image->setScale(1);
+		ingredient_slot->setScale(1);
 	}
 
-	auto grass_image = (Sprite*) this->getChildByTag(tag_number+1);
-	Rect rect1 = grass_image->getBoundingBox();
+	auto ingredient2_slot = (Sprite*) this->getChildByTag(tag_number+1);
+	Rect rect9 = ingredient2_slot->getBoundingBox();
+	if (rect9.containsPoint(p)) {
+
+		ingredient2_slot->setScale(2.0);
+
+	}
+	else {
+
+		ingredient2_slot->setScale(1);
+	}
+
+	auto jewel_slot = (Sprite*) this->getChildByTag(tag_number+2);
+	Rect rect1 = jewel_slot->getBoundingBox();
 	if (rect1.containsPoint(p)) {
 
-		grass_image->setScale(2.0);
+		jewel_slot->setScale(2.0);
 
 	}
 	else {
 
-		grass_image->setScale(1);
+		jewel_slot->setScale(1);
 	}
 
-	auto water_image = (Sprite*) this->getChildByTag(tag_number + 2);
-	Rect rect2 = water_image->getBoundingBox();
+	auto inventory_slot = (Sprite*) this->getChildByTag(tag_number + 3);
+	Rect rect2 = inventory_slot->getBoundingBox();
 	if (rect2.containsPoint(p)) {
 
-		water_image->setScale(2.0);
+		inventory_slot->setScale(2.0);
 
 	}
 	else {
 
-		water_image->setScale(1);
+		inventory_slot->setScale(1);
 	}
 
 
-	// 3, 4, 5  강화이미지
-	auto smelting = (Sprite*) this->getChildByTag(tag_number + 3);
+	// 4, 5, 6  강화이미지
+	auto smelting = (Sprite*) this->getChildByTag(tag_number + 4);
 	Rect rect3 = smelting->getBoundingBox();
 	if (rect3.containsPoint(p)) {
 
@@ -156,7 +183,7 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 		smelting->setScale(1);
 	}
 
-	auto hammering = (Sprite*) this->getChildByTag(tag_number + 4);
+	auto hammering = (Sprite*) this->getChildByTag(tag_number + 5);
 	Rect rect4 = hammering->getBoundingBox();
 	if (rect4.containsPoint(p)) {
 
@@ -168,7 +195,7 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 		hammering->setScale(1);
 	}
 
-	auto quenching = (Sprite*) this->getChildByTag(tag_number + 5);
+	auto quenching = (Sprite*) this->getChildByTag(tag_number + 6);
 	Rect rect5 = quenching->getBoundingBox();
 	if (rect5.containsPoint(p)) {
 
@@ -180,8 +207,8 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 		quenching->setScale(1);
 	}
 
-	//6, 7, 8 강화,도감,수리
-	auto upgrade = (Sprite*) this->getChildByTag(tag_number + 6);
+	// 7, 8, 9 강화,도감,수리
+	auto upgrade = (Sprite*) this->getChildByTag(tag_number + 7);
 	Rect rect6 = upgrade->getBoundingBox();
 	if (rect6.containsPoint(p)) {
 
@@ -193,7 +220,7 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 		upgrade->setScale(1);
 	}
 
-	auto list = (Sprite*) this->getChildByTag(tag_number + 7);
+	auto list = (Sprite*) this->getChildByTag(tag_number + 8);
 	Rect rect7 = list->getBoundingBox();
 	if (rect7.containsPoint(p)) {
 
@@ -205,7 +232,7 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 		list->setScale(1);
 	}
 
-	auto repair = (Sprite*) this->getChildByTag(tag_number + 8);
+	auto repair = (Sprite*) this->getChildByTag(tag_number + 9);
 	Rect rect8 = repair->getBoundingBox();
 	if (rect8.containsPoint(p)) {
 
