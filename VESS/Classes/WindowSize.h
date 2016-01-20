@@ -1,4 +1,7 @@
 #pragma once
+#ifndef __WINDOW_SIZE_H__
+#define __WINDOW_SIZE_H__
+
 
 #include "cocos2d.h"
 
@@ -38,3 +41,6 @@ static Size fightLayerSize = Size(
 	designResolutionSize.height);
 static Vec2 refinementLayerOrigin = Vec2(0, 0);
 static Vec2 fightLayerOrigin = Vec2(refinementLayerSize.width, 0);
+
+
+#endif

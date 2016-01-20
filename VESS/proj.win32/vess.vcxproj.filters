@@ -87,9 +87,6 @@
     <ClCompile Include="..\Classes\StartScene.cpp">
       <Filter>src\View\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\RefinementLayer.cpp">
-      <Filter>src\View\Layer</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\EnterScene.cpp">
       <Filter>src\View\Scene</Filter>
     </ClCompile>
@@ -110,6 +107,18 @@
     </ClCompile>
     <ClCompile Include="..\Classes\AnimationScene.cpp">
       <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FightLayer.cpp">
+      <Filter>src\View\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UpgradeLayer.cpp">
+      <Filter>src\View\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AnimationScene.cpp">
+      <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Event.cpp">
+      <Filter>src\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,9 +167,6 @@
     <ClInclude Include="..\Classes\StartScene.h">
       <Filter>src\View\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\RefinementLayer.h">
-      <Filter>src\View\Layer</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\EnterScene.h">
       <Filter>src\View\Scene</Filter>
     </ClInclude>
@@ -184,6 +190,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\AnimationScene.h">
       <Filter>src\View\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FightLayer.h">
+      <Filter>src\View\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UpgradeLayer.h">
+      <Filter>src\View\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Event.h">
+      <Filter>src\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
