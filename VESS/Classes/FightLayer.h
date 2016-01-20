@@ -5,6 +5,7 @@
 #include "WindowSize.h"
 #include "BattleOperator.h"
 #include "MonsterSpawnScheduler.h"
+#include "BackgroundSpawnScheduler.h"
 #include "GameData.h"
 #include "Stage.h"
 #include "Hero.h"
@@ -25,8 +26,10 @@ private :
 	virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 	virtual void onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 	virtual void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event);
+	BackgroundSpawnScheduler backgroundSpawnScheduler;
 
-
+	void initBackground();
+	void updateBackground(float dt);
 
 	void setTouchListener();
 public :

@@ -11,7 +11,11 @@ bool FightLayer::init()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	// µþÀÌ »ý¼ºµÊ
+	//Create Background
+	initBackground();
+	backgroundSpawnScheduler = BackgroundSpawnScheduler(this);
+
+	//µþÀÌ »ý¼ºµÊ
 	daughter = Hero::create();
 	daughter->setReciever(this);
 	//¸ó½ºÅÍ°¡ »ý¼ºµÊ
@@ -63,6 +67,28 @@ bool FightLayer::init()
 	return true;
 }
 
+void FightLayer::initBackground() {
+	auto ground = Sprite::create("Images/ground_basic.png");
+	int ground_width = ground->getTexture()->getPixelsWide();
+	float ground_rate = fightLayerSize.width / ground_width;
+	ground->setScale(ground_rate);
+	ground->setPosition(Vec2(fightLayerSize.width / 2, fightLayerSize.height * 0.22f));
+	this->addChild(ground, -100);
+	
+	auto sky = Sprite::create("Images/sky_basic.png");
+	int sky_width = sky->getTexture()->getPixelsWide();
+	float sky_height = sky->getTexture()->getPixelsHigh();
+	float sky_rate = fightLayerSize.width / sky_width;
+	sky_height = sky_height * sky_rate;
+	sky->setScale(sky_rate);
+	sky->setPosition(Vec2(fightLayerSize.width / 2, fightLayerSize.height - (sky_height / 2)));
+	this->addChild(sky, -200);
+}
+
+void FightLayer::updateBackground(float dt) {
+
+}
+
 void FightLayer::spawnMonster(float delta)
 {
 	int moving_distance = GameData::getInstance()->getMovingDistance();
@@ -81,6 +107,7 @@ void FightLayer::spawnMonster(float delta)
 		GameData::getInstance()->setMovingDistance(moving_distance + (int)moving_distance_real);
 		moving_distance_real -= (int)moving_distance_real;
 	}
+	backgroundSpawnScheduler.update(delta);
 }
 
 void FightLayer::setTouchListener()
@@ -175,8 +202,19 @@ void FightLayer::send(EVENT::All e) {
 			monster->damage(30);
 	}
 	if (e == EVENT::MonsterDead) {
-		log("fightlayerDead");
 		this->removeChild(monster);
 		monster = NULL;
+	}
+	if (e == EVENT::CreateMountain) {
+		BackgroundObject* mountain = BackgroundObject::create();
+		mountain->setImage("images/mountain.png", Vec2(1, 0.8f), 2.0f, BackgroundObject::ABSOLUTED, BackgroundObject::BOTTOM);
+		mountain->setSpeed(-100);
+		this->addChild(mountain, -105);
+	}
+	if (e == EVENT::CreateTree) {
+		BackgroundObject* tree = BackgroundObject::create();
+		tree->setImage("images/tree.png", Vec2(1, 0.6f), 0.8f, BackgroundObject::ABSOLUTED, BackgroundObject::TOP);
+		tree->setSpeed(-190);
+		this->addChild(tree, -104);
 	}
 }

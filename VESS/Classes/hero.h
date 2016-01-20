@@ -4,7 +4,7 @@
 #ifndef __HERO_H__
 #define __HERO_H__
 
-
+using namespace cocostudio;
 class Hero: public Unit, public EventSender {
 private:
 	enum HeroState {STAY = 0, ATTACK_S = 1,  JUMP_S = 2,  AVOID_S = 3,  SIT_S = 4		//START
