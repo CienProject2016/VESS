@@ -1,4 +1,4 @@
-#pragma once
+pragma once
 #include "RefinementLayer.h"
 #include "WindowSize.h"
 
