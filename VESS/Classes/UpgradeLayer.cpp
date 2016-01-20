@@ -22,8 +22,8 @@ bool UpgradeLayer::init()
 	// 강화 샘플 이미지
 	
 
-	auto background_image = Sprite::create("images/background_image.png");
-	auto background2_image = Sprite::create("images/background2_image.png");
+	auto background_image = Sprite::create("Images/background_image.png");
+	auto background2_image = Sprite::create("Images/background2_image.png");
 	auto smith_image = Sprite::create("Images/smith_image.png");
 	auto ingredient_slot = Sprite::create("Images/ingredient_slot.png");
 	auto ingredient2_slot = Sprite::create("Images/ingredient_slot.png");
@@ -34,7 +34,7 @@ bool UpgradeLayer::init()
 	auto quenching_image = Sprite::create("Images/quenching_button.png");
 	auto list_image = Sprite::create("Images/list_button.png");
 	auto upgrade_image = Sprite::create("Images/upgrade_button.png");
-	auto repair_image = Sprite::create("images/repair_button.png");
+	auto repair_image = Sprite::create("Images/repair_button.png");
 	// position the sprite on the center of the screen
 	background_image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.4f));
 	background_image->setScale(2.0f);
