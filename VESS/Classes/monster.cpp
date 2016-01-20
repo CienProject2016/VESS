@@ -52,6 +52,7 @@ Monster* Monster::create()
 
 void Monster::dropItem()
 {
+/*
 	log("dropItem");
 	
 
@@ -67,6 +68,7 @@ void Monster::dropItem()
 
 	//3. GameData¿¡ µî·Ï vector<Material> materialList& = GameData::getInstance()->getMaterials();
 	//materialList.push_back(material)
+*/
 }
 
 void Monster::damage(int dam) {
