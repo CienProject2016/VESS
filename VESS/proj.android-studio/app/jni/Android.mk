@@ -11,7 +11,12 @@ LOCAL_MODULE := cocos2dcpp_shared
 LOCAL_MODULE_FILENAME := libcocos2dcpp
 
 LOCAL_SRC_FILES := hellocpp/main.cpp \
+                   ../../../Classes/AnimationScene.cpp \
                    ../../../Classes/AppDelegate.cpp \
+                   ../../../Classes/BattleOperator.cpp \
+                   ../../../Classes/DialogLayer.cpp \
+                   ../../../Classes/EnterScene.cpp \
+                   ../../../Classes/Event.cpp \
                    ../../../Classes/FightLayer.cpp \
                    ../../../Classes/GameData.cpp \
                    ../../../Classes/GameScene.cpp \
@@ -19,10 +24,14 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../../Classes/Hero.cpp \
                    ../../../Classes/Item.cpp \
                    ../../../Classes/monster.cpp \
-                   ../../../Classes/RefinementLayer.cpp \
+                   ../../../Classes/MonsterSpawnScheduler.cpp \
+                   ../../../Classes/Stage.cpp \
+                   ../../../Classes/StageScene.cpp \
                    ../../../Classes/StartScene.cpp \
                    ../../../Classes/TestScene.cpp \
+                   ../../../Classes/TextLayer.cpp \
                    ../../../Classes/Unit.cpp \
+                   ../../../Classes/Upgradelayer.cpp \
 
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../Classes

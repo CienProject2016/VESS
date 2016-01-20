@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "StartScene.h"
 #include "EnterScene.h"
 
@@ -65,7 +65,7 @@ bool StartScene::init()
 
 	\
 
-		auto touchLabel = Label::createWithSystemFont("½ÃÀÛÇÏ½Ã·Á¸é È­¸éÀ» ÅÍÄ¡ÇÏ¼¼¿ä", "Arial", 70);
+		auto touchLabel = Label::createWithSystemFont("ì‹œìž‘í•˜ì‹œë ¤ë©´ í™”ë©´ì„ í„°ì¹˜í•˜ì„¸ìš”", "Arial", 70);
 	touchLabel->setPosition(Vec2(origin.x + visibleSize.width / 2 + 10,
 		origin.y + visibleSize.height - touchLabel->getContentSize().height * 12));
 

@@ -1,4 +1,4 @@
-#include "Hero.h"
+ï»¿#include "Hero.h"
 
 using namespace cocostudio;
 bool Hero::init()
@@ -114,8 +114,8 @@ void Hero::update(float dt) {
 }
 
 
-//ÇØ´ç state °¡ ½ÃÀÛÇÒ ¶§ÀÇ À§Ä¡¸¦ Àû¾î³õ°í ½Í¾úÀ¸³ª.
-//¸·»ó¾²´Â À§Ä¡´Â STAY »ÓÀÌ³×.. ±×·¡µµ ³ªÁß¿¡ ÀÌÆåÆ® ÆãÆã ÅÍÁú¶§ À§Ä¡¸¦ ¾Ë¾Æ¾ß ÇÒ ¼ö µµ ÀÖÀ¸´Ï ³¿°ÜµÎÀÚ.
+//í•´ë‹¹ state ê°€ ì‹œì‘í•  ë•Œì˜ ìœ„ì¹˜ë¥¼ ì ì–´ë†“ê³  ì‹¶ì—ˆìœ¼ë‚˜.
+//ë§‰ìƒì“°ëŠ” ìœ„ì¹˜ëŠ” STAY ë¿ì´ë„¤.. ê·¸ë˜ë„ ë‚˜ì¤‘ì— ì´í™íŠ¸ í‘í‘ í„°ì§ˆë•Œ ìœ„ì¹˜ë¥¼ ì•Œì•„ì•¼ í•  ìˆ˜ ë„ ìˆìœ¼ë‹ˆ ëƒ„ê²¨ë‘ì.
 void Hero::setPos(HeroState state) {
 	switch (state) {
 	case STAY:
@@ -124,8 +124,8 @@ void Hero::setPos(HeroState state) {
 	}
 }
 
-//°¢ state °¡ ½ÃÀÛÇÒ ¶§ À§Ä¡¸¦ ¸®ÅÏ,
-//±×·¯´Ï±î Áö±İÀº °ø°İ, È¸ÇÇ, Á¡ÇÁÇÒ ¶§ÀÇ ÃÖ°íÁ¡ À§Ä¡¸¦ ¸®ÅÏ
+//ê° state ê°€ ì‹œì‘í•  ë•Œ ìœ„ì¹˜ë¥¼ ë¦¬í„´,
+//ê·¸ëŸ¬ë‹ˆê¹Œ ì§€ê¸ˆì€ ê³µê²©, íšŒí”¼, ì í”„í•  ë•Œì˜ ìµœê³ ì  ìœ„ì¹˜ë¥¼ ë¦¬í„´
 Vec2 Hero::getStatePos(HeroState state) {
 	switch (state) {
 	float v;
@@ -155,7 +155,7 @@ Hero* Hero::create()
 	return nullptr;
 }
 
-//Hero °¡ ¿îµ¿(È¸ÇÇ, °ø°İ, Á¡ÇÁ, ¾É±â)Áß¿¡´Â ´Ù¸¥ ¸í·ÉÀ» ¹ŞÁö ¾Êµµ·Ï ¸¸µç´Ù.
+//Hero ê°€ ìš´ë™(íšŒí”¼, ê³µê²©, ì í”„, ì•‰ê¸°)ì¤‘ì—ëŠ” ë‹¤ë¥¸ ëª…ë ¹ì„ ë°›ì§€ ì•Šë„ë¡ ë§Œë“ ë‹¤.
 bool Hero::isAvailableCommend() {
 	if (state == STAY)	return true;
 	else return false;
@@ -165,14 +165,14 @@ void Hero::attack() {
 	if (isAvailableCommend()) {
 		state = ATTACK_S;
 		work_timer = 0;
-		vertical_velocity = max_attack_time * window_size.height * 0.2f / 2;	//¼öÁ÷ ¼Óµµ¸¦ ¼³Á¤
+		vertical_velocity = max_attack_time * window_size.height * 0.2f / 2;	//ìˆ˜ì§ ì†ë„ë¥¼ ì„¤ì •
 	}
 }
 void Hero::avoid() {
 	if (isAvailableCommend()) {
 		state = AVOID_S;
 		work_timer = 0;
-		vertical_velocity = max_avoid_time * window_size.height * 0.2f / 2;	//¼öÁ÷ ¼Óµµ¸¦ ¼³Á¤
+		vertical_velocity = max_avoid_time * window_size.height * 0.2f / 2;	//ìˆ˜ì§ ì†ë„ë¥¼ ì„¤ì •
 	}
 }
 void Hero::sitDown() {
@@ -185,7 +185,7 @@ void Hero::jump() {
 	if (isAvailableCommend()) {
 		state = JUMP_S;
 		work_timer = 0;
-		vertical_velocity = max_jump_time * window_size.height * 0.2f / 2;	//¼öÁ÷ ¼Óµµ¸¦ ¼³Á¤
+		vertical_velocity = max_jump_time * window_size.height * 0.2f / 2;	//ìˆ˜ì§ ì†ë„ë¥¼ ì„¤ì •
 	}
 }
 
