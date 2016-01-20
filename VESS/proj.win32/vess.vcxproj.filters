@@ -93,7 +93,7 @@
     <ClCompile Include="..\Classes\RefinementLayer.cpp">
       <Filter>src\View\Layer</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\EVENT.cpp">
+    <ClCompile Include="..\Classes\Event.cpp">
       <Filter>src\Model</Filter>
 	</ClCompile>
     <ClCompile Include="..\Classes\EnterScene.cpp">
@@ -167,7 +167,7 @@
     <ClInclude Include="..\Classes\RefinementLayer.h">
       <Filter>src\View\Layer</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\EVENT.h">
+    <ClInclude Include="..\Classes\Event.h">
       <Filter>src\Model</Filter>
 	</ClInclude>
     <ClInclude Include="..\Classes\EnterScene.h">
