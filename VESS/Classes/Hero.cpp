@@ -1,6 +1,6 @@
 ﻿#include "Hero.h"
 
-using namespace cocostudio;
+
 bool Hero::init()
 {
 	if (Unit::init())

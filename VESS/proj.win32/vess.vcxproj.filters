@@ -75,9 +75,6 @@
     <ClCompile Include="..\Classes\BattleOperator.cpp">
       <Filter>src\Model</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\AnimationScene.cpp">
-      <Filter>src\View</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\DialogLayer.cpp">
       <Filter>src\View\Layer</Filter>
     </ClCompile>
@@ -118,13 +115,22 @@
       <Filter>src\View\Layer</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Ingredient.cpp">
-		<Filter>src\Model</Filter>
+      <Filter>src\Model</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AnimationScene.cpp">
       <Filter>src\View\Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Event.cpp">
       <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BackgroundObject.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BackgroundSpawnScheduler.cpp">
+      <Filter>src\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AnimationScene.cpp">
+      <Filter>src\View\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -204,10 +210,16 @@
       <Filter>src\View\Layer</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Ingredient.h">
-		<Filter>src\Model</Filter>
+      <Filter>src\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Event.h">
       <Filter>src\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BackgroundObject.h">
+      <Filter>src\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BackgroundSpawnScheduler.h">
+      <Filter>src\Controller</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,9 @@ class EVENT {
 public:
 	enum All {
 		HeroAttack, 
-		MonsterDead
+		MonsterDead,
+		CreateTree,
+		CreateMountain
 	};
 };
 

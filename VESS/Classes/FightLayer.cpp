@@ -12,15 +12,16 @@ bool FightLayer::init()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	// 딸이 생성됨
+	//Create Background
+	initBackground();
+	backgroundSpawnScheduler = BackgroundSpawnScheduler(this);
+
+	//딸이 생성됨
 	daughter = Hero::create();
 	daughter->setReciever(this);
 	//몬스터가 생성됨
 	
-	auto background_image = Sprite::create("Images/fight_background.png");
-	background_image->setScale(2.0f);
-	background_image->setAnchorPoint(Vec2(0, 0));
-
+	
 	//공격버튼
 	auto attack_Button = MenuItemImage::create("Images/AttackButton.png", "Images/AttackButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::attackCallback, this));
 	auto dodge_Button = MenuItemImage::create("Images/DodgeButton.png", "Images/DodgeButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::dodgeCallback, this));
@@ -52,7 +53,6 @@ bool FightLayer::init()
 
 	this->schedule(schedule_selector(FightLayer::spawnMonster));
 
-	this->addChild(background_image, 0);
 	// add the sprite as a child to this layer
 	this->addChild(battle_Menu, 2);
 	this->addChild(attackMessage, 3);
@@ -67,6 +67,28 @@ bool FightLayer::init()
 	setTouchListener();
 	
 	return true;
+}
+
+void FightLayer::initBackground() {
+	auto ground = Sprite::create("Images/ground_basic.png");
+	int ground_width = ground->getTexture()->getPixelsWide();
+	float ground_rate = fightLayerSize.width / ground_width;
+	ground->setScale(ground_rate);
+	ground->setPosition(Vec2(fightLayerSize.width / 2, fightLayerSize.height * 0.22f));
+	this->addChild(ground, -100);
+	
+	auto sky = Sprite::create("Images/sky_basic.png");
+	int sky_width = sky->getTexture()->getPixelsWide();
+	float sky_height = sky->getTexture()->getPixelsHigh();
+	float sky_rate = fightLayerSize.width / sky_width;
+	sky_height = sky_height * sky_rate;
+	sky->setScale(sky_rate);
+	sky->setPosition(Vec2(fightLayerSize.width / 2, fightLayerSize.height - (sky_height / 2)));
+	this->addChild(sky, -200);
+}
+
+void FightLayer::updateBackground(float dt) {
+
 }
 
 void FightLayer::spawnMonster(float delta)
@@ -87,6 +109,7 @@ void FightLayer::spawnMonster(float delta)
 		GameData::getInstance()->setMovingDistance(moving_distance + (int)moving_distance_real);
 		moving_distance_real -= (int)moving_distance_real;
 	}
+	backgroundSpawnScheduler.update(delta);
 }
 
 void FightLayer::setTouchListener()
@@ -181,8 +204,19 @@ void FightLayer::send(EVENT::All e) {
 			monster->damage(30);
 	}
 	if (e == EVENT::MonsterDead) {
-		log("fightlayerDead");
 		this->removeChild(monster);
 		monster = NULL;
+	}
+	if (e == EVENT::CreateMountain) {
+		BackgroundObject* mountain = BackgroundObject::create();
+		mountain->setImage("Images/mountain.png", Vec2(1, 0.8f), 2.0f, BackgroundObject::ABSOLUTED, BackgroundObject::BOTTOM);
+		mountain->setSpeed(-100);
+		this->addChild(mountain, -105);
+	}
+	if (e == EVENT::CreateTree) {
+		BackgroundObject* tree = BackgroundObject::create();
+		tree->setImage("Images/tree.png", Vec2(1, 0.6f), 0.8f, BackgroundObject::ABSOLUTED, BackgroundObject::TOP);
+		tree->setSpeed(-190);
+		this->addChild(tree, -104);
 	}
 }

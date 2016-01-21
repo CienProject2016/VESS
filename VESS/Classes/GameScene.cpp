@@ -25,15 +25,15 @@ Scene* GameScene::createScene()
 	auto upgrade_layer = UpgradeLayer::create();
 	auto fight_layer = FightLayer::create();
 
-	upgrade_layer->setContentSize(Size(960, 1080));
+	upgrade_layer->setContentSize(Size(760, 1080));
 	upgrade_layer->setPosition(Vec2(0, 0));
 
-	fight_layer->setContentSize(Size(960, 1080));
-	fight_layer->setPosition(Vec2(960, 0));
+	fight_layer->setContentSize(Size(1160, 1080));
+	fight_layer->setPosition(Vec2(760, 0));
 
 	// add layer as a child to scene
-	scene->addChild(upgrade_layer);
-	scene->addChild(fight_layer);
+	scene->addChild(upgrade_layer,1);
+	scene->addChild(fight_layer,0);
 
 	// return the scene
 	return scene;
