@@ -7,10 +7,10 @@ bool Hero::init()
 	{
 		window_size = fightLayerSize;
 		origin = fightLayerOrigin;
-		Node* node = CSLoader::createNode("Hero.csb");
+		Node* node = CSLoader::createNode("animation/hero/Hero.csb");
 		node->setScale(2.0f);
 		this->addChild(node); //get animation data 
-		timeline::ActionTimeline* action = CSLoader::createTimeline("Hero.csb");
+		action = CSLoader::createTimeline("animation/hero/Hero.csb");
 		node->setPosition(0, 0);
 		node->runAction(action);
 		action->gotoFrameAndPlay(0, 24, true);
@@ -77,8 +77,12 @@ void Hero::update(float dt) {
 			}
 			break;
 		case SIT_S:
-			state = STAY;
-			setPos(STAY);
+			if (work_timer < max_sit_time) {
+			} else {
+				state = STAY;
+				setPos(state);
+				work_timer = 0;
+			}
 			break;
 		case ATTACK_E:
 			if (work_timer < max_attack_time) {
@@ -121,6 +125,7 @@ void Hero::setPos(HeroState state) {
 	switch (state) {
 	case STAY:
 		this->setPosition(getStatePos(state));
+		action->gotoFrameAndPlay(0, 24, true);
 		break;
 	}
 }
@@ -179,6 +184,7 @@ void Hero::avoid() {
 void Hero::sitDown() {
 	if (isAvailableCommend()) {
 		state = SIT_S;
+		action->gotoFrameAndPlay(25, 37, false);
 		work_timer = 0;
 	}
 }
