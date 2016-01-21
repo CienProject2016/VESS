@@ -68,7 +68,7 @@ void BattleOperator::setMenu() {
 	case CANCEL :
 		break;
 	case ATTACK :
-		attack.setVisible(true);
+		//attack.setVisible(true);
 		break;
 	case JUMP :
 		jump.setVisible(true);

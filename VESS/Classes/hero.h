@@ -14,10 +14,11 @@ private:
 	float max_avoid_time = 0.2f;	//수정해도 좋음(변수), 피하는 시간을 뜻함(단위 : s), 값이 커질수록 피하는데 오래 걸리고, 높이 뜀.
 	float max_jump_time = 0.42f;	//수정해도 좋음(변수), 점프하는 시간을 뜻함(단위 : s), 값이 커질수록 높이 뜀.
 	float max_attack_time = 0.2f;	//수정해도 좋음(변수), 공격하는 시간을 뜻함(단위 : s), 값이 커질수록 공격하는데 오래 걸리고, 높이 뜀.
+	float max_sit_time = 0.4f;		//수정해도 좋음(변수), 앉는 시간을 뜻함(단위 : s)
 	float vertical_velocity = 0;	//수직속도.
 	Size window_size;				//레이어 윈도우 사이즈
 	Vec2 origin;					//레이어의 위치 좌표
-
+	timeline::ActionTimeline* action;
 
 	float avoidDistance;			//피할때 어디까지 피할지의 거리
 	float attackDistance;			//때릴때 어디쯤 때릴지의 거리
