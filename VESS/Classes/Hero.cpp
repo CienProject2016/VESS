@@ -7,13 +7,13 @@ bool Hero::init()
 	{
 		window_size = fightLayerSize;
 		origin = fightLayerOrigin;
-		Node* node = CSLoader::createNode("animation/hero/Hero.csb");
-		node->setScale(2.0f);
+		Node* node = CSLoader::createNode("Hero.csb");
+		node->setScale(0.8f);
 		this->addChild(node); //get animation data 
-		action = CSLoader::createTimeline("animation/hero/Hero.csb");
+		action = CSLoader::createTimeline("Hero.csb");
 		node->setPosition(0, 0);
 		node->runAction(action);
-		action->gotoFrameAndPlay(0, 24, true);
+		action->gotoFrameAndPlay(0, 28, true);
 		this->scheduleUpdate();
 		setPos(STAY);
 
@@ -125,7 +125,7 @@ void Hero::setPos(HeroState state) {
 	switch (state) {
 	case STAY:
 		this->setPosition(getStatePos(state));
-		action->gotoFrameAndPlay(0, 24, true);
+		action->gotoFrameAndPlay(0, 28, true);
 		break;
 	}
 }
