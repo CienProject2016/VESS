@@ -18,8 +18,8 @@ public:
 	void bgmoffClicked(Ref* pSender);
 	void effectClicked(Ref* pSender);
 	void effectoffClicked(Ref* pSender);
-	void Settings::exitClicked(Ref* pSender);
-	void Settings::emptymenuClicked(Ref* pSender);
+	void exitClicked(Ref* pSender);
+	void emptymenuClicked(Ref* pSender);
 	CREATE_FUNC(Settings);
 };
 

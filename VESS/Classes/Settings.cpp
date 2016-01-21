@@ -2,8 +2,7 @@
 #include "StartScene.h"
 USING_NS_CC;
 
-Settings::Settings()
-{
+Settings::Settings(){
 	
 }
 
@@ -74,11 +73,10 @@ void Settings::effectoffClicked(Ref* pSender) {
 
 	CocosDenshion::SimpleAudioEngine::getInstance()->stopAllEffects();
 }
-void Settings::exitClicked(Ref* pSender)
-{
+void Settings::exitClicked(Ref* pSender){
 	Scene *startScene2 = StartScene::createScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(0.5, startScene2, Color3B(0, 255, 255)));
 	log("Touched");
 }
-void Settings::emptymenuClicked(Ref* pSender)
-{}
+void Settings::emptymenuClicked(Ref* pSender){
+}
