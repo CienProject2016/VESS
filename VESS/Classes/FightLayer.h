@@ -12,6 +12,7 @@
 #include "Monster.h"
 
 
+
 USING_NS_CC;
 
 class FightLayer : public Layer, public EventReciever
@@ -31,6 +32,7 @@ private :
 	void initBackground();
 	void updateBackground(float dt);
 
+	float* background_speed;
 	void setTouchListener();
 public :
 	void send(EVENT::All e);

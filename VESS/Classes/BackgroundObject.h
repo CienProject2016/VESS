@@ -9,15 +9,17 @@ using namespace std;
 class BackgroundObject : public Node {
 private:
 	float speed;
-	float settingSpeed;
+	float* settingSpeed;
+	float localSpeed;
 	float accel;
 	float accelTime;	//해당 스피드까지 도달하는데 걸리는 시간(단위 : 초)
+	int imageWidth;
 	BackgroundObject();
 public:
 	enum ScaleMode {RELATED_WIDTH, RELATED_HEIGHT, ABSOLUTED};
 	enum AlignMode {CENTER, BOTTOM, TOP, LEFT, RIGHT, RIGHT_TOP, RIGHT_BOTTOM, LEFT_TOP, LEFT_BOTTOM};
 	~BackgroundObject();
-	void setSpeed(float speed);
+	void setSpeed(float* speed, float accel, float localSpeed);
 	static BackgroundObject* create();
 	virtual bool init();
 	virtual void update(float dt);

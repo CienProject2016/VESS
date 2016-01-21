@@ -15,6 +15,7 @@ bool FightLayer::init()
 	//Create Background
 	initBackground();
 	backgroundSpawnScheduler = BackgroundSpawnScheduler(this);
+	background_speed = new float(-100);
 
 	//딸이 생성됨
 	daughter = Hero::create();
@@ -101,6 +102,7 @@ void FightLayer::spawnMonster(float delta)
 		monster->setReciever(this);
 		this->addChild(monster, 1);
 		GameData::getInstance()->setMovingDistance(moving_distance + 1);
+		*background_speed = 0;
 	}
 	if (monster == NULL) {
 		moving_distance_real += delta * moving_velocity;
@@ -206,17 +208,18 @@ void FightLayer::send(EVENT::All e) {
 	if (e == EVENT::MonsterDead) {
 		this->removeChild(monster);
 		monster = NULL;
+		*background_speed = -100;
 	}
 	if (e == EVENT::CreateMountain) {
 		BackgroundObject* mountain = BackgroundObject::create();
 		mountain->setImage("Images/mountain.png", Vec2(1, 0.8f), 2.0f, BackgroundObject::ABSOLUTED, BackgroundObject::BOTTOM);
-		mountain->setSpeed(-100);
+		mountain->setSpeed(background_speed, 100, 1);
 		this->addChild(mountain, -105);
 	}
 	if (e == EVENT::CreateTree) {
 		BackgroundObject* tree = BackgroundObject::create();
 		tree->setImage("Images/tree.png", Vec2(1, 0.6f), 0.8f, BackgroundObject::ABSOLUTED, BackgroundObject::TOP);
-		tree->setSpeed(-190);
+		tree->setSpeed(background_speed, 190, 2);
 		this->addChild(tree, -104);
 	}
 }
