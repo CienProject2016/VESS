@@ -24,25 +24,32 @@ Scene* Settings::createScene()
 
 bool Settings::init()
 {
-	if (!Layer::init())
+	if (!CCLayerColor::initWithColor(ccc4(255, 255, 255, 255)))
 	{
 		return false;
-	}	
+	}
+
+	
+	MenuItemFont* bgm = MenuItemFont::create("Back Ground Music", CC_CALLBACK_1(Settings::emptymenuClicked,this));
+	bgm->setColor(ccc3(0, 0, 0));
+	MenuItemImage* bgm_on = MenuItemImage::create("play.png", "play.png", CC_CALLBACK_1(Settings::bgmClicked, this));
+	MenuItemImage* bgm_off = MenuItemImage::create("stop.png", "stop.png", CC_CALLBACK_1(Settings::bgmoffClicked, this));
+	
+	
+	MenuItemFont* effect = MenuItemFont::create("Effect Sound", CC_CALLBACK_1(Settings::emptymenuClicked, this));
+	effect->setColor(ccc3(0, 0, 0));
+	MenuItemImage* effect_on = MenuItemImage::create("play.png", "play.png", CC_CALLBACK_1(Settings::effectClicked, this));
+	MenuItemImage* effect_off = MenuItemImage::create("stop.png", "stop.png", CC_CALLBACK_1(Settings::effectoffClicked, this));
+	
+	
+
+	MenuItemImage* exit = MenuItemImage::create("exit.png", "exit.png", CC_CALLBACK_1(Settings::exitClicked, this));
+	
 
 
-	MenuItemFont* bgm = MenuItemFont::create("Back Ground Music", NULL, NULL);
-	MenuItemImage* bgm_on = MenuItemImage::create("CloseNormal.png", "CloseSelected", CC_CALLBACK_1(Settings::bgmClicked, this));
-
-	MenuItemFont* effect = MenuItemFont::create("Effect Sound", NULL, NULL);
-	MenuItemImage* effect_on = MenuItemImage::create("CloseNormal.png", "CloseSelected", CC_CALLBACK_1(Settings::effectClicked, this));
-
-	MenuItemFont* exit = MenuItemFont::create("Exit", CC_CALLBACK_1(Settings::exitClicked, this));
-	bgm_on->setTag(1);
-	effect_on->setTag(2);
-
-
-	Menu* menu = Menu::create(bgm, bgm_on, effect, effect_on, exit, NULL);
-	menu->alignItemsVertically();
+	Menu* menu = Menu::create(bgm, bgm_on, bgm_off,effect, effect_on,effect_off, exit, NULL);
+	menu->alignItemsInColumns(3, 3, 1);
+	
 	
 
 	this->addChild(menu);
@@ -55,9 +62,17 @@ void Settings::bgmClicked(Ref* pSender)
 {
 	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("bgm.wav", true);
 }
+void Settings::bgmoffClicked(Ref* pSender)
+{
+	CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic("bgm.wav");
+}
 void Settings::effectClicked(Ref* pSender) {
 
 	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("effect.wav");
+}
+void Settings::effectoffClicked(Ref* pSender) {
+
+	CocosDenshion::SimpleAudioEngine::getInstance()->stopAllEffects();
 }
 void Settings::exitClicked(Ref* pSender)
 {
@@ -65,3 +80,5 @@ void Settings::exitClicked(Ref* pSender)
 	Director::getInstance()->replaceScene(TransitionFade::create(0.5, startScene2, Color3B(0, 255, 255)));
 	log("Touched");
 }
+void Settings::emptymenuClicked(Ref* pSender)
+{}

@@ -7,7 +7,7 @@
 
 USING_NS_CC;
 
-class Settings : public cocos2d::CCLayer
+class Settings : public cocos2d::CCLayerColor
 {
 public:
 	Settings();
@@ -15,8 +15,11 @@ public:
 	static cocos2d::Scene* createScene();
 	virtual bool init();
 	void bgmClicked(Ref* pSender);
+	void bgmoffClicked(Ref* pSender);
 	void effectClicked(Ref* pSender);
+	void effectoffClicked(Ref* pSender);
 	void Settings::exitClicked(Ref* pSender);
+	void Settings::emptymenuClicked(Ref* pSender);
 	CREATE_FUNC(Settings);
 };
 
