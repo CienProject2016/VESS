@@ -1,8 +1,7 @@
 ﻿#pragma once
 #include "FightLayer.h"
 
-#define attackTag 2000
-#define dodgeTag 2001
+#define attackTag 2001
 #define jumpTag 2002
 #define sitTag 2003
 
@@ -26,30 +25,27 @@ bool FightLayer::init()
 	//몬스터가 생성됨
 	
 	
-	//공격버튼
+	//버튼
+	auto dimension_Button = MenuItemImage::create("Images/dimension_Gate.png", "Images/dimensionButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::dimensionCallback, this));
 	auto attack_Button = MenuItemImage::create("Images/AttackButton.png", "Images/AttackButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::attackCallback, this));
-	auto dodge_Button = MenuItemImage::create("Images/DodgeButton.png", "Images/DodgeButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::dodgeCallback, this));
 	auto jump_Button = MenuItemImage::create("Images/JumpButton.png", "Images/JumpButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::jumpCallback, this));
 	auto sit_Button = MenuItemImage::create("Images/SitButton.png", "Images/SitButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::sitCallback, this));
+	
+	dimension_Button->setScale(1.0f);
 	attack_Button->setScale(2.0f);
-	dodge_Button->setScale(2.0f);
 	jump_Button->setScale(1.5f);
 	sit_Button->setScale(1.5f);
 
-	auto battle_Menu = Menu::create(attack_Button, dodge_Button, jump_Button, sit_Button, NULL);
+	auto battle_Menu = Menu::create(dimension_Button, attack_Button, jump_Button, sit_Button, NULL);
 	battle_Menu->setPosition(Vec2(origin.x + visibleSize.width*0.325f, origin.y + visibleSize.height*0.15f));
 	battle_Menu->alignItemsHorizontally();
 	battle_Menu->alignItemsHorizontallyWithPadding(visibleSize.width*0.05f);
+
 
 	auto attackMessage = Label::createWithTTF("Attack!", "fonts/Marker Felt.ttf", 100);
 	attackMessage->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height - attackMessage->getContentSize().height));
 	attackMessage->enableOutline(Color4B::WHITE, 1);
 	attackMessage->setVisible(false);
-
-	auto dodgeMessage = Label::createWithTTF("Dodge!", "fonts/Marker Felt.ttf", 100);
-	dodgeMessage->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height - dodgeMessage->getContentSize().height));
-	dodgeMessage->enableOutline(Color4B::WHITE, 1);
-	dodgeMessage->setVisible(false);
 
 	auto jumpMessage = Label::createWithTTF("Jump!", "fonts/Marker Felt.ttf", 100);
 	jumpMessage->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height - jumpMessage->getContentSize().height));
@@ -61,8 +57,8 @@ bool FightLayer::init()
 	sitMessage->enableOutline(Color4B::WHITE, 1);
 	sitMessage->setVisible(false);
 
+	//dimensionMessage->setTag(dimensionTag);
 	attackMessage->setTag(attackTag);
-	dodgeMessage->setTag(dodgeTag);
 	jumpMessage->setTag(jumpTag);
 	sitMessage->setTag(sitTag);
 
@@ -72,9 +68,8 @@ bool FightLayer::init()
 	// add the sprite as a child to this layer
 	this->addChild(battle_Menu, 2);
 	this->addChild(attackMessage, 3);
-	this->addChild(dodgeMessage, 4);
-	this->addChild(jumpMessage, 5);
-	this->addChild(sitMessage, 6);
+	this->addChild(jumpMessage, 4);
+	this->addChild(sitMessage, 5);
 
 
 	// add the unit as a child to this layer
@@ -131,6 +126,11 @@ void FightLayer::spawnMonster(float delta)
 	backgroundSpawnScheduler.update(delta);
 }
 
+void FightLayer::dimensionCallback(cocos2d::Ref* pSender)
+{
+		CCLOG("dimensionCallback");
+}
+
 
 void FightLayer::attackCallback(cocos2d::Ref* pSender)
 {
@@ -145,18 +145,6 @@ void FightLayer::attackCallback(cocos2d::Ref* pSender)
 	CCLOG("attackCallback");
 }
 
-void FightLayer::dodgeCallback(cocos2d::Ref* pSender)
-{
-	auto dodgeMessage = (Label*)this->getChildByTag(dodgeTag);
-	dodgeMessage->setVisible(true);
-	auto fadeIn = FadeIn::create(0);
-	auto delayTime = CCDelayTime::create(0.5f);
-	auto fadeOut = FadeOut::create(0);;
-	auto seq = CCSequence::create(fadeIn, delayTime, fadeOut, NULL);
-	dodgeMessage->runAction(seq);
-	daughter->avoid();
-	CCLOG("dodgeCallback");
-}
 
 void FightLayer::jumpCallback(cocos2d::Ref* pSender)
 {
