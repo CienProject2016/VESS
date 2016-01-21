@@ -17,9 +17,9 @@ bool Monster::init()
 		hp_ = 100;
 		window_size = fightLayerSize;
 		origin = fightLayerOrigin;
-		Node* node = CSLoader::createNode("Tauren.csb");
+		Node* node = CSLoader::createNode("animation/Tauren.csb");
 		this->addChild(node); //get animation data 
-		timeline::ActionTimeline* action = CSLoader::createTimeline("Tauren.csb");
+		timeline::ActionTimeline* action = CSLoader::createTimeline("animation/Tauren.csb");
 		node->setPosition(0, 0);
 		node->runAction(action);
 		action->gotoFrameAndPlay(26, 32, true);
