@@ -1,7 +1,11 @@
 ﻿#pragma once
 #include "FightLayer.h"
 
-#define Print 2000
+#define attackTag 2000
+#define dodgeTag 2001
+#define jumpTag 2002
+#define sitTag 2003
+
 
 bool FightLayer::init()
 {
@@ -25,30 +29,42 @@ bool FightLayer::init()
 	//공격버튼
 	auto attack_Button = MenuItemImage::create("Images/AttackButton.png", "Images/AttackButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::attackCallback, this));
 	auto dodge_Button = MenuItemImage::create("Images/DodgeButton.png", "Images/DodgeButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::dodgeCallback, this));
+	auto jump_Button = MenuItemImage::create("Images/JumpButton.png", "Images/JumpButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::jumpCallback, this));
+	auto sit_Button = MenuItemImage::create("Images/SitButton.png", "Images/SitButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::sitCallback, this));
 	attack_Button->setScale(2.0f);
 	dodge_Button->setScale(2.0f);
+	jump_Button->setScale(1.5f);
+	sit_Button->setScale(1.5f);
 
-	auto battle_Menu = Menu::create(attack_Button, dodge_Button, NULL);
-	battle_Menu->setPosition(Vec2(origin.x + visibleSize.width*0.2f, origin.y + visibleSize.height*0.15f));
+	auto battle_Menu = Menu::create(attack_Button, dodge_Button, jump_Button, sit_Button, NULL);
+	battle_Menu->setPosition(Vec2(origin.x + visibleSize.width*0.325f, origin.y + visibleSize.height*0.15f));
 	battle_Menu->alignItemsHorizontally();
-	battle_Menu->alignItemsHorizontallyWithPadding(visibleSize.width*0.1f);
-
-
-	//attackButton->setEnabled(false);
-	//dodgeButton->setEnabled(false);
+	battle_Menu->alignItemsHorizontallyWithPadding(visibleSize.width*0.05f);
 
 	auto attackMessage = Label::createWithTTF("Attack!", "fonts/Marker Felt.ttf", 100);
-	attackMessage->setPosition(Vec2(origin.x + visibleSize.width *0.25f, origin.y + visibleSize.height - attackMessage->getContentSize().height));
+	attackMessage->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height - attackMessage->getContentSize().height));
 	attackMessage->enableOutline(Color4B::WHITE, 1);
 	attackMessage->setVisible(false);
 
 	auto dodgeMessage = Label::createWithTTF("Dodge!", "fonts/Marker Felt.ttf", 100);
-	dodgeMessage->setPosition(Vec2(origin.x + visibleSize.width *0.25f, origin.y + visibleSize.height - dodgeMessage->getContentSize().height));
+	dodgeMessage->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height - dodgeMessage->getContentSize().height));
 	dodgeMessage->enableOutline(Color4B::WHITE, 1);
 	dodgeMessage->setVisible(false);
 
-	attackMessage->setTag(Print);
-	dodgeMessage->setTag(Print);
+	auto jumpMessage = Label::createWithTTF("Jump!", "fonts/Marker Felt.ttf", 100);
+	jumpMessage->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height - jumpMessage->getContentSize().height));
+	jumpMessage->enableOutline(Color4B::WHITE, 1);
+	jumpMessage->setVisible(false);
+
+	auto sitMessage = Label::createWithTTF("sit!", "fonts/Marker Felt.ttf", 100);
+	sitMessage->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height - sitMessage->getContentSize().height));
+	sitMessage->enableOutline(Color4B::WHITE, 1);
+	sitMessage->setVisible(false);
+
+	attackMessage->setTag(attackTag);
+	dodgeMessage->setTag(dodgeTag);
+	jumpMessage->setTag(jumpTag);
+	sitMessage->setTag(sitTag);
 
 
 	this->schedule(schedule_selector(FightLayer::spawnMonster));
@@ -56,6 +72,9 @@ bool FightLayer::init()
 	// add the sprite as a child to this layer
 	this->addChild(battle_Menu, 2);
 	this->addChild(attackMessage, 3);
+	this->addChild(dodgeMessage, 4);
+	this->addChild(jumpMessage, 5);
+	this->addChild(sitMessage, 6);
 
 
 	// add the unit as a child to this layer
@@ -112,6 +131,60 @@ void FightLayer::spawnMonster(float delta)
 	backgroundSpawnScheduler.update(delta);
 }
 
+
+void FightLayer::attackCallback(cocos2d::Ref* pSender)
+{
+	auto attackMessage  = (Label*)this->getChildByTag(attackTag);
+	attackMessage->setVisible(true);
+	auto fadeIn = FadeIn::create(0);
+	auto delayTime = CCDelayTime::create(0.5f);
+	auto fadeOut = FadeOut::create(0);;
+	auto seq = CCSequence::create(fadeIn, delayTime, fadeOut, NULL);
+	attackMessage->runAction(seq);
+	daughter->attack();
+	CCLOG("attackCallback");
+}
+
+void FightLayer::dodgeCallback(cocos2d::Ref* pSender)
+{
+	auto dodgeMessage = (Label*)this->getChildByTag(dodgeTag);
+	dodgeMessage->setVisible(true);
+	auto fadeIn = FadeIn::create(0);
+	auto delayTime = CCDelayTime::create(0.5f);
+	auto fadeOut = FadeOut::create(0);;
+	auto seq = CCSequence::create(fadeIn, delayTime, fadeOut, NULL);
+	dodgeMessage->runAction(seq);
+	daughter->avoid();
+	CCLOG("dodgeCallback");
+}
+
+void FightLayer::jumpCallback(cocos2d::Ref* pSender)
+{
+	auto jumpMessage = (Label*)this->getChildByTag(jumpTag);
+	jumpMessage->setVisible(true);
+	auto fadeIn = FadeIn::create(0);
+	auto delayTime = CCDelayTime::create(0.5f);
+	auto fadeOut = FadeOut::create(0);;
+	auto seq = CCSequence::create(fadeIn, delayTime, fadeOut, NULL);
+	jumpMessage->runAction(seq);
+	daughter->jump();
+	CCLOG("jumpCallback");
+}
+
+void FightLayer::sitCallback(cocos2d::Ref* pSender)
+{
+	auto sitMessage = (Label*)this->getChildByTag(sitTag);
+	sitMessage->setVisible(true);
+	auto fadeIn = FadeIn::create(0);
+	auto delayTime = CCDelayTime::create(0.5f);
+	auto fadeOut = FadeOut::create(0);;
+	auto seq = CCSequence::create(fadeIn, delayTime, fadeOut, NULL);
+	sitMessage->runAction(seq);
+	daughter->sitDown();
+	CCLOG("sitCallback");
+}
+
+
 void FightLayer::setTouchListener()
 {
 	// make touch listener
@@ -145,31 +218,6 @@ void FightLayer::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_even
 		pos.x -= min_x;
 		controller->setTouchPos(pos);
 	}
-}
-
-
-void FightLayer::attackCallback(cocos2d::Ref* pSender)
-{
-	auto attackMessage  = (Label*)this->getChildByTag(Print);
-	attackMessage->setVisible(true);
-	auto fadeIn = FadeIn::create(0);
-	auto delayTime = CCDelayTime::create(3.0f);
-	auto fadeOut = FadeOut::create(0);;
-	auto seq = CCSequence::create(fadeIn, delayTime, fadeOut, NULL);
-	attackMessage->runAction(seq);
-	CCLOG("attackCallback");
-}
-
-void FightLayer::dodgeCallback(cocos2d::Ref* pSender)
-{
-	auto dodgeMessage = (Label*)this->getChildByTag(Print);
-	dodgeMessage->setVisible(true);
-	auto fadeIn = FadeIn::create(0);
-	auto delayTime = CCDelayTime::create(3.0f);
-	auto fadeOut = FadeOut::create(0);;
-	auto seq = CCSequence::create(fadeIn, delayTime, fadeOut, NULL);
-	dodgeMessage->runAction(seq);
-	CCLOG("dodgeCallback");
 }
 
 void FightLayer::onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event)
