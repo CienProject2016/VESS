@@ -59,3 +59,13 @@ build/
 *.xcuserstate
 xcschememanagement.*
 *.opendb
+VESS/cocos2d/cocos/platform/android/libcocos2dx/libcocos2dx.iml
+VESS/proj.android-studio/.idea/compiler.xml
+VESS/proj.android-studio/.idea/encodings.xml
+VESS/proj.android-studio/.idea/gradle.xml
+VESS/proj.android-studio/.idea/misc.xml
+VESS/proj.android-studio/.idea/modules.xml
+VESS/proj.android-studio/.idea/vcs.xml
+VESS/proj.android-studio/app/vess.iml
+VESS/proj.android-studio/proj.android-studio.iml
+VESS/proj.android-studio/.idea/runConfigurations.xml

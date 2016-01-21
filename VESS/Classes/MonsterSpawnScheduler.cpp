@@ -1,6 +1,6 @@
-#include "MonsterSpawnScheduler.h"
+ï»¿#include "MonsterSpawnScheduler.h"
 
-//°Å¸®Á¤º¸¿Í ÇÃ·¹ÀÌ¾îÀÇ ÀÌµ¿°Å¸®Á¤º¸°¡ ÀÏÄ¡ÇÏ¸é TRUE¸¦ ¸®ÅÏÇÑ´Ù.
+//ê±°ë¦¬ì •ë³´ì™€ í”Œë ˆì´ì–´ì˜ ì´ë™ê±°ë¦¬ì •ë³´ê°€ ì¼ì¹˜í•˜ë©´ TRUEë¥¼ ë¦¬í„´í•œë‹¤.
 bool MonsterSpawnScheduler::isMonsterSpawnTime(int moving_distance, vector<int> distance_data)
 {
 	vector<int>::iterator iterator;

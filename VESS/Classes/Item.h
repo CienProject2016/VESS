@@ -3,8 +3,8 @@
 
 class Sword {
 private:
-	char* name;
-	int damage;
+	char* name_;
+	int damage_;
 public:
 	Sword();
 	~Sword();
@@ -16,8 +16,8 @@ public:
 
 class Shield {
 private:
-	char* name;
-	int defense;
+	char* name_;
+	int defense_;
 public:
 	Shield();
 	~Shield();

@@ -1,5 +1,6 @@
 
 #include "cocos2d.h"
+#include "EVENT.h"
 #ifndef __UNIT_H__
 #define __UNIT_H__
 

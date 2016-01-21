@@ -1,4 +1,4 @@
-#include "DialogLayer.h"
+﻿#include "DialogLayer.h"
 
 bool DialogLayer::init()
 {
