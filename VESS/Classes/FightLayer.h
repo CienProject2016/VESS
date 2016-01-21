@@ -12,6 +12,7 @@
 #include "Monster.h"
 
 
+
 USING_NS_CC;
 
 class FightLayer : public Layer, public EventReciever
@@ -31,14 +32,17 @@ private :
 	void initBackground();
 	void updateBackground(float dt);
 
+	float* background_speed;
 	void setTouchListener();
 public :
 	void send(EVENT::All e);
 	virtual bool init();
 	void spawnMonster(float);
 	CREATE_FUNC(FightLayer);
+	void dimensionCallback(cocos2d::Ref* pSender);
 	void attackCallback(cocos2d::Ref* pSender);
-	void dodgeCallback(cocos2d::Ref* pSender);
+	void jumpCallback(cocos2d::Ref* pSender);
+	void sitCallback(cocos2d::Ref* pSender);
 
 };
 
