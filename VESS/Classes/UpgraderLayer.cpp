@@ -42,34 +42,34 @@ bool UpgradeLayer::init()
 	background2_image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.4f));
 	background2_image->setScale(2.0f);
 
-	smith_image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.4f));
+	smith_image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.5f));
 	smith_image->setScale(2.0f);
 
-	ingredient_slot->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.1f));
+	ingredient_slot->setPosition(Vec2(origin.x + visibleSize.width * 0.13f, origin.y + visibleSize.height*0.1f));
 	ingredient_slot->setScale(1.0f);
 
-	ingredient2_slot->setPosition(Vec2(origin.x + visibleSize.width * 0.26f, origin.y + visibleSize.height*0.1f));
+	ingredient2_slot->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.1f));
 	ingredient2_slot->setScale(1.0f);
 
-	jewel_slot->setPosition(Vec2(origin.x + visibleSize.width * 0.32f, origin.y + visibleSize.height*0.1f));
+	jewel_slot->setPosition(Vec2(origin.x + visibleSize.width * 0.33f, origin.y + visibleSize.height*0.1f));
 	jewel_slot->setScale(1.0f);
 
-	inventory_slot->setPosition(Vec2(origin.x + visibleSize.width * 0.05f, origin.y + visibleSize.height*0.4f));
+	inventory_slot->setPosition(Vec2(origin.x + visibleSize.width * 0.03f, origin.y + visibleSize.height*0.2f));
 	inventory_slot->setScale(1.0f);
 
-	smelting_image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.2f));
+	smelting_image->setPosition(Vec2(origin.x + visibleSize.width * 0.23f, origin.y + visibleSize.height*0.3f));
 	smelting_image->setScale(1.0f);
 
-	hammering_image->setPosition(Vec2(origin.x + visibleSize.width * 0.1f, origin.y + visibleSize.height*0.4f));
+	hammering_image->setPosition(Vec2(origin.x + visibleSize.width * 0.13f, origin.y + visibleSize.height*0.5f));
 	hammering_image->setScale(1.0f);
 
-	quenching_image->setPosition(Vec2(origin.x + visibleSize.width * 0.3f, origin.y + visibleSize.height*0.4f));
+	quenching_image->setPosition(Vec2(origin.x + visibleSize.width * 0.33f, origin.y + visibleSize.height*0.5f));
 	quenching_image->setScale(1.0f);
 
-	list_image->setPosition(Vec2(origin.x + visibleSize.width * 0.35f, origin.y + visibleSize.height*0.8f));
+	list_image->setPosition(Vec2(origin.x + visibleSize.width * 0.32f, origin.y + visibleSize.height*0.8f));
 	list_image->setScale(1.0f);
 
-	upgrade_image->setPosition(Vec2(origin.x + visibleSize.width * 0.05f, origin.y + visibleSize.height*0.8f));
+	upgrade_image->setPosition(Vec2(origin.x + visibleSize.width * 0.08f, origin.y + visibleSize.height*0.8f));
 	upgrade_image->setScale(1.0f);
 
 	repair_image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.8f));
@@ -124,13 +124,13 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 	auto ingredient_slot = (Sprite*) this->getChildByTag(tag_number);
 	Rect rect = ingredient_slot->getBoundingBox();
 	if (rect.containsPoint(p)) {
-
+		
 		ingredient_slot->setScale(2.0);
 
 	}
 	else {
 
-		ingredient_slot->setScale(1);
+		ingredient_slot->setScale(2);
 	}
 
 	auto ingredient2_slot = (Sprite*) this->getChildByTag(tag_number+1);
@@ -142,7 +142,7 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 	}
 	else {
 
-		ingredient2_slot->setScale(1);
+		ingredient2_slot->setScale(2.0);
 	}
 
 	auto jewel_slot = (Sprite*) this->getChildByTag(tag_number+2);
@@ -154,7 +154,7 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 	}
 	else {
 
-		jewel_slot->setScale(1);
+		jewel_slot->setScale(2.0);
 	}
 
 	auto inventory_slot = (Sprite*) this->getChildByTag(tag_number + 3);
@@ -166,7 +166,7 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 	}
 	else {
 
-		inventory_slot->setScale(1);
+		inventory_slot->setScale(2.0);
 	}
 
 
@@ -175,36 +175,48 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 	Rect rect3 = smelting->getBoundingBox();
 	if (rect3.containsPoint(p)) {
 
-		smelting->setScale(2.0);
+		CCActionInterval*action1 = CCScaleTo::create(0.05f, 6 / 2);
+		CCActionInterval*action2 = CCScaleTo::create(0.05f, 4 / 2);
+		CCActionInterval*action3 = CCDelayTime::create(0.05);
+		CCFiniteTimeAction*seq = CCSequence::create(action1, action3, action2, NULL);
+		smelting->runAction(seq);
 
 	}
 	else {
 
-		smelting->setScale(1);
+		smelting->setScale(2);
 	}
 
 	auto hammering = (Sprite*) this->getChildByTag(tag_number + 5);
 	Rect rect4 = hammering->getBoundingBox();
 	if (rect4.containsPoint(p)) {
 
-		hammering->setScale(2.0);
+		CCActionInterval*action1 = CCScaleTo::create(0.05f, 6 / 2);
+		CCActionInterval*action2 = CCScaleTo::create(0.05f, 4 / 2);
+		CCActionInterval*action3 = CCDelayTime::create(0.05);
+		CCFiniteTimeAction*seq = CCSequence::create(action1, action3, action2, NULL);
+		hammering->runAction(seq);
 
 	}
 	else {
 
-		hammering->setScale(1);
+		hammering->setScale(2.0);
 	}
 
 	auto quenching = (Sprite*) this->getChildByTag(tag_number + 6);
 	Rect rect5 = quenching->getBoundingBox();
 	if (rect5.containsPoint(p)) {
 
-		quenching->setScale(2.0);
+		CCActionInterval*action1 = CCScaleTo::create(0.05f, 6 / 2);
+		CCActionInterval*action2 = CCScaleTo::create(0.05f, 4 / 2);
+		CCActionInterval*action3 = CCDelayTime::create(0.05);
+		CCFiniteTimeAction*seq = CCSequence::create(action1, action3, action2, NULL);
+		quenching->runAction(seq);
 
 	}
 	else {
 
-		quenching->setScale(1);
+		quenching->setScale(2);
 	}
 
 	// 7, 8, 9 강화,도감,수리
@@ -212,36 +224,48 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 	Rect rect6 = upgrade->getBoundingBox();
 	if (rect6.containsPoint(p)) {
 
-		upgrade->setScale(2.0);
+		CCActionInterval*action1 = CCScaleTo::create(0.05f, 6 / 2);
+		CCActionInterval*action2 = CCScaleTo::create(0.05f, 4 / 2);
+		CCActionInterval*action3 = CCDelayTime::create(0.05);
+		CCFiniteTimeAction*seq = CCSequence::create(action1, action3, action2, NULL);
+		upgrade->runAction(seq);
 
 	}
 	else {
 
-		upgrade->setScale(1);
+		upgrade->setScale(2);
 	}
 
 	auto list = (Sprite*) this->getChildByTag(tag_number + 8);
 	Rect rect7 = list->getBoundingBox();
 	if (rect7.containsPoint(p)) {
 
-		list->setScale(2.0);
+		CCActionInterval*action1 = CCScaleTo::create(0.05f, 6 / 2);
+		CCActionInterval*action2 = CCScaleTo::create(0.05f, 4 / 2);
+		CCActionInterval*action3 = CCDelayTime::create(0.05);
+		CCFiniteTimeAction*seq = CCSequence::create(action1, action3, action2, NULL);
+		list->runAction(seq);
 
 	}
 	else {
 
-		list->setScale(1);
+		list->setScale(2);
 	}
 
 	auto repair = (Sprite*) this->getChildByTag(tag_number + 9);
 	Rect rect8 = repair->getBoundingBox();
 	if (rect8.containsPoint(p)) {
 
-		repair->setScale(2.0);
+		CCActionInterval*action1 = CCScaleTo::create(0.05f, 6 / 2);
+		CCActionInterval*action2 = CCScaleTo::create(0.05f, 4 / 2);
+		CCActionInterval*action3 = CCDelayTime::create(0.05);
+		CCFiniteTimeAction*seq = CCSequence::create(action1, action3, action2, NULL);
+		repair->runAction(seq);
 
 	}
 	else {
 
-		repair->setScale(1);
+		repair->setScale(2);
 	}
 	return true;
 
