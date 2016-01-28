@@ -165,9 +165,9 @@ void FightLayer::dimensionCallback(cocos2d::Ref* pSender)
 		swordSprite->setPosition(shieldSprite->getPosition());
 		shieldSprite->setPosition(nullSprite->getPosition());
 
-
-		CCLOG("dimensionCallback");
 	}
+		CCLOG("dimensionCallback");
+	
 
 }
 
