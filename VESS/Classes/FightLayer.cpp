@@ -80,6 +80,20 @@ bool FightLayer::init()
 	controller = new BattleOperator();
 	this->addChild(controller, 1000000);
 	
+
+	auto swordSprite = Sprite::create("Images/sword.png");
+	auto shieldSprite = Sprite::create("Images/shield.png");
+	swordSprite->setPosition(Vec2(fightLayerSize.width / 10, fightLayerSize.height /2));
+	shieldSprite->setPosition(Vec2(fightLayerSize.width / 2, fightLayerSize.height / 2));
+	shieldSprite->setScale(.25f);
+	swordSprite->setScale(.75f);
+	swordSprite->setTag(500);
+	shieldSprite->setTag(501);
+	this->addChild(swordSprite);
+	this->addChild(shieldSprite);
+
+
+
 	setTouchListener();
 	
 	return true;
@@ -129,29 +143,32 @@ void FightLayer::spawnMonster(float delta)
 	backgroundSpawnScheduler.update(delta);
 }
 
+
 void FightLayer::dimensionCallback(cocos2d::Ref* pSender)
 {
-		CCLOG("dimensionCallback");
-}
-
-
-void FightLayer::changeDimension(){
 	int sword_ = GameData::getInstance()->getusingSword();
-	auto swordSprite = Sprite::create("Images/jewel_slot.png");
-	auto sheildSprite = Sprite::create("Images/tree.png");
+	
+	
+	auto swordSprite = (Sprite*)this->getChildByTag(500);
+	auto shieldSprite = (Sprite*)this->getChildByTag(501);
+	swordSprite->setVisible(true);
+	shieldSprite->setVisible(true);
 
-	if (sword_==1){
-		swordSprite->setPosition(Vec2(3, 2));
-		sheildSprite->setPosition(Vec2(6,2));
+
+	if (sword_ == 1){
+		
 	}
-	else
+	else if (sword_ == 0)
 	{
 		auto nullSprite = Sprite::create("Images/transparent_img.png");
-		nullSprite->setPosition(swordSprite->getPosition);
-		swordSprite->setPosition(sheildSprite->getPosition);
-		sheildSprite->setPosition(nullSprite->getPosition);
+		nullSprite->setPosition(swordSprite->getPosition());
+		swordSprite->setPosition(shieldSprite->getPosition());
+		shieldSprite->setPosition(nullSprite->getPosition());
 
+
+		CCLOG("dimensionCallback");
 	}
+
 }
 
 
