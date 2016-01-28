@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "FightLayer.h"
 
+
 #define attackTag 2001
 #define jumpTag 2002
 #define sitTag 2003
@@ -131,6 +132,26 @@ void FightLayer::spawnMonster(float delta)
 void FightLayer::dimensionCallback(cocos2d::Ref* pSender)
 {
 		CCLOG("dimensionCallback");
+}
+
+
+void FightLayer::changeDimension(){
+	int sword_ = GameData::getInstance()->getusingSword();
+	auto swordSprite = Sprite::create("Images/jewel_slot.png");
+	auto sheildSprite = Sprite::create("Images/tree.png");
+
+	if (sword_==1){
+		swordSprite->setPosition(Vec2(3, 2));
+		sheildSprite->setPosition(Vec2(6,2));
+	}
+	else
+	{
+		auto nullSprite = Sprite::create("Images/transparent_img.png");
+		nullSprite->setPosition(swordSprite->getPosition);
+		swordSprite->setPosition(sheildSprite->getPosition);
+		sheildSprite->setPosition(nullSprite->getPosition);
+
+	}
 }
 
 

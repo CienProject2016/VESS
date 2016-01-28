@@ -43,6 +43,7 @@ public :
 	void attackCallback(cocos2d::Ref* pSender);
 	void jumpCallback(cocos2d::Ref* pSender);
 	void sitCallback(cocos2d::Ref* pSender);
+	void changeDimension();
 
 };
 

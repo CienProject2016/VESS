@@ -14,6 +14,8 @@ private:
 	CC_SYNTHESIZE(int, costume_, Costume);
 	CC_SYNTHESIZE(int, moving_distance_, MovingDistance);
 	CC_SYNTHESIZE(vector<Ingredient>, ingredientList_, IngredientList);
+	CC_SYNTHESIZE(int, sword_, usingSword); 
+
 	GameData();
 	~GameData();
 public:
