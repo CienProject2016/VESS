@@ -36,7 +36,7 @@
                         <BlendFunc Src="770" Dst="771" />
                         <BoneColor A="255" R="25" G="25" B="25" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="testClothes_0010_head_11" ActionTag="-659770271" Tag="12" RotationSkewX="71.5650" RotationSkewY="71.5650" IconVisible="False" LeftMargin="-33.5000" RightMargin="-37.5000" TopMargin="-181.5000" BottomMargin="78.5000" ctype="SpriteObjectData">
+                      <AbstractNodeData Name="testClothes_0010_head_11" ActionTag="-659770271" Tag="12" RotationSkewX="71.5650" RotationSkewY="71.5650" IconVisible="False" LeftMargin="-5.5588" RightMargin="-65.4412" TopMargin="-36.4764" BottomMargin="-66.5236" ctype="SpriteObjectData">
                         <Size X="71.0000" Y="103.0000" />
                         <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                         <Position X="29.9412" Y="-15.0236" />
@@ -71,10 +71,10 @@
                       <AbstractNodeData Name="Bone_13" ActionTag="476589511" ZOrder="8" Tag="35" Length="97.0000" RotationSkewX="124.1066" RotationSkewY="124.1076" ctype="BoneNodeObjectData">
                         <Size X="0.0000" Y="0.0000" />
                         <Children>
-                          <AbstractNodeData Name="testClothes_0013_fronthair_14" ActionTag="-1202980649" Tag="15" RotationSkewX="-44.0303" RotationSkewY="-44.0303" IconVisible="False" LeftMargin="-23.5529" RightMargin="-89.4471" TopMargin="-36.8402" BottomMargin="-117.1598" ctype="SpriteObjectData">
+                          <AbstractNodeData Name="testClothes_0013_fronthair_14" ActionTag="-1202980649" Tag="15" RotationSkewX="-44.0303" RotationSkewY="-44.0303" IconVisible="False" LeftMargin="9.6132" RightMargin="-122.6132" TopMargin="-58.4048" BottomMargin="-95.5952" ctype="SpriteObjectData">
                             <Size X="113.0000" Y="154.0000" />
                             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                            <Position X="32.9471" Y="-40.1598" />
+                            <Position X="66.1132" Y="-18.5952" />
                             <Scale ScaleX="1.0000" ScaleY="1.0000" />
                             <CColor A="255" R="255" G="255" B="255" />
                             <PrePosition />
@@ -83,7 +83,7 @@
                             <BlendFunc Src="770" Dst="771" />
                           </AbstractNodeData>
                         </Children>
-                        <Position X="95.3935" Y="-14.7315" />
+                        <Position X="92.9510" Y="24.2633" />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
                         <BlendFunc Src="770" Dst="771" />
@@ -96,7 +96,7 @@
                     <BlendFunc Src="770" Dst="771" />
                     <BoneColor A="255" R="25" G="25" B="25" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="testClothes_0012_upperbody_13" ActionTag="-1446790239" Tag="14" RotationSkewX="-258.1574" RotationSkewY="101.8410" IconVisible="False" LeftMargin="-54.0000" RightMargin="-42.0000" TopMargin="-120.0000" BottomMargin="-66.0000" ctype="SpriteObjectData">
+                  <AbstractNodeData Name="testClothes_0012_upperbody_13" ActionTag="-1446790239" Tag="14" RotationSkewX="-258.1574" RotationSkewY="101.8410" IconVisible="False" LeftMargin="19.4250" RightMargin="-115.4250" TopMargin="-93.8967" BottomMargin="-92.1033" ctype="SpriteObjectData">
                     <Size X="96.0000" Y="186.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="67.4250" Y="0.8967" />
@@ -282,7 +282,7 @@
                 <BlendFunc Src="770" Dst="771" />
                 <BoneColor A="255" R="25" G="25" B="25" />
               </AbstractNodeData>
-              <AbstractNodeData Name="testClothes_0011_underbody_12" ActionTag="1557159378" Tag="13" RotationSkewX="84.8053" RotationSkewY="84.8063" IconVisible="False" LeftMargin="-35.0000" RightMargin="-41.0000" TopMargin="28.5000" BottomMargin="-133.5000" ctype="SpriteObjectData">
+              <AbstractNodeData Name="testClothes_0011_underbody_12" ActionTag="1557159378" Tag="13" RotationSkewX="84.8053" RotationSkewY="84.8063" IconVisible="False" LeftMargin="-15.8906" RightMargin="-60.1094" TopMargin="-54.3707" BottomMargin="-50.6293" ctype="SpriteObjectData">
                 <Size X="76.0000" Y="105.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="22.1094" Y="1.8707" />
@@ -292,27 +292,6 @@
                 <PreSize X="0.0000" Y="0.0000" />
                 <FileData Type="Normal" Path="testClothes_0011_underbody.png" Plist="" />
                 <BlendFunc Src="770" Dst="771" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="Bone_15" ActionTag="1345472366" ZOrder="100" Tag="56" Length="47.0000" RotationSkewX="-173.3966" RotationSkewY="541.0854" ctype="BoneNodeObjectData">
-                <Size X="0.0000" Y="0.0000" />
-                <Children>
-                  <AbstractNodeData Name="testClothes_0005_pants_29" ActionTag="-958725708" Tag="57" IconVisible="False" LeftMargin="-16.7682" RightMargin="-80.2318" TopMargin="-20.8936" BottomMargin="-75.1064" ctype="SpriteObjectData">
-                    <Size X="97.0000" Y="96.0000" />
-                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="31.7318" Y="-27.1064" />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="testClothes_0005_pants.png" Plist="" />
-                    <BlendFunc Src="770" Dst="771" />
-                  </AbstractNodeData>
-                </Children>
-                <Position X="166.5756" Y="-507.7195" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <BlendFunc Src="770" Dst="771" />
-                <BoneColor A="255" R="25" G="25" B="25" />
               </AbstractNodeData>
               <AbstractNodeData Name="Bone_9_0" ActionTag="-1448364123" ZOrder="15" Tag="39" Length="83.0000" RotationSkewX="181.4961" RotationSkewY="181.4951" ctype="BoneNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
@@ -377,7 +356,7 @@
                 <BlendFunc Src="770" Dst="771" />
                 <BoneColor A="255" R="25" G="25" B="25" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Bone_9_0_0" ActionTag="-2135390851" ZOrder="5" Tag="48" Length="83.0000" RotationSkewX="148.2696" RotationSkewY="148.2690" ctype="BoneNodeObjectData">
+              <AbstractNodeData Name="Bone_9_0_0" ActionTag="-2135390851" ZOrder="5" Tag="48" Length="83.0000" RotationSkewX="135.1047" RotationSkewY="135.1041" ctype="BoneNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
                   <AbstractNodeData Name="Bone_10" ActionTag="-278612721" ZOrder="4" Tag="49" Length="75.0000" RotationSkewX="46.0466" RotationSkewY="46.0466" ctype="BoneNodeObjectData">
@@ -426,7 +405,7 @@
                     <Size X="71.0000" Y="125.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="58.5105" Y="7.8564" />
-                    <Scale ScaleX="0.7882" ScaleY="1.2947" />
+                    <Scale ScaleX="0.7804" ScaleY="1.2962" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
@@ -434,7 +413,28 @@
                     <BlendFunc Src="770" Dst="771" />
                   </AbstractNodeData>
                 </Children>
-                <Position X="13.9406" Y="0.9555" />
+                <Position X="13.8430" Y="2.0298" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <BlendFunc Src="770" Dst="771" />
+                <BoneColor A="255" R="25" G="25" B="25" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Bone_1" ActionTag="-2040569311" ZOrder="102" Tag="45" Length="61.0000" RotationSkewX="168.7975" RotationSkewY="168.7975" ctype="BoneNodeObjectData">
+                <Size X="0.0000" Y="0.0000" />
+                <Children>
+                  <AbstractNodeData Name="testClothes_0005_pants_2" ActionTag="2127589257" Tag="46" RotationSkewX="-84.7735" RotationSkewY="-84.7734" IconVisible="False" LeftMargin="-30.8859" RightMargin="-66.1141" TopMargin="-29.8796" BottomMargin="-66.1204" ctype="SpriteObjectData">
+                    <Size X="97.0000" Y="96.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="17.6141" Y="-18.1204" />
+                    <Scale ScaleX="1.1127" ScaleY="0.9891" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="Normal" Path="testClothes_0005_pants.png" Plist="" />
+                    <BlendFunc Src="770" Dst="771" />
+                  </AbstractNodeData>
+                </Children>
+                <Position X="27.4848" Y="-5.7462" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <BlendFunc Src="770" Dst="771" />
