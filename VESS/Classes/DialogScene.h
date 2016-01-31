@@ -1,9 +1,11 @@
-#ifndef __STAGE_SCENE_H__
-#define __STAGE_SCENE_H__
+#ifndef __DIALOG_SCENE_H__
+#define __DIALOG_SCENE_H__
 
 #include "cocos2d.h"
+#include "Dialog.h"
+#include <vector>
 
-class StageScene : public cocos2d::Layer
+class DialogScene : public cocos2d::Layer
 {
 private:
 	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event);
@@ -12,9 +14,12 @@ private:
 	virtual void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 
 	void setTouchListener();
-
+	vector<Dialog> *dialogData;
+	vector<Dialog>::iterator dialogIterator;
 
 public:
+	void showNextDialog();
+	bool hasNextDialog();
 	static cocos2d::Scene* createScene();
 
 	virtual bool init();
@@ -23,7 +28,7 @@ public:
 	void menuCloseCallback(cocos2d::Ref* pSender);
 
 	// implement the "static create()" method manually
-	CREATE_FUNC(StageScene);
+	CREATE_FUNC(DialogScene);
 };
 
-#endif // __STAGE_SCENE_H__
+#endif // __DIALOG_SCENE_H__

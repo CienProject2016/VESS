@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "EnterScene.h"
-#include "StageScene.h"
+#include "DialogScene.h"
 #include "ui/CocosGUI.h"
 
 USING_NS_CC;
@@ -251,8 +251,8 @@ void EnterScene::onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_
 
 void EnterScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
-	Scene *stageScene = StageScene::createScene();
-	Director::getInstance()->replaceScene(TransitionFade::create(0.5, stageScene, Color3B(0, 255, 255)));
+	Scene *dialogScene = DialogScene::createScene();
+	Director::getInstance()->replaceScene(TransitionFade::create(0.5, dialogScene, Color3B(0, 255, 255)));
 	log("Touched");
 }
 

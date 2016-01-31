@@ -5,7 +5,6 @@
 #include "WindowSize.h"
 #include "Unit.h"
 #include <string>
-#include "Ingredient.h"
 #include "cocostudio\CocoStudio.h"
 using namespace std;
 using namespace cocostudio;
