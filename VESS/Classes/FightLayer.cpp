@@ -113,7 +113,7 @@ void FightLayer::spawnMonster(float delta)
 	vector<int> distance_data = stage_data.getMonsterLengthInfo();
 	if (MonsterSpawnScheduler::isMonsterSpawnTime(moving_distance, distance_data) && this->monster == NULL) {
 		monster = Monster::create();
-		monster->setReciever(this);
+			monster->setReciever(this);
 		this->addChild(monster, 1);
 		GameData::getInstance()->setMovingDistance(moving_distance + 1);
 		*background_speed = 0;

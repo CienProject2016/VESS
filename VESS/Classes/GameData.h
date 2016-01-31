@@ -2,7 +2,7 @@
 #include "cocos2d.h"
 #include "Stage.h"
 #include "Hero.h"
-#include "Ingredient.h"
+#include "Dialog.h"
 
 class GameData
 {
@@ -13,7 +13,8 @@ private:
 	CC_SYNTHESIZE(int, gold_, Gold);
 	CC_SYNTHESIZE(int, costume_, Costume);
 	CC_SYNTHESIZE(int, moving_distance_, MovingDistance);
-	CC_SYNTHESIZE(vector<Ingredient>, ingredientList_, IngredientList);
+	CC_SYNTHESIZE(vector<Dialog>*, dialogList_, DialogList);
+	
 	GameData();
 	~GameData();
 public:
