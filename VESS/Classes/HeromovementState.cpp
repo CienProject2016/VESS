@@ -13,7 +13,7 @@ void HeroMovementState::initPos() {
 	parent->setPosition(Vec2(fightLayerSize.width * 0.3f, fightLayerSize.height * 0.4f));
 }
 void HeroMovementState::setVerticalVelocity() {
-	vertical_velocity = max_time * gravity / 2;	//수직 속도를 설정
+	verticalVelocity = maxTime * gravity / 2;	//수직 속도를 설정
 }
 
 StayMovementState::StayMovementState(Hero* parent) {
@@ -26,33 +26,33 @@ bool StayMovementState::isAvailableCommand() {
 
 JumpMovementState::JumpMovementState(Hero* parent) {
 	this->parent = parent;
-	max_time = 0.42f;
-	timer = move_distance = 0;
+	maxTime = 0.42f;
+	timer = moveDistance = 0;
 	setGravity();
 	setVerticalVelocity();
 }
 
 void JumpMovementState::update(float delta) {
-	if (max_time <= timer) {
+	if (maxTime <= timer) {
 		parent->setMovementState(new StayMovementState(this->parent));
 		return;
 	}
-	vertical_velocity -= delta * gravity;
-	parent->setPositionY(parent->getPositionY() + vertical_velocity);
+	verticalVelocity -= delta * gravity;
+	parent->setPositionY(parent->getPositionY() + verticalVelocity);
 	timer += delta;
 }
 
 AttackMovementState::AttackMovementState(Hero* parent) {
 	this->parent = parent;
-	max_time = 0.2f;
+	maxTime = 0.2f;
 	timer = 0;
 	direction = 1;
-	move_distance = fightLayerSize.width * 0.4f;
+	moveDistance = fightLayerSize.width * 0.4f;
 	setGravity();
 	setVerticalVelocity();
 }
 void AttackMovementState::update(float delta) {
-	if (max_time <= timer) {
+	if (maxTime <= timer) {
 		if (direction < 0) {
 			parent->setMovementState(new StayMovementState(this->parent));
 			return;
@@ -64,9 +64,9 @@ void AttackMovementState::update(float delta) {
 			setVerticalVelocity();
 		}
 	}
-	vertical_velocity -= delta * gravity;
-	parent->setPositionY(parent->getPositionY() + vertical_velocity);
-	parent->setPositionX(parent->getPositionX() + direction * delta * move_distance / max_time);
+	verticalVelocity -= delta * gravity;
+	parent->setPositionY(parent->getPositionY() + verticalVelocity);
+	parent->setPositionX(parent->getPositionX() + direction * delta * moveDistance / maxTime);
 	timer += delta;
 }
 void AttackMovementState::attackEvent() {
@@ -75,15 +75,15 @@ void AttackMovementState::attackEvent() {
 
 AvoidMovementState::AvoidMovementState(Hero* parent) {
 	this->parent = parent;
-	max_time = 0.2f;
+	maxTime = 0.2f;
 	timer = 0;
 	direction = 1;
-	move_distance = fightLayerSize.width * 0.2f;
+	moveDistance = fightLayerSize.width * 0.2f;
 	setGravity();
 	setVerticalVelocity();
 }
 void AvoidMovementState::update(float delta) {
-	if (max_time <= timer) {
+	if (maxTime <= timer) {
 		if (direction < 0) {
 			parent->setMovementState(new StayMovementState(this->parent));
 			return;
@@ -94,25 +94,25 @@ void AvoidMovementState::update(float delta) {
 			setVerticalVelocity();
 		}
 	}
-	vertical_velocity -= delta * gravity;
-	parent->setPositionY(parent->getPositionY() + vertical_velocity);
-	parent->setPositionX(parent->getPositionX() - direction * delta * move_distance / max_time);
+	verticalVelocity -= delta * gravity;
+	parent->setPositionY(parent->getPositionY() + verticalVelocity);
+	parent->setPositionX(parent->getPositionX() - direction * delta * moveDistance / maxTime);
 	timer += delta;
 }
 
 SitdownMovementState::SitdownMovementState(Hero* parent) {
 	this->parent = parent;
-	max_time = 0.4f;
-	timer = move_distance = 0;
+	maxTime = 0.4f;
+	timer = moveDistance = 0;
 	setGravity();
 	setVerticalVelocity();
 }
 void SitdownMovementState::update(float delta) {
-	if (max_time <= timer) {
+	if (maxTime <= timer) {
 		parent->setMovementState(new StayMovementState(this->parent));
 		return;
 	}
-	vertical_velocity -= delta * gravity;
-	parent->setPositionY(parent->getPositionY() + vertical_velocity);
+	verticalVelocity -= delta * gravity;
+	parent->setPositionY(parent->getPositionY() + verticalVelocity);
 	timer += delta;
 }

@@ -18,7 +18,7 @@ bool FightLayer::init()
 	//Create Background
 	initBackground();
 	backgroundSpawnScheduler = BackgroundSpawnScheduler(this);
-	background_speed = new float(-100);
+	backgroundSpeed = new float(-100);
 
 	//딸이 생성됨
 	daughter = Hero::create();
@@ -116,14 +116,14 @@ void FightLayer::spawnMonster(float delta)
 		monster->setParentLayer(this);
 		this->addChild(monster, 1);
 		GameData::getInstance()->setMovingDistance(moving_distance + 1);
-		*background_speed = 0;
+		*backgroundSpeed = 0;
 	}
 	if (monster == NULL) {
-		moving_distance_real += delta * moving_velocity;
+		movingDistanceReal += delta * movingVelocity;
 	}
-	if (1 <= moving_distance_real) {
-		GameData::getInstance()->setMovingDistance(moving_distance + (int)moving_distance_real);
-		moving_distance_real -= (int)moving_distance_real;
+	if (1 <= movingDistanceReal) {
+		GameData::getInstance()->setMovingDistance(moving_distance + (int)movingDistanceReal);
+		movingDistanceReal -= (int)movingDistanceReal;
 	}
 	backgroundSpawnScheduler.update(delta);
 }
@@ -246,20 +246,20 @@ Hero* FightLayer::getDaughter() {
 void FightLayer::monsterDead() {
 	this->removeChild(monster);
 	monster = NULL;
-	*background_speed = -100;
+	*backgroundSpeed = -100;
 }
 
 void FightLayer::createBackgound(EnumBackground::Obj obj) {
 	if (obj == EnumBackground::mountain) {
 		BackgroundObject* mountain = BackgroundObject::create();
 		mountain->setImage("Images/mountain.png", Vec2(1, 0.8f), 2.0f, BackgroundObject::ABSOLUTED, BackgroundObject::BOTTOM);
-		mountain->setSpeed(background_speed, 100, 1);
+		mountain->setSpeed(backgroundSpeed, 100, 1);
 		this->addChild(mountain, -105);
 	}
 	if (obj == EnumBackground::tree) {
 		BackgroundObject* tree = BackgroundObject::create();
 		tree->setImage("Images/tree.png", Vec2(1, 0.6f), 0.8f, BackgroundObject::ABSOLUTED, BackgroundObject::TOP);
-		tree->setSpeed(background_speed, 190, 2);
+		tree->setSpeed(backgroundSpeed, 190, 2);
 		this->addChild(tree, -104);
 	}
 }

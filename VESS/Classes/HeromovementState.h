@@ -13,12 +13,12 @@ class Hero;
 
 class HeroMovementState {
 protected:
-	float max_time;
+	float maxTime;
 	float timer;
-	float vertical_velocity;
+	float verticalVelocity;
 	Hero* parent;
 	float gravity;
-	float move_distance;
+	float moveDistance;
 public:
 	HeroMovementState();
 	virtual void update(float delta);
