@@ -22,7 +22,7 @@ public:
 	//Vec2 getStatePos(HeroState state);	//각 state 가 시작할 때 설정된 Hero 의 위치를 리턴한다. 이펙트가 펑펑 터질때를 대비하여 만들어 놓았다.
 
 	virtual void update(float dt);
-	bool isAvailableCommend();
+	bool isAvailableCommand();
 	void attack();
 	void jump();
 	void avoid();

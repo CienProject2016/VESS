@@ -18,14 +18,14 @@ protected:
 	float vertical_velocity;
 	Hero* parent;
 	float gravity;
-	float moveDistance;
+	float move_distance;
 public:
 	HeroMovementState();
 	virtual void update(float delta);
 	void setGravity();
 	void setVerticalVelocity();
 	void InitPos();
-	virtual bool isAvailableCommend();
+	virtual bool isAvailableCommand();
 };
 
 
@@ -33,7 +33,7 @@ public:
 class StayMovementState : public HeroMovementState {
 public:
 	StayMovementState(Hero* parent);
-	virtual bool isAvailableCommend();
+	virtual bool isAvailableCommand();
 };
 
 class JumpMovementState : public HeroMovementState {

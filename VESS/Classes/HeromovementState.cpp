@@ -1,12 +1,12 @@
 
 #include "Hero.h"
-#include "HeromovementState.h"
+#include "HeroMovementState.h"
 HeroMovementState::HeroMovementState() {}
 void HeroMovementState::update(float delta) {}
 void HeroMovementState::setGravity() {
 	gravity = fightLayerSize.height * 0.2f;
 }
-bool HeroMovementState::isAvailableCommend() {
+bool HeroMovementState::isAvailableCommand() {
 	return false;
 }
 void HeroMovementState::InitPos() {
@@ -20,14 +20,14 @@ StayMovementState::StayMovementState(Hero* parent) {
 	this->parent = parent;
 	InitPos();
 }
-bool StayMovementState::isAvailableCommend() {
+bool StayMovementState::isAvailableCommand() {
 	return true;
 }
 
 JumpMovementState::JumpMovementState(Hero* parent) {
 	this->parent = parent;
 	max_time = 0.42f;
-	timer = moveDistance = 0;
+	timer = move_distance = 0;
 	setGravity();
 	setVerticalVelocity();
 }
@@ -47,7 +47,7 @@ AttackMovementState::AttackMovementState(Hero* parent) {
 	max_time = 0.2f;
 	timer = 0;
 	direction = 1;
-	moveDistance = fightLayerSize.width * 0.4f;
+	move_distance = fightLayerSize.width * 0.4f;
 	setGravity();
 	setVerticalVelocity();
 }
@@ -66,7 +66,7 @@ void AttackMovementState::update(float delta) {
 	}
 	vertical_velocity -= delta * gravity;
 	parent->setPositionY(parent->getPositionY() + vertical_velocity);
-	parent->setPositionX(parent->getPositionX() + direction * delta * moveDistance / max_time);
+	parent->setPositionX(parent->getPositionX() + direction * delta * move_distance / max_time);
 	timer += delta;
 }
 void AttackMovementState::attackEvent() {
@@ -78,7 +78,7 @@ AvoidMovementState::AvoidMovementState(Hero* parent) {
 	max_time = 0.2f;
 	timer = 0;
 	direction = 1;
-	moveDistance = fightLayerSize.width * 0.2f;
+	move_distance = fightLayerSize.width * 0.2f;
 	setGravity();
 	setVerticalVelocity();
 }
@@ -96,14 +96,14 @@ void AvoidMovementState::update(float delta) {
 	}
 	vertical_velocity -= delta * gravity;
 	parent->setPositionY(parent->getPositionY() + vertical_velocity);
-	parent->setPositionX(parent->getPositionX() - direction * delta * moveDistance / max_time);
+	parent->setPositionX(parent->getPositionX() - direction * delta * move_distance / max_time);
 	timer += delta;
 }
 
 SitdownMovementState::SitdownMovementState(Hero* parent) {
 	this->parent = parent;
 	max_time = 0.4f;
-	timer = moveDistance = 0;
+	timer = move_distance = 0;
 	setGravity();
 	setVerticalVelocity();
 }

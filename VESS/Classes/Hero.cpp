@@ -41,27 +41,27 @@ Hero* Hero::create()
 }
 
 //Hero 가 운동(회피, 공격, 점프, 앉기)중에는 다른 명령을 받지 않도록 만든다.
-bool Hero::isAvailableCommend() {
+bool Hero::isAvailableCommand() {
 	if (movement_state == NULL)	return true;
-	return movement_state->isAvailableCommend();
+	return movement_state->isAvailableCommand();
 }
 void Hero::attack() {
-	if (isAvailableCommend()) {
+	if (isAvailableCommand()) {
 		setMovementState(new AttackMovementState(this));
 	}
 }
 void Hero::avoid() {
-	if (isAvailableCommend()) {
+	if (isAvailableCommand()) {
 		setMovementState(new AvoidMovementState(this));
 	}
 }
 void Hero::sitDown() {
-	if (isAvailableCommend()) {
+	if (isAvailableCommand()) {
 		setMovementState(new SitdownMovementState(this));
 	}
 }
 void Hero::jump() {
-	if (isAvailableCommend()) {
+	if (isAvailableCommand()) {
 		setMovementState(new JumpMovementState(this));
 	}
 }
