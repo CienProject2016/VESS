@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-#include "EVENT.h"
 #include "BackgroundObject.h"
 #include <stdlib.h>
 #ifndef __BACKGROUND_SPAWN_SCHEDULER_H__
@@ -8,27 +7,35 @@
 
 using namespace std;
 
-class BackgroundSpawnSchedulerTimer : public EventSender{
+class FightLayer;
+
+class EnumBackground {
+public:
+	enum Obj {tree, mountain};
+};
+
+class BackgroundSpawnSchedulerTimer{
 private:
-	EVENT::All ev;
+	EnumBackground::Obj obj;
 	float timer;
 	float targetTimer;
 	float targetTimerScale;
+	FightLayer* field;
 public:
 	void update(float dt);
 	BackgroundSpawnSchedulerTimer();
-	BackgroundSpawnSchedulerTimer(EVENT::All ev, EventReciever* reciever, float scale);
+	BackgroundSpawnSchedulerTimer(EnumBackground::Obj obj, FightLayer* layer, float scale);
 };
 
-class BackgroundSpawnScheduler : public EventSender{
+class BackgroundSpawnScheduler{
 private:
 
 	BackgroundSpawnSchedulerTimer mountain;
 	BackgroundSpawnSchedulerTimer tree;
-
+	FightLayer* field;
 public:
 	BackgroundSpawnScheduler();
-	BackgroundSpawnScheduler(EventReciever* reciever);
+	BackgroundSpawnScheduler(FightLayer* layer);
 	void update(float dt);
 };
 

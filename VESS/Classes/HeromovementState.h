@@ -24,7 +24,7 @@ public:
 	virtual void update(float delta);
 	void setGravity();
 	void setVerticalVelocity();
-	void InitPos();
+	void initPos();
 	virtual bool isAvailableCommand();
 };
 

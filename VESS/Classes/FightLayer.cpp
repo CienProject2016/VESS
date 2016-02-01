@@ -22,7 +22,7 @@ bool FightLayer::init()
 
 	//딸이 생성됨
 	daughter = Hero::create();
-	daughter->setReciever(this);
+	daughter->setParentLayer(this);
 	//몬스터가 생성됨
 	
 	
@@ -113,7 +113,7 @@ void FightLayer::spawnMonster(float delta)
 	vector<int> distance_data = stage_data.getMonsterLengthInfo();
 	if (MonsterSpawnScheduler::isMonsterSpawnTime(moving_distance, distance_data) && this->monster == NULL) {
 		monster = Monster::create();
-		monster->setReciever(this);
+		monster->setParentLayer(this);
 		this->addChild(monster, 1);
 		GameData::getInstance()->setMovingDistance(moving_distance + 1);
 		*background_speed = 0;
@@ -143,7 +143,7 @@ void FightLayer::attackCallback(cocos2d::Ref* pSender)
 	auto fadeOut = FadeOut::create(0);;
 	auto seq = CCSequence::create(fadeIn, delayTime, fadeOut, NULL);
 	attackMessage->runAction(seq);
-	daughter->attack();
+	daughter->startAttack();
 	CCLOG("attackCallback");
 }
 
@@ -157,7 +157,7 @@ void FightLayer::jumpCallback(cocos2d::Ref* pSender)
 	auto fadeOut = FadeOut::create(0);;
 	auto seq = CCSequence::create(fadeIn, delayTime, fadeOut, NULL);
 	jumpMessage->runAction(seq);
-	daughter->jump();
+	daughter->startJump();
 	CCLOG("jumpCallback");
 }
 
@@ -170,7 +170,7 @@ void FightLayer::sitCallback(cocos2d::Ref* pSender)
 	auto fadeOut = FadeOut::create(0);;
 	auto seq = CCSequence::create(fadeIn, delayTime, fadeOut, NULL);
 	sitMessage->runAction(seq);
-	daughter->sitDown();
+	daughter->startSitDown();
 	CCLOG("sitCallback");
 }
 
@@ -221,38 +221,42 @@ void FightLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_even
 	case 0:		//CANCEL
 		break;
 	case 1:		//ATTACK
-		daughter->attack();
+		daughter->startAttack();
 		break;
 	case 2:		//JUMP
-		daughter->jump();
+		daughter->startJump();
 		break;
 	case 3:		//AVOID
-		daughter->avoid();
+		daughter->startAvoid();
 		break;
 	case 4:		//SIT
-		daughter->sitDown();
+		daughter->startSitDown();
 		break;
 	}
 	controller->endController();
 }
 
-void FightLayer::send(EVENT::All e) {
-	if (e == EVENT::HeroAttack) {
-		if(monster != NULL)
-			monster->damage(30);
-	}
-	if (e == EVENT::MonsterDead) {
-		this->removeChild(monster);
-		monster = NULL;
-		*background_speed = -100;
-	}
-	if (e == EVENT::CreateMountain) {
+Monster* FightLayer::getMonster() {
+	return monster;
+}
+Hero* FightLayer::getDaughter() {
+	return daughter;
+}
+
+void FightLayer::monsterDead() {
+	this->removeChild(monster);
+	monster = NULL;
+	*background_speed = -100;
+}
+
+void FightLayer::createBackgound(EnumBackground::Obj obj) {
+	if (obj == EnumBackground::mountain) {
 		BackgroundObject* mountain = BackgroundObject::create();
 		mountain->setImage("Images/mountain.png", Vec2(1, 0.8f), 2.0f, BackgroundObject::ABSOLUTED, BackgroundObject::BOTTOM);
 		mountain->setSpeed(background_speed, 100, 1);
 		this->addChild(mountain, -105);
 	}
-	if (e == EVENT::CreateTree) {
+	if (obj == EnumBackground::tree) {
 		BackgroundObject* tree = BackgroundObject::create();
 		tree->setImage("Images/tree.png", Vec2(1, 0.6f), 0.8f, BackgroundObject::ABSOLUTED, BackgroundObject::TOP);
 		tree->setSpeed(background_speed, 190, 2);

@@ -1,5 +1,5 @@
 ﻿#include "Hero.h"
-
+#include "FightLayer.h"
 
 bool Hero::init()
 {
@@ -45,29 +45,40 @@ bool Hero::isAvailableCommand() {
 	if (movement_state == NULL)	return true;
 	return movement_state->isAvailableCommand();
 }
-void Hero::attack() {
+void Hero::startAttack() {
 	if (isAvailableCommand()) {
 		setMovementState(new AttackMovementState(this));
 	}
 }
-void Hero::avoid() {
+void Hero::startAvoid() {
 	if (isAvailableCommand()) {
 		setMovementState(new AvoidMovementState(this));
 	}
 }
-void Hero::sitDown() {
+void Hero::startSitDown() {
 	if (isAvailableCommand()) {
 		setMovementState(new SitdownMovementState(this));
 	}
 }
-void Hero::jump() {
+void Hero::startJump() {
 	if (isAvailableCommand()) {
 		setMovementState(new JumpMovementState(this));
 	}
 }
 
+void Hero::attackDamage() {
+	if (field->getMonster() != NULL) {
+		field->getMonster()->damage(30);
+		attackEffect();
+	}
+}
+
 void Hero::attackEffect() {
 
+}
+
+void Hero::setParentLayer(FightLayer* layer) {
+	field = layer;
 }
 
 void Hero::setMovementState(HeroMovementState* state) {

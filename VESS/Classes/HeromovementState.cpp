@@ -9,7 +9,7 @@ void HeroMovementState::setGravity() {
 bool HeroMovementState::isAvailableCommand() {
 	return false;
 }
-void HeroMovementState::InitPos() {
+void HeroMovementState::initPos() {
 	parent->setPosition(Vec2(fightLayerSize.width * 0.3f, fightLayerSize.height * 0.4f));
 }
 void HeroMovementState::setVerticalVelocity() {
@@ -18,7 +18,7 @@ void HeroMovementState::setVerticalVelocity() {
 
 StayMovementState::StayMovementState(Hero* parent) {
 	this->parent = parent;
-	InitPos();
+	initPos();
 }
 bool StayMovementState::isAvailableCommand() {
 	return true;
@@ -70,7 +70,7 @@ void AttackMovementState::update(float delta) {
 	timer += delta;
 }
 void AttackMovementState::attackEvent() {
-	parent->reciever->send(EVENT::HeroAttack);
+	parent->attackDamage();
 }
 
 AvoidMovementState::AvoidMovementState(Hero* parent) {

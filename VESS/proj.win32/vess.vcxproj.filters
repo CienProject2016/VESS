@@ -126,9 +126,6 @@
     <ClCompile Include="..\Classes\AnimationScene.cpp">
       <Filter>src\View\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Event.cpp">
-      <Filter>src\Model</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\BackgroundObject.cpp">
       <Filter>src\Model</Filter>
     </ClCompile>
@@ -222,9 +219,6 @@
       <Filter>src\Vess</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Ingredient.h">
-      <Filter>src\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Event.h">
       <Filter>src\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\BackgroundObject.h">
