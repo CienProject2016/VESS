@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "UpgradeLayer.h"
+
 #define tag_number 50
 
 bool UpgradeLayer::init()
@@ -224,7 +225,9 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 	Rect rect7 = list->getBoundingBox();
 	if (rect7.containsPoint(p)) {
 
-		list->setScale(2.0);
+		
+		Scene *ReinforceScene = Reinforce::createScene();
+		Director::getInstance()->replaceScene(TransitionFade::create(0.5, ReinforceScene, Color3B(0, 255, 255)));
 
 	}
 	else {

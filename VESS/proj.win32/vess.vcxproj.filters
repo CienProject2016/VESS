@@ -119,7 +119,7 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Settings.cpp">
       <Filter>src\Vess</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Classes\Ingredient.cpp">
       <Filter>src\Model</Filter>
     </ClCompile>
@@ -137,6 +137,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\AnimationScene.cpp">
       <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Reinforce.cpp">
+      <Filter>src\View\Layer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -217,7 +220,7 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Settings.h">
       <Filter>src\Vess</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Classes\Ingredient.h">
       <Filter>src\Model</Filter>
     </ClInclude>
@@ -229,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\BackgroundSpawnScheduler.h">
       <Filter>src\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Reinforce.h">
+      <Filter>src\View\Layer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
