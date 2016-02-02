@@ -36,7 +36,7 @@ bool Reinforce::init()
 	}
 	gazingSpeed1 = 10;
 	gazingSpeed2 = 20;
-	gazingSpeed3 = 30;
+	gazingSpeed3 = 25;
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	log("UpgradeLayer visibleWidthSize : %f", visibleSize.width);
@@ -48,9 +48,9 @@ bool Reinforce::init()
 	listener->onTouchBegan = CC_CALLBACK_2(Reinforce::onTouchBegan, this);
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 
-	auto smelting_image = Sprite::create("Images/smelting_button.png");
-	auto hammering_image = Sprite::create("Images/hammering_button.png");
-	auto quenching_image = Sprite::create("Images/quenching_button.png");
+	smelting_image = Sprite::create("Images/smelting_button.png");
+	hammering_image = Sprite::create("Images/hammering_button.png");
+	quenching_image = Sprite::create("Images/quenching_button.png");
 
 	smelting_image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.2f));
 	smelting_image->setScale(1.0f);
@@ -136,9 +136,10 @@ bool Reinforce::init()
 void Reinforce::gazeIncrease(CCProgressTimer* gazing)
 {
 	float currentPercent = gazing->getPercentage();
-	gazing->setPercentage(currentPercent + (float)7);
+	gazing->setPercentage(currentPercent + (float)8);
 	
 }
+
 bool Reinforce::onTouchBegan(Touch* touch_, Event* event_)
 {
 	Point p = touch_->getLocation();
@@ -147,6 +148,7 @@ bool Reinforce::onTouchBegan(Touch* touch_, Event* event_)
 	if (rect3.containsPoint(p)) {
 
 		gazeIncrease(gazing2);
+		
 		
 	}
 	else {
@@ -157,8 +159,10 @@ bool Reinforce::onTouchBegan(Touch* touch_, Event* event_)
 	auto hammering = (Sprite*) this->getChildByTag(2);
 	Rect rect4 = hammering->getBoundingBox();
 	if (rect4.containsPoint(p)) {
-
+		
 		gazeIncrease(gazing1);
+		
+			
 		
 	}
 	else {
@@ -188,7 +192,8 @@ void Reinforce::update(float delta) {
 		gazing1->setPercentage(gazing1->getPercentage() - delta * gazingSpeed1);
 		gazing2->setPercentage(gazing2->getPercentage() - delta * gazingSpeed2);
 		gazing3->setPercentage(gazing3->getPercentage() - delta * gazingSpeed3);
-	
+
+		
 }
 
 

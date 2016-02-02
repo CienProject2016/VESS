@@ -20,7 +20,7 @@ private:
 	void setTouchListener();
 	CCProgressTimer *gazing1, *gazing2, *gazing3;
 	float gazingSpeed1, gazingSpeed2, gazingSpeed3;
-
+	Sprite *smelting_image, *hammering_image, *quenching_image;
 
 	
 public:
@@ -29,7 +29,8 @@ public:
 	static cocos2d::Scene* createScene();
 	virtual bool init();
 	void gazeIncrease(CCProgressTimer* gazing);
-	CREATE_FUNC(Reinforce);
 	virtual void update(float delta);
+	CREATE_FUNC(Reinforce);
+	
 };
 #endif
