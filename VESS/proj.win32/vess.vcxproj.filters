@@ -229,9 +229,6 @@
     <ClInclude Include="..\Classes\GameData.h">
       <Filter>src\Model\Data</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\HeroMovementState.h">
-      <Filter>src\Model\Unit</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Settings.h">
       <Filter>src\Vess</Filter>
     </ClInclude>
@@ -252,6 +249,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\UpgradeLayer.h">
       <Filter>src\View\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HeroMovementState.h">
+      <Filter>src\Model\Unit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
