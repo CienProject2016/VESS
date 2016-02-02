@@ -1,9 +1,11 @@
-﻿#pragma once
+#pragma once
 #include "FightLayer.h"
+#include "StageClearLayer.h"
 
 #define attackTag 2001
 #define jumpTag 2002
 #define sitTag 2003
+#define kFinalDistance 4001
 
 
 bool FightLayer::init()
@@ -117,19 +119,49 @@ void FightLayer::spawnMonster(float delta)
 		this->addChild(monster, 1);
 		GameData::getInstance()->setMovingDistance(moving_distance + 1);
 		*backgroundSpeed = 0;
+		
 	}
+
 	if (monster == NULL) {
 		movingDistanceReal += delta * movingVelocity;
+		if (moving_distance == kFinalDistance) {
+			this->stageClear();
+			CCLOG("stageClear");
+		}
 	}
 	if (1 <= movingDistanceReal) {
 		GameData::getInstance()->setMovingDistance(moving_distance + (int)movingDistanceReal);
 		movingDistanceReal -= (int)movingDistanceReal;
 	}
+
 	backgroundSpawnScheduler.update(delta);
 }
 
+void FightLayer::stageClear() {
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+	auto stageClearLayer = StageClearLayer::create();
+	stageClearLayer->setContentSize(Size(100, 100));
+	stageClearLayer->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height*0.5f));
+
+	this->addChild(stageClearLayer, 10000);
+
+}
+
+
 void FightLayer::dimensionCallback(cocos2d::Ref* pSender)
 {
+	/*
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+	auto stageClearLayer = StageClearLayer::create();
+	stageClearLayer->setContentSize(Size(100, 100));
+	stageClearLayer->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height*0.5f));
+	
+	this->addChild(stageClearLayer, 10000);
+	*/
 		CCLOG("dimensionCallback");
 }
 

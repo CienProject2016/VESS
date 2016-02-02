@@ -1,4 +1,3 @@
-
 #include "Hero.h"
 #include "HeroMovementState.h"
 HeroMovementState::HeroMovementState() {}
@@ -13,7 +12,7 @@ void HeroMovementState::initPos() {
 	parent->setPosition(Vec2(fightLayerSize.width * 0.3f, fightLayerSize.height * 0.4f));
 }
 void HeroMovementState::setVerticalVelocity() {
-	verticalVelocity = maxTime * gravity / 2;	//¼öÁ÷ ¼Óµµ¸¦ ¼³Á¤
+	verticalVelocity = maxTime * gravity / 2;	//ìˆ˜ì§ ì†ë„ë¥¼ ì„¤ì •
 }
 
 StayMovementState::StayMovementState(Hero* parent) {
