@@ -81,19 +81,6 @@ bool FightLayer::init()
 	this->addChild(controller, 1000000);
 	
 
-	auto swordSprite = Sprite::create("Images/sword.png");
-	auto shieldSprite = Sprite::create("Images/shield.png");
-	swordSprite->setPosition(Vec2(fightLayerSize.width / 10, fightLayerSize.height /2));
-	shieldSprite->setPosition(Vec2(fightLayerSize.width / 2, fightLayerSize.height / 2));
-	shieldSprite->setScale(.25f);
-	swordSprite->setScale(.75f);
-	swordSprite->setTag(500);
-	shieldSprite->setTag(501);
-	this->addChild(swordSprite);
-	this->addChild(shieldSprite);
-
-
-
 	setTouchListener();
 	
 	return true;
@@ -148,26 +135,29 @@ void FightLayer::dimensionCallback(cocos2d::Ref* pSender)
 {
 	int sword_ = GameData::getInstance()->getusingSword();
 	
+	auto gameScene = Director::getInstance()->getRunningScene();
+	auto upgradeLayer = gameScene->getChildByName("upgradeLayer");
+	auto uLSwordSprite = upgradeLayer->getChildByTag(600);
+	auto uLShieldSprite = upgradeLayer->getChildByTag(601);
+	\
+	uLShieldSprite->setVisible(true);
+	uLSwordSprite->setVisible(true);
 	
-	auto swordSprite = (Sprite*)this->getChildByTag(500);
-	auto shieldSprite = (Sprite*)this->getChildByTag(501);
-	swordSprite->setVisible(true);
-	shieldSprite->setVisible(true);
-
-
 	if (sword_ == 1){
-		
+	
 	}
 	else if (sword_ == 0)
 	{
+	
 		auto nullSprite = Sprite::create("Images/transparent_img.png");
-		nullSprite->setPosition(swordSprite->getPosition());
-		swordSprite->setPosition(shieldSprite->getPosition());
-		shieldSprite->setPosition(nullSprite->getPosition());
+		nullSprite->setPosition(uLSwordSprite->getPosition());
+		uLSwordSprite->setPosition(uLShieldSprite->getPosition());
+		uLShieldSprite->setPosition(nullSprite->getPosition());
 
 	}
-		CCLOG("dimensionCallback");
-	
+
+	CCLOG("dimensionCallback");
+
 
 }
 

@@ -102,6 +102,19 @@ bool UpgradeLayer::init()
 	this->addChild(repair_image);
 
 
+
+
+
+	auto swordSprite = Sprite::create("Images/sword.png");
+	auto shieldSprite = Sprite::create("Images/shield.png");
+	swordSprite->setPosition(Vec2(visibleSize.width / 10, visibleSize.height / 2));
+	shieldSprite->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	shieldSprite->setScale(.25f);
+	swordSprite->setScale(.75f);
+	swordSprite->setTag(600);
+	shieldSprite->setTag(601);
+	this->addChild(swordSprite);
+	this->addChild(shieldSprite);
 	
 	// 불속성 이미지
 
