@@ -1,13 +1,4 @@
 #include "Reinforce.h"
-#include "GameScene.h"
-#include "UpgradeLayer.h"
-//#include "GameData.h"
-//#include "Stage.h"
-//#include "FightLayer.h"
-
-
-USING_NS_CC;
-using namespace std;
 
 Reinforce::Reinforce()
 {}
@@ -43,7 +34,10 @@ bool Reinforce::init()
 	if (!Layer::init()) {
 		return false;
 	}
-	counter = 0;
+	gazingSpeed1 = 10;
+	gazingSpeed2 = 20;
+	gazingSpeed3 = 30;
+
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	log("UpgradeLayer visibleWidthSize : %f", visibleSize.width);
 	log("UpgradeLayer visibleHeightSize : %f", visibleSize.height);
@@ -73,86 +67,76 @@ bool Reinforce::init()
 	this->addChild(smelting_image);
 	this->addChild(hammering_image);
 	this->addChild(quenching_image);
+	this->scheduleUpdate();
+	
+	
+
+	CCSprite *timer_gaze = CCSprite::create("timebar.png");
+	gazing1 = CCProgressTimer::create(timer_gaze);
+	gazing1->setPosition(Vec2(origin.x + visibleSize.width * 0.2, origin.y + visibleSize.height*0.95));
+	gazing1->setPercentage(0);
+	gazing1->setMidpoint(ccp(0, 0.5));
+	gazing1->setBarChangeRate(ccp(1, 0));
+	gazing1->setType(kCCProgressTimerTypeBar);
+
+	this->addChild(gazing1);
+	
+		
+	CCSprite* timeOutline = CCSprite::create("timeoutline.png");
+	timeOutline->setPosition(Vec2(origin.x + visibleSize.width * 0.2, origin.y + visibleSize.height*0.95));
+	timeOutline->setVisible(true);
+	this->addChild(timeOutline);
+
+
+	CCSprite *timer_gaze2 = CCSprite::create("timebar.png");
+	gazing2 = CCProgressTimer::create(timer_gaze2);
+	gazing2->setPosition(Vec2(origin.x + visibleSize.width * 0.2, origin.y + visibleSize.height*0.9));
+	gazing2->setPercentage(0);
+	gazing2->setMidpoint(ccp(0, 0.5));
+	gazing2->setBarChangeRate(ccp(1, 0));
+	gazing2->setType(kCCProgressTimerTypeBar);
+
+	this->addChild(gazing2);
+
+	CCSprite* timeOutline2 = CCSprite::create("timeoutline.png");
+	timeOutline2->setPosition(Vec2(origin.x + visibleSize.width * 0.2, origin.y + visibleSize.height*0.9));
+	timeOutline2->setVisible(true);
+	this->addChild(timeOutline2);
+
+
+
+
+	CCSprite *timer_gaze3 = CCSprite::create("timebar.png");
+	gazing3 = CCProgressTimer::create(timer_gaze3);
+	gazing3->setPosition(Vec2(origin.x + visibleSize.width * 0.2, origin.y + visibleSize.height*0.85));
+	gazing3->setPercentage(0);
+	gazing3->setMidpoint(ccp(0, 0.5));
+	gazing3->setBarChangeRate(ccp(1, 0));
+	gazing3->setType(kCCProgressTimerTypeBar);
+
+	this->addChild(gazing3);
+
+	
+	CCSprite* timeOutline3 = CCSprite::create("timeoutline.png");
+	timeOutline3->setPosition(Vec2(origin.x + visibleSize.width * 0.2, origin.y + visibleSize.height*0.85));
+	timeOutline3->setVisible(true);
+	this->addChild(timeOutline3);
+	
+	
+	
+	
+	
 
 	
 	return true;
 	
 }
-void Reinforce::gazeCreate()
+
+
+void Reinforce::gazeIncrease(CCProgressTimer* gazing)
 {
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	if (counter == 0)
-	{
-		CCSprite *timer_gaze = CCSprite::create("timebar.png");
-		CCProgressTimer *gazing = CCProgressTimer::create(timer_gaze);
-		gazing->setPosition(Vec2(origin.x + visibleSize.width * 0.2, origin.y + visibleSize.height*0.95));
-		gazing->setPercentage(0);
-		gazing->setMidpoint(ccp(0, 0.5));
-		gazing->setBarChangeRate(ccp(1, 0));
-		gazing->setType(kCCProgressTimerTypeBar);
-
-		this->addChild(gazing);
-
-		CCProgressFromTo* progressToZero = CCProgressFromTo::create(15, 100, 0);
-		gazing->runAction(progressToZero);
-
-		CCSprite* timeOutline = CCSprite::create("timeoutline.png");
-		timeOutline->setPosition(Vec2(origin.x + visibleSize.width * 0.2, origin.y + visibleSize.height*0.95));
-		timeOutline->setVisible(true);
-		this->addChild(timeOutline);
-		counter += 1;
-
-	}
-	else if (counter == 1)
-	{
-		CCSprite *timer_gaze2 = CCSprite::create("timebar.png");
-		CCProgressTimer *gazing2 = CCProgressTimer::create(timer_gaze2);
-		gazing2->setPosition(Vec2(origin.x + visibleSize.width * 0.2, origin.y + visibleSize.height*0.9));
-		gazing2->setPercentage(100.f);
-		gazing2->setMidpoint(ccp(0, 0.5));
-		gazing2->setBarChangeRate(ccp(1, 0));
-		gazing2->setType(kCCProgressTimerTypeBar);
-
-		this->addChild(gazing2);
-
-		CCProgressFromTo* progressToZero2 = CCProgressFromTo::create(15, 100, 0);
-		gazing2->runAction(progressToZero2);
-
-		CCSprite* timeOutline2 = CCSprite::create("timeoutline.png");
-		timeOutline2->setPosition(Vec2(origin.x + visibleSize.width * 0.2, origin.y + visibleSize.height*0.9));
-		timeOutline2->setVisible(true);
-		this->addChild(timeOutline2);
-		counter += 1;
-
-	}
-	else if (counter == 2)
-	{
-		CCSprite *timer_gaze3 = CCSprite::create("timebar.png");
-		CCProgressTimer *gazing3 = CCProgressTimer::create(timer_gaze3);
-		gazing3->setPosition(Vec2(origin.x + visibleSize.width * 0.2, origin.y + visibleSize.height*0.85));
-		gazing3->setPercentage(100.f);
-		gazing3->setMidpoint(ccp(0, 0.5));
-		gazing3->setBarChangeRate(ccp(1, 0));
-		gazing3->setType(kCCProgressTimerTypeBar);
-
-		this->addChild(gazing3);
-
-		CCProgressFromTo* progressToZero3 = CCProgressFromTo::create(15, 100, 0);
-		gazing3->runAction(progressToZero3);
-
-		CCSprite* timeOutline3 = CCSprite::create("timeoutline.png");
-		timeOutline3->setPosition(Vec2(origin.x + visibleSize.width * 0.2, origin.y + visibleSize.height*0.85));
-		timeOutline3->setVisible(true);
-		this->addChild(timeOutline3);
-		
-
-	}
-	
-}
-void Reinforce::gazeIncrease()
-{
-	
+	float currentPercent = gazing->getPercentage();
+	gazing->setPercentage(currentPercent + (float)7);
 	
 }
 bool Reinforce::onTouchBegan(Touch* touch_, Event* event_)
@@ -162,8 +146,8 @@ bool Reinforce::onTouchBegan(Touch* touch_, Event* event_)
 	Rect rect3 = smelting->getBoundingBox();
 	if (rect3.containsPoint(p)) {
 
-		gazeCreate();
-		//smelting->setScale(2);
+		gazeIncrease(gazing2);
+		
 	}
 	else {
 
@@ -174,8 +158,8 @@ bool Reinforce::onTouchBegan(Touch* touch_, Event* event_)
 	Rect rect4 = hammering->getBoundingBox();
 	if (rect4.containsPoint(p)) {
 
-		gazeCreate();
-		//hammering->setScale(2);
+		gazeIncrease(gazing1);
+		
 	}
 	else {
 
@@ -186,8 +170,8 @@ bool Reinforce::onTouchBegan(Touch* touch_, Event* event_)
 	Rect rect5 = quenching->getBoundingBox();
 	if (rect5.containsPoint(p)) {
 
-		gazeCreate();
-		//quenching->setScale(2);
+		gazeIncrease(gazing3);
+		
 	}
 	else {
 
@@ -198,6 +182,16 @@ bool Reinforce::onTouchBegan(Touch* touch_, Event* event_)
 	return true;
 
 }
+
+void Reinforce::update(float delta) {
+	
+		gazing1->setPercentage(gazing1->getPercentage() - delta * gazingSpeed1);
+		gazing2->setPercentage(gazing2->getPercentage() - delta * gazingSpeed2);
+		gazing3->setPercentage(gazing3->getPercentage() - delta * gazingSpeed3);
+	
+}
+
+
 void Reinforce::setTouchListener()
 {
 	// make touch listener
