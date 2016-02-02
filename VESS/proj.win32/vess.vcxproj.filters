@@ -126,9 +126,6 @@
     <ClCompile Include="..\Classes\BattleOperator.cpp">
       <Filter>src\Model\Data</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Event.cpp">
-      <Filter>src\Model\Data</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\GameData.cpp">
       <Filter>src\Model\Data</Filter>
     </ClCompile>
@@ -147,6 +144,13 @@
     <ClCompile Include="..\Classes\DialogScene.cpp">
       <Filter>src\View\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\HeroMovementState.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DialogLayer.cpp" />
+    <ClCompile Include="..\Classes\FightLayer.cpp" />
+    <ClCompile Include="..\Classes\GameScene.cpp" />
+    <ClCompile Include="..\Classes\Hero.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -230,12 +234,16 @@
     <ClInclude Include="..\Classes\Dialog.h">
       <Filter>src\Model\Data</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Event.h">
-      <Filter>src\Model\Data</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\DialogScene.h">
       <Filter>src\View\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\HeroMovementState.h">
+      <Filter>src\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DialogLayer.h" />
+    <ClInclude Include="..\Classes\FightLayer.h" />
+    <ClInclude Include="..\Classes\GameData.h" />
+    <ClInclude Include="..\Classes\GameScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">
