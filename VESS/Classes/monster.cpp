@@ -1,6 +1,7 @@
 
 #include "Monster.h"
 #include "GameData.h"
+#include "FightLayer.h"
 using namespace std;
 
 Monster::Monster() {
@@ -71,10 +72,14 @@ void Monster::dropItem()
 */
 }
 
+void Monster::setParentLayer(FightLayer* layer) {
+	field = layer;
+}
+
 void Monster::damage(int dam) {
 	hp_ -= dam;
 	log("monster HP is : %d", hp_);
 	if (hp_ <= 0) {
-		this->reciever->send(EVENT::MonsterDead);
+		field->monsterDead();
 	}
 }

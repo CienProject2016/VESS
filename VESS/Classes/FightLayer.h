@@ -15,11 +15,11 @@
 
 USING_NS_CC;
 
-class FightLayer : public Layer, public EventReciever
+class FightLayer : public Layer
 {
 private : 
-	float moving_distance_real = 0;		//int 형으로 변환할 때 소수값을 잃지 않기 위해 선언.
-	float moving_velocity = 10;			//단위 : 거리/초
+	float movingDistanceReal = 0;		//int 형으로 변환할 때 소수값을 잃지 않기 위해 선언.
+	float movingVelocity = 10;			//단위 : 거리/초
 	BattleOperator* controller;
 	Hero* daughter;
 	Monster* monster;
@@ -32,10 +32,9 @@ private :
 	void initBackground();
 	void updateBackground(float dt);
 
-	float* background_speed;
+	float* backgroundSpeed;
 	void setTouchListener();
 public :
-	void send(EVENT::All e);
 	virtual bool init();
 	void spawnMonster(float);
 	CREATE_FUNC(FightLayer);
@@ -43,7 +42,12 @@ public :
 	void attackCallback(cocos2d::Ref* pSender);
 	void jumpCallback(cocos2d::Ref* pSender);
 	void sitCallback(cocos2d::Ref* pSender);
+	
+	void createBackgound(EnumBackground::Obj obj);
+	void monsterDead();
 
+	Monster* getMonster();
+	Hero* getDaughter();
 };
 
 #endif

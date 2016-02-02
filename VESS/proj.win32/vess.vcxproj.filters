@@ -87,6 +87,9 @@
     <ClCompile Include="..\Classes\Settings.cpp">
       <Filter>src\Vess</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Ingredient.cpp">
+      <Filter>src\Model</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\AnimationScene.cpp">
       <Filter>src\View\Scene</Filter>
     </ClCompile>
@@ -146,6 +149,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\DialogScene.cpp">
       <Filter>src\View\Scene</Filter>
+	</ClCompile>
+    <ClCompile Include="..\Classes\HeroMovementState.cpp">
+      <Filter>src\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Item.h">
       <Filter>src\Model\Item</Filter>
+	</ClInclude>
+    <ClInclude Include="..\Classes\Ingredient.h">
+      <Filter>src\Model</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\BackgroundObject.h">
       <Filter>src\Model\Object</Filter>
@@ -235,6 +244,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\DialogScene.h">
       <Filter>src\View\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HeroMovementState.h">
+      <Filter>src\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
