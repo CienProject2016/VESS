@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "FightLayer.h"
+#include "StageClearLayer.h"
 
 #define attackTag 2001
 #define jumpTag 2002
@@ -130,6 +131,13 @@ void FightLayer::spawnMonster(float delta)
 
 void FightLayer::dimensionCallback(cocos2d::Ref* pSender)
 {
+	
+	auto stageClearLayer = StageClearLayer::create();
+	
+	stageClearLayer->setContentSize(Size(200, 200));
+	stageClearLayer->setPosition(Vec2(200, 200));
+	this->addChild(stageClearLayer, 10000);
+
 		CCLOG("dimensionCallback");
 }
 
