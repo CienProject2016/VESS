@@ -57,29 +57,11 @@
     <ClCompile Include="..\Classes\StartScene.cpp">
       <Filter>src\View\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\EnterScene.cpp">
-      <Filter>src\View\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GameScene.cpp">
-      <Filter>src\View\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\StartScene.cpp">
-      <Filter>src\View\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\AnimationScene.cpp">
-      <Filter>src\View\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src\Vess</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AnimationScene.cpp">
       <Filter>src\View\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\FightLayer.cpp">
-      <Filter>src\View\Layer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\UpgradeLayer.cpp">
-      <Filter>src\View\Layer</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Settings.cpp">
       <Filter>src\Vess</Filter>
@@ -92,15 +74,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\AnimationScene.cpp">
       <Filter>src\View\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Unit.cpp">
-      <Filter>src\Model\Unit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Monster.cpp">
-      <Filter>src\Model\Unit</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Hero.cpp">
-      <Filter>src\Model\Unit</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameData.cpp">
       <Filter>src\Model\Data</Filter>
@@ -138,17 +111,41 @@
     <ClCompile Include="..\Classes\AnimationScene.cpp">
       <Filter>src\View\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\DialogScene.cpp">
-      <Filter>src\View\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\HeroMovementState.cpp">
-      <Filter>src\Model</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\FightLayer.cpp" />
     <ClCompile Include="..\Classes\GameScene.cpp" />
     <ClCompile Include="..\Classes\Hero.cpp" />
-    <ClCompile Include="..\Classes\DialogLayer.cpp">
+    <ClCompile Include="..\Classes\AnimationScene.cpp">
+      <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DialogScene.cpp">
+      <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EnterScene.cpp">
+      <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameScene.cpp">
+      <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StartScene.cpp">
+      <Filter>src\View\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UpgradeLayer.cpp">
       <Filter>src\View\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FightLayer.cpp">
+      <Filter>src\View\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Hero.cpp">
+      <Filter>src\Model\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HeromovementState.cpp">
+      <Filter>src\Model\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Monster.cpp">
+      <Filter>src\Model\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Unit.cpp">
+      <Filter>src\Model\Unit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,25 +161,10 @@
     <ClInclude Include="..\Classes\WindowSize.h">
       <Filter>src\Vess</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\FightLayer.h">
-      <Filter>src\View\Layer</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\GameScene.h">
       <Filter>src\View\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\StartScene.h">
-      <Filter>src\View\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\EnterScene.h">
-      <Filter>src\View\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameScene.h">
-      <Filter>src\View\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\StartScene.h">
-      <Filter>src\View\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\AnimationScene.h">
       <Filter>src\View\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -197,26 +179,11 @@
     <ClInclude Include="..\Classes\FightLayer.h">
       <Filter>src\View\Layer</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\UpgradeLayer.h">
-      <Filter>src\View\Layer</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Settings.h">
       <Filter>src\Vess</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\BackgroundSpawnScheduler.h">
       <Filter>src\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Unit.h">
-      <Filter>src\Model\Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Monster.h">
-      <Filter>src\Model\Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Hero.h">
-      <Filter>src\Model\Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameData.h">
-      <Filter>src\Model\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Stage.h">
       <Filter>src\Model\Data</Filter>
@@ -233,17 +200,44 @@
     <ClInclude Include="..\Classes\Dialog.h">
       <Filter>src\Model\Data</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\DialogScene.h">
-      <Filter>src\View\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HeroMovementState.h">
-      <Filter>src\Model</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\FightLayer.h" />
     <ClInclude Include="..\Classes\GameData.h" />
     <ClInclude Include="..\Classes\GameScene.h" />
-    <ClInclude Include="..\Classes\DialogLayer.h">
+    <ClInclude Include="..\Classes\AnimationScene.h">
+      <Filter>src\View\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DialogScene.h">
+      <Filter>src\View\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EnterScene.h">
+      <Filter>src\View\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameScene.h">
+      <Filter>src\View\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StartScene.h">
+      <Filter>src\View\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UpgradeLayer.h">
       <Filter>src\View\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FightLayer.h">
+      <Filter>src\View\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameData.h">
+      <Filter>src\Model\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HeromovementState.h">
+      <Filter>src\Model\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Monster.h">
+      <Filter>src\Model\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Hero.h">
+      <Filter>src\Model\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Unit.h">
+      <Filter>src\Model\Unit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

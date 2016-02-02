@@ -2,8 +2,6 @@
 #include "WindowSize.h"
 #include "cocostudio\CocoStudio.h"
 
-
-
 #ifndef __HERO_MOVEMENT_STATE__
 #define __HERO_MOVEMENT_STATE__
 
