@@ -118,10 +118,16 @@ void FightLayer::spawnMonster(float delta)
 		this->addChild(monster, 1);
 		GameData::getInstance()->setMovingDistance(moving_distance + 1);
 		*background_speed = 0;
+		
 	}
 	if (monster == NULL) {
 		moving_distance_real += delta * moving_velocity;
-	}
+		if (moving_distance == 450) {
+			this->stageClear();
+			CCLOG("stageClear");
+		}
+	
+		}
 	if (1 <= moving_distance_real) {
 		GameData::getInstance()->setMovingDistance(moving_distance + (int)moving_distance_real);
 		moving_distance_real -= (int)moving_distance_real;
@@ -129,15 +135,31 @@ void FightLayer::spawnMonster(float delta)
 	backgroundSpawnScheduler.update(delta);
 }
 
-void FightLayer::dimensionCallback(cocos2d::Ref* pSender)
-{
-	
+void FightLayer::stageClear() {
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
 	auto stageClearLayer = StageClearLayer::create();
-	
-	stageClearLayer->setContentSize(Size(200, 200));
-	stageClearLayer->setPosition(Vec2(200, 200));
+	stageClearLayer->setContentSize(Size(100, 100));
+	stageClearLayer->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height*0.5f));
+
 	this->addChild(stageClearLayer, 10000);
 
+}
+
+
+void FightLayer::dimensionCallback(cocos2d::Ref* pSender)
+{
+	/*
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+	auto stageClearLayer = StageClearLayer::create();
+	stageClearLayer->setContentSize(Size(100, 100));
+	stageClearLayer->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height*0.5f));
+	
+	this->addChild(stageClearLayer, 10000);
+	*/
 		CCLOG("dimensionCallback");
 }
 

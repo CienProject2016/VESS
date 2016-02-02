@@ -1,5 +1,5 @@
 #pragma once
-#ifndef _STAGE_CLEAR_LAYER_H__
+#ifndef __STAGE_CLEAR_LAYER_H__
 #define __STAGE_CLEAR_LAYER_H__
 
 #include "WindowSize.h"
@@ -17,7 +17,7 @@ private:
 	void stageSelectCallback(cocos2d::Ref* pSender);
 public:
 	virtual bool init();
-	//CREATE_FUNC(DialogLayer);
+	CREATE_FUNC(StageClearLayer);
 };
 
 #endif 
