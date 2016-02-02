@@ -1,10 +1,11 @@
-﻿#pragma once
+#pragma once
 #include "FightLayer.h"
 #include "StageClearLayer.h"
 
 #define attackTag 2001
 #define jumpTag 2002
 #define sitTag 2003
+#define kFinalDistance 4001
 
 
 bool FightLayer::init()
@@ -120,18 +121,19 @@ void FightLayer::spawnMonster(float delta)
 		*background_speed = 0;
 		
 	}
+
 	if (monster == NULL) {
 		moving_distance_real += delta * moving_velocity;
-		if (moving_distance == 450) {
+		if (moving_distance == kFinalDistance) {
 			this->stageClear();
 			CCLOG("stageClear");
 		}
-	
-		}
+	}
 	if (1 <= moving_distance_real) {
 		GameData::getInstance()->setMovingDistance(moving_distance + (int)moving_distance_real);
 		moving_distance_real -= (int)moving_distance_real;
 	}
+
 	backgroundSpawnScheduler.update(delta);
 }
 

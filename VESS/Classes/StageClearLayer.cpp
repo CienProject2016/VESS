@@ -16,18 +16,18 @@ bool StageClearLayer::init()
 	log("StageClearLayer origin.x : %f, origin.y : %f", origin.x, origin.y);
 
 
-	//¹öÆ°
+	//ë²„íŠ¼
 	auto nextStageButton = MenuItemImage::create("Images/NextStageButton.png", "Images/NextStageButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(StageClearLayer::nextStageCallback, this));
 	auto stageSelectButton = MenuItemImage::create("Images/StageSelectButton.png", "Images/StageSelectButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(StageClearLayer::stageSelectCallback, this));
 	nextStageButton->setScale(0.7f);
 	stageSelectButton->setScale(2.5f);
 
-	//¹è°æ
+	//ë°°ê²½
 	auto backgroundImage = Sprite::create("Images/BlackBackground.png");
 	backgroundImage->setPosition(Vec2(origin.x, origin.y ));
 	backgroundImage->setScale(0.5f);
 
-	//¸Þ´º
+	//ë©”ë‰´
 	auto clear_Menu = Menu::create(nextStageButton, stageSelectButton, NULL);
 	clear_Menu->setPosition(Vec2(origin.x , origin.y + visibleSize.height*0.05f));
 	//setPosition(Vec2(origin.x + visibleSize.width*0.325f, origin.y + visibleSize.height*0.15f)
