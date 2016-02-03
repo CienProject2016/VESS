@@ -4,19 +4,26 @@ GameData* GameData::instance_ = nullptr;
 
 GameData::GameData() : moving_distance_(0), stage_(), hero_hp_(100), gold_(150), costume_(0)
 {
+	auto dialogFileData = FileUtils::getInstance()->getStringFromFile("json/dialog.json");
+
 	dialogList_ = new vector<Dialog>();
+	rapidjson::Document doc;
+	doc.Parse(dialogFileData.c_str());
 
-	Dialog dialog1;
-	dialog1.setName("레비아탄");
-	dialog1.setPosition(Dialog::Position::RIGHT);
-	dialog1.setDialogue("하하하하\n인간계 최고의 대장장이 마크여.\n나를 위해 인간의 피를 머금은 검을 만들어라.");
-	dialogList_->push_back(dialog1);
+	auto& data = doc["opening"];
 
-	Dialog dialog2;
-	dialog2.setName("대장장이");
-	dialog2.setPosition(Dialog::Position::LEFT);
-	dialog2.setDialogue("인간을 해칠 무기를 만들수는 없소.\n돌아가시오.");
-	dialogList_->push_back(dialog2);
+	for (auto iter = data.Begin(); iter != data.End(); iter++) {
+		Dialog dialog;
+		dialog.setName((*iter)["name"].GetString());
+		if ((*iter)["position"] == "left") {
+			dialog.setPosition(Dialog::Position::LEFT);
+		} else {
+			dialog.setPosition(Dialog::Position::RIGHT);
+		}
+		dialog.setDialogue((*iter)["lines"].GetString());
+		dialogList_->push_back(dialog);
+	}
+
 }
 
 GameData::~GameData()
