@@ -4,6 +4,7 @@
 #define attackTag 2001
 #define jumpTag 2002
 #define sitTag 2003
+#define durabilityTag 300
 
 
 bool FightLayer::init()
@@ -30,14 +31,15 @@ bool FightLayer::init()
 	auto dimension_Button = MenuItemImage::create("Images/dimension_Gate.png", "Images/dimensionButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::dimensionCallback, this));
 	auto attack_Button = MenuItemImage::create("Images/AttackButton.png", "Images/AttackButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::attackCallback, this));
 	auto jump_Button = MenuItemImage::create("Images/JumpButton.png", "Images/JumpButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::jumpCallback, this));
-	auto sit_Button = MenuItemImage::create("Images/SitButton.png", "Images/SitButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::sitCallback, this));
-	
+	//auto sit_Button = MenuItemImage::create("Images/SitButton.png", "Images/SitButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::sitCallback, this));
+
+
 	dimension_Button->setScale(1.0f);
 	attack_Button->setScale(2.0f);
 	jump_Button->setScale(1.5f);
-	sit_Button->setScale(1.5f);
+	//sit_Button->setScale(1.5f);
 
-	auto battle_Menu = Menu::create(dimension_Button, attack_Button, jump_Button, sit_Button, NULL);
+	auto battle_Menu = Menu::create(dimension_Button, attack_Button, jump_Button , NULL);//sit_Button
 	battle_Menu->setPosition(Vec2(origin.x + visibleSize.width*0.325f, origin.y + visibleSize.height*0.15f));
 	battle_Menu->alignItemsHorizontally();
 	battle_Menu->alignItemsHorizontallyWithPadding(visibleSize.width*0.05f);
@@ -57,6 +59,22 @@ bool FightLayer::init()
 	sitMessage->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height - sitMessage->getContentSize().height));
 	sitMessage->enableOutline(Color4B::WHITE, 1);
 	sitMessage->setVisible(false);
+
+
+	auto label = Label::createWithTTF("0", "fonts/arial.ttf", 50);
+
+	int durabilitysword = GameData::getInstance()->getDurabilityShield();
+	label->setPosition(Vec2(origin.x + visibleSize.width*0.550f, origin.y + visibleSize.height*0.15f));
+	label->setColor(ccc3(0, 0, 0)); //black
+	label->setString(StringUtils::format("%d", durabilitysword));
+    this->addChild(label,1);
+	label->setTag(durabilityTag);
+
+	
+	
+
+	auto swordImage = Sprite::create("Images/sword.png");
+	auto upgradeImage = Sprite::create("Images/shield.png");
 
 	//dimensionMessage->setTag(dimensionTag);
 	attackMessage->setTag(attackTag);
@@ -100,6 +118,9 @@ void FightLayer::initBackground() {
 	sky->setScale(sky_rate);
 	sky->setPosition(Vec2(fightLayerSize.width / 2, fightLayerSize.height - (sky_height / 2)));
 	this->addChild(sky, -200);
+
+
+	
 }
 
 void FightLayer::updateBackground(float dt) {
@@ -136,7 +157,7 @@ void FightLayer::dimensionCallback(cocos2d::Ref* pSender)
 
 void FightLayer::attackCallback(cocos2d::Ref* pSender)
 {
-	auto attackMessage  = (Label*)this->getChildByTag(attackTag);
+	auto attackMessage = (Label*)this->getChildByTag(attackTag);
 	attackMessage->setVisible(true);
 	auto fadeIn = FadeIn::create(0);
 	auto delayTime = CCDelayTime::create(0.5f);
@@ -144,7 +165,10 @@ void FightLayer::attackCallback(cocos2d::Ref* pSender)
 	auto seq = CCSequence::create(fadeIn, delayTime, fadeOut, NULL);
 	attackMessage->runAction(seq);
 	daughter->attack();
+	
+	dura();//reduce durability of weapon
 	CCLOG("attackCallback");
+
 }
 
 
@@ -158,6 +182,7 @@ void FightLayer::jumpCallback(cocos2d::Ref* pSender)
 	auto seq = CCSequence::create(fadeIn, delayTime, fadeOut, NULL);
 	jumpMessage->runAction(seq);
 	daughter->jump();
+	
 	CCLOG("jumpCallback");
 }
 
@@ -172,6 +197,15 @@ void FightLayer::sitCallback(cocos2d::Ref* pSender)
 	sitMessage->runAction(seq);
 	daughter->sitDown();
 	CCLOG("sitCallback");
+}
+void FightLayer::dura() {
+
+
+	auto label = (Label*)this->getChildByTag(durabilityTag);
+	int durability = GameData::getInstance()->getDurabilityShield();
+	GameData::getInstance()->setDurabilityShield(durability - 1);
+	label->setString(StringUtils::format("%d", durability - 1));
+
 }
 
 
@@ -222,9 +256,11 @@ void FightLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_even
 		break;
 	case 1:		//ATTACK
 		daughter->attack();
+		dura();//reduce durability of weapon
 		break;
 	case 2:		//JUMP
 		daughter->jump();
+		
 		break;
 	case 3:		//AVOID
 		daughter->avoid();
