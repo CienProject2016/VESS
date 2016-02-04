@@ -40,6 +40,7 @@ private :
 	void attackCallback(cocos2d::Ref* pSender);
 	void jumpCallback(cocos2d::Ref* pSender);
 	void sitCallback(cocos2d::Ref* pSender);
+	void reduceDurability();
 	void setTouchListener();
 	
 
@@ -50,8 +51,6 @@ public :
 
 	void createBackgound(EnumBackground::Obj obj);
 	CREATE_FUNC(FightLayer);
-	
-	
 
 	Monster* getMonster();
 	Hero* getDaughter();

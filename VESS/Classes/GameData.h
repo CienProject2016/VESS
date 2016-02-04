@@ -20,7 +20,8 @@ private:
 	CC_SYNTHESIZE(int, costume_, Costume);
 	CC_SYNTHESIZE(int, moving_distance_, MovingDistance);
 	CC_SYNTHESIZE(vector<Dialog>*, dialogList_, DialogList);
-	
+	CC_SYNTHESIZE(int, durability_sword_,DurabilitySword);
+	CC_SYNTHESIZE(int, durabilty_shield_,DurabilityShield);
 	GameData();
 	~GameData();
 public:
