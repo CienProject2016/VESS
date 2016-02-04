@@ -3,6 +3,12 @@
 #include "Stage.h"
 #include "Hero.h"
 #include "Dialog.h"
+#include "rapidjson/rapidjson.h"
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
+#include "rapidjson/filereadstream.h"
+#include "rapidjson/filewritestream.h"
 
 class GameData
 {
