@@ -166,7 +166,7 @@ void FightLayer::attackCallback(cocos2d::Ref* pSender)
 	attackMessage->runAction(seq);
 	daughter->attack();
 	
-	dura();//reduce durability of weapon
+	reduceDurability();//reduce durability of weapon
 	CCLOG("attackCallback");
 
 }
@@ -198,7 +198,7 @@ void FightLayer::sitCallback(cocos2d::Ref* pSender)
 	daughter->sitDown();
 	CCLOG("sitCallback");
 }
-void FightLayer::dura() {
+void FightLayer::reduceDurability() {
 
 
 	auto label = (Label*)this->getChildByTag(durabilityTag);
@@ -256,7 +256,7 @@ void FightLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_even
 		break;
 	case 1:		//ATTACK
 		daughter->attack();
-		dura();//reduce durability of weapon
+		reduceDurability();//reduce durability of weapon
 		break;
 	case 2:		//JUMP
 		daughter->jump();
