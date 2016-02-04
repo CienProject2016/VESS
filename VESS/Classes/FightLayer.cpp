@@ -1,10 +1,12 @@
-﻿#pragma once
+#pragma once
 #include "FightLayer.h"
+#include "StageClearLayer.h"
 
 #define attackTag 2001
 #define jumpTag 2002
 #define sitTag 2003
 #define durabilityTag 300
+#define kFinalDistance 4001
 
 
 bool FightLayer::init()
@@ -19,11 +21,11 @@ bool FightLayer::init()
 	//Create Background
 	initBackground();
 	backgroundSpawnScheduler = BackgroundSpawnScheduler(this);
-	background_speed = new float(-100);
+	backgroundSpeed = new float(-100);
 
 	//딸이 생성됨
 	daughter = Hero::create();
-	daughter->setReciever(this);
+	daughter->setParentLayer(this);
 	//몬스터가 생성됨
 	
 	
@@ -31,13 +33,10 @@ bool FightLayer::init()
 	auto dimension_Button = MenuItemImage::create("Images/dimension_Gate.png", "Images/dimensionButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::dimensionCallback, this));
 	auto attack_Button = MenuItemImage::create("Images/AttackButton.png", "Images/AttackButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::attackCallback, this));
 	auto jump_Button = MenuItemImage::create("Images/JumpButton.png", "Images/JumpButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::jumpCallback, this));
-	//auto sit_Button = MenuItemImage::create("Images/SitButton.png", "Images/SitButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::sitCallback, this));
-
-
+	
 	dimension_Button->setScale(1.0f);
 	attack_Button->setScale(2.0f);
 	jump_Button->setScale(1.5f);
-	//sit_Button->setScale(1.5f);
 
 	auto battle_Menu = Menu::create(dimension_Button, attack_Button, jump_Button , NULL);//sit_Button
 	battle_Menu->setPosition(Vec2(origin.x + visibleSize.width*0.325f, origin.y + visibleSize.height*0.15f));
@@ -134,23 +133,53 @@ void FightLayer::spawnMonster(float delta)
 	vector<int> distance_data = stage_data.getMonsterLengthInfo();
 	if (MonsterSpawnScheduler::isMonsterSpawnTime(moving_distance, distance_data) && this->monster == NULL) {
 		monster = Monster::create();
-			monster->setReciever(this);
+		monster->setParentLayer(this);
 		this->addChild(monster, 1);
 		GameData::getInstance()->setMovingDistance(moving_distance + 1);
-		*background_speed = 0;
+		*backgroundSpeed = 0;
+		
 	}
+
 	if (monster == NULL) {
-		moving_distance_real += delta * moving_velocity;
+		movingDistanceReal += delta * movingVelocity;
+		if (moving_distance == kFinalDistance) {
+			this->stageClear();
+			CCLOG("stageClear");
+		}
 	}
-	if (1 <= moving_distance_real) {
-		GameData::getInstance()->setMovingDistance(moving_distance + (int)moving_distance_real);
-		moving_distance_real -= (int)moving_distance_real;
+	if (1 <= movingDistanceReal) {
+		GameData::getInstance()->setMovingDistance(moving_distance + (int)movingDistanceReal);
+		movingDistanceReal -= (int)movingDistanceReal;
 	}
+
 	backgroundSpawnScheduler.update(delta);
 }
 
+void FightLayer::stageClear() {
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+	auto stageClearLayer = StageClearLayer::create();
+	stageClearLayer->setContentSize(Size(100, 100));
+	stageClearLayer->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height*0.5f));
+
+	this->addChild(stageClearLayer, 10000);
+
+}
+
+
 void FightLayer::dimensionCallback(cocos2d::Ref* pSender)
 {
+	/*
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+	auto stageClearLayer = StageClearLayer::create();
+	stageClearLayer->setContentSize(Size(100, 100));
+	stageClearLayer->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height*0.5f));
+	
+	this->addChild(stageClearLayer, 10000);
+	*/
 		CCLOG("dimensionCallback");
 }
 
@@ -164,9 +193,10 @@ void FightLayer::attackCallback(cocos2d::Ref* pSender)
 	auto fadeOut = FadeOut::create(0);;
 	auto seq = CCSequence::create(fadeIn, delayTime, fadeOut, NULL);
 	attackMessage->runAction(seq);
-	daughter->attack();
-	
+
+	daughter->startAttack();
 	reduceDurability();//reduce durability of weapon
+	
 	CCLOG("attackCallback");
 
 }
@@ -181,8 +211,8 @@ void FightLayer::jumpCallback(cocos2d::Ref* pSender)
 	auto fadeOut = FadeOut::create(0);;
 	auto seq = CCSequence::create(fadeIn, delayTime, fadeOut, NULL);
 	jumpMessage->runAction(seq);
-	daughter->jump();
 	
+	daughter->startJump();
 	CCLOG("jumpCallback");
 }
 
@@ -195,7 +225,7 @@ void FightLayer::sitCallback(cocos2d::Ref* pSender)
 	auto fadeOut = FadeOut::create(0);;
 	auto seq = CCSequence::create(fadeIn, delayTime, fadeOut, NULL);
 	sitMessage->runAction(seq);
-	daughter->sitDown();
+	daughter->startSitDown();
 	CCLOG("sitCallback");
 }
 void FightLayer::reduceDurability() {
@@ -255,43 +285,46 @@ void FightLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_even
 	case 0:		//CANCEL
 		break;
 	case 1:		//ATTACK
-		daughter->attack();
+		daughter->startAttack();
 		reduceDurability();//reduce durability of weapon
 		break;
 	case 2:		//JUMP
-		daughter->jump();
-		
+		daughter->startJump();
 		break;
 	case 3:		//AVOID
-		daughter->avoid();
+		daughter->startAvoid();
 		break;
 	case 4:		//SIT
-		daughter->sitDown();
+		daughter->startSitDown();
 		break;
 	}
 	controller->endController();
 }
 
-void FightLayer::send(EVENT::All e) {
-	if (e == EVENT::HeroAttack) {
-		if(monster != NULL)
-			monster->damage(30);
-	}
-	if (e == EVENT::MonsterDead) {
-		this->removeChild(monster);
-		monster = NULL;
-		*background_speed = -100;
-	}
-	if (e == EVENT::CreateMountain) {
+Monster* FightLayer::getMonster() {
+	return monster;
+}
+Hero* FightLayer::getDaughter() {
+	return daughter;
+}
+
+void FightLayer::monsterDead() {
+	this->removeChild(monster);
+	monster = NULL;
+	*backgroundSpeed = -100;
+}
+
+void FightLayer::createBackgound(EnumBackground::Obj obj) {
+	if (obj == EnumBackground::mountain) {
 		BackgroundObject* mountain = BackgroundObject::create();
 		mountain->setImage("Images/mountain.png", Vec2(1, 0.8f), 2.0f, BackgroundObject::ABSOLUTED, BackgroundObject::BOTTOM);
-		mountain->setSpeed(background_speed, 100, 1);
+		mountain->setSpeed(backgroundSpeed, 100, 1);
 		this->addChild(mountain, -105);
 	}
-	if (e == EVENT::CreateTree) {
+	if (obj == EnumBackground::tree) {
 		BackgroundObject* tree = BackgroundObject::create();
 		tree->setImage("Images/tree.png", Vec2(1, 0.6f), 0.8f, BackgroundObject::ABSOLUTED, BackgroundObject::TOP);
-		tree->setSpeed(background_speed, 190, 2);
+		tree->setSpeed(backgroundSpeed, 190, 2);
 		this->addChild(tree, -104);
 	}
 }
