@@ -21,8 +21,11 @@ public:
 	~Monster();
 	void dropItem();
 	virtual bool init();
-
 	static Monster* create();
 	void damage(int dam);
+
+
+	CCSprite * hpBar = CCSprite::create("Images/monsterHpBar.png");
+	CCProgressTimer* hpBarDecreasing = CCProgressTimer::create(hpBar);
 };
 #endif // __MONSTER_H__

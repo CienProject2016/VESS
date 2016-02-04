@@ -3,8 +3,8 @@
 #include "cocostudio\CocoStudio.h"
 #ifndef __HERO_H__
 #define __HERO_H__
-
 using namespace cocostudio;
+
 class Hero: public Unit, public EventSender {
 private:
 	enum HeroState {STAY = 0, ATTACK_S = 1,  JUMP_S = 2,  AVOID_S = 3,  SIT_S = 4		//START
@@ -22,6 +22,7 @@ private:
 
 	float avoidDistance;			//피할때 어디까지 피할지의 거리
 	float attackDistance;			//때릴때 어디쯤 때릴지의 거리
+
 public:
 
 	static Hero* create();
@@ -36,5 +37,7 @@ public:
 	void avoid();
 	void sitDown();
 	void attackEffect();
+	void getDamage(bool damage);
+	int numGetDamage = 0;
 };
 #endif

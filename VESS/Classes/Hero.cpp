@@ -1,5 +1,5 @@
 ﻿#include "Hero.h"
-
+#include "FightLayer.h"
 
 bool Hero::init()
 {
@@ -16,9 +16,9 @@ bool Hero::init()
 		action->gotoFrameAndPlay(0, 28, true);
 		this->scheduleUpdate();
 		setPos(STAY);
-
 		avoidDistance = window_size.width * 0.2f;
 		attackDistance = window_size.width * 0.4f;
+		
 
 		return true;
 	}
@@ -198,4 +198,13 @@ void Hero::jump() {
 
 void Hero::attackEffect() {
 
+}
+void Hero::getDamage(bool damage) {
+	
+	auto heart1 = (Sprite*)getChildByTag(100000);
+	auto heart2 = (Sprite*)getChildByTag(100001);
+	auto heart3 = (Sprite*)getChildByTag(100002);
+	if (numGetDamage == 0) { heart1->setOpacity(0); numGetDamage++; }
+	else if (numGetDamage == 1) { heart2->setOpacity(0); numGetDamage++; }
+	else if (numGetDamage == 2) { heart3->setOpacity(0); numGetDamage++; }
 }

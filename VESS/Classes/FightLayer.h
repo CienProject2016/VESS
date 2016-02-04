@@ -34,6 +34,10 @@ private :
 
 	float* background_speed;
 	void setTouchListener();
+	int dam = 20;
+
+
+
 public :
 	void send(EVENT::All e);
 	virtual bool init();
