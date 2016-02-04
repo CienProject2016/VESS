@@ -20,8 +20,8 @@ private:
 public :
 	virtual bool init();
 	CREATE_FUNC(UpgradeLayer);
-	
-
 };
 
+
 #endif
+
