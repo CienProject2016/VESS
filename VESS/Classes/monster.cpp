@@ -1,6 +1,7 @@
 
 #include "Monster.h"
 #include "GameData.h"
+#include "FightLayer.h"
 using namespace std;
 
 Monster::Monster() {
@@ -62,19 +63,23 @@ void Monster::dropItem()
 
 	vector<Ingredient>& ingredientList = GameData::getInstance()->getIngredientList();
 	ingredientList.push_back(ingredient);
-	//1. ·£´ıÇÔ¼ö (0,1,2) *
+	//1. ëœë¤í•¨ìˆ˜ (0,1,2) *
 
-	//2. Àç·á Material material = new Material(random);  *
+	//2. ì¬ë£Œ Material material = new Material(random);  *
 
-	//3. GameData¿¡ µî·Ï vector<Material> materialList& = GameData::getInstance()->getMaterials();
+	//3. GameDataì— ë“±ë¡ vector<Material> materialList& = GameData::getInstance()->getMaterials();
 	//materialList.push_back(material)
 */
+}
+
+void Monster::setParentLayer(FightLayer* layer) {
+	field = layer;
 }
 
 void Monster::damage(int dam) {
 	hp_ -= dam;
 	log("monster HP is : %d", hp_);
 	if (hp_ <= 0) {
-		this->reciever->send(EVENT::MonsterDead);
+		field->monsterDead();
 	}
 }

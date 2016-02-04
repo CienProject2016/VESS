@@ -3,7 +3,7 @@
 
 #include "cocos2d.h"
 
-class StartScene : public cocos2d::Layer
+class StartScene : public cocos2d::CCLayerColor
 {
 private:
 	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event);

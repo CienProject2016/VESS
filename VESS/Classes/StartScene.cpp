@@ -26,7 +26,7 @@ bool StartScene::init()
 {
     //////////////////////////////
     // 1. super init first
-    if ( !Layer::init() )
+    if ( !CCLayerColor::initWithColor(ccc4(255, 255, 255, 255)))
     {
         return false;
     }
@@ -39,20 +39,7 @@ bool StartScene::init()
     //    you may modify it.
 
     // add a "close" icon to exit the progress. it's an autorelease object
-    auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
-                                           CC_CALLBACK_1(StartScene::menuCloseCallback, this));
-    
-	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width / 2,
-		origin.y + closeItem->getContentSize().height / 2));
-
-	/**/
-
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 2);
+   
 	
 	auto openSetting = MenuItemImage::create("Images/SettingButton.png", "Images/SettingButton.png", CC_CALLBACK_1(StartScene::settingClicked, this));
 	openSetting->setPosition(Vec2(origin.x + visibleSize.width - openSetting->getContentSize().width / 10,
@@ -72,13 +59,12 @@ bool StartScene::init()
 	// position the label on the center of the screen
 	label->setPosition(Vec2(origin.x + visibleSize.width / 2,
 		origin.y + visibleSize.height - label->getContentSize().height*2.5));
+	label->setColor(ccc3(0, 0, 0)); //black
 
-	\
-
-		auto touchLabel = Label::createWithSystemFont("시작하시려면 화면을 터치하세요", "Arial", 70);
+	auto touchLabel = Label::createWithSystemFont("시작하시려면 화면을 터치하세요", "Arial", 70);
 	touchLabel->setPosition(Vec2(origin.x + visibleSize.width / 2 + 10,
 		origin.y + visibleSize.height - touchLabel->getContentSize().height * 12));
-
+	touchLabel->setColor(ccc3(0, 0, 0));
 	// add the label as a child to this layer
 	this->addChild(label, 1);
 	this->addChild(touchLabel, 2);

@@ -2,7 +2,13 @@
 #include "cocos2d.h"
 #include "Stage.h"
 #include "Hero.h"
-#include "Ingredient.h"
+#include "Dialog.h"
+#include "rapidjson/rapidjson.h"
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
+#include "rapidjson/filereadstream.h"
+#include "rapidjson/filewritestream.h"
 
 class GameData
 {
@@ -13,7 +19,9 @@ private:
 	CC_SYNTHESIZE(int, gold_, Gold);
 	CC_SYNTHESIZE(int, costume_, Costume);
 	CC_SYNTHESIZE(int, moving_distance_, MovingDistance);
-	CC_SYNTHESIZE(vector<Ingredient>, ingredientList_, IngredientList);
+	CC_SYNTHESIZE(vector<Dialog>*, dialogList_, DialogList);
+	CC_SYNTHESIZE(int, durability_sword_,DurabilitySword);
+	CC_SYNTHESIZE(int, durabilty_shield_,DurabilityShield);
 	GameData();
 	~GameData();
 public:

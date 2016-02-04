@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "EnterScene.h"
-#include "StageScene.h"
+#include "DialogScene.h"
 #include "ui/CocosGUI.h"
 
 USING_NS_CC;
@@ -15,6 +15,7 @@ Scene* EnterScene::createScene()
 
 bool EnterScene::init()
 {
+	int i;
 	if (!Layer::init())
 	{
 		return false;
@@ -58,155 +59,26 @@ bool EnterScene::init()
 
 	auto myScene = Scene::create();
 
-	auto enterStage1 = ui::Button::create("Images/Door.png", "Images/BackgroundScreen.png", "Images/SettingButton.png");
-	enterStage1->setPosition(Vec2(visibleSize.width / 5, visibleSize.height / 5));
-	enterStage1->setScale(0.5f);
-	enterStage1->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type){
-		switch (type)
-		{
-		case ui::Widget::TouchEventType::BEGAN:
-			break;
-		case ui::Widget::TouchEventType::ENDED:
-			break;
-		default:
-			break;
-		}
-	});
-	this->addChild(enterStage1);
-	
-
-	auto enterStage2 = ui::Button::create("Images/Door.png", "Images/BackgroundScreen.png", "Images/SettingButton.png");
-	enterStage2->setPosition(Vec2(visibleSize.width / 5 +.7*(visibleSize.width/5), visibleSize.height / 5));
-	enterStage2->setScale(.5f);
-	enterStage2->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type){
-		switch (type)
-		{
-		case ui::Widget::TouchEventType::BEGAN:
-			break;
-		case ui::Widget::TouchEventType::ENDED:
-			break;
-		default:
-			break;
-		}
-	});
-	this->addChild(enterStage2);
-
-
-	auto enterStage3 = ui::Button::create("Images/Door.png", "Images/BackgroundScreen.png", "Images/SettingButton.png");
-	enterStage3->setPosition(Vec2(visibleSize.width / 5 + 1.4*(visibleSize.width / 5), visibleSize.height / 5));
-	enterStage3->setScale(.5f);
-	enterStage3->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type){
-		switch (type)
-		{
-		case ui::Widget::TouchEventType::BEGAN:
-			break;
-		case ui::Widget::TouchEventType::ENDED:
-			break;
-		default:
-			break;
-		}
-	});
-	this->addChild(enterStage3);
-
-	auto enterStage4 = ui::Button::create("Images/Door.png", "Images/BackgroundScreen.png", "Images/SettingButton.png");
-	enterStage4->setPosition(Vec2(visibleSize.width / 5 + 2.1*(visibleSize.width / 5), visibleSize.height / 5));
-	enterStage4->setScale(.5f);
-	enterStage4->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type){
-		switch (type)
-		{
-		case ui::Widget::TouchEventType::BEGAN:
-			break;
-		case ui::Widget::TouchEventType::ENDED:
-			break;
-		default:
-			break;
-		}
-	});
-	this->addChild(enterStage4);
-
-
-	auto enterStage5 = ui::Button::create("Images/Door.png", "Images/BackgroundScreen.png", "Images/SettingButton.png");
-	enterStage5->setPosition(Vec2(visibleSize.width / 5 + 2.8*(visibleSize.width / 5), visibleSize.height / 5));
-	enterStage5->setScale(.5f);
-	enterStage5->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type){
-		switch (type)
-		{
-		case ui::Widget::TouchEventType::BEGAN:
-			break;
-		case ui::Widget::TouchEventType::ENDED:
-			break;
-		default:
-			break;
-		}
-	});
-	this->addChild(enterStage5);
-
-
-	auto enterStage6 = ui::Button::create("Images/Door.png", "Images/BackgroundScreen.png", "Images/SettingButton.png");
-	enterStage6->setPosition(Vec2(visibleSize.width / 5, visibleSize.height / 5 + (visibleSize.width / 5)));
-	enterStage6->setScale(.5f);
-	enterStage6->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type){
-		switch (type)
-		{
-		case ui::Widget::TouchEventType::BEGAN:
-			break;
-		case ui::Widget::TouchEventType::ENDED:
-			break;
-		default:
-			break;
-		}
-	});
-	this->addChild(enterStage6);
-
-
-	auto enterStage7 = ui::Button::create("Images/Door.png", "Images/BackgroundScreen.png", "Images/SettingButton.png");
-	enterStage7->setPosition(Vec2(visibleSize.width / 5 + .7*(visibleSize.width / 5), visibleSize.height / 5 + (visibleSize.width / 5)));
-	enterStage7->setScale(.5f);
-	enterStage7->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type){
-		switch (type)
-		{
-		case ui::Widget::TouchEventType::BEGAN:
-			break;
-		case ui::Widget::TouchEventType::ENDED:
-			break;
-		default:
-			break;
-		}
-	});
-	this->addChild(enterStage7);
-
-	auto enterStage8 = ui::Button::create("Images/Door.png", "Images/BackgroundScreen.png", "Images/SettingButton.png");
-	enterStage8->setPosition(Vec2(visibleSize.width / 5 + 1.4*(visibleSize.width / 5), visibleSize.height / 5 + (visibleSize.width / 5)));
-	enterStage8->setScale(.5f);
-	enterStage8->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type){
-		switch (type)
-		{
-		case ui::Widget::TouchEventType::BEGAN:
-			break;
-		case ui::Widget::TouchEventType::ENDED:
-			break;
-		default:
-			break;
-		}
-	});
-	this->addChild(enterStage8);
-
-
-	auto enterStage9 = ui::Button::create("Images/Door.png", "Images/BackgroundScreen.png", "Images/SettingButton.png");
-	enterStage9->setPosition(Vec2(visibleSize.width / 5 + 2.1*(visibleSize.width / 5), visibleSize.height / 5 + (visibleSize.width / 5)));
-	enterStage9->setScale(.5f);
-	enterStage9->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type){
-		switch (type)
-		{
-		case ui::Widget::TouchEventType::BEGAN:
-			break;
-		case ui::Widget::TouchEventType::ENDED:
-			break;
-		default:
-			break;
-		}
-	});
-	this->addChild(enterStage9);
+	for (i = 1; i < 10; i++){
+		auto enterStagei = ui::Button::create("Images/Door.png", "Images/BackgroundScreen.png", "Images/SettingButton.png");
+		if (i < 6)
+			enterStagei->setPosition(Vec2(visibleSize.width / 5 + (i - 1)*0.7*(visibleSize.width / 5), visibleSize.height / 5));
+		else
+			enterStagei->setPosition(Vec2(visibleSize.width / 5 + (i - 6)*0.7*(visibleSize.width / 5), visibleSize.height / 5 + (visibleSize.width / 5)));
+		enterStagei->setScale(2.0f);
+		enterStagei->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type){
+			switch (type)
+			{
+			case ui::Widget::TouchEventType::BEGAN:
+				break;
+			case ui::Widget::TouchEventType::ENDED:
+				break;
+			default:
+				break;
+			}
+		});
+		this->addChild(enterStagei);
+	}
 
 	auto backButton = Sprite::create("Images/back.png");
 	backButton->setPosition(Vec2(visibleSize.width / 5, (visibleSize.height / 5) * 4 + origin.y));
@@ -251,8 +123,8 @@ void EnterScene::onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_
 
 void EnterScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
-	Scene *stageScene = StageScene::createScene();
-	Director::getInstance()->replaceScene(TransitionFade::create(0.5, stageScene, Color3B(0, 255, 255)));
+	Scene *dialogScene = DialogScene::createScene();
+	Director::getInstance()->replaceScene(TransitionFade::create(0.5, dialogScene, Color3B(0, 255, 255)));
 	log("Touched");
 }
 
