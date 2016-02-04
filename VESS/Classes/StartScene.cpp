@@ -41,9 +41,10 @@ bool StartScene::init()
     // add a "close" icon to exit the progress. it's an autorelease object
    
 	
-	auto openSetting = MenuItemImage::create("setting.png", "CloseSelected.png", CC_CALLBACK_1(StartScene::settingClicked, this));
-	openSetting->setPosition(Vec2(origin.x + visibleSize.width - openSetting->getContentSize().width / 2,
-		origin.y + visibleSize.height - openSetting->getContentSize().height));
+	auto openSetting = MenuItemImage::create("Images/SettingButton.png", "Images/SettingButton.png", CC_CALLBACK_1(StartScene::settingClicked, this));
+	openSetting->setPosition(Vec2(origin.x + visibleSize.width - openSetting->getContentSize().width / 10,
+		origin.y + visibleSize.height - openSetting->getContentSize().height/7));
+	openSetting->setScale(0.2f);
 
 	auto setting = Menu::create(openSetting, NULL);
 	setting->setPosition(Vec2::ZERO);
