@@ -138,9 +138,6 @@
     <ClCompile Include="..\Classes\AnimationScene.cpp">
       <Filter>src\View\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Reinforce.cpp">
-      <Filter>src\View\Layer</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -232,9 +229,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\BackgroundSpawnScheduler.h">
       <Filter>src\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Reinforce.h">
-      <Filter>src\View\Layer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
