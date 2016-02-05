@@ -25,8 +25,6 @@ bool FightLayer::init()
 	daughter = Hero::create();
 	daughter->setReciever(this);
 	//몬스터가 생성됨
-	
-
 
 	//버튼
 	auto dimension_Button = MenuItemImage::create("Images/dimension_Gate.png", "Images/dimensionButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::dimensionCallback, this));
@@ -100,12 +98,12 @@ void FightLayer::initBackground() {
 	heart1->setTag(100000);
 	heart2->setTag(100001);
 	heart3->setTag(100002);
-	heart1->setPosition(Vec2(fightLayerSize.width*0.15f, fightLayerSize.height*0.9f));
-	heart2->setPosition(Vec2(fightLayerSize.width*0.27f, fightLayerSize.height*0.9f));
-	heart3->setPosition(Vec2(fightLayerSize.width*0.39f, fightLayerSize.height*0.9f));
-	heart1->setScale(0.1f);
-	heart2->setScale(0.1f);
-	heart3->setScale(0.1f);
+	heart1->setPosition(Vec2(fightLayerSize.width*0.13f, fightLayerSize.height*0.93f));
+	heart2->setPosition(Vec2(fightLayerSize.width*0.21f, fightLayerSize.height*0.93f));
+	heart3->setPosition(Vec2(fightLayerSize.width*0.29f, fightLayerSize.height*0.93f));
+	heart1->setScale(0.55f);
+	heart2->setScale(0.55f);
+	heart3->setScale(0.55f);
 	this->addChild(heart1);
 	this->addChild(heart2);
 	this->addChild(heart3);
