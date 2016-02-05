@@ -15,6 +15,9 @@ bool Hero::init()
 		node->runAction(action);
 		action->gotoFrameAndPlay(0, 28, true);
 		this->scheduleUpdate();
+		avoidDistance = window_size.width * 0.2f;
+		attackDistance = window_size.width * 0.4f;
+		
 		setMovementState(new StayMovementState(this));
 		return true;
 	}
@@ -75,6 +78,15 @@ void Hero::attackDamage() {
 
 void Hero::attackEffect() {
 
+}
+void Hero::getDamage(bool damage) {
+
+	auto heart1 = (Sprite*)getChildByTag(100000);
+	auto heart2 = (Sprite*)getChildByTag(100001);
+	auto heart3 = (Sprite*)getChildByTag(100002);
+	if (numGetDamage == 0) { heart1->setOpacity(0); numGetDamage++; }
+	else if (numGetDamage == 1) { heart2->setOpacity(0); numGetDamage++; }
+	else if (numGetDamage == 2) { heart3->setOpacity(0); numGetDamage++; }
 }
 
 void Hero::setParentLayer(FightLayer* layer) {

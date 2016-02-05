@@ -16,15 +16,25 @@ bool Monster::init()
 	if (Unit::init())
 	{
 		hp_ = 100;
+		fullHp_ = hp_;
+
 		window_size = fightLayerSize;
 		origin = fightLayerOrigin;
 		Node* node = CSLoader::createNode("animation/Tauren.csb");
 		this->addChild(node); //get animation data 
+
 		timeline::ActionTimeline* action = CSLoader::createTimeline("animation/Tauren.csb");
 		node->setPosition(0, 0);
 		node->runAction(action);
-		action->gotoFrameAndPlay(26, 32, true);
+		action->gotoFrameAndPlay(26 , 32, true);
 		this->setPosition(Vec2(window_size.width * 0.7f, window_size.height * 0.4f));
+
+		auto currentHp = Label::createWithTTF("0", "fonts/arial.ttf", 50);
+		currentHp->setPosition(Vec2(0, -40));
+		currentHp->setColor(ccc3(0, 0, 0)); //black
+		currentHp->setString(StringUtils::format("%d / %d", hp_,fullHp_));
+		this->addChild(currentHp, 1);
+		currentHp->setTag(3);
 		return true;
 	}	
 	return false;
@@ -53,23 +63,6 @@ Monster* Monster::create()
 
 void Monster::dropItem()
 {
-/*
-	log("dropItem");
-	
-
-	int ingredientType = cocos2d::RandomHelper::random_int(0, 2);
-	
-	Ingredient ingredient(ingredientType);
-
-	vector<Ingredient>& ingredientList = GameData::getInstance()->getIngredientList();
-	ingredientList.push_back(ingredient);
-	//1. 랜덤함수 (0,1,2) *
-
-	//2. 재료 Material material = new Material(random);  *
-
-	//3. GameData에 등록 vector<Material> materialList& = GameData::getInstance()->getMaterials();
-	//materialList.push_back(material)
-*/
 }
 
 void Monster::setParentLayer(FightLayer* layer) {
@@ -78,6 +71,10 @@ void Monster::setParentLayer(FightLayer* layer) {
 
 void Monster::damage(int dam) {
 	hp_ -= dam;
+	
+	auto currentHp = (Label*)getChildByTag(3);
+	currentHp->setString(StringUtils::format("%d / %d", hp_, fullHp_));
+
 	log("monster HP is : %d", hp_);
 	if (hp_ <= 0) {
 		field->monsterDead();
