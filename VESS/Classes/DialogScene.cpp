@@ -1,4 +1,5 @@
-﻿ #include "DialogScene.h"
+
+#include "DialogScene.h"
 #include "GameScene.h"
 #include "GameData.h"
 USING_NS_CC;

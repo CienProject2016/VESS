@@ -1,4 +1,5 @@
 #include "BackgroundSpawnScheduler.h"
+#include "FightLayer.h"
 
 void BackgroundSpawnScheduler::update(float dt) {
 	mountain.update(dt);
@@ -8,10 +9,9 @@ void BackgroundSpawnScheduler::update(float dt) {
 BackgroundSpawnScheduler::BackgroundSpawnScheduler() {
 }
 
-BackgroundSpawnScheduler::BackgroundSpawnScheduler(EventReciever* reciever) {
-	this->setReciever(reciever);
-	mountain = BackgroundSpawnSchedulerTimer(EVENT::CreateMountain, reciever, 3);
-	tree = BackgroundSpawnSchedulerTimer(EVENT::CreateTree, reciever, 1);
+BackgroundSpawnScheduler::BackgroundSpawnScheduler(FightLayer* reciever) {
+	mountain = BackgroundSpawnSchedulerTimer(EnumBackground::mountain, reciever, 3);
+	tree = BackgroundSpawnSchedulerTimer(EnumBackground::tree, reciever, 1);
 }
 
 void BackgroundSpawnSchedulerTimer::update(float dt) {
@@ -19,19 +19,19 @@ void BackgroundSpawnSchedulerTimer::update(float dt) {
 	if (timer > targetTimer) {
 		timer = 0;
 		targetTimer = (((float)(rand() % 150)) / 100) * targetTimerScale;
-		reciever->send(ev);
+		field->createBackgound(obj);
 	}
 }
 
-BackgroundSpawnSchedulerTimer::BackgroundSpawnSchedulerTimer(EVENT::All ev, EventReciever* reciever, float scale) {
-	this->ev = ev;
-	this->setReciever(reciever);
+BackgroundSpawnSchedulerTimer::BackgroundSpawnSchedulerTimer(EnumBackground::Obj obj, FightLayer* layer, float scale) {
+	this->obj = obj;
+	field = layer;
 	timer = 0;
 	targetTimer = 1;
 	targetTimerScale = scale;
 }
 BackgroundSpawnSchedulerTimer::BackgroundSpawnSchedulerTimer() {
-	this->ev = EVENT::CreateMountain;
+	this->obj = EnumBackground::mountain;
 	timer = 0;
 	targetTimer = 1;
 }

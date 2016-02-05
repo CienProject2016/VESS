@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "UpgradeLayer.h"
+
 #define tag_number 50
 
 bool UpgradeLayer::init()
@@ -25,16 +26,11 @@ bool UpgradeLayer::init()
 	auto background_image = Sprite::create("Images/background_image.png");
 	auto background2_image = Sprite::create("Images/background2_image.png");
 	auto smith_image = Sprite::create("Images/smith_image.png");
-	auto ingredient_slot = Sprite::create("Images/ingredient_slot.png");
-	auto ingredient2_slot = Sprite::create("Images/ingredient_slot.png");
-	auto jewel_slot = Sprite::create("Images/jewel_slot.png");
-	auto inventory_slot = Sprite::create("Images/inventory_slot.png");
-	auto smelting_image = Sprite::create("Images/smelting_button.png");
-	auto hammering_image = Sprite::create("Images/hammering_button.png");
-	auto quenching_image = Sprite::create("Images/quenching_button.png");
-	auto list_image = Sprite::create("Images/list_button.png");
-	auto upgrade_image = Sprite::create("Images/upgrade_button.png");
-	auto repair_image = Sprite::create("Images/repair_button.png");
+	smelting_image = Sprite::create("Images/smelting_button.png");
+	hammering_image = Sprite::create("Images/hammering_button.png");
+	quenching_image = Sprite::create("Images/quenching_button.png");
+	upgrade_image = Sprite::create("Images/upgrade_button.png");
+	repair_image = Sprite::create("Images/repair_button.png");
 	// position the sprite on the center of the screen
 	background_image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.4f));
 	background_image->setScale(2.4f);
@@ -45,61 +41,78 @@ bool UpgradeLayer::init()
 	smith_image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.4f));
 	smith_image->setScale(2.0f);
 
-	ingredient_slot->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.1f));
-	ingredient_slot->setScale(1.0f);
-
-	ingredient2_slot->setPosition(Vec2(origin.x + visibleSize.width * 0.26f, origin.y + visibleSize.height*0.1f));
-	ingredient2_slot->setScale(1.0f);
-
-	jewel_slot->setPosition(Vec2(origin.x + visibleSize.width * 0.32f, origin.y + visibleSize.height*0.1f));
-	jewel_slot->setScale(1.0f);
-
-	inventory_slot->setPosition(Vec2(origin.x + visibleSize.width * 0.05f, origin.y + visibleSize.height*0.4f));
-	inventory_slot->setScale(1.0f);
-
-	smelting_image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.2f));
+	smelting_image->setPosition(Vec2(origin.x + visibleSize.width * 0.12f, origin.y + visibleSize.height*0.4f));
 	smelting_image->setScale(1.0f);
 
-	hammering_image->setPosition(Vec2(origin.x + visibleSize.width * 0.1f, origin.y + visibleSize.height*0.4f));
+	hammering_image->setPosition(Vec2(origin.x + visibleSize.width * 0.22f, origin.y + visibleSize.height*0.2f));
 	hammering_image->setScale(1.0f);
 
-	quenching_image->setPosition(Vec2(origin.x + visibleSize.width * 0.3f, origin.y + visibleSize.height*0.4f));
+	quenching_image->setPosition(Vec2(origin.x + visibleSize.width * 0.32f, origin.y + visibleSize.height*0.4f));
 	quenching_image->setScale(1.0f);
 
-	list_image->setPosition(Vec2(origin.x + visibleSize.width * 0.35f, origin.y + visibleSize.height*0.8f));
-	list_image->setScale(1.0f);
+	upgrade_image->setPosition(Vec2(origin.x + visibleSize.width * 0.1f, origin.y + visibleSize.height*0.7f));
+	upgrade_image->setScale(1.3f);
 
-	upgrade_image->setPosition(Vec2(origin.x + visibleSize.width * 0.05f, origin.y + visibleSize.height*0.8f));
-	upgrade_image->setScale(1.0f);
+	repair_image->setPosition(Vec2(origin.x + visibleSize.width * 0.33f, origin.y + visibleSize.height*0.7f));
+	repair_image->setScale(1.5f);
 
-	repair_image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.8f));
-	repair_image->setScale(1.0f);
-
-
-	ingredient_slot->setTag(tag_number);
-	ingredient2_slot->setTag(tag_number+1);
-	jewel_slot->setTag(tag_number+2);
-	inventory_slot->setTag(tag_number+3);
-	smelting_image->setTag(tag_number+4);
-	hammering_image->setTag(tag_number+5);
-	quenching_image->setTag(tag_number+6);
-	list_image->setTag(tag_number+7);
-	upgrade_image->setTag(tag_number+8);
-	repair_image->setTag(tag_number + 9);
+	smelting_image->setTag(tag_number+1);
+	hammering_image->setTag(tag_number+2);
+	quenching_image->setTag(tag_number+3);
+	upgrade_image->setTag(tag_number+4);
+	repair_image->setTag(tag_number + 5);
+	//smelting bar create
+	CCSprite *timer_gaze = CCSprite::create("timebar.png");
+	gazing1 = CCProgressTimer::create(timer_gaze);
+	gazing1->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.95));
+	gazing1->setPercentage(0);
+	gazing1->setMidpoint(ccp(0, 0.5));
+	gazing1->setBarChangeRate(ccp(1, 0));
+	gazing1->setType(kCCProgressTimerTypeBar);
+	timeOutline1 = CCSprite::create("timeoutline.png");
+	timeOutline1->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.95));
+	gazingSpeed1 = 10;
+	//hammering bar create
+	CCSprite *timer_gaze2 = CCSprite::create("timebar.png");
+	gazing2 = CCProgressTimer::create(timer_gaze2);
+	gazing2->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.9));
+	gazing2->setPercentage(0);
+	gazing2->setMidpoint(ccp(0, 0.5));
+	gazing2->setBarChangeRate(ccp(1, 0));
+	gazing2->setType(kCCProgressTimerTypeBar);
+	timeOutline2 = CCSprite::create("timeoutline.png");
+	timeOutline2->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.9));
+	gazingSpeed2 = 20;
+	//quenching bar create
+	CCSprite *timer_gaze3 = CCSprite::create("timebar.png");
+	gazing3 = CCProgressTimer::create(timer_gaze3);
+	gazing3->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.85));
+	gazing3->setPercentage(0);
+	gazing3->setMidpoint(ccp(0, 0.5));
+	gazing3->setBarChangeRate(ccp(1, 0));
+	gazing3->setType(kCCProgressTimerTypeBar);
+	timeOutline3 = CCSprite::create("timeoutline.png");
+	timeOutline3->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.85));
+	gazingSpeed3 = 25;
 	// add the sprite as a child to this layer
 	this->addChild(background_image);
 	this->addChild(background2_image);
 	this->addChild(smith_image);
-	this->addChild(ingredient_slot);
-	this->addChild(ingredient2_slot);
-	this->addChild(jewel_slot);
-	this->addChild(inventory_slot);
 	this->addChild(smelting_image);
 	this->addChild(hammering_image);
 	this->addChild(quenching_image);
-	this->addChild(list_image);
 	this->addChild(upgrade_image);
 	this->addChild(repair_image);
+	this->addChild(gazing1);
+	this->addChild(timeOutline1);
+	this->addChild(gazing2);
+	this->addChild(timeOutline2);
+	this->addChild(gazing3);
+	this->addChild(timeOutline3);
+	this->scheduleUpdate();
+	//강화 게이지바 숨김
+	hideGaze();
+	
 
 
 	
@@ -115,67 +128,51 @@ bool UpgradeLayer::init()
 	//setTouchListener();
 	return true;
 }
+void UpgradeLayer::update(float delta) {
+
+	gazing1->setPercentage(gazing1->getPercentage() - delta * gazingSpeed1);
+	gazing2->setPercentage(gazing2->getPercentage() - delta * gazingSpeed2);
+	gazing3->setPercentage(gazing3->getPercentage() - delta * gazingSpeed3);
+
+
+}
+void UpgradeLayer::gazeIncrease(CCProgressTimer* gazing)
+{
+	float currentPercent = gazing->getPercentage();
+	gazing->setPercentage(currentPercent + (float)8);
+
+}
+void UpgradeLayer::upgradeClicked()
+{
+	upgrade_image->setVisible(false);
+	repair_image->setVisible(false);
+	gazing1->setVisible(true);
+	timeOutline1->setVisible(true);
+	gazing2->setVisible(true);
+	timeOutline2->setVisible(true);
+	gazing3->setVisible(true);
+	timeOutline3->setVisible(true);
+
+}
+void UpgradeLayer::hideGaze()
+{
+	gazing1->setVisible(false);
+	timeOutline1->setVisible(false);
+	gazing2->setVisible(false);
+	timeOutline2->setVisible(false);
+	gazing3->setVisible(false);
+	timeOutline3->setVisible(false);
+}
 
 bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 {
-
-	// 0, 1, 2, 3  슬롯
 	Point p = touch_->getLocation();
-	auto ingredient_slot = (Sprite*) this->getChildByTag(tag_number);
-	Rect rect = ingredient_slot->getBoundingBox();
-	if (rect.containsPoint(p)) {
-
-		ingredient_slot->setScale(2.0);
-
-	}
-	else {
-
-		ingredient_slot->setScale(1);
-	}
-
-	auto ingredient2_slot = (Sprite*) this->getChildByTag(tag_number+1);
-	Rect rect9 = ingredient2_slot->getBoundingBox();
-	if (rect9.containsPoint(p)) {
-
-		ingredient2_slot->setScale(2.0);
-
-	}
-	else {
-
-		ingredient2_slot->setScale(1);
-	}
-
-	auto jewel_slot = (Sprite*) this->getChildByTag(tag_number+2);
-	Rect rect1 = jewel_slot->getBoundingBox();
-	if (rect1.containsPoint(p)) {
-
-		jewel_slot->setScale(2.0);
-
-	}
-	else {
-
-		jewel_slot->setScale(1);
-	}
-
-	auto inventory_slot = (Sprite*) this->getChildByTag(tag_number + 3);
-	Rect rect2 = inventory_slot->getBoundingBox();
-	if (rect2.containsPoint(p)) {
-
-		inventory_slot->setScale(2.0);
-
-	}
-	else {
-
-		inventory_slot->setScale(1);
-	}
-
-
-	// 4, 5, 6  강화이미지
-	auto smelting = (Sprite*) this->getChildByTag(tag_number + 4);
+    // 제련, 망치, 담금질 이미지
+	auto smelting = (Sprite*) this->getChildByTag(tag_number + 1);
 	Rect rect3 = smelting->getBoundingBox();
 	if (rect3.containsPoint(p)) {
 
-		smelting->setScale(2.0);
+		gazeIncrease(gazing1);
 
 	}
 	else {
@@ -183,11 +180,11 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 		smelting->setScale(1);
 	}
 
-	auto hammering = (Sprite*) this->getChildByTag(tag_number + 5);
+	auto hammering = (Sprite*) this->getChildByTag(tag_number + 2);
 	Rect rect4 = hammering->getBoundingBox();
 	if (rect4.containsPoint(p)) {
 
-		hammering->setScale(2.0);
+		gazeIncrease(gazing2);
 
 	}
 	else {
@@ -195,11 +192,11 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 		hammering->setScale(1);
 	}
 
-	auto quenching = (Sprite*) this->getChildByTag(tag_number + 6);
+	auto quenching = (Sprite*) this->getChildByTag(tag_number + 3);
 	Rect rect5 = quenching->getBoundingBox();
 	if (rect5.containsPoint(p)) {
 
-		quenching->setScale(2.0);
+		gazeIncrease(gazing3);
 
 	}
 	else {
@@ -207,12 +204,12 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 		quenching->setScale(1);
 	}
 
-	// 7, 8, 9 강화,도감,수리
-	auto upgrade = (Sprite*) this->getChildByTag(tag_number + 7);
+	// 강화, 수리 이미지
+	auto upgrade = (Sprite*) this->getChildByTag(tag_number + 4);
 	Rect rect6 = upgrade->getBoundingBox();
 	if (rect6.containsPoint(p)) {
 
-		upgrade->setScale(2.0);
+		upgradeClicked();
 
 	}
 	else {
@@ -220,19 +217,7 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 		upgrade->setScale(1);
 	}
 
-	auto list = (Sprite*) this->getChildByTag(tag_number + 8);
-	Rect rect7 = list->getBoundingBox();
-	if (rect7.containsPoint(p)) {
-
-		list->setScale(2.0);
-
-	}
-	else {
-
-		list->setScale(1);
-	}
-
-	auto repair = (Sprite*) this->getChildByTag(tag_number + 9);
+	auto repair = (Sprite*) this->getChildByTag(tag_number + 5);
 	Rect rect8 = repair->getBoundingBox();
 	if (rect8.containsPoint(p)) {
 
