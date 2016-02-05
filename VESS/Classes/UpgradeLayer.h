@@ -7,6 +7,8 @@
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
 #include "GameScene.h"
+#include "GameData.h"
+#include "Item.h"
 
 USING_NS_CC;
 using namespace std;
@@ -18,9 +20,9 @@ private:
 	virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 	virtual void onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 	virtual void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event);
-	CCProgressTimer *gazing1, *gazing2, *gazing3;
+	CCProgressTimer *gauge_1, *gauge_2, *gauge_3;
 	CCSprite* timeOutline1, *timeOutline2, *timeOutline3;
-	float gazingSpeed1, gazingSpeed2, gazingSpeed3;
+	float gauge_speed_1, gauge_speed_2, gauge_speed_3;
 	Sprite *smelting_image, *hammering_image, *quenching_image;
 	Sprite *upgrade_image, *repair_image;
 	void setTouchListener();
@@ -29,9 +31,15 @@ private:
 public :
 	virtual bool init();
 	virtual void update(float delta);
-	void gazeIncrease(CCProgressTimer* gazing);
+	void gaugeIncrease(CCProgressTimer* gauge);
 	void upgradeClicked();
-	void hideGaze();
+	void repairClicked();
+	void hideGauge();
+	void completeButton();
+
+	bool isUpgrade = true;
+	bool isComplete = false;
+	Sword getSword;
 	CREATE_FUNC(UpgradeLayer);
 	
 

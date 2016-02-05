@@ -9,7 +9,7 @@
 #include "rapidjson/stringbuffer.h"
 #include "rapidjson/filereadstream.h"
 #include "rapidjson/filewritestream.h"
-
+#include "Item.h"
 class GameData
 {
 private:
@@ -20,8 +20,8 @@ private:
 	CC_SYNTHESIZE(int, costume_, Costume);
 	CC_SYNTHESIZE(int, moving_distance_, MovingDistance);
 	CC_SYNTHESIZE(vector<Dialog>*, dialogList_, DialogList);
-	CC_SYNTHESIZE(int, durability_sword_,DurabilitySword);
-	CC_SYNTHESIZE(int, durabilty_shield_,DurabilityShield);
+	CC_SYNTHESIZE(Sword, sword_, Sword);
+	CC_SYNTHESIZE(Shield, shield_, Shield);
 	GameData();
 	~GameData();
 public:
