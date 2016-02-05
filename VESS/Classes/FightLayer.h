@@ -42,7 +42,7 @@ private :
 	void sitCallback(cocos2d::Ref* pSender);
 	void reduceDurability();
 	void setTouchListener();
-	
+	int damage = 20;
 
 public :
 	virtual bool init();

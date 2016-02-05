@@ -8,6 +8,7 @@ USING_NS_CC;
 class Unit: public Node{
 protected:
 	CC_SYNTHESIZE(int, hp_, HP);
+	CC_SYNTHESIZE(int, fullHp_, FullHp);
 public:	
 	Unit();
 	~Unit();

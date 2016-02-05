@@ -1,5 +1,6 @@
 #pragma once
 #include "FightLayer.h"
+#include "Hero.h"
 #include "StageClearLayer.h"
 
 #define attackTag 2001
@@ -27,8 +28,7 @@ bool FightLayer::init()
 	daughter = Hero::create();
 	daughter->setParentLayer(this);
 	//몬스터가 생성됨
-	
-	
+
 	//버튼
 	auto dimension_Button = MenuItemImage::create("Images/dimension_Gate.png", "Images/dimensionButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::dimensionCallback, this));
 	auto attack_Button = MenuItemImage::create("Images/AttackButton.png", "Images/AttackButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::attackCallback, this));
@@ -109,6 +109,22 @@ void FightLayer::initBackground() {
 	ground->setPosition(Vec2(fightLayerSize.width / 2, fightLayerSize.height * 0.22f));
 	this->addChild(ground, -100);
 	
+	CCSprite * heart1 = CCSprite::create("Images/heart.png");
+	CCSprite * heart2 = CCSprite::create("Images/heart.png");
+	CCSprite * heart3 = CCSprite::create("Images/heart.png");
+	heart1->setTag(100000);
+	heart2->setTag(100001);
+	heart3->setTag(100002);
+	heart1->setPosition(Vec2(fightLayerSize.width*0.13f, fightLayerSize.height*0.93f));
+	heart2->setPosition(Vec2(fightLayerSize.width*0.21f, fightLayerSize.height*0.93f));
+	heart3->setPosition(Vec2(fightLayerSize.width*0.29f, fightLayerSize.height*0.93f));
+	heart1->setScale(0.55f);
+	heart2->setScale(0.55f);
+	heart3->setScale(0.55f);
+	this->addChild(heart1);
+	this->addChild(heart2);
+	this->addChild(heart3);
+
 	auto sky = Sprite::create("Images/sky_basic.png");
 	int sky_width = sky->getTexture()->getPixelsWide();
 	float sky_height = sky->getTexture()->getPixelsHigh();
@@ -117,7 +133,6 @@ void FightLayer::initBackground() {
 	sky->setScale(sky_rate);
 	sky->setPosition(Vec2(fightLayerSize.width / 2, fightLayerSize.height - (sky_height / 2)));
 	this->addChild(sky, -200);
-
 
 	
 }
@@ -153,6 +168,7 @@ void FightLayer::spawnMonster(float delta)
 	}
 
 	backgroundSpawnScheduler.update(delta);
+
 }
 
 void FightLayer::stageClear() {
@@ -328,3 +344,5 @@ void FightLayer::createBackgound(EnumBackground::Obj obj) {
 		this->addChild(tree, -104);
 	}
 }
+
+
