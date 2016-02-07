@@ -23,6 +23,11 @@ bool UpgradeLayer::init()
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 	// 강화 샘플 이미지
 	
+	//키보드 입력
+	auto keyboardListener = EventListenerKeyboard::create();
+	keyboardListener->onKeyPressed = CC_CALLBACK_2(UpgradeLayer::keyPressed, this);
+	keyboardListener->onKeyReleased = CC_CALLBACK_2(UpgradeLayer::keyReleased, this);
+	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(keyboardListener, this);
 
 	auto background_image = Sprite::create("Images/background_image.png");
 	auto background2_image = Sprite::create("Images/background2_image.png");
@@ -109,11 +114,11 @@ bool UpgradeLayer::init()
 	this->addChild(quenching_image);
 	this->addChild(upgrade_image);
 	this->addChild(repair_image);
-	this->addChild(gauge_1);
+	this->addChild(gauge_1,2);
 	this->addChild(timeOutline1);
-	this->addChild(gauge_2);
+	this->addChild(gauge_2,2);
 	this->addChild(timeOutline2);
-	this->addChild(gauge_3);
+	this->addChild(gauge_3,2);
 	this->addChild(timeOutline3);
 	this->scheduleUpdate();
 	//강화 게이지바 숨김
@@ -127,19 +132,40 @@ void UpgradeLayer::update(float delta) {
 	gauge_2->setPercentage(gauge_2->getPercentage() - delta * gauge_speed_2);
 	gauge_3->setPercentage(gauge_3->getPercentage() - delta * gauge_speed_3);
 
+	checkRepairComplete();
+	checkLock();
+
+}
+void UpgradeLayer::checkRepairComplete() {
 	if (gauge_2->getPercentage() >= 95 && !isUpgrade)
 	{
 		completeButton();
 		isComplete = true;
 	}
+}
+void UpgradeLayer::checkLock() {
+	// 나중에 강화마다 값을 다르게 할거면, 매개변수에 값을 받아오는 식으로 수정하시면 됩니다.
+	if (gauge_1->getPercentage() >= 70)
+	{
+		lock_01 = true;
+	}
+
+	if (gauge_2->getPercentage() >= 70)
+	{
+		lock_02 = true;
+	}
 
 }
+
+
 void UpgradeLayer::gaugeIncrease(CCProgressTimer* gauge)
 {
 	float currentPercent = gauge->getPercentage();
 	gauge->setPercentage(currentPercent + (float)8);
 
 }
+
+
 void UpgradeLayer::upgradeClicked()
 {
 	upgrade_image->setVisible(false);
@@ -152,7 +178,6 @@ void UpgradeLayer::upgradeClicked()
 	timeOutline3->setVisible(true);
 
 }
-
 void UpgradeLayer::repairClicked()
 {
 	upgrade_image->setVisible(false);
@@ -161,9 +186,10 @@ void UpgradeLayer::repairClicked()
 	timeOutline2->setVisible(true);
 	
 	isUpgrade = false; // 강화인지 수리인지 체크하는 변수
-
+	lock_01 = true; // 수리의 경우 망치만 사용하므로 제한을 걸어둘 필요가 없다.
 	getSword = GameData::getInstance()->getSword();
 }
+
 
 void UpgradeLayer::completeButton()
 {
@@ -182,6 +208,8 @@ void UpgradeLayer::completeButton()
 
 	// 현재 완료버튼은 수리가 완료됬을 경우에만 생성됨. 강화는 현재 미지원.
 }
+
+
 void UpgradeLayer::hideGauge()
 {
 	gauge_1->setVisible(false);
@@ -212,7 +240,7 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 
 	auto hammering = (Sprite*) this->getChildByTag(tag_number + 2);
 	Rect rect4 = hammering->getBoundingBox();
-	if (rect4.containsPoint(p)) {
+	if (rect4.containsPoint(p) && lock_01) {
 
 		gaugeIncrease(gauge_2);
 
@@ -224,7 +252,7 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 
 	auto quenching = (Sprite*) this->getChildByTag(tag_number + 3);
 	Rect rect5 = quenching->getBoundingBox();
-	if (rect5.containsPoint(p)) {
+	if (rect5.containsPoint(p) && lock_02) {
 
 		gaugeIncrease(gauge_3);
 
@@ -266,6 +294,10 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 			getSword.setDurability(getSword.getMaxDurability());
 			log("complete!!");
 			log("%d", getSword.getDurability());
+			lock_01 = false; // 초기화
+			lock_02 = false;
+			isUpgrade = true;
+			isComplete = false;
 		}
 
 	}
@@ -298,6 +330,28 @@ void UpgradeLayer::onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unuse
 }
 
 void UpgradeLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
+{
+
+}
+
+void UpgradeLayer::keyPressed(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d::Event *event_) 
+{
+	if (key_code_ == EventKeyboard::KeyCode::KEY_A)
+	{
+		gaugeIncrease(gauge_1);
+	}
+
+	if (key_code_ == EventKeyboard::KeyCode::KEY_S && lock_01)
+	{
+		gaugeIncrease(gauge_2);
+	}
+
+	if (key_code_ == EventKeyboard::KeyCode::KEY_D && lock_02)
+	{
+		gaugeIncrease(gauge_3);
+	}
+}
+void UpgradeLayer::keyReleased(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d::Event *event_)
 {
 
 }
