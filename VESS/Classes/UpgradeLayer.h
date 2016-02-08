@@ -30,6 +30,7 @@ private:
 	Sprite *smelting_image, *hammering_image, *quenching_image;
 	Sprite *upgrade_image, *repair_image;
 	void setTouchListener();
+	
 
 	char attribute;
 public :

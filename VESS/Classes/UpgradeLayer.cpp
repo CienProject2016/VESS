@@ -123,6 +123,10 @@ bool UpgradeLayer::init()
 	this->scheduleUpdate();
 	//강화 게이지바 숨김
 	hideGauge();
+	//망치,담금질 비활성화 색상으로 변경
+	hammering_image->setOpacity(120);
+	quenching_image->setOpacity(120);
+	
 	
 	return true;
 }
@@ -148,11 +152,14 @@ void UpgradeLayer::checkLock() {
 	if (gauge_1->getPercentage() >= 70)
 	{
 		lock_01 = true;
+		hammering_image->setOpacity(255);
+		
 	}
 
 	if (gauge_2->getPercentage() >= 70)
 	{
 		lock_02 = true;
+		quenching_image->setOpacity(255);
 	}
 
 }
