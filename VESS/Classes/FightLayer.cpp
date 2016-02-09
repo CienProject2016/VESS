@@ -38,10 +38,10 @@ bool FightLayer::init()
 	attack_Button->setScale(2.0f);
 	jump_Button->setScale(1.5f);
 
-	auto battle_Menu = Menu::create(dimension_Button, attack_Button, jump_Button , NULL);//sit_Button
-	battle_Menu->setPosition(Vec2(origin.x + visibleSize.width*0.325f, origin.y + visibleSize.height*0.15f));
-	battle_Menu->alignItemsHorizontally();
-	battle_Menu->alignItemsHorizontallyWithPadding(visibleSize.width*0.05f);
+	auto battleMenu = Menu::create(dimension_Button, attack_Button, jump_Button , NULL);//sit_Button
+	battleMenu->setPosition(Vec2(origin.x + visibleSize.width*0.325f, origin.y + visibleSize.height*0.15f));
+	battleMenu->alignItemsHorizontally();
+	battleMenu->alignItemsHorizontallyWithPadding(visibleSize.width*0.05f);
 
 
 	auto attackMessage = Label::createWithTTF("Attack!", "fonts/Marker Felt.ttf", 100);
@@ -84,7 +84,7 @@ bool FightLayer::init()
 	this->schedule(schedule_selector(FightLayer::spawnMonster));
 
 	// add the sprite as a child to this layer
-	this->addChild(battle_Menu, 2);
+	this->addChild(battleMenu, 2);
 	this->addChild(attackMessage, 3);
 	this->addChild(jumpMessage, 4);
 	this->addChild(sitMessage, 5);
