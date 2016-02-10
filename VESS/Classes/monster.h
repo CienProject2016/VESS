@@ -13,10 +13,18 @@ using namespace cocostudio;
 class FightLayer;
 
 class Monster : public Unit{
-private:
+
+private :
+	int fdsafdsa;
+protected:
 	Size window_size;
 	Vec2 origin;
 	FightLayer* field;
+	void initHp(int hp);
+	void initWindowSize();
+	virtual void initImage();
+	Node* image;
+	RepeatForever* makeAction(char* plist, int imageCount, char* imageName, float frameTime);
 public:
 	bool isDead();
 	Monster();
@@ -26,9 +34,10 @@ public:
 	void setParentLayer(FightLayer* layer);
 	static Monster* create();
 	void damage(int dam);
+	virtual void update(float delta);
 
 
-	CCSprite * hpBar = CCSprite::create("Images/monsterHpBar.png");
-	CCProgressTimer* hpBarDecreasing = CCProgressTimer::create(hpBar);
+	CCSprite * hpBar;
+	CCProgressTimer* hpBarDecreasing;
 };
 #endif // __MONSTER_H__
