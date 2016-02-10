@@ -1,22 +1,25 @@
 ﻿#pragma once
 #include "UpgradeLayer.h"
-
+#include "GameData.h"
 
 #define tag_number 50
+#define gold "GOLD"
 
 bool UpgradeLayer::init()
 {
 	if (!Layer::init()) {
 		return false;
 	}
-
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
 
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(UpgradeLayer::onTouchBegan, this);
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
+
+	auto upgrade_image = Sprite::create("Images/upgrade_button.png");
+	auto repair_image = Sprite::create("Images/repair_button.png");
+
 
 	
 	//키보드 입력
@@ -105,6 +108,34 @@ bool UpgradeLayer::init()
 	this->addChild(backgroundImage);
 	this->addChild(background2Image);
 	this->addChild(smith_image);
+
+	int upgradeGold = GameData::getInstance()->getNeededUpgradeGold();
+	auto touchLabel1 = Label::createWithTTF("골드", "fonts/arial.ttf", 50);
+	touchLabel1->setString(StringUtils::format("%d%s", upgradeGold, gold));
+	// position the label on the center of the screen
+	touchLabel1->setPosition(Vec2(Vec2(origin.x + visibleSize.width * 0.15f, origin.y + visibleSize.height*0.8f)));
+	touchLabel1->setColor(ccc3(250, 250, 250)); 
+	this->addChild(touchLabel1, 1);
+
+	int repairGold = GameData::getInstance()->getNeededRepairGold();
+	auto touchLabel2 = Label::createWithTTF("골드", "fonts/arial.ttf", 50);
+	touchLabel2->setString(StringUtils::format("%d%s", repairGold, gold));
+	// position the label on the center of the screen
+	touchLabel2->setPosition(Vec2(origin.x + visibleSize.width * 0.33f, origin.y + visibleSize.height*0.8f));
+	touchLabel2->setColor(ccc3(250, 250, 250)); 
+
+	this->addChild(touchLabel2, 2);
+
+	int Gold = GameData::getInstance()->getGold();
+	auto touchLabel3 = Label::createWithTTF("", "fonts/arial.ttf", 50);
+	touchLabel3->setString(StringUtils::format("%d%s", Gold,gold));
+	// position the label on the center of the screen
+	touchLabel3->setPosition(Vec2(origin.x + visibleSize.width * 0.9f, origin.y + visibleSize.height*0.9f));
+	touchLabel3->setColor(ccc3(0, 0, 0)); //black	
+
+	this->addChild(touchLabel3, 3);
+
+	//setTouchListener();
 	this->addChild(smeltingImage);
 	this->addChild(hammeringImage);
 	this->addChild(quenchingImage);

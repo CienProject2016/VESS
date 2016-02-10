@@ -51,8 +51,8 @@ public :
 	bool isComplete = false;
 	Sword getSword;
 	CREATE_FUNC(UpgradeLayer);
-	
-
 };
 
+
 #endif
+

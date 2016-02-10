@@ -20,6 +20,8 @@ private:
 	CC_SYNTHESIZE(int, costume_, Costume);
 	CC_SYNTHESIZE(int, moving_distance_, MovingDistance);
 	CC_SYNTHESIZE(vector<Dialog>*, dialogList_, DialogList);
+	CC_SYNTHESIZE(int, needed_upgrade_gold_, NeededUpgradeGold);
+	CC_SYNTHESIZE(int, needed_repair_gold_ , NeededRepairGold);
 	CC_SYNTHESIZE(Sword, sword_, Sword);
 	CC_SYNTHESIZE(Shield, shield_, Shield);
 	GameData();
@@ -27,3 +29,5 @@ private:
 public:
 	static GameData* getInstance();
 };
+
+
