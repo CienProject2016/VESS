@@ -3,7 +3,13 @@
 #include "Stage.h"
 #include "Hero.h"
 #include "Dialog.h"
-
+#include "rapidjson/rapidjson.h"
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
+#include "rapidjson/filereadstream.h"
+#include "rapidjson/filewritestream.h"
+#include "Item.h"
 class GameData
 {
 private:
@@ -16,6 +22,8 @@ private:
 	CC_SYNTHESIZE(vector<Dialog>*, dialogList_, DialogList);
 	CC_SYNTHESIZE(int, needed_upgrade_gold_, NeededUpgradeGold);
 	CC_SYNTHESIZE(int, needed_repair_gold_ , NeededRepairGold);
+	CC_SYNTHESIZE(Sword, sword_, Sword);
+	CC_SYNTHESIZE(Shield, shield_, Shield);
 	GameData();
 	~GameData();
 public:
