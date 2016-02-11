@@ -32,7 +32,7 @@ Scene* GameScene::createScene()
 	fight_layer->setPosition(Vec2(760, 0));//ÀüÅõÃ¢
 
 	// add layer as a child to scene
-	scene->addChild(upgrade_layer,1);
+	scene->addChild(upgrade_layer,1,"upgradeLayer");
 	scene->addChild(fight_layer,0);
 
 	// return the scene
