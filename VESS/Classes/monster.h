@@ -14,7 +14,7 @@ class FightLayer;
 
 class Monster : public Unit{
 private:
-	Size window_size;
+	Size windowSize;
 	Vec2 origin;
 	FightLayer* field;
 public:
@@ -28,7 +28,7 @@ public:
 	void damage(int dam);
 
 
-	CCSprite * hpBar = CCSprite::create("Images/monsterHpBar.png");
-	CCProgressTimer* hpBarDecreasing = CCProgressTimer::create(hpBar);
+	Sprite * hpBar = Sprite::create("Images/monsterHpBar.png");
+	ProgressTimer* hpBarDecreasing = ProgressTimer::create(hpBar);
 };
 #endif // __MONSTER_H__
