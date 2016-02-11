@@ -32,7 +32,7 @@ BackgroundSpawnSchedulerTimer::BackgroundSpawnSchedulerTimer(EnumBackground::OBJ
 }
 
 BackgroundSpawnSchedulerTimer::BackgroundSpawnSchedulerTimer() {
-	this->object = EnumBackground::mountain;
+	this->object = EnumBackground::MOUNTAIN;
 	timer = 0;
 	monsterSpawnInterval = 1;
 }

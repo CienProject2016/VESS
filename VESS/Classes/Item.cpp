@@ -1,5 +1,6 @@
 ﻿#include "Item.h"
 
+
 char* Item::getName() {
 	return name_;
 }
@@ -21,7 +22,16 @@ void Item::setMaxDurability(int val) {
 	max_durability_ = val;
 }
 
+bool Item::isInUse() {
+	return inUse;
+}
+
+void Item::setInUse(bool inUse) {
+	this->inUse = inUse;
+}
+
 Sword::Sword() {
+	setInUse(true);
 	Item::setName("wooden sword");
 	damage_ = 10;
 	Item::setMaxDurability(10);
@@ -40,6 +50,7 @@ void Sword::setDamage(int val) {
 }
 
 Shield::Shield() {
+	setInUse(false);
 	Item::setName("wooden shield");
 	Item::setDurability(15);
 	Item::setMaxDurability(20);

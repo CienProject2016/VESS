@@ -5,7 +5,7 @@
 #ifndef __HERO_MOVEMENT_STATE__
 #define __HERO_MOVEMENT_STATE__
 
-using namespace cocostudio;
+USING_NS_CC;
 
 class Hero;
 
@@ -16,7 +16,7 @@ protected:
 	float verticalVelocity;
 	Hero* parent;
 	float gravity;
-	float moveDistance;
+	float movingDistance;
 public:
 	HeroMovementState();
 	virtual void update(float delta);
@@ -41,16 +41,18 @@ public:
 };
 
 class AttackMovementState : public HeroMovementState {
-public:
+private:
 	int direction;
+public:
 	AttackMovementState(Hero* parent);
 	virtual void update(float delta);
 	void attackEvent();
 };
 
 class AvoidMovementState : public HeroMovementState {
-public:
+private:
 	int direction;
+public:
 	AvoidMovementState(Hero* parent);
 	virtual void update(float delta);
 };
