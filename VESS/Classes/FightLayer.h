@@ -43,14 +43,15 @@ private :
 	void sitCallback(cocos2d::Ref* pSender);
 	void reduceDurability();
 	void setTouchListener();
+
 	int damage = 20;
 
 public :
 	virtual bool init();
+
+	void createBackgound(EnumBackground::OBJECT object);
 	void spawnMonster(float);
 	void monsterDead();
-
-	void createBackgound(EnumBackground::Obj obj);
 	CREATE_FUNC(FightLayer);
 
 	Monster* getMonster();

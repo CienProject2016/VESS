@@ -7,6 +7,7 @@ private:
 	char* name_;
 	int durability_;
 	int max_durability_;
+	bool inUse;
 public:
 	virtual char* getName();
 	virtual void setName(char name[]);
@@ -14,6 +15,8 @@ public:
 	virtual void setDurability(int durabillity);
 	virtual int getMaxDurability();
 	virtual void setMaxDurability(int maxDurabillity);
+	bool isInUse();
+	void setInUse(bool);
 };
 class Sword : public Item {
 private:

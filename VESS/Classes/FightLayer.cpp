@@ -3,6 +3,7 @@
 #include "Hero.h"
 #include "StageClearLayer.h"
 
+#define gold "GOLD"
 #define attackTag 2001
 #define jumpTag 2002
 #define sitTag 2003
@@ -30,19 +31,18 @@ bool FightLayer::init()
 	//몬스터가 생성됨
 
 	//버튼
-	auto dimension_Button = MenuItemImage::create("Images/dimension_Gate.png", "Images/dimensionButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::dimensionCallback, this));
-	auto attack_Button = MenuItemImage::create("Images/AttackButton.png", "Images/AttackButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::attackCallback, this));
-	auto jump_Button = MenuItemImage::create("Images/JumpButton.png", "Images/JumpButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::jumpCallback, this));
+	auto dimensionButton = MenuItemImage::create("Images/dimension_Gate.png", "Images/dimensionButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::dimensionCallback, this));
+	auto attackButton = MenuItemImage::create("Images/AttackButton.png", "Images/AttackButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::attackCallback, this));
+	auto jumpButton = MenuItemImage::create("Images/JumpButton.png", "Images/JumpButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::jumpCallback, this));
 	
-	dimension_Button->setScale(1.0f);
-	attack_Button->setScale(2.0f);
-	jump_Button->setScale(1.5f);
+	dimensionButton->setScale(1.0f);
+	attackButton->setScale(2.0f);
+	jumpButton->setScale(1.5f);
 
-	auto battle_Menu = Menu::create(dimension_Button, attack_Button, jump_Button , NULL);//sit_Button
-	battle_Menu->setPosition(Vec2(origin.x + visibleSize.width*0.325f, origin.y + visibleSize.height*0.15f));
-	battle_Menu->alignItemsHorizontally();
-	battle_Menu->alignItemsHorizontallyWithPadding(visibleSize.width*0.05f);
-
+	auto battleMenu = Menu::create(dimensionButton, attackButton, jumpButton , NULL);//sit_Button
+	battleMenu->setPosition(Vec2(origin.x + visibleSize.width*0.325f, origin.y + visibleSize.height*0.15f));
+	battleMenu->alignItemsHorizontally();
+	battleMenu->alignItemsHorizontallyWithPadding(visibleSize.width*0.05f);
 
 	auto attackMessage = Label::createWithTTF("Attack!", "fonts/Marker Felt.ttf", 100);
 	attackMessage->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height - attackMessage->getContentSize().height));
@@ -70,7 +70,6 @@ bool FightLayer::init()
 	label->setTag(durabilityTag);
 
 	
-	
 
 	auto swordImage = Sprite::create("Images/sword.png");
 	auto upgradeImage = Sprite::create("Images/shield.png");
@@ -81,10 +80,19 @@ bool FightLayer::init()
 	sitMessage->setTag(sitTag);
 
 
+	int currentGold = GameData::getInstance()->getGold();
+	auto currentGoldLabel = Label::createWithTTF("", "fonts/arial.ttf", 50);
+	currentGoldLabel->setString(StringUtils::format("%d%s", currentGold, gold));
+	currentGoldLabel->setPosition(Vec2(origin.x + visibleSize.width * 0.540f, origin.y + visibleSize.height*0.9f));
+	currentGoldLabel->setColor(ccc3(0, 0, 0)); //black	
+
+	this->addChild(currentGoldLabel, 999999);
+
+
 	this->schedule(schedule_selector(FightLayer::spawnMonster));
 
 	// add the sprite as a child to this layer
-	this->addChild(battle_Menu, 2);
+	this->addChild(battleMenu, 2);
 	this->addChild(attackMessage, 3);
 	this->addChild(jumpMessage, 4);
 	this->addChild(sitMessage, 5);
@@ -96,6 +104,7 @@ bool FightLayer::init()
 	controller = new BattleOperator();
 	this->addChild(controller, 1000000);
 	
+
 	setTouchListener();
 
 	return true;
@@ -183,20 +192,29 @@ void FightLayer::stageClear() {
 
 }
 
-
 void FightLayer::dimensionCallback(cocos2d::Ref* pSender)
 {
-	/*
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	auto stageClearLayer = StageClearLayer::create();
-	stageClearLayer->setContentSize(Size(100, 100));
-	stageClearLayer->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height*0.5f));
+	Sword* sword = &GameData::getInstance()->getSword();
+	sword->setInUse(!sword->isInUse());
+
+	auto gameScene = Director::getInstance()->getRunningScene();
+	auto upgradeLayer = gameScene->getChildByName("upgradeLayer");
+	auto swordSprite = upgradeLayer->getChildByTag(600);
+	auto shieldSprite = upgradeLayer->getChildByTag(601);
+	shieldSprite->setVisible(true);
+	swordSprite->setVisible(true);
 	
-	this->addChild(stageClearLayer, 10000);
-	*/
-		CCLOG("dimensionCallback");
+	if (!sword->isInUse()){
+		auto nullSprite = Sprite::create("Images/transparent_img.png");
+		nullSprite->setPosition(swordSprite->getPosition());
+		swordSprite->setPosition(shieldSprite->getPosition());
+		shieldSprite->setPosition(nullSprite->getPosition());
+	}
+
+	CCLOG("dimensionCallback");
+
+
 }
 
 
@@ -330,14 +348,14 @@ void FightLayer::monsterDead() {
 	*backgroundSpeed = -100;
 }
 
-void FightLayer::createBackgound(EnumBackground::Obj obj) {
-	if (obj == EnumBackground::mountain) {
+void FightLayer::createBackgound(EnumBackground::OBJECT object) {
+	if (object == EnumBackground::MOUNTAIN) {
 		BackgroundObject* mountain = BackgroundObject::create();
 		mountain->setImage("Images/mountain.png", Vec2(1, 0.8f), 2.0f, BackgroundObject::ABSOLUTED, BackgroundObject::BOTTOM);
 		mountain->setSpeed(backgroundSpeed, 100, 1);
 		this->addChild(mountain, -105);
 	}
-	if (obj == EnumBackground::tree) {
+	if (object == EnumBackground::TREE) {
 		BackgroundObject* tree = BackgroundObject::create();
 		tree->setImage("Images/tree.png", Vec2(1, 0.6f), 0.8f, BackgroundObject::ABSOLUTED, BackgroundObject::TOP);
 		tree->setSpeed(backgroundSpeed, 190, 2);

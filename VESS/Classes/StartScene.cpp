@@ -82,7 +82,8 @@ bool StartScene::init()
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
     
-
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("audio/op.mp3");
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("audio/op.mp3");
     return true;
 }
 
@@ -116,6 +117,7 @@ void StartScene::onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_
 
 void StartScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
 	Scene *EnterScene = EnterScene::createScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(0.5, EnterScene, Color3B(0, 255, 255)));
 	log("Touched");

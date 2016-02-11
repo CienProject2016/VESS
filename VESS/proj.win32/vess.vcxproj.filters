@@ -235,9 +235,6 @@
     <ClInclude Include="..\Classes\Settings.h">
       <Filter>src\Vess</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Monster.h">
-      <Filter>src\Model\Unit</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Hero.h">
       <Filter>src\Model\Unit</Filter>
     </ClInclude>
@@ -260,6 +257,9 @@
       <Filter>src\Model\Unit</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Slime.h">
+      <Filter>src\Model\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Monster.h">
       <Filter>src\Model\Unit</Filter>
     </ClInclude>
   </ItemGroup>

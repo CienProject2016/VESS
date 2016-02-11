@@ -8,13 +8,13 @@
 class Slime : public Monster {
 private:
 	RepeatForever* makeAttack1();
-	enum SlimeState {STAND, ATTACK0, ATTACK1};
-	SlimeState currState;
-	void changeState(SlimeState state);
+	enum SLIME_STATE {STAND, ATTACK0, ATTACK1};
+	SLIME_STATE currentState;
+	void changeState(SLIME_STATE state);
 protected:
 	Slime();
 	virtual void initImage();
-	RepeatForever* stand, *attack_00, *attack_01;
+	RepeatForever* stand, *attack00, *attack01;
 public:
 	~Slime();
 	virtual void update(float delta);

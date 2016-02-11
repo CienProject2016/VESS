@@ -2,6 +2,7 @@
 #include "Monster.h"
 #include "GameData.h"
 #include "FightLayer.h"
+
 using namespace std;
 
 Monster::Monster() {
@@ -18,24 +19,28 @@ bool Monster::init()
 		initImage();
 		initHp(100);
 		this->scheduleUpdate();
+
+		
 		return true;
 	}	
 	return false;
 }
 
 void Monster::initWindowSize() {
-	window_size = fightLayerSize;
-	origin = fightLayerOrigin;
+	this->windowSize = fightLayerSize;
+	this->origin = fightLayerOrigin;
 }
 
 void Monster::initImage() {
+
 	image = CSLoader::createNode("animation/Tauren.csb");
 	this->addChild(image); //get animation data 
+
 	timeline::ActionTimeline* action = CSLoader::createTimeline("animation/Tauren.csb");
 	image->setPosition(0, 0);
 	image->runAction(action);
 	action->gotoFrameAndPlay(26, 32, true);
-	this->setPosition(Vec2(window_size.width * 0.7f, window_size.height * 0.4f));
+	this->setPosition(Vec2(windowSize.width * 0.7f, windowSize.height * 0.4f));
 }
 
 void Monster::update(float delta) {
@@ -43,12 +48,12 @@ void Monster::update(float delta) {
 }
 
 void Monster::initHp(int hp) {
-	hp_ = hp;
-	fullHp_ = hp_;
+	this->hp = hp;
+	this->fullHp = hp;
 	auto currentHp = Label::createWithTTF("0", "fonts/arial.ttf", 50);
 	currentHp->setPosition(Vec2(0, -40));
 	currentHp->setColor(ccc3(0, 0, 0)); //black
-	currentHp->setString(StringUtils::format("%d / %d", hp_, fullHp_));
+	currentHp->setString(StringUtils::format("%d / %d", hp, fullHp));
 	this->addChild(currentHp, 1);
 	currentHp->setTag(3);
 	hpBar = CCSprite::create("Images/monsterHpBar.png");
@@ -57,7 +62,7 @@ void Monster::initHp(int hp) {
 
 bool Monster::isDead()
 {
-	if (this->hp_ <= 0)
+	if (this->hp <= 0)
 	{
 		return true;
 	}
@@ -85,13 +90,13 @@ void Monster::setParentLayer(FightLayer* layer) {
 }
 
 void Monster::damage(int dam) {
-	hp_ -= dam;
+	hp -= dam;
 	
 	auto currentHp = (Label*)getChildByTag(3);
-	currentHp->setString(StringUtils::format("%d / %d", hp_, fullHp_));
+	currentHp->setString(StringUtils::format("%d / %d", hp, fullHp));
 
-	log("monster HP is : %d", hp_);
-	if (hp_ <= 0) {
+	log("monster HP is : %d", hp);
+	if (hp <= 0) {
 		field->monsterDead();
 	}
 }
