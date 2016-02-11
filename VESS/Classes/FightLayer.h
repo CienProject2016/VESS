@@ -48,10 +48,9 @@ private :
 public :
 	virtual bool init();
 
-	void createBackgound(EnumBackground::Obj obj);
+	void createBackgound(EnumBackground::OBJECT object);
 	void spawnMonster(float);
 	void monsterDead();
-
 	CREATE_FUNC(FightLayer);
 
 	Monster* getMonster();

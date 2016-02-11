@@ -348,14 +348,14 @@ void FightLayer::monsterDead() {
 	*backgroundSpeed = -100;
 }
 
-void FightLayer::createBackgound(EnumBackground::Obj obj) {
-	if (obj == EnumBackground::mountain) {
+void FightLayer::createBackgound(EnumBackground::OBJECT object) {
+	if (object == EnumBackground::MOUNTAIN) {
 		BackgroundObject* mountain = BackgroundObject::create();
 		mountain->setImage("Images/mountain.png", Vec2(1, 0.8f), 2.0f, BackgroundObject::ABSOLUTED, BackgroundObject::BOTTOM);
 		mountain->setSpeed(backgroundSpeed, 100, 1);
 		this->addChild(mountain, -105);
 	}
-	if (obj == EnumBackground::tree) {
+	if (object == EnumBackground::TREE) {
 		BackgroundObject* tree = BackgroundObject::create();
 		tree->setImage("Images/tree.png", Vec2(1, 0.6f), 0.8f, BackgroundObject::ABSOLUTED, BackgroundObject::TOP);
 		tree->setSpeed(backgroundSpeed, 190, 2);
