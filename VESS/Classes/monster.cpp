@@ -2,6 +2,7 @@
 #include "Monster.h"
 #include "GameData.h"
 #include "FightLayer.h"
+
 using namespace std;
 
 Monster::Monster() {
@@ -15,10 +16,10 @@ bool Monster::init()
 {
 	if (Unit::init())
 	{
-		hp_ = 100;
-		fullHp_ = hp_;
+		hp = 100;
+		fullHp = hp;
 
-		window_size = fightLayerSize;
+		windowSize = fightLayerSize;
 		origin = fightLayerOrigin;
 		Node* node = CSLoader::createNode("animation/Tauren.csb");
 		this->addChild(node); //get animation data 
@@ -27,12 +28,12 @@ bool Monster::init()
 		node->setPosition(0, 0);
 		node->runAction(action);
 		action->gotoFrameAndPlay(26 , 32, true);
-		this->setPosition(Vec2(window_size.width * 0.7f, window_size.height * 0.4f));
+		this->setPosition(Vec2(windowSize.width * 0.7f, windowSize.height * 0.4f));
 
 		auto currentHp = Label::createWithTTF("0", "fonts/arial.ttf", 50);
 		currentHp->setPosition(Vec2(0, -40));
-		currentHp->setColor(ccc3(0, 0, 0)); //black
-		currentHp->setString(StringUtils::format("%d / %d", hp_,fullHp_));
+		currentHp->setColor(Color3B::BLACK); //black
+		currentHp->setString(StringUtils::format("%d / %d", hp,fullHp));
 		this->addChild(currentHp, 1);
 		currentHp->setTag(3);
 		return true;
@@ -42,7 +43,7 @@ bool Monster::init()
 
 bool Monster::isDead()
 {
-	if (this->hp_ <= 0)
+	if (this->hp <= 0)
 	{
 		return true;
 	}
@@ -70,13 +71,13 @@ void Monster::setParentLayer(FightLayer* layer) {
 }
 
 void Monster::damage(int dam) {
-	hp_ -= dam;
+	hp -= dam;
 	
 	auto currentHp = (Label*)getChildByTag(3);
-	currentHp->setString(StringUtils::format("%d / %d", hp_, fullHp_));
+	currentHp->setString(StringUtils::format("%d / %d", hp, fullHp));
 
-	log("monster HP is : %d", hp_);
-	if (hp_ <= 0) {
+	log("monster HP is : %d", hp);
+	if (hp <= 0) {
 		field->monsterDead();
 	}
 }
