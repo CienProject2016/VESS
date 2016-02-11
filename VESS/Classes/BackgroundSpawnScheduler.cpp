@@ -10,8 +10,8 @@ BackgroundSpawnScheduler::BackgroundSpawnScheduler() {
 }
 
 BackgroundSpawnScheduler::BackgroundSpawnScheduler(FightLayer* reciever) {
-	mountain = BackgroundSpawnSchedulerTimer(EnumBackground::mountain, reciever, 3);
-	tree = BackgroundSpawnSchedulerTimer(EnumBackground::tree, reciever, 1);
+	mountain = BackgroundSpawnSchedulerTimer(EnumBackground::MOUNTAIN, reciever, 3);
+	tree = BackgroundSpawnSchedulerTimer(EnumBackground::TREE, reciever, 1);
 }
 
 void BackgroundSpawnSchedulerTimer::update(float deltaTime) {
@@ -23,13 +23,14 @@ void BackgroundSpawnSchedulerTimer::update(float deltaTime) {
 	}
 }
 
-BackgroundSpawnSchedulerTimer::BackgroundSpawnSchedulerTimer(EnumBackground::Object object, FightLayer* layer, float Scale) {
+BackgroundSpawnSchedulerTimer::BackgroundSpawnSchedulerTimer(EnumBackground::OBJECT object, FightLayer* layer, float scale) {
 	this->object = object;
 	field = layer;
 	timer = 0;
 	monsterSpawnInterval = 1;
-	monsterSpawnIntervalScaling = Scale;
+	monsterSpawnIntervalScaling = scale;
 }
+
 BackgroundSpawnSchedulerTimer::BackgroundSpawnSchedulerTimer() {
 	this->object = EnumBackground::mountain;
 	timer = 0;
