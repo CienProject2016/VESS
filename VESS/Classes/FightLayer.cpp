@@ -3,7 +3,7 @@
 #include "Hero.h"
 #include "StageClearLayer.h"
 
-
+#define gold "GOLD"
 #define attackTag 2001
 #define jumpTag 2002
 #define sitTag 2003
@@ -78,6 +78,15 @@ bool FightLayer::init()
 	attackMessage->setTag(attackTag);
 	jumpMessage->setTag(jumpTag);
 	sitMessage->setTag(sitTag);
+
+
+	int currentGold = GameData::getInstance()->getGold();
+	auto currentGoldLabel = Label::createWithTTF("", "fonts/arial.ttf", 50);
+	currentGoldLabel->setString(StringUtils::format("%d%s", currentGold, gold));
+	currentGoldLabel->setPosition(Vec2(origin.x + visibleSize.width * 0.540f, origin.y + visibleSize.height*0.9f));
+	currentGoldLabel->setColor(ccc3(0, 0, 0)); //black	
+
+	this->addChild(currentGoldLabel, 999999);
 
 
 	this->schedule(schedule_selector(FightLayer::spawnMonster));
