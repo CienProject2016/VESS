@@ -49,7 +49,7 @@ public :
 	void spawnMonster(float);
 	void monsterDead();
 
-	void createBackgound(EnumBackground::Obj obj);
+	void createBackgound(EnumBackground::Object object);
 	CREATE_FUNC(FightLayer);
 
 	Monster* getMonster();
