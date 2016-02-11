@@ -106,7 +106,7 @@ bool FightLayer::init()
 	
 
 	setTouchListener();
-	
+
 	return true;
 }
 
@@ -156,7 +156,7 @@ void FightLayer::spawnMonster(float delta)
 	Stage stage_data = GameData::getInstance()->getStage();
 	vector<int> distance_data = stage_data.getMonsterLengthInfo();
 	if (MonsterSpawnScheduler::isMonsterSpawnTime(moving_distance, distance_data) && this->monster == NULL) {
-		monster = Monster::create();
+		monster = Slime::create();
 		monster->setParentLayer(this);
 		this->addChild(monster, 1);
 		GameData::getInstance()->setMovingDistance(moving_distance + 1);

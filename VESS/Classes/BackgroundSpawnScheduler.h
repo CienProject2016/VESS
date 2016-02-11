@@ -1,10 +1,10 @@
 #pragma once
+
+#ifndef __BACKGROUND_SPAWN_SCHEDULER_H__
+#define __BACKGROUND_SPAWN_SCHEDULER_H__
 #include <vector>
 #include "BackgroundObject.h"
 #include <stdlib.h>
-#ifndef __BACKGROUND_SPAWN_SCHEDULER_H__
-#define __BACKGROUND_SPAWN_SCHEDULER_H__
-
 using namespace std;
 
 class FightLayer;

@@ -153,6 +153,9 @@
     <ClCompile Include="..\Classes\UpgradeLayer.cpp">
       <Filter>src\View\Layer</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Slime.cpp">
+      <Filter>src\Model\Unit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -253,8 +256,11 @@
     <ClInclude Include="..\Classes\HeroMovementState.h">
       <Filter>src\Model\Unit</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Slime.h">
+      <Filter>src\Model\Unit</Filter>
+    </ClInclude>
     <ClInclude Include="..\Classes\Monster.h">
-      <Filter>src\Vess</Filter>
+      <Filter>src\Model\Unit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
