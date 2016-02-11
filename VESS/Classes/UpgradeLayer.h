@@ -24,11 +24,11 @@ private:
 	void keyPressed(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d::Event *event_);
 	void keyReleased(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d::Event *event_);
 
-	CCProgressTimer *gauge_1, *gauge_2, *gauge_3;
-	CCSprite* timeOutline1, *timeOutline2, *timeOutline3;
-	float gauge_speed_1, gauge_speed_2, gauge_speed_3;
-	Sprite *smelting_image, *hammering_image, *quenching_image;
-	Sprite *upgrade_image, *repair_image;
+	CCProgressTimer *smeltingBarGauge, *hammeringBarGauge, *quenchingBarGauge;
+	CCSprite* smeltingTimeOutLine, *hammeringTimeOutLine, *quenchingTimeOutLine;
+	float smeltingGaugeDownSpeed, hammeringGaugeDownSpeed, quenchingGaugeDownSpeed;
+	Sprite *smeltingImage, *hammeringImage, *quenchingImage;
+	Sprite *upgradeImage, *repairImage;
 	void setTouchListener();
 	
 
@@ -51,8 +51,8 @@ public :
 	bool isComplete = false;
 	Sword getSword;
 	CREATE_FUNC(UpgradeLayer);
-	
-
 };
 
+
 #endif
+
