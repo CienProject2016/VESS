@@ -15,8 +15,8 @@ bool Hero::init()
 		node->runAction(action);
 		action->gotoFrameAndPlay(0, 28, true);
 		this->scheduleUpdate();
-		DistanceOfAvoid = windowSize.width * 0.2f;
-		DistanceOfAttack = windowSize.width * 0.4f;
+		avoidDistance = windowSize.width * 0.2f;
+		attackDistance = windowSize.width * 0.4f;
 		
 		setMovementState(new StayMovementState(this));
 		return true;

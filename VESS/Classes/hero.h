@@ -20,8 +20,8 @@ private:
 	Size windowSize;				//레이어 윈도우 사이즈
 	Vec2 origin;					//레이어의 위치 좌표
 	timeline::ActionTimeline* action;
-	float DistanceOfAvoid;			//피할때 어디까지 피할지의 거리
-	float DistanceOfAttack;			//때릴때 어디쯤 때릴지의 거리
+	float avoidDistance;			//피할때 어디까지 피할지의 거리
+	float attackDistance;			//때릴때 어디쯤 때릴지의 거리
 
 public:
 
