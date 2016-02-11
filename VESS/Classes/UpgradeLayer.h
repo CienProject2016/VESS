@@ -20,12 +20,17 @@ private:
 	virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 	virtual void onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 	virtual void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event);
-	CCProgressTimer *gauge_1, *gauge_2, *gauge_3;
-	CCSprite* timeOutline1, *timeOutline2, *timeOutline3;
-	float gauge_speed_1, gauge_speed_2, gauge_speed_3;
-	Sprite *smelting_image, *hammering_image, *quenching_image;
-	Sprite *upgrade_image, *repair_image;
+
+	void keyPressed(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d::Event *event_);
+	void keyReleased(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d::Event *event_);
+
+	CCProgressTimer *smeltingBarGauge, *hammeringBarGauge, *quenchingBarGauge;
+	CCSprite* smeltingTimeOutLine, *hammeringTimeOutLine, *quenchingTimeOutLine;
+	float smeltingGaugeDownSpeed, hammeringGaugeDownSpeed, quenchingGaugeDownSpeed;
+	Sprite *smeltingImage, *hammeringImage, *quenchingImage;
+	Sprite *upgradeImage, *repairImage;
 	void setTouchListener();
+	
 
 	char attribute;
 public :
@@ -36,13 +41,18 @@ public :
 	void repairClicked();
 	void hideGauge();
 	void completeButton();
+	void checkRepairComplete();
+	void checkLock();
 
+
+	bool lock_01 = false;
+	bool lock_02 = false;
 	bool isUpgrade = true;
 	bool isComplete = false;
 	Sword getSword;
 	CREATE_FUNC(UpgradeLayer);
-	
-
 };
 
+
 #endif
+

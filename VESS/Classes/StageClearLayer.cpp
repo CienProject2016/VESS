@@ -28,14 +28,14 @@ bool StageClearLayer::init()
 	backgroundImage->setScale(0.5f);
 
 	//메뉴
-	auto clear_Menu = Menu::create(nextStageButton, stageSelectButton, NULL);
-	clear_Menu->setPosition(Vec2(origin.x , origin.y + visibleSize.height*0.05f));
+	auto clearMenu = Menu::create(nextStageButton, stageSelectButton, NULL);
+	clearMenu->setPosition(Vec2(origin.x , origin.y + visibleSize.height*0.05f));
 	//setPosition(Vec2(origin.x + visibleSize.width*0.325f, origin.y + visibleSize.height*0.15f)
-	clear_Menu->alignItemsHorizontally();
-	clear_Menu->alignItemsVerticallyWithPadding(visibleSize.width*0.02f);
+	clearMenu->alignItemsHorizontally();
+	clearMenu->alignItemsVerticallyWithPadding(visibleSize.width*0.02f);
 	
 	this->addChild(backgroundImage,1);
-	this->addChild(clear_Menu,2);
+	this->addChild(clearMenu,2);
 	
 	return true;
 }
