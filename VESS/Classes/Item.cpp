@@ -1,20 +1,44 @@
 ﻿#include "Item.h"
 
 
-Sword::Sword() {
-	name_ = "wooden sword";
-	damage_ = 10;
-}
-
-Sword::~Sword() {
-}
-
-char* Sword::getName() {
+char* Item::getName() {
 	return name_;
 }
 
-void Sword::setName(char val[]) {
+void Item::setName(char val[]) {
 	name_ = val;
+}
+
+int Item::getDurability() {
+	return durability_;
+}
+void Item::setDurability(int val) {
+	durability_ = val;
+}
+int Item::getMaxDurability() {
+	return max_durability_;
+}
+void Item::setMaxDurability(int val) {
+	max_durability_ = val;
+}
+
+bool Item::isInUse() {
+	return inUse;
+}
+
+void Item::setInUse(bool inUse) {
+	this->inUse = inUse;
+}
+
+Sword::Sword() {
+	setInUse(true);
+	Item::setName("wooden sword");
+	damage_ = 10;
+	Item::setMaxDurability(10);
+	Item::setDurability(5); // 현재 테스팅 용으로 일부러 5로 낮춰놓음
+}
+
+Sword::~Sword() {
 }
 
 int Sword::getDamage() {
@@ -26,25 +50,11 @@ void Sword::setDamage(int val) {
 }
 
 Shield::Shield() {
-	name_ = "wooden shield";
-	defense_ = 10;
+	setInUse(false);
+	Item::setName("wooden shield");
+	Item::setDurability(15);
+	Item::setMaxDurability(20);
 }
 
 Shield::~Shield() {
-}
-
-char* Shield::getName() {
-	return name_;
-}
-
-void Shield::setName(char val[]) {
-	name_ = val;
-}
-
-int Shield::getDefense() {
-	return defense_;
-}
-
-void Shield::setDefense(int val) {
-	defense_ = val;
 }

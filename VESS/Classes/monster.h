@@ -5,25 +5,30 @@
 #include "WindowSize.h"
 #include "Unit.h"
 #include <string>
-#include "Ingredient.h"
 #include "cocostudio\CocoStudio.h"
 using namespace std;
 using namespace cocostudio;
 
 
+class FightLayer;
 
-class Monster : public Unit , public EventSender{
+class Monster : public Unit{
 private:
 	Size window_size;
 	Vec2 origin;
+	FightLayer* field;
 public:
 	bool isDead();
 	Monster();
 	~Monster();
 	void dropItem();
 	virtual bool init();
-
+	void setParentLayer(FightLayer* layer);
 	static Monster* create();
 	void damage(int dam);
+
+
+	CCSprite * hpBar = CCSprite::create("Images/monsterHpBar.png");
+	CCProgressTimer* hpBarDecreasing = CCProgressTimer::create(hpBar);
 };
 #endif // __MONSTER_H__

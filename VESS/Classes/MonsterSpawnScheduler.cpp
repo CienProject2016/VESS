@@ -1,4 +1,4 @@
-﻿#include "MonsterSpawnScheduler.h"
+#include "MonsterSpawnScheduler.h"
 
 //거리정보와 플레이어의 이동거리정보가 일치하면 TRUE를 리턴한다.
 bool MonsterSpawnScheduler::isMonsterSpawnTime(int moving_distance, vector<int> distance_data)
