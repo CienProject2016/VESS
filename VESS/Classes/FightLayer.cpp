@@ -10,6 +10,10 @@
 #define durabilityTag 300
 #define kFinalDistance 4001
 
+void FightLayer::update(float delta) {
+	int currentGold = GameData::getInstance()->getGold();
+	currentGoldLabel->setString(StringUtils::format("%d%s", currentGold, gold));
+}
 
 bool FightLayer::init()
 {
@@ -81,12 +85,12 @@ bool FightLayer::init()
 
 
 	int currentGold = GameData::getInstance()->getGold();
-	auto currentGoldLabel = Label::createWithTTF("", "fonts/arial.ttf", 50);
+	currentGoldLabel = Label::createWithTTF("", "fonts/arial.ttf", 50);
 	currentGoldLabel->setString(StringUtils::format("%d%s", currentGold, gold));
 	currentGoldLabel->setPosition(Vec2(origin.x + visibleSize.width * 0.540f, origin.y + visibleSize.height*0.9f));
 	currentGoldLabel->setColor(ccc3(0, 0, 0)); //black	
-
-	this->addChild(currentGoldLabel, 999999);
+	currentGoldLabel->setName("goldLabel");
+	this->addChild(currentGoldLabel, 9999);
 
 
 	this->schedule(schedule_selector(FightLayer::spawnMonster));
@@ -106,7 +110,7 @@ bool FightLayer::init()
 	
 
 	setTouchListener();
-
+	this->scheduleUpdate();
 	return true;
 }
 

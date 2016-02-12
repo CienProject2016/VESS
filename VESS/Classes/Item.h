@@ -3,12 +3,8 @@
 
 
 class Item {
-private:
-	char* name_;
-	int durability_;
-	int max_durability_;
-	bool inUse;
 public:
+	enum Type { SWORD, SHIELD };
 	virtual char* getName();
 	virtual void setName(char name[]);
 	virtual int getDurability();
@@ -17,6 +13,12 @@ public:
 	virtual void setMaxDurability(int maxDurabillity);
 	bool isInUse();
 	void setInUse(bool);
+private:
+	char* name_;
+	int durability_;
+	int max_durability_;
+	bool inUse;
+	Type itemType;
 };
 class Sword : public Item {
 private:
