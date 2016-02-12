@@ -11,9 +11,6 @@
 #include "Hero.h"
 #include "Monster.h"
 #include "Slime.h"
-
-
-
 USING_NS_CC;
 
 class FightLayer : public Layer
@@ -22,11 +19,12 @@ private :
 	float movingDistanceReal = 0;		//int 형으로 변환할 때 소수값을 잃지 않기 위해 선언.
 	float movingVelocity = 50;			//단위 : 거리/초
 	float* backgroundSpeed;
+	Label* currentGoldLabel;
 	BattleOperator* controller;
 	Hero* daughter;
 	Monster* monster;
 	
-
+	virtual void update(float delta);
 	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 	virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 	virtual void onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event);

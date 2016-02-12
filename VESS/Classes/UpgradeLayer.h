@@ -15,6 +15,24 @@ using namespace std;
 
 class UpgradeLayer : public Layer
 {
+public:
+	enum UpgradePhase { UPGRADE, REPAIR, NONE };
+	enum CompleteButtonPhase { CAN_CLICK , CANNOT_CLICK};
+	virtual bool init();
+	virtual void update(float delta);
+	void increaseGauge(CCProgressTimer* gauge);
+	void upgradeClicked();
+	void repairClicked();
+	void hideBeforeUpgradeResources();
+	void showCompleteButton();
+	void checkComplete();
+	void checkLock();
+	void completeClicked();
+	void showUiButton(UpgradePhase);
+
+	Sword getSword;
+	CREATE_FUNC(UpgradeLayer);
+
 private:
 	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 	virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_event);
@@ -29,28 +47,17 @@ private:
 	float smeltingGaugeDownSpeed, hammeringGaugeDownSpeed, quenchingGaugeDownSpeed;
 	Sprite *smeltingImage, *hammeringImage, *quenchingImage;
 	Sprite *upgradeImage, *repairImage;
+	Sprite* completeUpgradeButton, completeRepairButton;
 	void setTouchListener();
-	
-
-	char attribute;
-public :
-	virtual bool init();
-	virtual void update(float delta);
-	void gaugeIncrease(CCProgressTimer* gauge);
-	void upgradeClicked();
-	void repairClicked();
-	void hideGauge();
-	void completeButton();
-	void checkRepairComplete();
-	void checkLock();
-
-
-	bool lock_01 = false;
-	bool lock_02 = false;
+	int upgradeGold;
+	int repairGold;
+	bool lockBeforeHammering = false;
+	bool lockBeforeQuenching = false;
 	bool isUpgrade = true;
 	bool isComplete = false;
-	Sword getSword;
-	CREATE_FUNC(UpgradeLayer);
+	char attribute;
+	UpgradePhase currentUpgradePhase;
+	CompleteButtonPhase completeButtonPhase;
 };
 
 

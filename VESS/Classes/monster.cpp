@@ -97,6 +97,8 @@ void Monster::damage(int dam) {
 
 	log("monster HP is : %d", hp);
 	if (hp <= 0) {
+		int currentGold = GameData::getInstance()->getGold();
+		GameData::getInstance()->setGold(currentGold + 50);
 		field->monsterDead();
 	}
 }
