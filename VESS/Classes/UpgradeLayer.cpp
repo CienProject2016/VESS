@@ -112,21 +112,23 @@ bool UpgradeLayer::init()
 	auto upgradeLabel = Label::createWithTTF("강화골드", "fonts/arial.ttf", 50);
 	upgradeLabel->setString(StringUtils::format("%d%s", upgradeGold, gold));
 	// position the label on the center of the screen
-	upgradeLabel->setPosition(Vec2(Vec2(origin.x + visibleSize.width * 0.13f, origin.y + visibleSize.height*0.86f)));
+	upgradeLabel->setPosition(Vec2(Vec2(origin.x + visibleSize.width * 0.11f, origin.y + visibleSize.height*0.86f)));
 	upgradeLabel->setColor(ccc3(250, 250, 250)); 
 	this->addChild(upgradeLabel, 1);
 
+	auto gateImage = Sprite::create("Images/dimension_Gate.png");
+	gateImage->setPosition(Vec2(visibleSize.width * 0.35f, visibleSize.height * 0.6f));
+	this->addChild(gateImage, 55);
 
-	auto swordSprite = Sprite::create("Images/sword.png");
-	auto shieldSprite = Sprite::create("Images/shield.png");
-	swordSprite->setPosition(Vec2(visibleSize.width / 10, visibleSize.height / 2));
-	shieldSprite->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
-	shieldSprite->setScale(.25f);
-	swordSprite->setScale(.75f);
-	swordSprite->setTag(600);
-	shieldSprite->setTag(601);
-	this->addChild(swordSprite);
-	this->addChild(shieldSprite);
+	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
+		itemImage = Sprite::create("Images/sword.png");
+	}
+	else {
+		itemImage = Sprite::create("Images/shield.png");
+	}
+	itemImage->setPosition(Vec2(visibleSize.width * 0.35f, visibleSize.height * 0.6f));
+	itemImage->setName("itemImage");
+	this->addChild(itemImage,56);
 	
 	repairGold = GameData::getInstance()->getNeededRepairGold();
 	auto repairLabel = Label::createWithTTF("수리골드", "fonts/arial.ttf", 50);
@@ -169,6 +171,13 @@ void UpgradeLayer::update(float delta) {
 
 	checkComplete();
 	checkLock();
+
+	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
+		itemImage->setTexture("Images/shield.png");		
+	}
+	else {
+		itemImage->setTexture("Images/sword.png");
+	}
 }
 
 void UpgradeLayer::checkComplete() {
@@ -246,7 +255,7 @@ void UpgradeLayer::upgradeClicked()
 	Sword* sword = &GameData::getInstance()->getSword();
 	if (sword->isInUse()) {
 		//소드는 딸이 사용중이므로 방패강화
-		if (UpgradeController::upgrade(upgradeGold, Item::SHIELD) == true) {
+		if (UpgradeController::payUpgradeCosts(upgradeGold, Item::SHIELD) == true) {
 			showUiButton(currentUpgradePhase);
 		}
 		else {
@@ -254,7 +263,7 @@ void UpgradeLayer::upgradeClicked()
 		}
 	}
 	else {
-		if (UpgradeController::upgrade(upgradeGold, Item::SWORD) == true) {
+		if (UpgradeController::payUpgradeCosts(upgradeGold, Item::SWORD) == true) {
 			showUiButton(currentUpgradePhase);
 		}
 		else {
@@ -287,10 +296,8 @@ void UpgradeLayer::showCompleteButton()
 	else if (currentUpgradePhase == UPGRADE) {
 		Size visibleSize = Director::getInstance()->getVisibleSize();
 		Vec2 origin = Director::getInstance()->getVisibleOrigin();
-		completeUpgradeButton->setTexture("Images/upgrade_after_complete.png");
-		
+		completeUpgradeButton->setTexture("Images/upgrade_after_complete.png");		
 	}
-
 }
 
 
@@ -358,6 +365,7 @@ void UpgradeLayer::completeClicked() {
 	log("complete!!");
 	switch (currentUpgradePhase) {
 	case UpgradePhase::UPGRADE:
+		UpgradeController::upgradeItem();
 		break;
 	case UpgradePhase::REPAIR:		
 		getSword.setDurability(getSword.getMaxDurability());

@@ -31,8 +31,8 @@ public:
 	static Monster* create();
 	void damage(int dam);
 	virtual void update(float delta);
-	Sprite * hpBar = Sprite::create("Images/monsterHpBar.png");
-	ProgressTimer* hpBarDecreasing = ProgressTimer::create(hpBar);
+	//Sprite * hpBar = Sprite::create("Images/monsterHpBar.png");
+	//ProgressTimer* hpBarDecreasing = ProgressTimer::create(hpBar);
 };
 
 #endif // __MONSTER_H__

@@ -29,7 +29,6 @@ public:
 
 class BackgroundSpawnScheduler{ //fightlayer에서 딱 하나 생성. 각각의 오브젝트들을 따로따로 생성,운용(같이 움직이지 않는다)
 private:
-
 	BackgroundSpawnSchedulerTimer mountain;
 	BackgroundSpawnSchedulerTimer tree;
 	FightLayer* field;

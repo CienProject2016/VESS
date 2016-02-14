@@ -12,6 +12,20 @@ using namespace cocostudio;
 class FightLayer;
 
 class Hero: public Unit {
+public:
+	static Hero* create();
+	virtual bool init();
+	void setParentLayer(FightLayer* layer);
+	virtual void update(float delta);
+	bool isAvailableCommand();
+	void startAttack();
+	void startJump();
+	void startAvoid();
+	void startSitDown();
+	void attackDamage();
+	void attackEffect();
+	void getDamage(bool damage);
+	void setMovementState(HeroMovementState* state);
 private:
 	const int SIZE_OF_LIFE = 3;
 	int numGetDamage = 0;
@@ -23,24 +37,5 @@ private:
 	float avoidDistance;			//피할때 어디까지 피할지의 거리
 	float attackDistance;			//때릴때 어디쯤 때릴지의 거리
 
-public:
-
-	static Hero* create();
-	virtual bool init();
-
-	void setParentLayer(FightLayer* layer);
-
-	virtual void update(float delta);
-	bool isAvailableCommand();
-	void startAttack();
-	void startJump();
-	void startAvoid();
-	void startSitDown();
-	void attackDamage();
-	void attackEffect();
-	void getDamage(bool damage);
-	
-
-	void setMovementState(HeroMovementState* state);
 };
 #endif
