@@ -4,7 +4,7 @@
 #include "StageClearLayer.h"
 #include "DimensionGateController.h"
 #include "SimpleAudioEngine.h"
-
+#include "Resources.h"
 
 #define gold "GOLD"
 #define attackTag 2001
@@ -47,9 +47,9 @@ bool FightLayer::init()
 	//몬스터가 생성됨
 
 	//버튼
-	auto dimensionButton = MenuItemImage::create("Images/dimension_Gate.png", "Images/dimension_Gate.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::dimensionCallback, this));
-	auto attackButton = MenuItemImage::create("Images/AttackButton.png", "Images/AttackButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::attackCallback, this));
-	auto jumpButton = MenuItemImage::create("Images/JumpButton.png", "Images/JumpButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::jumpCallback, this));
+	auto dimensionButton = MenuItemImage::create(ImageResources::DIMENSION_GATE_BUTTON_PATH, ImageResources::DIMENSION_GATE_BUTTON_PATH, ImageResources::DISABLE_BUTTON_PATH, CC_CALLBACK_1(FightLayer::dimensionCallback, this));
+	auto attackButton = MenuItemImage::create("Images/AttackButton.png", "Images/AttackButton.png", ImageResources::DISABLE_BUTTON_PATH, CC_CALLBACK_1(FightLayer::attackCallback, this));
+	auto jumpButton = MenuItemImage::create(ImageResources::JUMP_BUTTON_PATH, ImageResources::JUMP_BUTTON_PATH, ImageResources::DISABLE_BUTTON_PATH, CC_CALLBACK_1(FightLayer::jumpCallback, this));
 	
 	dimensionButton->setScale(1.0f);
 	attackButton->setScale(2.0f);
@@ -136,8 +136,6 @@ bool FightLayer::init()
 	//효과음 준비
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("audio/sound_jump.mp3");
 
-
-
 	this->scheduleUpdate();
 	return true;
 }
@@ -153,6 +151,7 @@ void FightLayer::initBackground() {
 	CCSprite * heart1 = CCSprite::create("Images/heart.png");
 	CCSprite * heart2 = CCSprite::create("Images/heart.png");
 	CCSprite * heart3 = CCSprite::create("Images/heart.png");
+
 	heart1->setTag(100000);
 	heart2->setTag(100001);
 	heart3->setTag(100002);

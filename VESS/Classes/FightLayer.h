@@ -15,6 +15,16 @@ USING_NS_CC;
 
 class FightLayer : public Layer
 {
+public:
+	virtual bool init();
+
+	void createBackgound(EnumBackground::OBJECT object);
+	void spawnMonster(float);
+	void monsterDead();
+	CREATE_FUNC(FightLayer);
+
+	Monster* getMonster();
+	Hero* getDaughter();
 private : 
 	float movingDistanceReal = 0;		//int 형으로 변환할 때 소수값을 잃지 않기 위해 선언.
 	float movingVelocity = 50;			//단위 : 거리/초
@@ -46,16 +56,6 @@ private :
 
 	int damage = 20;
 
-public :
-	virtual bool init();
-
-	void createBackgound(EnumBackground::OBJECT object);
-	void spawnMonster(float);
-	void monsterDead();
-	CREATE_FUNC(FightLayer);
-
-	Monster* getMonster();
-	Hero* getDaughter();
 };
 
 #endif

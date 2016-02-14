@@ -16,6 +16,7 @@ using namespace std;
 class UpgradeLayer : public Layer
 {
 public:
+	enum ZOrder {SMELTING_IMAGE, HAMMERING_IMAGE, QUENCHING_IMAGE, UPGRADE_IMAGE, REPAIR_IMAGE, COMPLETE_UPGRADE_BUTTON};
 	enum UpgradePhase { UPGRADE, REPAIR, NONE };
 	enum CompleteButtonPhase { CAN_CLICK , CANNOT_CLICK};
 	virtual bool init();
