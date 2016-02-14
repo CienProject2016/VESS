@@ -18,6 +18,7 @@ bool Hero::init()
 		avoidDistance = windowSize.width * 0.2f;
 		attackDistance = windowSize.width * 0.4f;
 		
+		
 		setMovementState(new StayMovementState(this));
 		return true;
 	}
@@ -25,7 +26,6 @@ bool Hero::init()
 }
 
 void Hero::update(float delta) {
-
 	if (movementState != NULL) {
 		movementState->update(delta);
 	}

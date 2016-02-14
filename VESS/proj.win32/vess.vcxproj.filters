@@ -37,7 +37,7 @@
     <Filter Include="src\Model\Object">
       <UniqueIdentifier>{c744b3f4-69be-4440-8d4a-fcec1c962ce3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Model\Unit\Vess">
+    <Filter Include="src\Vess">
       <UniqueIdentifier>{672a340d-6ce6-427c-9f2a-c984e8048cea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -58,13 +58,13 @@
       <Filter>src\View\Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>src\Model\Unit\Vess</Filter>
+      <Filter>src\Vess</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AnimationScene.cpp">
       <Filter>src\View\Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Settings.cpp">
-      <Filter>src\Model\Unit\Vess</Filter>
+      <Filter>src\Vess</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AnimationScene.cpp">
       <Filter>src\View\Scene</Filter>
@@ -159,10 +159,13 @@
     <ClCompile Include="..\Classes\UpgradeController.cpp">
       <Filter>src\Controller</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\DimensionGateController.cpp">
+      <Filter>src\Controller</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>src\Model\Unit\Vess</Filter>
+      <Filter>src\Vess</Filter>
     </ClInclude>
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
@@ -171,7 +174,7 @@
       <Filter>src\Controller</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\WindowSize.h">
-      <Filter>src\Model\Unit\Vess</Filter>
+      <Filter>src\Vess</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameScene.h">
       <Filter>src\View\Scene</Filter>
@@ -192,7 +195,7 @@
       <Filter>src\View\Layer</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Settings.h">
-      <Filter>src\Model\Unit\Vess</Filter>
+      <Filter>src\Vess</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\BackgroundSpawnScheduler.h">
       <Filter>src\Controller</Filter>
@@ -266,6 +269,9 @@
       <Filter>src\Model\Unit</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\UpgradeController.h">
+      <Filter>src\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DimensionGateController.h">
       <Filter>src\Controller</Filter>
     </ClInclude>
   </ItemGroup>

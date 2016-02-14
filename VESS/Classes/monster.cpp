@@ -56,8 +56,8 @@ void Monster::initHp(int hp) {
 	currentHp->setString(StringUtils::format("%d / %d", hp, fullHp));
 	this->addChild(currentHp, 1);
 	currentHp->setTag(3);
-	hpBar = CCSprite::create("Images/monsterHpBar.png");
-	hpBarDecreasing = CCProgressTimer::create(hpBar);
+    //hpBar = CCSprite::create("Images/monsterHpBar.png");
+	//hpBarDecreasing = CCProgressTimer::create(hpBar);
 }
 
 bool Monster::isDead()

@@ -23,6 +23,7 @@ private :
 	BattleOperator* controller;
 	Hero* daughter;
 	Monster* monster;
+	Sprite* itemImage;
 	
 	virtual void update(float delta);
 	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event);

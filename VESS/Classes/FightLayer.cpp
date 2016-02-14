@@ -2,6 +2,7 @@
 #include "FightLayer.h"
 #include "Hero.h"
 #include "StageClearLayer.h"
+#include "DimensionGateController.h"
 
 #define gold "GOLD"
 #define attackTag 2001
@@ -13,6 +14,13 @@
 void FightLayer::update(float delta) {
 	int currentGold = GameData::getInstance()->getGold();
 	currentGoldLabel->setString(StringUtils::format("%d%s", currentGold, gold));
+
+	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
+		itemImage->setTexture("Images/sword.png");
+	}
+	else {
+		itemImage->setTexture("Images/shield.png");
+	}
 }
 
 bool FightLayer::init()
@@ -35,7 +43,7 @@ bool FightLayer::init()
 	//몬스터가 생성됨
 
 	//버튼
-	auto dimensionButton = MenuItemImage::create("Images/dimension_Gate.png", "Images/dimensionButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::dimensionCallback, this));
+	auto dimensionButton = MenuItemImage::create("Images/dimension_Gate.png", "Images/dimension_Gate.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::dimensionCallback, this));
 	auto attackButton = MenuItemImage::create("Images/AttackButton.png", "Images/AttackButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::attackCallback, this));
 	auto jumpButton = MenuItemImage::create("Images/JumpButton.png", "Images/JumpButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::jumpCallback, this));
 	
@@ -73,10 +81,14 @@ bool FightLayer::init()
     this->addChild(label,1);
 	label->setTag(durabilityTag);
 
-	
-
-	auto swordImage = Sprite::create("Images/sword.png");
-	auto upgradeImage = Sprite::create("Images/shield.png");
+	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
+		itemImage = Sprite::create("Images/sword.png");
+	}
+	else {
+		itemImage = Sprite::create("Images/shield.png");
+	}
+	itemImage->setPosition(Vec2(visibleSize.width *0.3f, visibleSize.height * 3/5));
+	this->addChild(itemImage);
 
 	//dimensionMessage->setTag(dimensionTag);
 	attackMessage->setTag(attackTag);
@@ -198,27 +210,7 @@ void FightLayer::stageClear() {
 
 void FightLayer::dimensionCallback(cocos2d::Ref* pSender)
 {
-
-	Sword* sword = &GameData::getInstance()->getSword();
-	sword->setInUse(!sword->isInUse());
-
-	auto gameScene = Director::getInstance()->getRunningScene();
-	auto upgradeLayer = gameScene->getChildByName("upgradeLayer");
-	auto swordSprite = upgradeLayer->getChildByTag(600);
-	auto shieldSprite = upgradeLayer->getChildByTag(601);
-	shieldSprite->setVisible(true);
-	swordSprite->setVisible(true);
-	
-	if (!sword->isInUse()){
-		auto nullSprite = Sprite::create("Images/transparent_img.png");
-		nullSprite->setPosition(swordSprite->getPosition());
-		swordSprite->setPosition(shieldSprite->getPosition());
-		shieldSprite->setPosition(nullSprite->getPosition());
-	}
-
-	CCLOG("dimensionCallback");
-
-
+	DimensionGateController::changeItemPosition();
 }
 
 
