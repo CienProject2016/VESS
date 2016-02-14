@@ -1,8 +1,5 @@
 ﻿#pragma once
 #include "StartScene.h"
-#include "GameScene.h"
-#include "Settings.h"
-#include "EnterScene.h"
 
 USING_NS_CC;
 
@@ -26,7 +23,7 @@ bool StartScene::init()
 {
     //////////////////////////////
     // 1. super init first
-    if ( !CCLayerColor::initWithColor(ccc4(255, 255, 255, 255)))
+    if ( !CCLayerColor::initWithColor(Color4B(255, 255, 255, 255)))
     {
         return false;
     }
@@ -41,7 +38,7 @@ bool StartScene::init()
     // add a "close" icon to exit the progress. it's an autorelease object
    
 	
-	auto openSetting = MenuItemImage::create("Images/SettingButton.png", "Images/SettingButton.png", CC_CALLBACK_1(StartScene::settingClicked, this));
+	auto openSetting = MenuItemImage::create("Images/setting_button.png", "Images/setting_button.png", CC_CALLBACK_1(StartScene::settingClicked, this));
 	openSetting->setPosition(Vec2(origin.x + visibleSize.width - openSetting->getContentSize().width / 10,
 		origin.y + visibleSize.height - openSetting->getContentSize().height/7));
 	openSetting->setScale(0.2f);
@@ -59,12 +56,12 @@ bool StartScene::init()
 	// position the label on the center of the screen
 	label->setPosition(Vec2(origin.x + visibleSize.width / 2,
 		origin.y + visibleSize.height - label->getContentSize().height*2.5));
-	label->setColor(ccc3(0, 0, 0)); //black
+	label->setColor(Color3B(0, 0, 0)); //black
 
 	auto touchLabel = Label::createWithSystemFont("시작하시려면 화면을 터치하세요", "Arial", 70);
 	touchLabel->setPosition(Vec2(origin.x + visibleSize.width / 2 + 10,
 		origin.y + visibleSize.height - touchLabel->getContentSize().height * 12));
-	touchLabel->setColor(ccc3(0, 0, 0));
+	touchLabel->setColor(Color3B(0, 0, 0));
 	// add the label as a child to this layer
 	this->addChild(label, 1);
 	this->addChild(touchLabel, 2);
@@ -117,7 +114,7 @@ void StartScene::onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_
 void StartScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
 	Scene *EnterScene = EnterScene::createScene();
-	Director::getInstance()->replaceScene(TransitionFade::create(0.5, EnterScene, Color3B(0, 255, 255)));
+	Director::getInstance()->replaceScene(TransitionFade::create(0.5, EnterScene, Color3B(255, 255, 255)));
 	log("Touched");
 }
 
@@ -134,7 +131,7 @@ void StartScene::menuCloseCallback(Ref* pSender)
 void StartScene::settingClicked(Ref* pSender)
 {
 	Scene *settingScene=Settings::createScene();
-	Director::getInstance()->replaceScene(TransitionFade::create(0.5, settingScene, Color3B(0, 255, 255)));
+	Director::getInstance()->replaceScene(TransitionFade::create(0.5, settingScene, Color3B(255, 255, 255)));
 	log("Touched");
 	
 }

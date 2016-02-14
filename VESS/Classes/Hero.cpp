@@ -1,6 +1,8 @@
 ﻿#include "Hero.h"
 #include "FightLayer.h"
 
+#define ANIMATION 10000
+
 bool Hero::init()
 {
 	if (Unit::init())
@@ -11,9 +13,10 @@ bool Hero::init()
 		node->setScale(0.8f);
 		this->addChild(node); //get animation data 
 		action = CSLoader::createTimeline("Hero.csb");
+		action->setTag(ANIMATION);
 		node->setPosition(0, 0);
 		node->runAction(action);
-		action->gotoFrameAndPlay(0, 28, true);
+		action->gotoFrameAndPlay(0, 16, true);
 		this->scheduleUpdate();
 		avoidDistance = window_size.width * 0.2f;
 		attackDistance = window_size.width * 0.4f;
@@ -47,25 +50,30 @@ Hero* Hero::create()
 bool Hero::isAvailableCommand() {
 	if (movement_state == NULL)	return true;
 	return movement_state->isAvailableCommand();
+	action->gotoFrameAndPlay(75, 95, true);//대기 모션
 }
 void Hero::startAttack() {
 	if (isAvailableCommand()) {
 		setMovementState(new AttackMovementState(this));
+		action->gotoFrameAndPlay(198, 211, false);//공격1 
 	}
 }
 void Hero::startAvoid() {
 	if (isAvailableCommand()) {
 		setMovementState(new AvoidMovementState(this));
+		action->gotoFrameAndPlay(175, 187, false);//중간회피 
 	}
 }
 void Hero::startSitDown() {
 	if (isAvailableCommand()) {
 		setMovementState(new SitdownMovementState(this));
+		action->gotoFrameAndPlay(116, 128, false);//아래회피(sit 대신 dodge
 	}
 }
 void Hero::startJump() {
 	if (isAvailableCommand()) {
 		setMovementState(new JumpMovementState(this));
+		action->gotoFrameAndPlay(97, 113, false);//위회피
 	}
 }
 
@@ -98,4 +106,6 @@ void Hero::setMovementState(HeroMovementState* state) {
 		delete movement_state;
 	}
 	movement_state = state;
+	action->gotoFrameAndPlay(0, 16, true);//달리는 모션
+	//action->gotoFrameAndPlay(75, 95, true);//대기 모션
 }

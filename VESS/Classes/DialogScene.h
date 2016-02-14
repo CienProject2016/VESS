@@ -3,6 +3,8 @@
 
 #include "cocos2d.h"
 #include "Dialog.h"
+#include "GameScene.h"
+#include "GameData.h"
 #include <vector>
 
 class DialogScene : public cocos2d::Layer

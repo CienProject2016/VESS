@@ -1,11 +1,5 @@
 #include "GameScene.h"
 
-#include "UpgradeLayer.h"
-#include "FightLayer.h"
-#include "GameData.h"
-#include "Stage.h"
-#include "WindowSize.h"
-
 USING_NS_CC;
 using namespace std;
 
@@ -19,9 +13,6 @@ Scene* GameScene::createScene()
 	Document data = getGameData();
 	GameData::getInstance()->getStage().setStageLevel(data["stage"].GetInt());
 
-
-
-	// 'layer' is an autorelease object
 	auto upgrade_layer = UpgradeLayer::create();
 	auto fight_layer = FightLayer::create();
 
@@ -31,15 +22,12 @@ Scene* GameScene::createScene()
 	fight_layer->setContentSize(Size(1160, 1080));
 	fight_layer->setPosition(Vec2(760, 0));//ÀüÅõÃ¢
 
-	// add layer as a child to scene
 	scene->addChild(upgrade_layer,1);
 	scene->addChild(fight_layer,0);
 
-	// return the scene
 	return scene;
 }
 
-// on "init" you need to initialize your instance
 bool GameScene::init()
 {
 	//////////////////////////////

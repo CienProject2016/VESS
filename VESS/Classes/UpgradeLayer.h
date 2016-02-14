@@ -24,8 +24,8 @@ private:
 	void keyPressed(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d::Event *event_);
 	void keyReleased(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d::Event *event_);
 
-	CCProgressTimer *smeltingBarGauge, *hammeringBarGauge, *quenchingBarGauge;
-	CCSprite* smeltingTimeOutLine, *hammeringTimeOutLine, *quenchingTimeOutLine;
+	ProgressTimer *smeltingBarGauge, *hammeringBarGauge, *quenchingBarGauge;
+	Sprite* smeltingTimeOutLine, *hammeringTimeOutLine, *quenchingTimeOutLine;
 	float smeltingGaugeDownSpeed, hammeringGaugeDownSpeed, quenchingGaugeDownSpeed;
 	Sprite *smeltingImage, *hammeringImage, *quenchingImage;
 	Sprite *upgradeImage, *repairImage;
@@ -36,7 +36,7 @@ private:
 public :
 	virtual bool init();
 	virtual void update(float delta);
-	void gaugeIncrease(CCProgressTimer* gauge);
+	void gaugeIncrease(ProgressTimer* gauge);
 	void upgradeClicked();
 	void repairClicked();
 	void hideGauge();
