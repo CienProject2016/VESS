@@ -5,6 +5,7 @@
 #include "GameData.h"
 #include "Stage.h"
 #include "WindowSize.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 using namespace std;
@@ -34,7 +35,9 @@ Scene* GameScene::createScene()
 	// add layer as a child to scene
 	scene->addChild(upgrade_layer,1,"upgradeLayer");
 	scene->addChild(fight_layer,0);
-
+	
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("audio/bgm_neorock.mp3");
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("audio/bgm_neorock.mp3");
 	// return the scene
 	return scene;
 }

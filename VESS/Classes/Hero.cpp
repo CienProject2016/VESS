@@ -66,6 +66,7 @@ void Hero::startSitDown() {
 void Hero::startJump() {
 	if (isAvailableCommand()) {
 		setMovementState(new JumpMovementState(this));
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("audio/sound_jump.mp3");
 	}
 }
 

@@ -16,6 +16,7 @@ private:
 	CC_SYNTHESIZE(string, name_, Name);
 	CC_SYNTHESIZE(string, dialogue_, Dialogue);
 	CC_SYNTHESIZE(string, background_, Background);
+	CC_SYNTHESIZE(string, image, Image);
 };
 
 #endif // __DIALOG_H__

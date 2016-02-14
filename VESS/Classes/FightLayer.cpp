@@ -3,6 +3,8 @@
 #include "Hero.h"
 #include "StageClearLayer.h"
 #include "DimensionGateController.h"
+#include "SimpleAudioEngine.h"
+
 
 #define gold "GOLD"
 #define attackTag 2001
@@ -130,6 +132,12 @@ bool FightLayer::init()
 	
 
 	setTouchListener();
+
+	//효과음 준비
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("audio/sound_jump.mp3");
+
+
+
 	this->scheduleUpdate();
 	return true;
 }
@@ -251,6 +259,8 @@ void FightLayer::jumpCallback(cocos2d::Ref* pSender)
 	jumpMessage->runAction(seq);
 	
 	daughter->startJump();
+	
+
 	CCLOG("jumpCallback");
 }
 

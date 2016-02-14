@@ -2,11 +2,13 @@
   "opening":[
     {
       "name" : "레비아탄",
+	  "image" : "leviathan_face_01",
       "position" : "right",
       "lines" : "하하하하\n인간계 최고의 대장장이 마크여.\n나를 위해 인간의 피를 머금은 검을 만들어라."
     },
     {
       "name" : "대장장이",
+	  "image" : "smith_face_01",
       "position" : "left",
       "lines" : "인간을 해칠 무기를 만들수는 없소.\n돌아가시오."
     }
