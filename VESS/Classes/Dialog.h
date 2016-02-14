@@ -5,6 +5,10 @@
 #include "cocos2d.h"
 
 using namespace std;
+
+/*
+	대화를 위한 클래스
+*/
 class Dialog
 {
 public:
@@ -12,10 +16,10 @@ public:
 	Dialog();
 	~Dialog();
 private:
-	CC_SYNTHESIZE(Dialog::Position, position_, Position);
-	CC_SYNTHESIZE(string, name_, Name);
-	CC_SYNTHESIZE(string, dialogue_, Dialogue);
-	CC_SYNTHESIZE(string, background_, Background);
+	CC_SYNTHESIZE(Dialog::Position, position, Position);
+	CC_SYNTHESIZE(string, name, Name);
+	CC_SYNTHESIZE(string, dialogue, Dialogue);
+	CC_SYNTHESIZE(string, background, Background);
 	CC_SYNTHESIZE(string, image, Image);
 };
 

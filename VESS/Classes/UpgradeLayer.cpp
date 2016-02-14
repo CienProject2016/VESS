@@ -2,9 +2,7 @@
 #include "UpgradeLayer.h"
 #include "GameData.h"
 #include "UpgradeController.h"
-
-#define tag_number 50
-#define gold "GOLD"
+#include "Resources.h"
 
 bool UpgradeLayer::init()
 {
@@ -60,11 +58,11 @@ bool UpgradeLayer::init()
 	repairImage->setPosition(Vec2(origin.x + visibleSize.width * 0.325f, origin.y + visibleSize.height*0.9f));
 	repairImage->setScale(1.0f);
 
-	smeltingImage->setTag(tag_number+1);
-	hammeringImage->setTag(tag_number+2);
-	quenchingImage->setTag(tag_number+3);
-	upgradeImage->setTag(tag_number+4);
-	repairImage->setTag(tag_number + 5);
+	smeltingImage->setTag(ZOrder::SMELTING_IMAGE);
+	hammeringImage->setTag(ZOrder::HAMMERING_IMAGE);
+	quenchingImage->setTag(ZOrder::QUENCHING_IMAGE);
+	upgradeImage->setTag(ZOrder::UPGRADE_IMAGE);
+	repairImage->setTag(ZOrder::REPAIR_IMAGE);
 
 	//smelting bar create
 	CCSprite *smeltingTimeBar = CCSprite::create("timebar.png");
@@ -110,13 +108,13 @@ bool UpgradeLayer::init()
 
 	upgradeGold = GameData::getInstance()->getNeededUpgradeGold();
 	auto upgradeLabel = Label::createWithTTF("강화골드", "fonts/arial.ttf", 50);
-	upgradeLabel->setString(StringUtils::format("%d%s", upgradeGold, gold));
+	upgradeLabel->setString(StringUtils::format("%d%s", upgradeGold, "GOLD"));
 	// position the label on the center of the screen
 	upgradeLabel->setPosition(Vec2(Vec2(origin.x + visibleSize.width * 0.11f, origin.y + visibleSize.height*0.86f)));
 	upgradeLabel->setColor(ccc3(250, 250, 250)); 
 	this->addChild(upgradeLabel, 1);
 
-	auto gateImage = Sprite::create("Images/dimension_Gate.png");
+	auto gateImage = Sprite::create(ImageResources::DIMENSION_GATE_BUTTON_PATH);
 	gateImage->setPosition(Vec2(visibleSize.width * 0.35f, visibleSize.height * 0.6f));
 	this->addChild(gateImage, 55);
 
@@ -139,14 +137,14 @@ bool UpgradeLayer::init()
 
 	repairGold = GameData::getInstance()->getNeededRepairGold();
 	auto repairLabel = Label::createWithTTF("수리골드", "fonts/arial.ttf", 50);
-	repairLabel->setString(StringUtils::format("%d%s", repairGold, gold));
+	repairLabel->setString(StringUtils::format("%d%s", repairGold, "GOLD"));
 	repairLabel->setPosition(Vec2(origin.x + visibleSize.width * 0.33f, origin.y + visibleSize.height*0.86f));
 	repairLabel->setColor(ccc3(250, 250, 250)); 
 	this->addChild(repairLabel, 2);
 
 	completeUpgradeButton = Sprite::create("Images/upgrade_before_complete.png");
 	completeUpgradeButton->setPosition(Vec2(visibleSize.width * 0.22f, visibleSize.height *7/10));
-	completeUpgradeButton->setTag(tag_number + 6);
+	completeUpgradeButton->setTag(ZOrder::COMPLETE_UPGRADE_BUTTON);
 	this->addChild(completeUpgradeButton);
 	this->addChild(smeltingImage);
 	this->addChild(hammeringImage);
@@ -326,42 +324,42 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 {
 	Point p = touch_->getLocation();
 
-	auto smeltingButton = (Sprite*) this->getChildByTag(tag_number + 1);
+	auto smeltingButton = (Sprite*) this->getChildByTag(ZOrder::SMELTING_IMAGE);
 	Rect smeltingTouchRect = smeltingButton->getBoundingBox();
 	if (smeltingTouchRect.containsPoint(p)) {
 		increaseGauge(smeltingBarGauge);
 	}
 
-	auto hammeringButton = (Sprite*) this->getChildByTag(tag_number + 2);
+	auto hammeringButton = (Sprite*) this->getChildByTag(ZOrder::HAMMERING_IMAGE);
 	
 	Rect hammeringTouchRect = hammeringButton->getBoundingBox();
 	if (hammeringTouchRect.containsPoint(p) && lockBeforeHammering) {
 		increaseGauge(hammeringBarGauge);
 	}
 
-	auto quenchingButton = (Sprite*) this->getChildByTag(tag_number + 3);
+	auto quenchingButton = (Sprite*) this->getChildByTag(ZOrder::QUENCHING_IMAGE);
 	Rect quenchingTouchRect = quenchingButton->getBoundingBox();
 	if (quenchingTouchRect.containsPoint(p) && lockBeforeQuenching) {
 		increaseGauge(quenchingBarGauge);
 	}
 
 	// 강화, 수리 이미지
-	auto upgradeButton = (Sprite*) this->getChildByTag(tag_number + 4);
+	auto upgradeButton = (Sprite*) this->getChildByTag(ZOrder::UPGRADE_IMAGE);
 	Rect upgradeTouchRect = upgradeButton->getBoundingBox();
 	if (upgradeTouchRect.containsPoint(p)) {
 		upgradeClicked();
 	}
 
-	auto repairButton = (Sprite*) this->getChildByTag(tag_number + 5);
+	auto repairButton = (Sprite*) this->getChildByTag(ZOrder::REPAIR_IMAGE);
 	Rect repairTouchRect = repairButton->getBoundingBox();
 	if (repairTouchRect.containsPoint(p)) {
 		repairClicked();
 	}
 
 	if (completeButtonPhase == CAN_CLICK) {
-		auto completeButton = (Sprite*) this->getChildByTag(tag_number + 6);
-		Rect completeTouchRect = completeButton->getBoundingBox();
-		if (completeTouchRect.containsPoint(p)) {
+		auto completeUpgradeButton = (Sprite*) this->getChildByTag(ZOrder::COMPLETE_UPGRADE_BUTTON);
+		Rect completeUpgradeTouchRect = completeUpgradeButton->getBoundingBox();
+		if (completeUpgradeTouchRect.containsPoint(p)) {
 			completeClicked();
 		}		
 	}
