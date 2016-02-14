@@ -52,7 +52,10 @@ bool StartScene::init()
 
     // add a label shows "Hello World"
     // create and initialize a label
-    
+	auto subLabel = Label::createWithSystemFont("본격 강화 피지컬 액션 RPG", "Arial", 70);
+	subLabel->setPosition(Vec2(origin.x + visibleSize.width *0.25f, origin.y + visibleSize.height *0.5f));
+	subLabel->setColor(ccc3(0, 0, 0));
+	this->addChild(subLabel);
 
 	auto label = Label::createWithTTF("V   E        S   S", "fonts/arial.ttf", 250);
 

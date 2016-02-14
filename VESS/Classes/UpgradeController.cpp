@@ -6,7 +6,6 @@ bool UpgradeController::payUpgradeCosts(int neededGold, Item::Type itemType) { /
 	log("Upgrade Complete");
 	if (currentGold >= neededGold) {
 		GameData::getInstance()->setGold(currentGold - neededGold);
-		upgradeSword(); //타이밍 적절하지 않음 -> 강화버튼 누른 후에 되어야 함
 		return true;
 	}
 	return false;	
@@ -15,10 +14,10 @@ bool UpgradeController::payUpgradeCosts(int neededGold, Item::Type itemType) { /
 bool UpgradeController::upgradeItem() {
 	switch (GameData::getInstance()->getItemMode()) {
 	case GameData::ItemMode::SWORD:
-		upgradeSword();
+		upgradeShield();
 		break;
 	case GameData::ItemMode::SHIELD:
-		upgradeShield();
+		upgradeSword();		
 		break;
 	default : 
 		log("Item Mode 정보 오류");

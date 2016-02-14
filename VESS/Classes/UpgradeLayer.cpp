@@ -120,16 +120,23 @@ bool UpgradeLayer::init()
 	gateImage->setPosition(Vec2(visibleSize.width * 0.35f, visibleSize.height * 0.6f));
 	this->addChild(gateImage, 55);
 
+	//업그레이드 레이어는 ItemMode의 반대 이미지를 보여줌
 	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
-		itemImage = Sprite::create("Images/sword.png");
+		itemImage = Sprite::create("Images/shield.png");
+		itemName = Label::createWithSystemFont("방패 이름", "Arial", 50);
 	}
 	else {
-		itemImage = Sprite::create("Images/shield.png");
+		itemImage = Sprite::create("Images/sword.png");
+		itemName = Label::createWithSystemFont("칼 이름", "Arial", 50);
 	}
 	itemImage->setPosition(Vec2(visibleSize.width * 0.35f, visibleSize.height * 0.6f));
 	itemImage->setName("itemImage");
+	itemName->setPosition(Vec2(origin.x+ visibleSize.width*0.35f, origin.x + visibleSize.height * 0.7f));
+	itemName->setVisible(true);
+
 	this->addChild(itemImage,56);
-	
+	this->addChild(itemName,58);
+
 	repairGold = GameData::getInstance()->getNeededRepairGold();
 	auto repairLabel = Label::createWithTTF("수리골드", "fonts/arial.ttf", 50);
 	repairLabel->setString(StringUtils::format("%d%s", repairGold, gold));
@@ -152,6 +159,7 @@ bool UpgradeLayer::init()
 	this->addChild(hammeringTimeOutLine);
 	this->addChild(quenchingBarGauge,2);
 	this->addChild(quenchingTimeOutLine);
+	
 	this->scheduleUpdate();
 	//강화 게이지바 숨김
 	hideBeforeUpgradeResources();
@@ -173,10 +181,12 @@ void UpgradeLayer::update(float delta) {
 	checkLock();
 
 	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
-		itemImage->setTexture("Images/shield.png");		
+		itemImage->setTexture("Images/shield.png");
+		itemName->setString(GameData::getInstance()->getShield().getName());
 	}
 	else {
 		itemImage->setTexture("Images/sword.png");
+		itemName->setString(StringUtils::format("%s", GameData::getInstance()->getSword().getName().c_str()));
 	}
 }
 

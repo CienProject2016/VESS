@@ -17,9 +17,11 @@ void FightLayer::update(float delta) {
 
 	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
 		itemImage->setTexture("Images/sword.png");
+		itemName->setString(GameData::getInstance()->getSword().getName());
 	}
 	else {
 		itemImage->setTexture("Images/shield.png");
+		itemName->setString(GameData::getInstance()->getShield().getName());
 	}
 }
 
@@ -83,12 +85,18 @@ bool FightLayer::init()
 
 	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
 		itemImage = Sprite::create("Images/sword.png");
+		itemName = Label::createWithSystemFont("칼 이름", "Arial", 50);
 	}
 	else {
 		itemImage = Sprite::create("Images/shield.png");
+		itemName = Label::createWithSystemFont("방패 이름", "Arial", 50);
 	}
 	itemImage->setPosition(Vec2(visibleSize.width *0.3f, visibleSize.height * 3/5));
 	this->addChild(itemImage);
+	itemName->setPosition(Vec2(visibleSize.width*0.35f, visibleSize.height * 0.7f));
+	itemName->setColor(ccc3(0, 0, 0)); 
+	this->addChild(itemName);
+
 
 	//dimensionMessage->setTag(dimensionTag);
 	attackMessage->setTag(attackTag);

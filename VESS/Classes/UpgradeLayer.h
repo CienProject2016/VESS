@@ -34,14 +34,15 @@ public:
 	CREATE_FUNC(UpgradeLayer);
 
 private:
-	Sprite* itemImage;
+	Label* itemName;
+	Sprite* itemImage;	
 	int upgradeGold;
 	int repairGold;
 	bool lockBeforeHammering = false;
 	bool lockBeforeQuenching = false;
 	bool isUpgrade = true;
 	bool isComplete = false;
-	char attribute;
+	char attribute;	
 	UpgradePhase currentUpgradePhase;
 	CompleteButtonPhase completeButtonPhase;
 	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event);

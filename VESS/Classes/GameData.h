@@ -16,6 +16,7 @@ public:
 	enum ItemMode { SWORD, SHIELD };	
 	static GameData* getInstance();
 	rapidjson::Document& getUpgradeSwordInfo();
+	rapidjson::Document& getUpgradeShieldInfo();
 	ItemMode getItemMode();
 	void setItemMode(ItemMode);
 private:
@@ -33,6 +34,7 @@ private:
 	CC_SYNTHESIZE(Shield, shield_, Shield);
 
 	rapidjson::Document upgradeSwordInfo;
+	rapidjson::Document upgradeShieldInfo;
 	GameData();
 	~GameData();
 	void setDialogInfo();
