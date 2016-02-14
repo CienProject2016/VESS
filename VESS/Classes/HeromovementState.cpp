@@ -50,6 +50,7 @@ AttackMovementState::AttackMovementState(Hero* parent) {
 	setGravity();
 	setVerticalVelocity();
 }
+
 void AttackMovementState::update(float delta) {
 	if (maxTime <= timer) {
 		if (direction < 0) {

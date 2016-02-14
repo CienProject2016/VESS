@@ -2,6 +2,8 @@
 #include "WindowSize.h"
 #include "cocostudio\CocoStudio.h"
 #include "HeroMovementState.h"
+#include "SimpleAudioEngine.h"
+
 
 #ifndef __HERO_H__
 #define __HERO_H__

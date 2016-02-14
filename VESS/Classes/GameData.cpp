@@ -43,7 +43,14 @@ void GameData::setDialogInfo() {
 		else {
 			dialog.setName((*iter)["name"].GetString());
 		}
-		
+		if ((*iter)["image"] == NULL) {
+			dialog.setImage("no_image");
+			log("GameData - Dialog image 정보 없음");
+		}
+		else {
+			dialog.setImage((*iter)["image"].GetString());
+		}
+
 		if ((*iter)["position"] == NULL) {
 			dialog.setPosition(Dialog::Position::RIGHT);
 			log("GameData - Dialog position 정보 없음");
