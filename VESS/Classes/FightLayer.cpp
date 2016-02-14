@@ -78,7 +78,7 @@ bool FightLayer::init()
 
 	auto label = Label::createWithTTF("0", "fonts/arial.ttf", 50);
 
-	int durabilitysword = GameData::getInstance()->getShield().getDurability();
+	int durabilitysword = GameData::getInstance()->getSword().getDurability();
 	label->setPosition(Vec2(origin.x + visibleSize.width*0.550f, origin.y + visibleSize.height*0.15f));
 	label->setColor(ccc3(0, 0, 0)); //black
 	label->setString(StringUtils::format("%d", durabilitysword));
@@ -187,7 +187,7 @@ void FightLayer::spawnMonster(float delta)
 	Stage stage_data = GameData::getInstance()->getStage();
 	vector<int> distance_data = stage_data.getMonsterLengthInfo();
 	if (MonsterSpawnScheduler::isMonsterSpawnTime(moving_distance, distance_data) && this->monster == NULL) {
-		monster = Slime::create();
+		monster = Monster::create();
 		monster->setParentLayer(this);
 		this->addChild(monster, 1);
 		GameData::getInstance()->setMovingDistance(moving_distance + 1);
@@ -277,11 +277,10 @@ void FightLayer::sitCallback(cocos2d::Ref* pSender)
 }
 void FightLayer::reduceDurability() {
 
-
 	auto label = (Label*)this->getChildByTag(durabilityTag);
-	int durability = GameData::getInstance()->getShield().getDurability();
-	GameData::getInstance()->getShield().setDurability(durability - 1);
-	label->setString(StringUtils::format("%d", durability - 1));
+	int durability = GameData::getInstance()->getSword().getDurability();
+	GameData::getInstance()->getSword().setDurability(durability - 1);
+	label->setString(StringUtils::format("%d", durability));
 
 }
 

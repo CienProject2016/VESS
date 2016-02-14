@@ -5,6 +5,11 @@
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
 #include "cocos2d.h"
+#include "UpgradeLayer.h"
+#include "FightLayer.h"
+#include "GameData.h"
+#include "Stage.h"
+#include "WindowSize.h"
 
 using namespace rapidjson;
 

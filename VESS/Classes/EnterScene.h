@@ -2,6 +2,9 @@
 #define __ENTER_SCENE_H__
 
 #include "cocos2d.h"
+#include "DialogScene.h"
+#include "ui/CocosGUI.h"
+#define stageDoor 1
 
 class EnterScene : public cocos2d::Layer
 {
