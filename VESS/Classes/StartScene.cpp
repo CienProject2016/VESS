@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include "StartScene.h"
+#include "Settings.h"
+#include "EnterScene.h"
 
 USING_NS_CC;
 
@@ -49,7 +51,10 @@ bool StartScene::init()
 
     // add a label shows "Hello World"
     // create and initialize a label
-    
+	auto subLabel = Label::createWithSystemFont("본격 강화 피지컬 액션 RPG", "Arial", 70);
+	subLabel->setPosition(Vec2(origin.x + visibleSize.width *0.25f, origin.y + visibleSize.height *0.5f));
+	subLabel->setColor(ccc3(0, 0, 0));
+	this->addChild(subLabel);
 
 	auto label = Label::createWithTTF("V   E        S   S", "fonts/arial.ttf", 250);
 
@@ -79,7 +84,8 @@ bool StartScene::init()
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
     
-
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("audio/bgm_op.mp3");
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("audio/bgm_op.mp3");
     return true;
 }
 
@@ -113,6 +119,7 @@ void StartScene::onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_
 
 void StartScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
+	//CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
 	Scene *EnterScene = EnterScene::createScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(0.5, EnterScene, Color3B(255, 255, 255)));
 	log("Touched");

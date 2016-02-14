@@ -12,7 +12,15 @@
 #include "Item.h"
 class GameData
 {
+public:
+	enum ItemMode { SWORD, SHIELD };	
+	static GameData* getInstance();
+	rapidjson::Document& getUpgradeSwordInfo();
+	rapidjson::Document& getUpgradeShieldInfo();
+	ItemMode getItemMode();
+	void setItemMode(ItemMode);
 private:
+	ItemMode itemMode;
 	static GameData* instance_;
 	CC_SYNTHESIZE(Stage, stage_, Stage);
 	CC_SYNTHESIZE(int, hero_hp_, HeroHp);
@@ -24,10 +32,14 @@ private:
 	CC_SYNTHESIZE(int, needed_repair_gold_ , NeededRepairGold);
 	CC_SYNTHESIZE(Sword, sword_, Sword);
 	CC_SYNTHESIZE(Shield, shield_, Shield);
+
+	rapidjson::Document upgradeSwordInfo;
+	rapidjson::Document upgradeShieldInfo;
 	GameData();
 	~GameData();
-public:
-	static GameData* getInstance();
+	void setDialogInfo();
+	void setUpgradeInfo();
+
 };
 
 

@@ -1,11 +1,18 @@
 ﻿#include "Item.h"
 
-char* Item::getName() {
+Item::Item() : upgradeId(1), name_(),speed() {
+}
+
+Item::~Item() {
+
+}
+
+string Item::getName() {
 	return name_;
 }
 
-void Item::setName(char val[]) {
-	name_ = val;
+void Item::setName(string name) {
+	name_ = name;
 }
 
 int Item::getDurability() {
@@ -21,11 +28,20 @@ void Item::setMaxDurability(int val) {
 	max_durability_ = val;
 }
 
+bool Item::isInUse() {
+	return inUse;
+}
+
+void Item::setInUse(bool inUse) {
+	this->inUse = inUse;
+}
+
 Sword::Sword() {
-	Item::setName("wooden sword");
+	setInUse(true);
+	setName("wooden sword");
 	damage_ = 10;
-	Item::setMaxDurability(10);
-	Item::setDurability(5); // 현재 테스팅 용으로 일부러 5로 낮춰놓음
+	setMaxDurability(10);
+	setDurability(5); // 현재 테스팅 용으로 일부러 5로 낮춰놓음
 }
 
 Sword::~Sword() {
@@ -40,6 +56,7 @@ void Sword::setDamage(int val) {
 }
 
 Shield::Shield() {
+	setInUse(false);
 	Item::setName("wooden shield");
 	Item::setDurability(15);
 	Item::setMaxDurability(20);

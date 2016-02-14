@@ -7,7 +7,7 @@ bool Hero::init()
 {
 	if (Unit::init())
 	{
-		window_size = fightLayerSize;
+		windowSize = fightLayerSize;
 		origin = fightLayerOrigin;
 		Node* node = CSLoader::createNode("Hero.csb");
 		node->setScale(0.8f);
@@ -18,8 +18,9 @@ bool Hero::init()
 		node->runAction(action);
 		action->gotoFrameAndPlay(0, 16, true);
 		this->scheduleUpdate();
-		avoidDistance = window_size.width * 0.2f;
-		attackDistance = window_size.width * 0.4f;
+		avoidDistance = windowSize.width * 0.2f;
+		attackDistance = windowSize.width * 0.4f;
+		
 		
 		setMovementState(new StayMovementState(this));
 		return true;
@@ -27,10 +28,9 @@ bool Hero::init()
 	return false;
 }
 
-void Hero::update(float dt) {
-
-	if (movement_state != NULL) {
-		movement_state->update(dt);
+void Hero::update(float delta) {
+	if (movementState != NULL) {
+		movementState->update(delta);
 	}
 }
 
@@ -48,8 +48,8 @@ Hero* Hero::create()
 
 //Hero 가 운동(회피, 공격, 점프, 앉기)중에는 다른 명령을 받지 않도록 만든다.
 bool Hero::isAvailableCommand() {
-	if (movement_state == NULL)	return true;
-	return movement_state->isAvailableCommand();
+	if (movementState == NULL)	return true;
+	return movementState->isAvailableCommand();
 	action->gotoFrameAndPlay(75, 95, true);//대기 모션
 }
 void Hero::startAttack() {
@@ -74,6 +74,7 @@ void Hero::startJump() {
 	if (isAvailableCommand()) {
 		setMovementState(new JumpMovementState(this));
 		action->gotoFrameAndPlay(97, 113, false);//위회피
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("audio/sound_jump.mp3");
 	}
 }
 
@@ -88,13 +89,15 @@ void Hero::attackEffect() {
 
 }
 void Hero::getDamage(bool damage) {
-
-	auto heart1 = (Sprite*)getChildByTag(100000);
-	auto heart2 = (Sprite*)getChildByTag(100001);
-	auto heart3 = (Sprite*)getChildByTag(100002);
-	if (numGetDamage == 0) { heart1->setOpacity(0); numGetDamage++; }
-	else if (numGetDamage == 1) { heart2->setOpacity(0); numGetDamage++; }
-	else if (numGetDamage == 2) { heart3->setOpacity(0); numGetDamage++; }
+	Sprite** heart = (Sprite**)malloc(sizeof(Sprite*)*SIZE_OF_LIFE);
+	for (int i = 0;i < SIZE_OF_LIFE;i++)
+	{
+		heart[i] = Sprite::create();
+		heart[i] = (Sprite*)getChildByTag(10000 + i);
+	}
+	if (numGetDamage == 0) { heart[0]->setOpacity(0); numGetDamage++; }
+	else if (numGetDamage == 1) { heart[1]->setOpacity(0); numGetDamage++; }
+	else if (numGetDamage == 2) { heart[2]->setOpacity(0); numGetDamage++;free(heart);}
 }
 
 void Hero::setParentLayer(FightLayer* layer) {
@@ -102,10 +105,9 @@ void Hero::setParentLayer(FightLayer* layer) {
 }
 
 void Hero::setMovementState(HeroMovementState* state) {
-	if (this->movement_state != NULL) {
-		delete movement_state;
+	if (this->movementState != NULL) {
+		delete movementState;
 	}
-	movement_state = state;
+	movementState = state;
 	action->gotoFrameAndPlay(0, 16, true);//달리는 모션
-	//action->gotoFrameAndPlay(75, 95, true);//대기 모션
 }

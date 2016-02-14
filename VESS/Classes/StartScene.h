@@ -2,9 +2,7 @@
 #define __START_SCENE_H__
 
 #include "cocos2d.h"
-#include "GameScene.h"
-#include "Settings.h"
-#include "EnterScene.h"
+#include "SimpleAudioEngine.h"
 
 class StartScene : public cocos2d::CCLayerColor
 {
