@@ -17,6 +17,7 @@ public:
 	bool isInUse();
 	void setInUse(bool);
 protected :
+	CC_SYNTHESIZE(int, speed, Speed);
 	CC_SYNTHESIZE(int, upgradeId, UpgradeId);
 	string name_;
 	int durability_;
@@ -28,7 +29,6 @@ protected :
 class Sword : public Item {
 private:
 	int damage_;
-	CC_SYNTHESIZE(int, speed, Speed);
 public:
 	enum SwordType { °Ë };
 	Sword();
@@ -38,6 +38,8 @@ public:
 };
 
 class Shield : public Item {
+private :
+	CC_SYNTHESIZE(int, defense, Defense);
 public:
 	Shield();
 	~Shield();

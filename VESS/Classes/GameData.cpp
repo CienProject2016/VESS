@@ -74,10 +74,22 @@ void GameData::setUpgradeInfo() {
 	upgradeSwordInfo.Parse(upgradeSwordFileData.c_str());
 	auto& upgradeSwordData = upgradeSwordInfo["sword"]["1"];
 	Sword sword;
+	sword.setDamage(upgradeSwordData["damage"].GetInt());
 	sword.setName(upgradeSwordData["name"].GetString());
 	sword.setSpeed(upgradeSwordData["speed"].GetInt());
 	sword.setUpgradeId(1);
 	this->setSword(sword);
+
+	auto upgradeShieldFileData = FileUtils::getInstance()->getStringFromFile("json/shield.json");
+
+	upgradeShieldInfo.Parse(upgradeShieldFileData.c_str());
+	auto& upgradeShieldData = upgradeShieldInfo["방패"]["1"];
+	Shield shield;
+	shield.setDefense(upgradeShieldData["defense"].GetInt());
+	shield.setName(upgradeShieldData["name"].GetString());
+	shield.setSpeed(upgradeShieldData["speed"].GetInt());
+	shield.setUpgradeId(1);
+	this->setShield(shield);
 }
 
 rapidjson::Document& GameData::getUpgradeSwordInfo() {

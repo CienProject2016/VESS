@@ -24,6 +24,7 @@ private :
 	Hero* daughter;
 	Monster* monster;
 	Sprite* itemImage;
+	Label* itemName;
 	
 	virtual void update(float delta);
 	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event);

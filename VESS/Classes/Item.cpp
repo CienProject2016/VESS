@@ -1,6 +1,6 @@
 ﻿#include "Item.h"
 
-Item::Item() : upgradeId(1), name_() {
+Item::Item() : upgradeId(1), name_(),speed() {
 }
 
 Item::~Item() {
@@ -36,7 +36,7 @@ void Item::setInUse(bool inUse) {
 	this->inUse = inUse;
 }
 
-Sword::Sword():speed() {
+Sword::Sword() {
 	setInUse(true);
 	setName("wooden sword");
 	damage_ = 10;

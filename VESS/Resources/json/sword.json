@@ -3,19 +3,19 @@
     "1": {
       "name": "녹슨 청동검",
       "type": "검",
-      "deltaAttack": 10,
+      "damage": 10,
       "speed": 1
     },
     "2": {
       "name": "청동검",
       "type": "검",
-      "deltaAttack": 20,
+      "damage": 20,
       "speed": 1
     },
     "3": {
       "name": "신비한 청동검",
       "type": "검",
-      "deltaAttack": 30,
+      "damage": 30,
       "speed": 1
     }
   }
