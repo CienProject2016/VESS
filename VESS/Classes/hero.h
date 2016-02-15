@@ -25,7 +25,7 @@ public:
 	void startAvoid();
 	void startSitDown();
 	void attackDamage();
-	void attackEffect();
+	void attackEffect(int damage);
 	void getDamage(bool damage);
 	void setMovementState(HeroMovementState* state);
 private:

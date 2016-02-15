@@ -15,7 +15,7 @@
 
 void FightLayer::update(float delta) {
 	int currentGold = GameData::getInstance()->getGold();
-	currentGoldLabel->setString(StringUtils::format("%d%s", currentGold, gold));
+	currentGoldLabel->setString(StringUtils::format("%d", currentGold));
 
 	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
 		itemImage->setTexture("Images/sword.png");
@@ -108,12 +108,16 @@ bool FightLayer::init()
 
 	int currentGold = GameData::getInstance()->getGold();
 	currentGoldLabel = Label::createWithTTF("", "fonts/arial.ttf", 50);
-	currentGoldLabel->setString(StringUtils::format("%d%s", currentGold, gold));
-	currentGoldLabel->setPosition(Vec2(origin.x + visibleSize.width * 0.540f, origin.y + visibleSize.height*0.9f));
+	currentGoldLabel->setString(StringUtils::format("%d", currentGold));
+	currentGoldLabel->setPosition(Vec2(origin.x + visibleSize.width * 0.540f, origin.y + visibleSize.height*0.935f));
 	currentGoldLabel->setColor(ccc3(0, 0, 0)); //black	
 	currentGoldLabel->setName("goldLabel");
 	this->addChild(currentGoldLabel, 9999);
 
+	auto goldIcon = Sprite::create(ImageResources::GOLD_ICON_PATH);
+	goldIcon->setPosition(Vec2(origin.x + visibleSize.width*0.49f, origin.y + visibleSize.height * 0.935f));
+	this->addChild(goldIcon);
+	
 
 	this->schedule(schedule_selector(FightLayer::spawnMonster));
 
@@ -134,7 +138,8 @@ bool FightLayer::init()
 	setTouchListener();
 
 	//효과음 준비
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("audio/sound_jump.mp3");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioResources::SOUND_JUMP_PATH.c_str());
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioResources::SOUND_DIMENSION_GATE_PATH.c_str());
 
 	this->scheduleUpdate();
 	return true;
@@ -226,6 +231,7 @@ void FightLayer::stageClear() {
 void FightLayer::dimensionCallback(cocos2d::Ref* pSender)
 {
 	DimensionGateController::changeItemPosition();
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioResources::SOUND_DIMENSION_GATE_PATH.c_str());
 }
 
 

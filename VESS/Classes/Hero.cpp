@@ -1,5 +1,6 @@
 ﻿#include "Hero.h"
 #include "FightLayer.h"
+#include "Resources.h"
 
 #define ANIMATION 10000
 
@@ -74,20 +75,21 @@ void Hero::startJump() {
 	if (isAvailableCommand()) {
 		setMovementState(new JumpMovementState(this));
 		action->gotoFrameAndPlay(97, 113, false);//위회피
-		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("audio/sound_jump.mp3");
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioResources::SOUND_JUMP_PATH.c_str());
 	}
 }
 
 void Hero::attackDamage() {
 	if (field->getMonster() != NULL) {
 		field->getMonster()->damage(30);
-		attackEffect();
+		attackEffect(30);
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioResources::SOUND_ATTACK_PATH.c_str());
 	}
 }
 
-void Hero::attackEffect() {
-
+void Hero::attackEffect(int attackDamage) {
 }
+
 void Hero::getDamage(bool damage) {
 	Sprite** heart = (Sprite**)malloc(sizeof(Sprite*)*SIZE_OF_LIFE);
 	for (int i = 0;i < SIZE_OF_LIFE;i++)
