@@ -103,6 +103,9 @@ rapidjson::Document& GameData::getUpgradeSwordInfo() {
 	return upgradeSwordInfo;
 }
 
+rapidjson::Document& GameData::getUpgradeShieldInfo() {
+	return upgradeShieldInfo;
+}
 
 void GameData::setItemMode(ItemMode itemMode) {
 	this->itemMode = itemMode;

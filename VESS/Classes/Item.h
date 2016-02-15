@@ -14,7 +14,6 @@ public:
 	virtual void setDurability(int durabillity);
 	virtual int getMaxDurability();
 	virtual void setMaxDurability(int maxDurabillity);
-	bool isInUse();
 	void setInUse(bool);
 protected :
 	CC_SYNTHESIZE(int, speed, Speed);
@@ -22,7 +21,6 @@ protected :
 	string name_;
 	int durability_;
 	int max_durability_;
-	bool inUse;
 	Type itemType;	
 };
 
