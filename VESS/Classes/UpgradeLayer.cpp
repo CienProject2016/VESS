@@ -261,7 +261,7 @@ void UpgradeLayer::upgradeClicked()
 	currentUpgradePhase = UpgradePhase::UPGRADE;
 	log("Upgrade Phase");
 	Sword* sword = &GameData::getInstance()->getSword();
-	if (sword->isInUse()) {
+	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
 		//소드는 딸이 사용중이므로 방패강화
 		if (UpgradeController::payUpgradeCosts(upgradeGold, Item::SHIELD) == true) {
 			showUiButton(currentUpgradePhase);
