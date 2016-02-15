@@ -165,6 +165,9 @@
     <ClCompile Include="..\Classes\Resources.cpp">
       <Filter>src\Vess</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\UpgradeCompleteLayer.cpp">
+      <Filter>src\View\Layer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -279,6 +282,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Resources.h">
       <Filter>src\Vess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UpgradeCompleteLayer.h">
+      <Filter>src\View\Layer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

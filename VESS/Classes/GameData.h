@@ -18,6 +18,7 @@ public:
 	rapidjson::Document& getUpgradeSwordInfo();
 	rapidjson::Document& getUpgradeShieldInfo();
 	ItemMode getItemMode();
+	ItemMode getUpgradeItemMode();
 	void setItemMode(ItemMode);
 private:
 	ItemMode itemMode;

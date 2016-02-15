@@ -114,3 +114,12 @@ void GameData::setItemMode(ItemMode itemMode) {
 GameData::ItemMode GameData::getItemMode() {
 	return this->itemMode;
 }
+
+GameData::ItemMode GameData::getUpgradeItemMode() {
+	if (this->itemMode == GameData::ItemMode::SWORD) {
+		return GameData::ItemMode::SHIELD;
+	}
+	else {
+		return GameData::ItemMode::SWORD;
+	}
+}
