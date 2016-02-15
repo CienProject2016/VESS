@@ -173,6 +173,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Stage.cpp" />
     <ClCompile Include="..\Classes\GameData.cpp" />
     <ClCompile Include="..\Classes\Unit.cpp" />
+    <ClCompile Include="..\Classes\UpgradeCompleteLayer.cpp" />
     <ClCompile Include="..\Classes\UpgradeController.cpp" />
     <ClCompile Include="..\Classes\UpgradeLayer.cpp" />
     <ClCompile Include="main.cpp" />
@@ -202,6 +203,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Settings.h" />
     <ClInclude Include="..\Classes\Stage.h" />
     <ClInclude Include="..\Classes\Unit.h" />
+    <ClInclude Include="..\Classes\UpgradeCompleteLayer.h" />
     <ClInclude Include="..\Classes\UpgradeController.h" />
     <ClInclude Include="..\Classes\UpgradeLayer.h" />
     <ClInclude Include="..\Classes\WindowSize.h" />

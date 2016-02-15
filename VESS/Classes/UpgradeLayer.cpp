@@ -2,6 +2,7 @@
 #include "UpgradeLayer.h"
 #include "GameData.h"
 #include "UpgradeController.h"
+#include "UpgradeCompleteLayer.h"
 #include "Resources.h"
 
 bool UpgradeLayer::init()
@@ -18,6 +19,13 @@ bool UpgradeLayer::init()
 	listener->onTouchBegan = CC_CALLBACK_2(UpgradeLayer::onTouchBegan, this);
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 
+	auto upgradeCompleteLayer = UpgradeCompleteLayer::create();
+	upgradeCompleteLayer->setContentSize(Size(800, 600));
+	upgradeCompleteLayer->setAnchorPoint(Vec2(0, 0));
+	upgradeCompleteLayer->setPosition(Vec2(visibleSize.width * 0.01f, visibleSize.height * 0.17f));
+	upgradeCompleteLayer->setVisible(false);
+	upgradeCompleteLayer->setName("upgradeCompleteLayer");
+	this->addChild(upgradeCompleteLayer, ZOrder::UPGRADE_COMPLETE_LAYER);
 	
 	//키보드 입력
 	auto keyboardListener = EventListenerKeyboard::create();
@@ -116,7 +124,7 @@ bool UpgradeLayer::init()
 
 	auto gateImage = Sprite::create(ImageResources::DIMENSION_GATE_BUTTON_PATH);
 	gateImage->setPosition(Vec2(visibleSize.width * 0.35f, visibleSize.height * 0.6f));
-	this->addChild(gateImage, 55);
+	this->addChild(gateImage, ZOrder::DIMENSION_GATE_IMAGE);
 
 	//업그레이드 레이어는 ItemMode의 반대 이미지를 보여줌
 	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
@@ -132,8 +140,8 @@ bool UpgradeLayer::init()
 	itemName->setPosition(Vec2(origin.x+ visibleSize.width*0.35f, origin.x + visibleSize.height * 0.7f));
 	itemName->setVisible(true);
 
-	this->addChild(itemImage,56);
-	this->addChild(itemName,58);
+	this->addChild(itemImage,ZOrder::ITEM_IMAGE);
+	this->addChild(itemName,ZOrder::ITEM_NAME);
 
 	repairGold = GameData::getInstance()->getNeededRepairGold();
 	auto repairLabel = Label::createWithTTF("수리골드", "fonts/arial.ttf", 50);
@@ -387,6 +395,9 @@ void UpgradeLayer::completeClicked() {
 	hammeringImage->setOpacity(120);
 	quenchingImage->setOpacity(120);
 	completeButtonPhase = CompleteButtonPhase::CANNOT_CLICK;
+
+	auto upgradeCompleteLayer = (Layer*)getChildByName("upgradeCompleteLayer");
+	upgradeCompleteLayer->setVisible(true);
 }
 
 void UpgradeLayer::setTouchListener()

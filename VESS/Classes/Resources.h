@@ -8,6 +8,8 @@ public:
 	const static string JUMP_BUTTON_PATH;
 	const static string DISABLE_BUTTON_PATH;
 	const static string GOLD_ICON_PATH;
+	const static string UPGRADE_COMPLETE_POPUP_FRAME_PATH;
+	const static string CONFIRM_BUTTON_PATH;
 };
 
 struct AudioResources {
@@ -18,4 +20,9 @@ public:
 	const static string SOUND_DIMENSION_GATE_PATH;
 	const static string SOUND_JUMP_PATH;
 	const static string SOUND_ATTACK_PATH;
+};
+
+struct ElementNames {
+public:
+	const static string UPGRADE_COMPLETE_LAYER;
 };

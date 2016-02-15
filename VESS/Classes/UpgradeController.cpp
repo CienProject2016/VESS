@@ -37,6 +37,7 @@ void UpgradeController::upgradeSword() {
 		Sword newSword;
 		newSword.setName(upgradeSwordData["name"].GetString());
 		newSword.setSpeed(upgradeSwordData["speed"].GetInt());
+		newSword.setDamage(upgradeSwordData["damage"].GetInt());
 		newSword.setUpgradeId(oldSword.getUpgradeId() + 1);
 		GameData::getInstance()->setSword(newSword);
 	}	
@@ -52,6 +53,7 @@ void UpgradeController::upgradeShield() {
 		Shield newShield;
 		newShield.setName(upgradeShieldData["name"].GetString());
 		newShield.setSpeed(upgradeShieldData["speed"].GetInt());
+		newShield.setDefense(upgradeShieldData["defense"].GetInt());
 		newShield.setUpgradeId(oldShield.getUpgradeId() + 1);
 		GameData::getInstance()->setShield(newShield);
 	}
