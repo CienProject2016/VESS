@@ -36,6 +36,8 @@ public:
 
 private:
 	Label* itemName;
+	Label* upgradeLabel;
+	Label* repairLabel;
 	Sprite* itemImage;	
 	int upgradeGold;
 	int repairGold;
@@ -43,6 +45,8 @@ private:
 	bool lockBeforeQuenching = false;
 	bool isUpgrade = true;
 	bool isComplete = false;
+	
+
 	char attribute;	
 	UpgradePhase currentUpgradePhase;
 	CompleteButtonPhase completeButtonPhase;

@@ -115,13 +115,14 @@ bool UpgradeLayer::init()
 	this->addChild(smith_image);
 
 	upgradeGold = GameData::getInstance()->getNeededUpgradeGold();
-	auto upgradeLabel = Label::createWithTTF("강화골드", "fonts/arial.ttf", 50);
+	upgradeLabel = Label::createWithTTF("강화골드", "fonts/arial.ttf", 50);
 	upgradeLabel->setString(StringUtils::format("%d%s", upgradeGold, "GOLD"));
 	// position the label on the center of the screen
 	upgradeLabel->setPosition(Vec2(Vec2(origin.x + visibleSize.width * 0.11f, origin.y + visibleSize.height*0.86f)));
 	upgradeLabel->setColor(ccc3(250, 250, 250)); 
 	this->addChild(upgradeLabel, 1);
-
+	
+	
 	auto gateImage = Sprite::create(ImageResources::DIMENSION_GATE_BUTTON_PATH);
 	gateImage->setPosition(Vec2(visibleSize.width * 0.35f, visibleSize.height * 0.6f));
 	this->addChild(gateImage, ZOrder::DIMENSION_GATE_IMAGE);
@@ -144,7 +145,7 @@ bool UpgradeLayer::init()
 	this->addChild(itemName,ZOrder::ITEM_NAME);
 
 	repairGold = GameData::getInstance()->getNeededRepairGold();
-	auto repairLabel = Label::createWithTTF("수리골드", "fonts/arial.ttf", 50);
+	repairLabel = Label::createWithTTF("수리골드", "fonts/arial.ttf", 50);
 	repairLabel->setString(StringUtils::format("%d%s", repairGold, "GOLD"));
 	repairLabel->setPosition(Vec2(origin.x + visibleSize.width * 0.33f, origin.y + visibleSize.height*0.86f));
 	repairLabel->setColor(ccc3(250, 250, 250)); 
@@ -206,7 +207,7 @@ void UpgradeLayer::checkComplete() {
 		}
 		break;
 	case UpgradePhase::REPAIR:
-		if (hammeringBarGauge->getPercentage() >= 95)
+		if (hammeringBarGauge->getPercentage() >= 80)
 		{
 			showCompleteButton();
 			completeButtonPhase = CompleteButtonPhase::CAN_CLICK;
@@ -243,6 +244,8 @@ void UpgradeLayer::showUiButton(UpgradePhase upgradePhase) {
 		completeUpgradeButton->setVisible(false);
 		upgradeImage->setVisible(true);
 		repairImage->setVisible(true);
+		upgradeLabel->setVisible(true);
+		repairLabel->setVisible(true);
 		smeltingBarGauge->setVisible(false);
 		smeltingTimeOutLine->setVisible(false);
 		hammeringBarGauge->setVisible(false);
@@ -250,16 +253,28 @@ void UpgradeLayer::showUiButton(UpgradePhase upgradePhase) {
 		quenchingBarGauge->setVisible(false);
 		quenchingTimeOutLine->setVisible(false);
 	}
-	else {
+	else if(upgradePhase == UpgradePhase::UPGRADE){
 		completeUpgradeButton->setVisible(true);
 		upgradeImage->setVisible(false);
 		repairImage->setVisible(false);
+		upgradeLabel->setVisible(false);
+		repairLabel->setVisible(false);
 		smeltingBarGauge->setVisible(true);
 		smeltingTimeOutLine->setVisible(true);
 		hammeringBarGauge->setVisible(true);
 		hammeringTimeOutLine->setVisible(true);
 		quenchingBarGauge->setVisible(true);
 		quenchingTimeOutLine->setVisible(true);
+	}
+	else if (upgradePhase == UpgradePhase::REPAIR) {
+		completeUpgradeButton->setVisible(true);
+		upgradeImage->setVisible(false);
+		repairImage->setVisible(false);
+		upgradeLabel->setVisible(false);
+		repairLabel->setVisible(false);
+		hammeringBarGauge->setVisible(true);
+		hammeringTimeOutLine->setVisible(true);
+
 	}
 }
 
@@ -297,8 +312,11 @@ void UpgradeLayer::repairClicked()
 	hammeringTimeOutLine->setVisible(true);
 	
 	currentUpgradePhase = UpgradePhase::REPAIR; // 강화인지 수리인지 체크하는 변수
+	log("Repair Phase");
 	lockBeforeHammering = true; // 수리의 경우 망치만 사용하므로 제한을 걸어둘 필요가 없다.
 	getSword = GameData::getInstance()->getSword();
+	log("current durability is %d", getSword.getDurability());
+	showUiButton(currentUpgradePhase);
 }
 
 
@@ -403,13 +421,13 @@ void UpgradeLayer::completeClicked() {
 void UpgradeLayer::setTouchListener()
 {
 	// make touch listener
-
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(UpgradeLayer::onTouchBegan, this);
 	listener->onTouchMoved = CC_CALLBACK_2(UpgradeLayer::onTouchMoved, this);
 	listener->onTouchCancelled = CC_CALLBACK_2(UpgradeLayer::onTouchCancelled, this);
 	listener->onTouchEnded = CC_CALLBACK_2(UpgradeLayer::onTouchEnded, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
 }
 
 

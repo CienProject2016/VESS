@@ -27,6 +27,21 @@ bool UpgradeController::upgradeItem() {
 	return true;
 }
 
+bool UpgradeController::repairItem() {
+	switch (GameData::getInstance()->getItemMode()) {
+	case GameData::ItemMode::SWORD:
+		repairShield();
+		break;
+	case GameData::ItemMode::SHIELD:
+		repairShield();
+		break;
+	default:
+		log("Item Mode 정보 오류2");
+		return false;
+	}
+	return true;
+}
+
 void UpgradeController::upgradeSword() {
 	Sword& oldSword = GameData::getInstance()->getSword();
 	
@@ -41,6 +56,18 @@ void UpgradeController::upgradeSword() {
 		newSword.setUpgradeId(oldSword.getUpgradeId() + 1);
 		GameData::getInstance()->setSword(newSword);
 	}	
+}
+
+void UpgradeController::repairSword() {
+	Sword& oldSword = GameData::getInstance()->getSword();
+	oldSword.setDurability(oldSword.getMaxDurability());
+	GameData::getInstance()->setSword(oldSword);
+}
+
+void UpgradeController::repairShield() {
+	Shield& oldShield = GameData::getInstance()->getShield();
+	oldShield.setDurability(oldShield.getMaxDurability());
+	GameData::getInstance()->setShield(oldShield);
 }
 
 void UpgradeController::upgradeShield() {
