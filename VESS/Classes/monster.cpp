@@ -5,25 +5,21 @@
 
 using namespace std;
 
-Monster::Monster() {
-}
+Monster::Monster() {}
 
-Monster::~Monster() {
-}
+Monster::~Monster() {}
 
-bool Monster::init()
+void Monster::init(FightLayer* layer, Monster::Name name)
 {
 	if (Unit::init())
 	{
+		kind = name;
+		field = layer;
 		initWindowSize();
-		initImage();
-		initHp(100);
+		initImage(name);
+		initHp(name);
 		this->scheduleUpdate();
-
-		
-		return true;
 	}	
-	return false;
 }
 
 void Monster::initWindowSize() {
@@ -31,7 +27,7 @@ void Monster::initWindowSize() {
 	this->origin = fightLayerOrigin;
 }
 
-void Monster::initImage() {
+void Monster::initImage(Monster::Name name) {
 
 	image = CSLoader::createNode("animation/Tauren.csb");
 	this->addChild(image); //get animation data 
@@ -47,7 +43,7 @@ void Monster::update(float delta) {
 
 }
 
-void Monster::initHp(int hp) {
+void Monster::initHp(Monster::Name name) {
 	this->hp = hp;
 	this->fullHp = hp;
 	auto currentHp = Label::createWithTTF("0", "fonts/arial.ttf", 50);
@@ -60,33 +56,16 @@ void Monster::initHp(int hp) {
 	//hpBarDecreasing = CCProgressTimer::create(hpBar);
 }
 
-bool Monster::isDead()
-{
-	if (this->hp <= 0)
-	{
-		return true;
-	}
-	return false;
-}
-
-Monster* Monster::create()
+Monster* Monster::create(FightLayer* layer, Monster::Name name)
 {
 	Monster *monster = new Monster();
-	if(monster && monster->init())
-	{
-		monster->autorelease();
-		return monster;
-	}
-	CC_SAFE_DELETE(monster);
-	return nullptr;
+	monster->init(layer, name);
+	monster->autorelease();
+	return monster;
 }
 
 void Monster::dropItem()
 {
-}
-
-void Monster::setParentLayer(FightLayer* layer) {
-	field = layer;
 }
 
 void Monster::damage(int dam) {
@@ -103,34 +82,42 @@ void Monster::damage(int dam) {
 	}
 }
 
-RepeatForever* Monster::makeAction(char* plist, int imageCount, char* imageName, float frameTime) {
-	//star-ani_default.plist 를 읽어 각각의 이미지들, 즉 star01.png, star02.png...를 캐시에 넣는다.
-	//ex) SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animation/basic_slime/stand/basic_slime_stand.plist");
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile(plist);
+int MonsterInfo::getHp(Monster::Name name) {
+	return 100;
+}
 
-	// 여기서부터는 에니메이션을 만드는 과정    
-	// animation을 만들 각각의 이미지를 담을 공간을 만들어 두자.
-	cocos2d::Vector<SpriteFrame*> animFrames;
+MonsterBehaviorPattern::MonsterBehaviorPattern() {}
+
+void MonsterBehaviorPattern::update(float delta) {}
+
+MonsterAnimation::MonsterAnimation(Monster* monster, Monster::Name) {
+
+}
+
+void MonsterAnimation::playAttack(int num) {}
+void MonsterAnimation::playDamage() {}
+void MonsterAnimation::playDead() {}
+
+RepeatForever* MonsterAnimation::makeAction(char** plist, int plistCount, int imageCount, char* imageName, float frameTime) {
+	//plist 를 읽어 각각의 이미지들, 즉 fdsa01.png, fdsa02.png...를 캐시에 넣는다.
+	//ex) SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animation/basic_slime/stand/basic_slime_stand.plist");
+	for (int i = 0; i < plistCount; i++)
+		SpriteFrameCache::getInstance()->addSpriteFramesWithFile(plist[i]);
+
+	cocos2d::Vector<SpriteFrame*> animFrames;	// 각각의 이미지를 담을 공간
 
 	// star01.png, star02.png 등 파일명을 가지고 있을 변수를 하나 만든다.
 	char str[100] = { 0 };
 
 	// 캐시 해놓은 이미지를 하나씩 가져와서 
 	for (int i = 0; i < imageCount; i++) {
-		sprintf(str, "%s%02d.png",imageName, i); // i 값에 따라 basic00.png, basic.png..등이 된다.
-													   // 만들어진 파일명의 이미지를 캐시에서 가져와 
+		sprintf(str, "%s%02d.png",imageName, i); // i 값에 따라 basic00.png, basic01.png..등이 된다.
 		SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(str);
-		// animFrames 에다가 넣는다.
-		animFrames.pushBack(frame);
+		animFrames.pushBack(frame);		// 만들어진 파일명의 이미지를 캐시에서 가져와서 animFrames 에다가 넣는다.
 	}
-	// 에니메이션에 사용할 이미지들이 준비되었다.
 
-	// 준비된 이미지 프레임들을 0.1초마다 바꿔보여주도록 설정해서 animation을 만든다.    
-	Animation *animation = Animation::createWithSpriteFrames(animFrames, frameTime);
-
-	// animation 설정을 이용해서 Animate 액션을 만든다.
-	Animate *animate = Animate::create(animation);
-
-	// 계속 움직이도록 RepeatForever 로 잡아준다.    
-	return RepeatForever::create(animate);
+	// 애니메이션에 사용할 이미지들이 준비되었다.
+	Animation *animation = Animation::createWithSpriteFrames(animFrames, frameTime);	// 준비된 이미지 프레임들을 frameTime (s) 마다 바꿔보여주도록 설정해서 animation을 만든다.   
+	Animate *animate = Animate::create(animation);	// animation 설정을 이용해서 Animate 액션을 만든다.
+	return RepeatForever::create(animate);	// 계속 움직이도록 RepeatForever 로 잡아준다.  
 }
