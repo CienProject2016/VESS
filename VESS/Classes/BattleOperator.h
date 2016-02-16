@@ -6,7 +6,7 @@ USING_NS_CC;
 
 class BattleOperatorMenu : public Node {
 private:
-	Vec2 pos, local_pos;
+	Vec2 pos, localPosition;
 
 public:
 	Sprite* image;
@@ -21,13 +21,13 @@ public:
 class BattleOperator : public Node {
 private:
 	BattleOperatorMenu jump, avoid, attack, sit;
-	void createMenus();
+	void createMenu();
 	void initMainImage();
 	void setMenu();
-	Sprite *main_image;
+	Sprite *mainImage;
 	enum OperatorState { CANCEL = 0, ATTACK = 1, JUMP = 2, AVOID = 3, SIT = 4};
-	OperatorState menu_state;
-	bool is_open;
+	OperatorState menuState;
+	bool isUsing;
 public:
 	Vec2 pos, first_touch;
 	BattleOperator();

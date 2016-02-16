@@ -333,13 +333,13 @@ void FightLayer::monsterDead() {
 void FightLayer::createBackgound(EnumBackground::Obj obj) {
 	if (obj == EnumBackground::mountain) {
 		BackgroundObject* mountain = BackgroundObject::create();
-		mountain->setImage("Images/mountain.png", Vec2(1, 0.8f), 2.0f, BackgroundObject::ABSOLUTED, BackgroundObject::BOTTOM);
+		mountain->setImage("Images/mountain.png", Vec2(1, 0.8f), 2.0f, BackgroundObject::CUSTOMIZED_SIZE, BackgroundObject::BOTTOM);
 		mountain->setSpeed(backgroundSpeed, 100, 1);
 		this->addChild(mountain, -105);
 	}
 	if (obj == EnumBackground::tree) {
 		BackgroundObject* tree = BackgroundObject::create();
-		tree->setImage("Images/tree.png", Vec2(1, 0.6f), 0.8f, BackgroundObject::ABSOLUTED, BackgroundObject::TOP);
+		tree->setImage("Images/tree.png", Vec2(1, 0.6f), 0.8f, BackgroundObject::CUSTOMIZED_SIZE, BackgroundObject::TOP);
 		tree->setSpeed(backgroundSpeed, 190, 2);
 		this->addChild(tree, -104);
 	}
