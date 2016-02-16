@@ -7,6 +7,7 @@ class UpgradeController {
 private :
 	static void upgradeSword();
 	static void upgradeShield();
+	static string to_string(int);
 public:
 	static bool upgradeItem();
 	static bool payUpgradeCosts(int, Item::Type);	

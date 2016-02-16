@@ -1,6 +1,6 @@
 #pragma once
-#ifndef __Upgrade_LAYER_H__
-#define __Upgrade_LAYER_H__
+#ifndef __UPGRADE_LAYER_H__
+#define __UPGRADE_LAYER_H__
 
 #include "cocos2d.h"
 #include "rapidjson/document.h"
@@ -9,6 +9,9 @@
 #include "GameScene.h"
 #include "GameData.h"
 #include "Item.h"
+#include "UpgradeController.h"
+#include "UpgradeCompleteLayer.h"
+#include "Resources.h"
 
 USING_NS_CC;
 using namespace std;

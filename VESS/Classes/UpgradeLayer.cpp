@@ -1,9 +1,4 @@
-﻿#pragma once
-#include "UpgradeLayer.h"
-#include "GameData.h"
-#include "UpgradeController.h"
-#include "UpgradeCompleteLayer.h"
-#include "Resources.h"
+﻿#include "UpgradeLayer.h"
 
 bool UpgradeLayer::init()
 {
@@ -82,7 +77,7 @@ bool UpgradeLayer::init()
 	smeltingBarGauge->setType(kCCProgressTimerTypeBar);
 	smeltingTimeOutLine = CCSprite::create("timeoutline.png");
 	smeltingTimeOutLine->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.95));
-	smeltingGaugeDownSpeed = 10;
+	smeltingGaugeDownSpeed = 5;
 
 	//hammering bar create
 	CCSprite *hammeringTimeBar = CCSprite::create("timebar.png");
@@ -94,7 +89,7 @@ bool UpgradeLayer::init()
 	hammeringBarGauge->setType(kCCProgressTimerTypeBar);
 	hammeringTimeOutLine = CCSprite::create("timeoutline.png");
 	hammeringTimeOutLine->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.9));
-	hammeringGaugeDownSpeed = 20;
+	hammeringGaugeDownSpeed = 10;
 
 	//quenching bar create
 	CCSprite *quenchingTimeBar = CCSprite::create("timebar.png");
@@ -106,7 +101,7 @@ bool UpgradeLayer::init()
 	quenchingBarGauge->setType(kCCProgressTimerTypeBar);
 	quenchingTimeOutLine = CCSprite::create("timeoutline.png");
 	quenchingTimeOutLine->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.85));
-	quenchingGaugeDownSpeed = 25;
+	quenchingGaugeDownSpeed = 15;
 
 
 	// add the sprite as a child to this layer
@@ -206,7 +201,7 @@ void UpgradeLayer::checkComplete() {
 		}
 		break;
 	case UpgradePhase::REPAIR:
-		if (hammeringBarGauge->getPercentage() >= 95)
+		if (hammeringBarGauge->getPercentage() >= 70)
 		{
 			showCompleteButton();
 			completeButtonPhase = CompleteButtonPhase::CAN_CLICK;
@@ -268,7 +263,6 @@ void UpgradeLayer::upgradeClicked()
 {
 	currentUpgradePhase = UpgradePhase::UPGRADE;
 	log("Upgrade Phase");
-	Sword* sword = &GameData::getInstance()->getSword();
 	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
 		//소드는 딸이 사용중이므로 방패강화
 		if (UpgradeController::payUpgradeCosts(upgradeGold, Item::SHIELD) == true) {
@@ -286,9 +280,8 @@ void UpgradeLayer::upgradeClicked()
 			//돈이 없어 강화를 할 수 없는 경우
 		}
 	}
-	
-
 }
+
 void UpgradeLayer::repairClicked()
 {
 	upgradeImage->setVisible(false);
