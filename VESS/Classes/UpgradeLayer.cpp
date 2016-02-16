@@ -2,6 +2,7 @@
 #include "UpgradeLayer.h"
 #include "GameData.h"
 
+
 #define tag_number 50
 #define gold "GOLD"
 
@@ -31,9 +32,9 @@ bool UpgradeLayer::init()
 	auto backgroundImage = Sprite::create("Images/background_image.png");
 	auto background2Image = Sprite::create("Images/background2_image.png");
 	auto smith_image = Sprite::create("Images/smith_image.png");
-	smeltingImage = Sprite::create("Images/smelting_button.png");
-	hammeringImage = Sprite::create("Images/hammering_button.png");
-	quenchingImage = Sprite::create("Images/quenching_button.png");
+	smeltingImage = Sprite::create("Images/smelting.png");
+	hammeringImage = Sprite::create("Images/hammering.png");
+	quenchingImage = Sprite::create("Images/quenching.png");
 	upgradeImage = Sprite::create("Images/upgrade_button.png");
 	repairImage = Sprite::create("Images/repair_button.png");
 	// position the sprite on the center of the screen
@@ -68,38 +69,38 @@ bool UpgradeLayer::init()
 	repairImage->setTag(tag_number + 5);
 
 	//smelting bar create
-	CCSprite *smeltingTimeBar = CCSprite::create("timebar.png");
-	smeltingBarGauge = CCProgressTimer::create(smeltingTimeBar);
+	Sprite *smeltingTimeBar = Sprite::create("timebar.png");
+	smeltingBarGauge = ProgressTimer::create(smeltingTimeBar);
 	smeltingBarGauge->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.95));
 	smeltingBarGauge->setPercentage(0);
 	smeltingBarGauge->setMidpoint(ccp(0, 0.5));
 	smeltingBarGauge->setBarChangeRate(ccp(1, 0));
 	smeltingBarGauge->setType(kCCProgressTimerTypeBar);
-	smeltingTimeOutLine = CCSprite::create("timeoutline.png");
+	smeltingTimeOutLine = Sprite::create("timeoutline.png");
 	smeltingTimeOutLine->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.95));
 	smeltingGaugeDownSpeed = 10;
 
 	//hammering bar create
-	CCSprite *hammeringTimeBar = CCSprite::create("timebar.png");
-	hammeringBarGauge = CCProgressTimer::create(hammeringTimeBar);
+	Sprite *hammeringTimeBar = Sprite::create("timebar.png");
+	hammeringBarGauge = ProgressTimer::create(hammeringTimeBar);
 	hammeringBarGauge->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.9));
 	hammeringBarGauge->setPercentage(0);
 	hammeringBarGauge->setMidpoint(ccp(0, 0.5));
 	hammeringBarGauge->setBarChangeRate(ccp(1, 0));
 	hammeringBarGauge->setType(kCCProgressTimerTypeBar);
-	hammeringTimeOutLine = CCSprite::create("timeoutline.png");
+	hammeringTimeOutLine = Sprite::create("timeoutline.png");
 	hammeringTimeOutLine->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.9));
 	hammeringGaugeDownSpeed = 20;
 
 	//quenching bar create
-	CCSprite *quenchingTimeBar = CCSprite::create("timebar.png");
-	quenchingBarGauge = CCProgressTimer::create(quenchingTimeBar);
+	Sprite *quenchingTimeBar = Sprite::create("timebar.png");
+	quenchingBarGauge = ProgressTimer::create(quenchingTimeBar);
 	quenchingBarGauge->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.85));
 	quenchingBarGauge->setPercentage(0);
 	quenchingBarGauge->setMidpoint(ccp(0, 0.5));
 	quenchingBarGauge->setBarChangeRate(ccp(1, 0));
 	quenchingBarGauge->setType(kCCProgressTimerTypeBar);
-	quenchingTimeOutLine = CCSprite::create("timeoutline.png");
+	quenchingTimeOutLine = Sprite::create("timeoutline.png");
 	quenchingTimeOutLine->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.85));
 	quenchingGaugeDownSpeed = 25;
 
@@ -150,10 +151,6 @@ bool UpgradeLayer::init()
 	this->scheduleUpdate();
 	//강화 게이지바 숨김
 	hideGauge();
-	//망치,담금질 비활성화 색상으로 변경
-	hammeringImage->setOpacity(120);
-	quenchingImage->setOpacity(120);
-	
 	
 	return true;
 }
@@ -163,36 +160,47 @@ void UpgradeLayer::update(float delta) {
 	hammeringBarGauge->setPercentage(hammeringBarGauge->getPercentage() - delta * hammeringGaugeDownSpeed);
 	quenchingBarGauge->setPercentage(quenchingBarGauge->getPercentage() - delta * quenchingGaugeDownSpeed);
 
-	checkRepairComplete();
-	checkLock();
-
-}
-void UpgradeLayer::checkRepairComplete() {
-	if (hammeringBarGauge->getPercentage() >= 95 && !isUpgrade)
+	//checkLock();
+	if (GaugeLockChecker::isGaugeLocked(smeltingBarGauge->getPercentage(), 70))
+	{
+		lock_01 = true;
+		hammeringImage->setOpacity(255);
+	}
+	if (GaugeLockChecker::isGaugeLocked(hammeringBarGauge->getPercentage(), 70))
+	{
+		lock_02 = true;
+		quenchingImage->setOpacity(255);
+	}
+	if (GaugeLockChecker::isGaugeLocked(hammeringBarGauge->getPercentage(), 95) && !isUpgrade)
 	{
 		completeButton();
 		isComplete = true;
 	}
 }
-void UpgradeLayer::checkLock() {
-	// 나중에 강화마다 값을 다르게 할거면, 매개변수에 값을 받아오는 식으로 수정하시면 됩니다.
-	if (smeltingBarGauge->getPercentage() >= 70)
-	{
-		lock_01 = true;
-		hammeringImage->setOpacity(255);
-		
-	}
+//void UpgradeLayer::checkLock() {
+//	// 나중에 강화마다 값을 다르게 할거면, 매개변수에 값을 받아오는 식으로 수정하시면 됩니다.
+//	if (smeltingBarGauge->getPercentage() >= 70)
+//	{
+//		lock_01 = true;
+//		hammeringImage->setOpacity(255);
+//		
+//	}
+//
+//	if (hammeringBarGauge->getPercentage() >= 70)
+//	{
+//		lock_02 = true;
+//		quenchingImage->setOpacity(255);
+//	}
+//	if (hammeringBarGauge->getPercentage() >= 95 && !isUpgrade)
+//	{
+//		completeButton();
+//		isComplete = true;
+//	}
+//
+//}
 
-	if (hammeringBarGauge->getPercentage() >= 70)
-	{
-		lock_02 = true;
-		quenchingImage->setOpacity(255);
-	}
 
-}
-
-
-void UpgradeLayer::gaugeIncrease(CCProgressTimer* gauge)
+void UpgradeLayer::gaugeIncrease(ProgressTimer* gauge)
 {
 	float currentPercent = gauge->getPercentage();
 	gauge->setPercentage(currentPercent + (float)8);
@@ -211,9 +219,12 @@ void UpgradeLayer::upgradeClicked()
 	quenchingBarGauge->setVisible(true);
 	quenchingTimeOutLine->setVisible(true);
 
+	smeltingImage->setOpacity(255);
+
 }
 void UpgradeLayer::repairClicked()
 {
+	hammeringImage->setOpacity(255);
 	upgradeImage->setVisible(false);
 	repairImage->setVisible(false);
 	hammeringBarGauge->setVisible(true);
@@ -222,6 +233,8 @@ void UpgradeLayer::repairClicked()
 	isUpgrade = false; // 강화인지 수리인지 체크하는 변수
 	lock_01 = true; // 수리의 경우 망치만 사용하므로 제한을 걸어둘 필요가 없다.
 	getSword = GameData::getInstance()->getSword();
+
+
 }
 
 
@@ -252,6 +265,10 @@ void UpgradeLayer::hideGauge()
 	hammeringTimeOutLine->setVisible(false);
 	quenchingBarGauge->setVisible(false);
 	quenchingTimeOutLine->setVisible(false);
+
+	smeltingImage->setOpacity(120);
+	hammeringImage->setOpacity(120);
+	quenchingImage->setOpacity(120);
 }
 
 bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
@@ -263,62 +280,32 @@ bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 	auto smelting = (Sprite*) this->getChildByTag(tag_number + 1);
 	Rect rect3 = smelting->getBoundingBox();
 	if (rect3.containsPoint(p)) {
-
 		gaugeIncrease(smeltingBarGauge);
-
-	}
-	else {
-
-		smelting->setScale(1);
 	}
 
 	auto hammering = (Sprite*) this->getChildByTag(tag_number + 2);
 	Rect rect4 = hammering->getBoundingBox();
 	if (rect4.containsPoint(p) && lock_01) {
-
 		gaugeIncrease(hammeringBarGauge);
-
-	}
-	else {
-
-		hammering->setScale(1);
 	}
 
 	auto quenching = (Sprite*) this->getChildByTag(tag_number + 3);
 	Rect rect5 = quenching->getBoundingBox();
 	if (rect5.containsPoint(p) && lock_02) {
-
 		gaugeIncrease(quenchingBarGauge);
-
-	}
-	else {
-
-		quenching->setScale(1);
 	}
 
 	// 강화, 수리 이미지
 	auto upgrade = (Sprite*) this->getChildByTag(tag_number + 4);
 	Rect rect6 = upgrade->getBoundingBox();
 	if (rect6.containsPoint(p)) {
-
 		upgradeClicked();
-
-	}
-	else {
-
-		upgrade->setScale(1);
 	}
 
 	auto repair = (Sprite*) this->getChildByTag(tag_number + 5);
 	Rect rect8 = repair->getBoundingBox();
 	if (rect8.containsPoint(p)) {
-
 		repairClicked();
-
-	}
-	else {
-
-		repair->setScale(1);
 	}
 
 	if (isComplete) {
@@ -373,20 +360,35 @@ void UpgradeLayer::keyPressed(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d
 	if (key_code_ == EventKeyboard::KeyCode::KEY_A)
 	{
 		gaugeIncrease(smeltingBarGauge);
+		if (pressed_smelting)
+			smeltingImage->setTexture("Images/smelting2.png");
+		else
+			smeltingImage->setTexture("Images/smelting.png");
+
+		pressed_smelting = (pressed_smelting + 1) % 2;
 	}
 
 	if (key_code_ == EventKeyboard::KeyCode::KEY_S && lock_01)
 	{
 		gaugeIncrease(hammeringBarGauge);
+		if (pressed_hammering)
+			hammeringImage->setTexture("Images/hammering2.png");
+		else
+			hammeringImage->setTexture("Images/hammering.png");
+		pressed_hammering = (pressed_hammering + 1) % 2;
 	}
 
 	if (key_code_ == EventKeyboard::KeyCode::KEY_D && lock_02)
 	{
 		gaugeIncrease(quenchingBarGauge);
+		if (pressed_quenching)
+			quenchingImage->setTexture("Images/quenching2.png");
+		else
+			quenchingImage->setTexture("Images/quenching.png");
+		pressed_quenching = (pressed_quenching + 1) % 2;
 	}
 }
 void UpgradeLayer::keyReleased(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d::Event *event_)
 {
 
 }
-
