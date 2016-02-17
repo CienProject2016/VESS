@@ -1,5 +1,6 @@
 #include "UpgradeController.h"
 #include "GameData.h"
+#include <sstream>
 
 bool UpgradeController::payUpgradeCosts(int neededGold, Item::Type itemType) { //pay money
 	int currentGold = GameData::getInstance()->getGold();
@@ -8,6 +9,7 @@ bool UpgradeController::payUpgradeCosts(int neededGold, Item::Type itemType) { /
 		GameData::getInstance()->setGold(currentGold - neededGold);
 		return true;
 	}
+
 	return false;	
 }
 
@@ -27,34 +29,53 @@ bool UpgradeController::upgradeItem() {
 	return true;
 }
 
+bool UpgradeController::repairItem() {
+	switch (GameData::getInstance()->getItemMode()) {
+	case GameData::ItemMode::SWORD:
+		repairShield();
+		break;
+	case GameData::ItemMode::SHIELD:
+		repairShield();
+		break;
+	default:
+		log("Item Mode 정보 오류2");
+		return false;
+	}
+	return true;
+}
+
 void UpgradeController::upgradeSword() {
-	Sword& oldSword = GameData::getInstance()->getSword();
+	Sword oldSword = GameData::getInstance()->getSword();
 	
-	rapidjson::Document& upgradeSwordInfo = GameData::getInstance()->getUpgradeSwordInfo();
-	string upgradeId = to_string(oldSword.getUpgradeId() + 1);
-	if (upgradeSwordInfo["sword"][upgradeId.c_str()] != NULL) {
-		auto& upgradeSwordData = upgradeSwordInfo["sword"][upgradeId.c_str()];
-		Sword newSword;
-		newSword.setName(upgradeSwordData["name"].GetString());
-		newSword.setSpeed(upgradeSwordData["speed"].GetInt());
-		newSword.setDamage(upgradeSwordData["damage"].GetInt());
-		newSword.setUpgradeId(oldSword.getUpgradeId() + 1);
+	int upgradeId = oldSword.getUpgradeId() + 1;
+	vector<Sword>* swordList = GameData::getInstance()->getSwordList();
+
+	if (swordList->size() < upgradeId) {
+		Sword newSword = swordList->at(upgradeId-1);
 		GameData::getInstance()->setSword(newSword);
 	}	
 }
 
-void UpgradeController::upgradeShield() {
-	Shield& oldShield = GameData::getInstance()->getShield();
+void UpgradeController::repairSword() {
+	Sword& oldSword = GameData::getInstance()->getSword();
+	oldSword.setDurability(oldSword.getMaxDurability());
+	GameData::getInstance()->setSword(oldSword);
+}
 
-	rapidjson::Document& upgradeShieldInfo = GameData::getInstance()->getUpgradeShieldInfo();
-	string upgradeId = to_string(oldShield.getUpgradeId() + 1);
-	if (upgradeShieldInfo["방패"][upgradeId.c_str()] != NULL) {
-		auto& upgradeShieldData = upgradeShieldInfo["방패"][upgradeId.c_str()];
-		Shield newShield;
-		newShield.setName(upgradeShieldData["name"].GetString());
-		newShield.setSpeed(upgradeShieldData["speed"].GetInt());
-		newShield.setDefense(upgradeShieldData["defense"].GetInt());
-		newShield.setUpgradeId(oldShield.getUpgradeId() + 1);
+void UpgradeController::repairShield() {
+	Shield& oldShield = GameData::getInstance()->getShield();
+	oldShield.setDurability(oldShield.getMaxDurability());
+	GameData::getInstance()->setShield(oldShield);
+}
+
+void UpgradeController::upgradeShield() {
+	Shield oldShield = GameData::getInstance()->getShield();
+
+	int upgradeId = oldShield.getUpgradeId() + 1;
+	vector<Shield>* shieldList = GameData::getInstance()->getShieldList();
+
+	if (shieldList->size() < upgradeId) {
+		Shield newShield = shieldList->at(upgradeId - 1);
 		GameData::getInstance()->setShield(newShield);
 	}
 }

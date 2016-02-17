@@ -1,5 +1,4 @@
-﻿#pragma once
-#include "StartScene.h"
+﻿#include "StartScene.h"
 #include "Settings.h"
 #include "EnterScene.h"
 
@@ -84,8 +83,8 @@ bool StartScene::init()
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
     
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("audio/bgm_op.mp3");
-	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("audio/bgm_op.mp3");
+	//CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("audio/bgm_op.mp3");
+	//CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("audio/bgm_op.mp3");
     return true;
 }
 

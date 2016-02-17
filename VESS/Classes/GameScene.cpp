@@ -1,10 +1,8 @@
 #include "GameScene.h"
 
-#include "UpgradeLayer.h"
-#include "FightLayer.h"
 #include "GameData.h"
 #include "Stage.h"
-#include "WindowSize.h"
+
 #include "SimpleAudioEngine.h"
 
 USING_NS_CC;

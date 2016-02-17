@@ -1,4 +1,3 @@
-﻿#pragma once
 #include "EnterScene.h"
 
 USING_NS_CC;

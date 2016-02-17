@@ -1,4 +1,7 @@
 #pragma once
+#ifndef __ITEM_H__
+#define __ITEM_H__
+
 #include <string>
 using namespace std;
 #include "cocos2d.h"
@@ -14,7 +17,6 @@ public:
 	virtual void setDurability(int durabillity);
 	virtual int getMaxDurability();
 	virtual void setMaxDurability(int maxDurabillity);
-	void setInUse(bool);
 protected :
 	CC_SYNTHESIZE(int, speed, Speed);
 	CC_SYNTHESIZE(int, upgradeId, UpgradeId);
@@ -24,11 +26,13 @@ protected :
 	Type itemType;	
 };
 
+#endif
+
 class Sword : public Item {
 private:
 	int damage_;
 public:
-	enum SwordType { °Ë };
+	enum SwordType { Gum };
 	Sword();
 	~Sword();
 	int getDamage();
@@ -42,3 +46,4 @@ public:
 	Shield();
 	~Shield();
 };
+

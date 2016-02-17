@@ -1,19 +1,19 @@
 {
-	"방패" : {
-		"1" : {
-			"name" : "벽돌",
-			"defense" : 64,
-			"speed" : 1
-		},
-		"2" : {
-			"name" : "일반 벽돌",
-			"defense" : 97,
-			"speed" : 1
-		},
-		"3" : {
-			"name" : "다듬어진 벽돌",
-			"defense" : 162,
-			"speed" : 1
-		}
-	}
+  "방패": [
+    {
+      "name": "벽돌",
+      "defense": 64,
+      "speed": 1
+    },
+    {
+      "name": "일반 벽돌",
+      "defense": 97,
+      "speed": 1
+    },
+    {
+      "name": "다듬어진 벽돌",
+      "defense": 162,
+      "speed": 1
+    }
+  ]
 }
