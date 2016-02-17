@@ -1,10 +1,9 @@
 #include "GameScene.h"
 
-#include "UpgradeLayer.h"
-#include "FightLayer.h"
 #include "GameData.h"
 #include "Stage.h"
-#include "WindowSize.h"
+
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 using namespace std;
@@ -26,15 +25,17 @@ Scene* GameScene::createScene()
 	auto fight_layer = FightLayer::create();
 
 	upgrade_layer->setContentSize(Size(760, 1080));
-	upgrade_layer->setPosition(Vec2(0, 0));//강화창
+	upgrade_layer->setPosition(Vec2(0 , 0));//강화창
 
 	fight_layer->setContentSize(Size(1160, 1080));
 	fight_layer->setPosition(Vec2(760, 0));//전투창
 
 	// add layer as a child to scene
-	scene->addChild(upgrade_layer,1);
+	scene->addChild(upgrade_layer,1,"upgradeLayer");
 	scene->addChild(fight_layer,0);
-
+	
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("audio/bgm_neorock.mp3");
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("audio/bgm_neorock.mp3");
 	// return the scene
 	return scene;
 }

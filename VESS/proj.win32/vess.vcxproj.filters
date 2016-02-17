@@ -10,9 +10,6 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Vess">
-      <UniqueIdentifier>{672a340d-6ce6-427c-9f2a-c984e8048cea}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\View">
       <UniqueIdentifier>{4a76b62d-ee37-452b-b193-ec61e4160e93}</UniqueIdentifier>
     </Filter>
@@ -39,6 +36,9 @@
     </Filter>
     <Filter Include="src\Model\Object">
       <UniqueIdentifier>{c744b3f4-69be-4440-8d4a-fcec1c962ce3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Vess">
+      <UniqueIdentifier>{672a340d-6ce6-427c-9f2a-c984e8048cea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +153,24 @@
     <ClCompile Include="..\Classes\UpgradeLayer.cpp">
       <Filter>src\View\Layer</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\GuageLockChecker.cpp">
+      <Filter>src\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Slime.cpp">
+      <Filter>src\Model\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UpgradeController.cpp">
+      <Filter>src\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DimensionGateController.cpp">
+      <Filter>src\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Resources.cpp">
+      <Filter>src\Vess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\UpgradeCompleteLayer.cpp">
+      <Filter>src\View\Layer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -232,9 +250,6 @@
     <ClInclude Include="..\Classes\Settings.h">
       <Filter>src\Vess</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Monster.h">
-      <Filter>src\Model\Unit</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Hero.h">
       <Filter>src\Model\Unit</Filter>
     </ClInclude>
@@ -255,6 +270,27 @@
     </ClInclude>
     <ClInclude Include="..\Classes\HeroMovementState.h">
       <Filter>src\Model\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GaugeLockChecker.h">
+      <Filter>src\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Slime.h">
+      <Filter>src\Model\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Monster.h">
+      <Filter>src\Model\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UpgradeController.h">
+      <Filter>src\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DimensionGateController.h">
+      <Filter>src\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Resources.h">
+      <Filter>src\Vess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\UpgradeCompleteLayer.h">
+      <Filter>src\View\Layer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

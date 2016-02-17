@@ -1,130 +1,132 @@
-#pragma once
+
 #include "FightLayer.h"
 #include "Hero.h"
 #include "StageClearLayer.h"
+#include "DimensionGateController.h"
+#include "SimpleAudioEngine.h"
+#include "Resources.h"
 
-#define attackTag 2001
-#define jumpTag 2002
-#define sitTag 2003
+#define gold "GOLD"
 #define durabilityTag 300
 #define kFinalDistance 4001
 
-
 bool FightLayer::init()
 {
-	if (!Layer::init()) {
-		return false;
-	}
+	if (!Layer::init())		return false;
 	
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	visibleSize = Director::getInstance()->getVisibleSize();
+	origin = Director::getInstance()->getVisibleOrigin();
 
-	//Create Background
 	initBackground();
-	backgroundSpawnScheduler = BackgroundSpawnScheduler(this);
-	backgroundSpeed = new float(-100);
+	initDaughter();
+	initOperator();
+	initButton();
+	initGoldLabel();
+	initWeaponLabel();
+	initHeart();
 
-	//딸이 생성됨
+	this->scheduleUpdate();
+
+	setTouchListener();
+
+	//효과음 준비
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioResources::SOUND_JUMP_PATH.c_str());
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioResources::SOUND_DIMENSION_GATE_PATH.c_str());
+
+	return true;
+}
+
+void FightLayer::initOperator() {
+	operator_ = new BattleOperator();
+	this->addChild(operator_, 1000000);
+}
+
+void FightLayer::initDaughter() {
 	daughter = Hero::create();
 	daughter->setParentLayer(this);
-	//몬스터가 생성됨
+	this->addChild(daughter, 0);
+}
 
-	//버튼
-	auto dimension_Button = MenuItemImage::create("Images/dimension_Gate.png", "Images/dimensionButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::dimensionCallback, this));
-	auto attack_Button = MenuItemImage::create("Images/AttackButton.png", "Images/AttackButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::attackCallback, this));
-	auto jump_Button = MenuItemImage::create("Images/JumpButton.png", "Images/JumpButton.png", "Images/DisabledButton.png", CC_CALLBACK_1(FightLayer::jumpCallback, this));
-	
-	dimension_Button->setScale(1.0f);
-	attack_Button->setScale(2.0f);
-	jump_Button->setScale(1.5f);
+void FightLayer::initWeaponLabel() {
+	auto label = Label::createWithTTF("0", "fonts/arial.ttf", 50);
 
-	auto battleMenu = Menu::create(dimension_Button, attack_Button, jump_Button , NULL);//sit_Button
+	int durabilitysword = GameData::getInstance()->getSword().getDurability();
+	label->setPosition(Vec2(origin.x + visibleSize.width*0.550f, origin.y + visibleSize.height*0.15f));
+	label->setColor(ccc3(0, 0, 0)); //black
+	label->setString(StringUtils::format("%d", durabilitysword));
+	this->addChild(label, 1);
+	label->setTag(durabilityTag);
+
+	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
+		itemImage = Sprite::create("Images/sword.png");
+		itemName = Label::createWithSystemFont("칼 이름", "Arial", 50);
+	}
+	else {
+		itemImage = Sprite::create("Images/shield.png");
+		itemName = Label::createWithSystemFont("방패 이름", "Arial", 50);
+	}
+	itemImage->setPosition(Vec2(visibleSize.width *0.3f, visibleSize.height * 3 / 5));
+	this->addChild(itemImage);
+	itemName->setPosition(Vec2(visibleSize.width*0.35f, visibleSize.height * 0.7f));
+	itemName->setColor(ccc3(0, 0, 0));
+	this->addChild(itemName);
+
+
+	//dimensionMessage->setTag(dimensionTag);
+}
+
+void FightLayer::initGoldLabel() {
+	int currentGold = GameData::getInstance()->getGold();
+	currentGoldLabel = Label::createWithTTF("", "fonts/arial.ttf", 50);
+	currentGoldLabel->setString(StringUtils::format("%d", currentGold));
+	currentGoldLabel->setPosition(Vec2(origin.x + visibleSize.width * 0.540f, origin.y + visibleSize.height*0.935f));
+	currentGoldLabel->setColor(ccc3(0, 0, 0)); //black	
+	currentGoldLabel->setName("goldLabel");
+	this->addChild(currentGoldLabel, 9999);
+
+	auto goldIcon = Sprite::create(ImageResources::GOLD_ICON_PATH);
+	goldIcon->setPosition(Vec2(origin.x + visibleSize.width*0.49f, origin.y + visibleSize.height * 0.935f));
+	this->addChild(goldIcon);
+}
+
+void FightLayer::initButton() {
+
+	auto dimensionButton = MenuItemImage::create(ImageResources::DIMENSION_GATE_BUTTON_PATH, ImageResources::DIMENSION_GATE_BUTTON_PATH, ImageResources::DISABLE_BUTTON_PATH, CC_CALLBACK_1(FightLayer::dimensionCallback, this));
+	auto attackButton = MenuItemImage::create("Images/AttackButton.png", "Images/AttackButton.png", ImageResources::DISABLE_BUTTON_PATH, CC_CALLBACK_1(FightLayer::attackCallback, this));
+	auto jumpButton = MenuItemImage::create(ImageResources::JUMP_BUTTON_PATH, ImageResources::JUMP_BUTTON_PATH, ImageResources::DISABLE_BUTTON_PATH, CC_CALLBACK_1(FightLayer::jumpCallback, this));
+
+	dimensionButton->setScale(1.0f);
+	attackButton->setScale(2.0f);
+	jumpButton->setScale(1.5f);
+
+	auto battleMenu = Menu::create(dimensionButton, attackButton, jumpButton, NULL);//sit_Button
 	battleMenu->setPosition(Vec2(origin.x + visibleSize.width*0.325f, origin.y + visibleSize.height*0.15f));
 	battleMenu->alignItemsHorizontally();
 	battleMenu->alignItemsHorizontallyWithPadding(visibleSize.width*0.05f);
 
 
-	auto attackMessage = Label::createWithTTF("Attack!", "fonts/Marker Felt.ttf", 100);
-	attackMessage->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height - attackMessage->getContentSize().height));
-	attackMessage->enableOutline(Color4B::WHITE, 1);
-	attackMessage->setVisible(false);
-
-	auto jumpMessage = Label::createWithTTF("Jump!", "fonts/Marker Felt.ttf", 100);
-	jumpMessage->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height - jumpMessage->getContentSize().height));
-	jumpMessage->enableOutline(Color4B::WHITE, 1);
-	jumpMessage->setVisible(false);
-
-	auto sitMessage = Label::createWithTTF("sit!", "fonts/Marker Felt.ttf", 100);
-	sitMessage->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height - sitMessage->getContentSize().height));
-	sitMessage->enableOutline(Color4B::WHITE, 1);
-	sitMessage->setVisible(false);
-
-
-	auto label = Label::createWithTTF("0", "fonts/arial.ttf", 50);
-
-	int durabilitysword = GameData::getInstance()->getShield().getDurability();
-	label->setPosition(Vec2(origin.x + visibleSize.width*0.550f, origin.y + visibleSize.height*0.15f));
-	label->setColor(ccc3(0, 0, 0)); //black
-	label->setString(StringUtils::format("%d", durabilitysword));
-    this->addChild(label,1);
-	label->setTag(durabilityTag);
-
-	
-	
-
-	auto swordImage = Sprite::create("Images/sword.png");
-	auto upgradeImage = Sprite::create("Images/shield.png");
-
-	//dimensionMessage->setTag(dimensionTag);
-	attackMessage->setTag(attackTag);
-	jumpMessage->setTag(jumpTag);
-	sitMessage->setTag(sitTag);
-
-
-	this->schedule(schedule_selector(FightLayer::spawnMonster));
 
 	// add the sprite as a child to this layer
 	this->addChild(battleMenu, 2);
-	this->addChild(attackMessage, 3);
-	this->addChild(jumpMessage, 4);
-	this->addChild(sitMessage, 5);
+}
 
-
-	// add the unit as a child to this layer
-	this->addChild(daughter, 0);
-	//인풋을 받을 controller 생성
-	controller = new BattleOperator();
-	this->addChild(controller, 1000000);
-	
-	setTouchListener();
-	
-	return true;
+void FightLayer::initHeart() {
+	heart = (Sprite**)malloc(sizeof(Sprite*) * 3);
+	for (int i = 0; i < 3; i++) {
+		heart[i] = Sprite::create("Images/heart.png");
+		heart[i]->setTag(100000 + i);
+		heart[i]->setPosition(Vec2(fightLayerSize.width*(0.13f + 0.08f * i), fightLayerSize.height*0.93f));
+		heart[i]->setScale(0.55f);
+		this->addChild(heart[i]);
+	}
 }
 
 void FightLayer::initBackground() {
 	auto ground = Sprite::create("Images/ground_basic.png");
-	int ground_width = ground->getTexture()->getPixelsWide();
-	float ground_rate = fightLayerSize.width / ground_width;
-	ground->setScale(ground_rate);
+	ground->setScale((fightLayerSize.width) / (ground->getTexture()->getPixelsWide()));
 	ground->setPosition(Vec2(fightLayerSize.width / 2, fightLayerSize.height * 0.22f));
 	this->addChild(ground, -100);
 	
-	CCSprite * heart1 = CCSprite::create("Images/heart.png");
-	CCSprite * heart2 = CCSprite::create("Images/heart.png");
-	CCSprite * heart3 = CCSprite::create("Images/heart.png");
-	heart1->setTag(100000);
-	heart2->setTag(100001);
-	heart3->setTag(100002);
-	heart1->setPosition(Vec2(fightLayerSize.width*0.13f, fightLayerSize.height*0.93f));
-	heart2->setPosition(Vec2(fightLayerSize.width*0.21f, fightLayerSize.height*0.93f));
-	heart3->setPosition(Vec2(fightLayerSize.width*0.29f, fightLayerSize.height*0.93f));
-	heart1->setScale(0.55f);
-	heart2->setScale(0.55f);
-	heart3->setScale(0.55f);
-	this->addChild(heart1);
-	this->addChild(heart2);
-	this->addChild(heart3);
-
 	auto sky = Sprite::create("Images/sky_basic.png");
 	int sky_width = sky->getTexture()->getPixelsWide();
 	float sky_height = sky->getTexture()->getPixelsHigh();
@@ -134,15 +136,27 @@ void FightLayer::initBackground() {
 	sky->setPosition(Vec2(fightLayerSize.width / 2, fightLayerSize.height - (sky_height / 2)));
 	this->addChild(sky, -200);
 
-	
+	backgroundSpawnScheduler = BackgroundSpawnScheduler(this);
+	backgroundSpeed = new float(-100);
 }
 
-void FightLayer::updateBackground(float dt) {
-
+void FightLayer::redrawGold() {
+	int currentGold = GameData::getInstance()->getGold();
+	currentGoldLabel->setString(StringUtils::format("%d", currentGold));
 }
 
-void FightLayer::spawnMonster(float delta)
-{
+void FightLayer::redrawTexture() {
+	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
+		itemImage->setTexture("Images/sword.png");
+		itemName->setString(GameData::getInstance()->getSword().getName());
+	}
+	else {
+		itemImage->setTexture("Images/shield.png");
+		itemName->setString(GameData::getInstance()->getShield().getName());
+	}
+}
+
+void FightLayer::monsterSpawnUpdate(float delta) {
 	int moving_distance = GameData::getInstance()->getMovingDistance();
 	Stage stage_data = GameData::getInstance()->getStage();
 	vector<int> distance_data = stage_data.getMonsterLengthInfo();
@@ -152,7 +166,7 @@ void FightLayer::spawnMonster(float delta)
 		this->addChild(monster, 1);
 		GameData::getInstance()->setMovingDistance(moving_distance + 1);
 		*backgroundSpeed = 0;
-		
+
 	}
 
 	if (monster == NULL) {
@@ -166,7 +180,12 @@ void FightLayer::spawnMonster(float delta)
 		GameData::getInstance()->setMovingDistance(moving_distance + (int)movingDistanceReal);
 		movingDistanceReal -= (int)movingDistanceReal;
 	}
+}
 
+void FightLayer::update(float delta) {
+
+	redrawTexture();
+	monsterSpawnUpdate(delta);
 	backgroundSpawnScheduler.update(delta);
 
 }
@@ -183,75 +202,34 @@ void FightLayer::stageClear() {
 
 }
 
-
 void FightLayer::dimensionCallback(cocos2d::Ref* pSender)
 {
-	/*
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-	auto stageClearLayer = StageClearLayer::create();
-	stageClearLayer->setContentSize(Size(100, 100));
-	stageClearLayer->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height*0.5f));
-	
-	this->addChild(stageClearLayer, 10000);
-	*/
-		CCLOG("dimensionCallback");
+	DimensionGateController::changeItemPosition();
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioResources::SOUND_DIMENSION_GATE_PATH.c_str());
 }
 
 
 void FightLayer::attackCallback(cocos2d::Ref* pSender)
 {
-	auto attackMessage = (Label*)this->getChildByTag(attackTag);
-	attackMessage->setVisible(true);
-	auto fadeIn = FadeIn::create(0);
-	auto delayTime = CCDelayTime::create(0.5f);
-	auto fadeOut = FadeOut::create(0);;
-	auto seq = CCSequence::create(fadeIn, delayTime, fadeOut, NULL);
-	attackMessage->runAction(seq);
-
 	daughter->startAttack();
 	reduceDurability();//reduce durability of weapon
-	
-	CCLOG("attackCallback");
-
 }
 
 
 void FightLayer::jumpCallback(cocos2d::Ref* pSender)
 {
-	auto jumpMessage = (Label*)this->getChildByTag(jumpTag);
-	jumpMessage->setVisible(true);
-	auto fadeIn = FadeIn::create(0);
-	auto delayTime = CCDelayTime::create(0.5f);
-	auto fadeOut = FadeOut::create(0);;
-	auto seq = CCSequence::create(fadeIn, delayTime, fadeOut, NULL);
-	jumpMessage->runAction(seq);
-	
 	daughter->startJump();
-	CCLOG("jumpCallback");
 }
 
 void FightLayer::sitCallback(cocos2d::Ref* pSender)
 {
-	auto sitMessage = (Label*)this->getChildByTag(sitTag);
-	sitMessage->setVisible(true);
-	auto fadeIn = FadeIn::create(0);
-	auto delayTime = CCDelayTime::create(0.5f);
-	auto fadeOut = FadeOut::create(0);;
-	auto seq = CCSequence::create(fadeIn, delayTime, fadeOut, NULL);
-	sitMessage->runAction(seq);
 	daughter->startSitDown();
-	CCLOG("sitCallback");
 }
 void FightLayer::reduceDurability() {
-
-
 	auto label = (Label*)this->getChildByTag(durabilityTag);
-	int durability = GameData::getInstance()->getShield().getDurability();
-	GameData::getInstance()->getShield().setDurability(durability - 1);
-	label->setString(StringUtils::format("%d", durability - 1));
-
+	int durability = GameData::getInstance()->getSword().getDurability();
+	GameData::getInstance()->getSword().setDurability(durability - 1);
+	label->setString(StringUtils::format("%d", durability));
 }
 
 
@@ -274,7 +252,7 @@ bool FightLayer::onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_even
 		int min_x = this->boundingBox().getMinX();
 		Vec2 pos = touch->getLocation();
 		pos.x -= min_x;
-		controller->startController(pos);
+		operator_->startController(pos);
 		return true;
 	}
 	return false;
@@ -286,7 +264,7 @@ void FightLayer::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_even
 		int min_x = this->boundingBox().getMinX();
 		Vec2 pos = touch->getLocation();
 		pos.x -= min_x;
-		controller->setTouchPos(pos);
+		operator_->setTouchPos(pos);
 	}
 }
 
@@ -297,7 +275,7 @@ void FightLayer::onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_
 
 void FightLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
-	switch (controller->getState()) {
+	switch (operator_->getState()) {
 	case 0:		//CANCEL
 		break;
 	case 1:		//ATTACK
@@ -314,7 +292,7 @@ void FightLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_even
 		daughter->startSitDown();
 		break;
 	}
-	controller->endController();
+	operator_->endController();
 }
 
 Monster* FightLayer::getMonster() {
@@ -330,14 +308,14 @@ void FightLayer::monsterDead() {
 	*backgroundSpeed = -100;
 }
 
-void FightLayer::createBackgound(EnumBackground::Obj obj) {
-	if (obj == EnumBackground::mountain) {
+void FightLayer::createBackgound(EnumBackground::OBJECT object) {
+	if (object == EnumBackground::MOUNTAIN) {
 		BackgroundObject* mountain = BackgroundObject::create();
 		mountain->setImage("Images/mountain.png", Vec2(1, 0.8f), 2.0f, BackgroundObject::CUSTOMIZED_SIZE, BackgroundObject::BOTTOM);
 		mountain->setSpeed(backgroundSpeed, 100, 1);
 		this->addChild(mountain, -105);
 	}
-	if (obj == EnumBackground::tree) {
+	if (object == EnumBackground::TREE) {
 		BackgroundObject* tree = BackgroundObject::create();
 		tree->setImage("Images/tree.png", Vec2(1, 0.6f), 0.8f, BackgroundObject::CUSTOMIZED_SIZE, BackgroundObject::TOP);
 		tree->setSpeed(backgroundSpeed, 190, 2);
