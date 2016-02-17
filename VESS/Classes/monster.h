@@ -16,31 +16,34 @@ class MonsterBehaviorPattern;
 class MonsterInfo;
 
 class Monster : public Unit{
+protected:
+	Monster();
+	~Monster();
 public:
-	enum Name { Tauren, Slime };
+	enum Kind { Tauren, Slime };
 
 	// 밑의 두 변수는 서로 연관성이 있기 때문에 public 으로 두고 서로 읽을 수 있도록 했음.
 	// 아에 다른 클래스에서 이들을 볼 수 있다는 단점이 있지만, 봐도 뭐 쓰지만 않으면 상관 없을 것 같은데?
 	MonsterAnimation* anim;
-	MonsterBehaviorPattern* pattern;
+	MonsterBehaviorPattern* behavior;
 
-	static Monster* create(FightLayer* layer, Monster::Name);
+	static Monster* create(FightLayer* layer, Monster::Kind);
 
 	void dropItem();
 	void damage(int dam);
 	virtual void update(float delta);
-	Name kind;
+	Kind kind;
+	Node* image;
 private:
 	FightLayer* field;
-	void init(FightLayer* layer, Monster::Name);
+	void init(FightLayer* layer, Monster::Kind);
 	void initWindowSize();
-	void initHp(Monster::Name name);
-	void initImage(Monster::Name name);
-	Node* image;
+	void initHp();
+	void initImage();
+	void initBehavior();
 	Size windowSize;
 	Vec2 origin;
-	Monster();
-	~Monster();
+
 
 };
 
@@ -53,7 +56,7 @@ class MonsterInfo {
 private: 
 	MonsterInfo();
 public:
-	static int getHp(Monster::Name name);
+	static int getHp(Monster::Kind kind);
 };
 
 
@@ -65,10 +68,15 @@ public:
 //객체를 생성 후 해당 몬스터가 갖고 있음. 왜냐하면, class M.B.P. 내에 update 가 실행되며, 패턴을 바꾸어야 하기 때문.
 class MonsterBehaviorPattern {
 private:
+	float timer;
+	float maxTimer;
 	Monster* monster;
 	MonsterBehaviorPattern();
 	enum MonsterState { stand, attack0, attack1, attack2, attack3, dead };
+	void decisionBehavior();
+	void playAnimationForState();
 public:
+	MonsterState state;
 	MonsterBehaviorPattern(Monster* parent);
 	bool isStandState();
 	void update(float delta);
@@ -79,16 +87,6 @@ public:
 
 
 
-class MonsterAnimation {
-private:
-	RepeatForever* makeAction(char** plist, int plistCount, int imageCount, char* imageName, float frameTime);
-	Monster* monster;
-	MonsterAnimation();
-public:
-	MonsterAnimation(Monster* monster, Monster::Name);
-	void playAttack(int num);
-	void playDamage();
-	void playDead();
-};
+
 
 #endif // __MONSTER_H__

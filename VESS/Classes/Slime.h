@@ -11,12 +11,13 @@ private:
 	enum SLIME_STATE {STAND, ATTACK0, ATTACK1};
 	SLIME_STATE currentState;
 	void changeState(SLIME_STATE state);
+
 protected:
-	Slime();
+	Slime() {}
 	virtual void initImage();
 	RepeatForever* stand, *attack00, *attack01;
 public:
-	~Slime();
+
 	virtual void update(float delta);
 	virtual bool init();
 	static Slime* create();

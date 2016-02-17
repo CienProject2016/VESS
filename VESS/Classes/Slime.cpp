@@ -2,13 +2,9 @@
 #include "FightLayer.h"
 
 
-Slime::Slime() {
-
-}
-Slime::~Slime() {
-}
 
 void Slime::changeState(SLIME_STATE state) {
+	/*
 	if (state != currentState) {
 		if (currentState == STAND)			image->stopAction(stand);
 		else if (currentState == ATTACK0)	image->stopAction(attack00);	
@@ -20,9 +16,10 @@ void Slime::changeState(SLIME_STATE state) {
 
 		currentState = state;
 	}
+	*/
 }
 
-void Slime::initImage() {
+void Slime::initImage() {/*
 	stand = makeAction("animation/basic_slime/stand/basic_slime_stand.plist", 8, "basic_slime_stand_", 0.1f);
 	attack00 = makeAction("animation/basic_slime/attack1/basic_slime_attack0.plist", 20, "basic_slime_attack0_", 0.05f);
 	attack01 = makeAttack1();
@@ -31,10 +28,11 @@ void Slime::initImage() {
 	image->setScale(2.8f);
 
 	this->addChild(image);
-	image->runAction(stand);
+	image->runAction(stand);*/
 }
 
 bool Slime::init() {
+	/*
 	if (Monster::init())
 	{
 		//타입이 Slime 일 때에만 해당상태를 초기화.
@@ -42,9 +40,12 @@ bool Slime::init() {
 		return true;
 	}
 	return false;
+	*/
+	return false;
 }
 
 Slime* Slime::create() {
+	/*
 	Slime *monster = new Slime();
 	if (monster && monster->init())
 	{
@@ -53,6 +54,8 @@ Slime* Slime::create() {
 	}
 	CC_SAFE_DELETE(monster);
 	return nullptr;
+	*/
+	return new Slime();
 }
 
 void Slime::update(float delta) {
