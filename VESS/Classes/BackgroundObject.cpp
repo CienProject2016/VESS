@@ -20,8 +20,7 @@ BackgroundObject* BackgroundObject::create() {
 }
 
 bool BackgroundObject::init() {
-	if (Node::init())
-	{
+	if (Node::init()){
 		speed = accel = imageWidth = 0;
 		accelTime = 1;
 		this->scheduleUpdate();
@@ -51,8 +50,8 @@ void BackgroundObject::update(float dt) {
 
 void BackgroundObject::setImage(string fileName) {	setImage(fileName, Vec2(0, 0));	}
 void BackgroundObject::setImage(string fileName, Vec2 position) {	setImage(fileName, position, 1);	}
-void BackgroundObject::setImage(string fileName, Vec2 position, float scale) {	setImage(fileName, position, scale, ABSOLUTED);	}
-void BackgroundObject::setImage(string fileName, Vec2 position, float scale, BackgroundObject::AlignMode alignMode) {	setImage(fileName, position, scale, ABSOLUTED, alignMode);	}
+void BackgroundObject::setImage(string fileName, Vec2 position, float scale) {	setImage(fileName, position, scale, CUSTOMIZED_SIZE);	}
+void BackgroundObject::setImage(string fileName, Vec2 position, float scale, BackgroundObject::AlignMode alignMode) {	setImage(fileName, position, scale, CUSTOMIZED_SIZE, alignMode);	}
 void BackgroundObject::setImage(string fileName, Vec2 position, float scale, BackgroundObject::ScaleMode scaleMode) {	setImage(fileName, position, scale, scaleMode, CENTER);}
 void BackgroundObject::setImage(string fileName, Vec2 position, float scale, BackgroundObject::ScaleMode scaleMode, BackgroundObject::AlignMode alignMode) {	setImage(fileName, position, scale, scaleMode, alignMode, Vec2(0, 0));	}
 void BackgroundObject::setImage(string fileName, Vec2 position, float scale, BackgroundObject::ScaleMode scaleMode, BackgroundObject::AlignMode alignMode, Vec2 pixel_of_TR) {
@@ -62,13 +61,13 @@ void BackgroundObject::setImage(string fileName, Vec2 position, float scale, Bac
 	Vec2 localPosition;
 	Vec2 screenPosition;
 	switch (scaleMode) {
-	case RELATED_WIDTH:
+	case FIGHTLAYER_WIDTH:
 		rate = scale * fightLayerSize.width / size.x;
 		break;
-	case RELATED_HEIGHT:
+	case FIGHTLAYER_HEIGHT:
 		rate = scale * fightLayerSize.height / size.y;
 		break;
-	case ABSOLUTED:
+	case CUSTOMIZED_SIZE:
 		rate = scale;
 		break;
 	}

@@ -1,4 +1,3 @@
-
 #include "cocos2d.h"
 #include "WindowSize.h"
 #ifndef __BACKGROUND_OBJECT_H__
@@ -16,7 +15,7 @@ private:
 	int imageWidth;
 	BackgroundObject();
 public:
-	enum ScaleMode {RELATED_WIDTH, RELATED_HEIGHT, ABSOLUTED};
+	enum ScaleMode {FIGHTLAYER_WIDTH, FIGHTLAYER_HEIGHT, CUSTOMIZED_SIZE};
 	enum AlignMode {CENTER, BOTTOM, TOP, LEFT, RIGHT, RIGHT_TOP, RIGHT_BOTTOM, LEFT_TOP, LEFT_BOTTOM};
 	~BackgroundObject();
 	void setSpeed(float* speed, float accel, float localSpeed);
