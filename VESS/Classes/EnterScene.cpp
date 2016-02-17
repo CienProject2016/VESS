@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "EnterScene.h"
+#include "Settings.h"
 
 USING_NS_CC;
 
@@ -23,11 +24,7 @@ bool EnterScene::init()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	auto closeItem = MenuItemImage::create(
-		"CloseNormal.png",
-		"CloseSelected.png",
-		CC_CALLBACK_1(EnterScene::menuCloseCallback, this));
-
+	auto closeItem = MenuItemImage::create("CloseNormal.png","CloseSelected.png",CC_CALLBACK_1(EnterScene::menuCloseCallback, this));
 	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width / 2,
 		origin.y + closeItem->getContentSize().height / 2));
 
@@ -41,10 +38,13 @@ bool EnterScene::init()
 	enterButton->setScale(0.15f);
 	this->addChild(enterButton, 2);
 
-	auto settingButton = Sprite::create("Images/setting_button.png");
+	auto settingButton = MenuItemImage::create("Images/setting_button.png", "Images/setting_button.png", CC_CALLBACK_1(EnterScene::settingClicked, this));
 	settingButton->setPosition(Vec2((visibleSize.width / 5) * 4 + origin.x, (visibleSize.height / 5) * 4 + origin.y));
 	settingButton->setScale(0.3f);
-	this->addChild(settingButton, 1);
+
+	auto setting = Menu::create(settingButton, NULL);
+	setting->setPosition(Vec2::ZERO);
+	this->addChild(setting, 1);
 
 	auto backgroundScreen = Sprite::create("Images/background_screen.png");
 	backgroundScreen->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
@@ -122,6 +122,14 @@ void EnterScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_even
 	Scene *dialogScene = DialogScene::createScene();
 	Director::getInstance()->replaceScene(TransitionFade::create(0.5, dialogScene, Color3B(255, 255, 255)));
 	log("Touched");
+}
+
+void EnterScene::settingClicked(Ref* pSender)
+{
+	Scene *settingScene = Settings::createScene();
+	Director::getInstance()->replaceScene(TransitionFade::create(0.5, settingScene, Color3B(255, 255, 255)));
+	log("Touched");
+
 }
 
 

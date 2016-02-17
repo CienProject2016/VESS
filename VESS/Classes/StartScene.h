@@ -13,17 +13,13 @@ private:
 	virtual void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 
 	void setTouchListener();
-public:
-    static cocos2d::Scene* createScene();
-
-    virtual bool init();
-	
-    
-    // a selector callback
+	// a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
 	void settingClicked(cocos2d::Ref* pSender);
 
-    
+public:
+    static cocos2d::Scene* createScene();
+    virtual bool init();    
     // implement the "static create()" method manually
     CREATE_FUNC(StartScene);
 };
