@@ -1,0 +1,22 @@
+{
+  "sword": [
+    {
+      "name": "녹슨 청동검",
+      "type": "검",
+      "damage": 10,
+      "speed": 1
+    },
+    {
+      "name": "청동검",
+      "type": "검",
+      "damage": 20,
+      "speed": 1
+    },
+    {
+      "name": "신비한 청동검",
+      "type": "검",
+      "damage": 30,
+      "speed": 1
+    }
+  ]
+}

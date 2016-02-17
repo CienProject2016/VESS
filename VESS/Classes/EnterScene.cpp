@@ -1,9 +1,7 @@
-﻿#pragma once
 #include "EnterScene.h"
-#include "DialogScene.h"
-#include "ui/CocosGUI.h"
 
 USING_NS_CC;
+
 
 Scene* EnterScene::createScene()
 {
@@ -24,11 +22,6 @@ bool EnterScene::init()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	/////////////////////////////
-	// 2. add a menu item with "X" image, which is clicked to quit the program
-	//    you may modify it.
-
-	// add a "close" icon to exit the progress. it's an autorelease object
 	auto closeItem = MenuItemImage::create(
 		"CloseNormal.png",
 		"CloseSelected.png",
@@ -41,18 +34,18 @@ bool EnterScene::init()
 	auto menu = Menu::create(closeItem, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 3);
-	//새 스프라이트들 만들어서 크기,위치 지정
-	auto enterButton = Sprite::create("Images/EnterButton.png");
+	
+	auto enterButton = Sprite::create("Images/enter_button.png");
 	enterButton->setPosition(Vec2(visibleSize.width / 5 + origin.x, visibleSize.height / 5 + origin.y));
 	enterButton->setScale(0.15f);
 	this->addChild(enterButton, 2);
 
-	auto settingButton = Sprite::create("Images/SettingButton.png");
+	auto settingButton = Sprite::create("Images/setting_button.png");
 	settingButton->setPosition(Vec2((visibleSize.width / 5) * 4 + origin.x, (visibleSize.height / 5) * 4 + origin.y));
 	settingButton->setScale(0.3f);
 	this->addChild(settingButton, 1);
 
-	auto backgroundScreen = Sprite::create("Images/BackgroundScreen.png");
+	auto backgroundScreen = Sprite::create("Images/background_screen.png");
 	backgroundScreen->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
 	backgroundScreen->setScale(1.2f);
 	this->addChild(backgroundScreen, 0);
@@ -60,13 +53,15 @@ bool EnterScene::init()
 	auto myScene = Scene::create();
 
 	for (i = 1; i < 10; i++){
-		auto enterStagei = ui::Button::create("Images/Door.png", "Images/BackgroundScreen.png", "Images/SettingButton.png");
+		auto enterStage = ui::Button::create("Images/door.png", "", "Images/setting_button.png");
 		if (i < 6)
-			enterStagei->setPosition(Vec2(visibleSize.width / 5 + (i - 1)*0.7*(visibleSize.width / 5), visibleSize.height / 5));
+			enterStage->setPosition(Vec2(visibleSize.width / 5 + (i - 1)*0.7*(visibleSize.width / 5), visibleSize.height / 5));
 		else
-			enterStagei->setPosition(Vec2(visibleSize.width / 5 + (i - 6)*0.7*(visibleSize.width / 5), visibleSize.height / 5 + (visibleSize.width / 5)));
-		enterStagei->setScale(2.0f);
-		enterStagei->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type){
+			enterStage->setPosition(Vec2(visibleSize.width / 5 + (i - 6)*0.7*(visibleSize.width / 5), visibleSize.height / 5 + (visibleSize.width / 5)));
+		enterStage->setScale(2.0f);
+		enterStage->setTag(stageDoor + i);
+
+		enterStage->addTouchEventListener([&](Ref* sender, ui::Widget::TouchEventType type){
 			switch (type)
 			{
 			case ui::Widget::TouchEventType::BEGAN:
@@ -77,7 +72,7 @@ bool EnterScene::init()
 				break;
 			}
 		});
-		this->addChild(enterStagei);
+		this->addChild(enterStage);
 	}
 
 	auto backButton = Sprite::create("Images/back.png");
@@ -86,15 +81,15 @@ bool EnterScene::init()
 	this->addChild(backButton,0);
 
 	setTouchListener();
-
+	
+	return true;
 }
 
 
 
 void EnterScene::setTouchListener()
 {
-	// make touch listener
-
+	
 	auto listener = EventListenerTouchOneByOne::create();
 	listener->onTouchBegan = CC_CALLBACK_2(EnterScene::onTouchBegan, this);
 	listener->onTouchMoved = CC_CALLBACK_2(EnterScene::onTouchMoved, this);
@@ -124,7 +119,7 @@ void EnterScene::onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_
 void EnterScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
 	Scene *dialogScene = DialogScene::createScene();
-	Director::getInstance()->replaceScene(TransitionFade::create(0.5, dialogScene, Color3B(0, 255, 255)));
+	Director::getInstance()->replaceScene(TransitionFade::create(0.5, dialogScene, Color3B(255, 255, 255)));
 	log("Touched");
 }
 

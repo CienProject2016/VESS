@@ -156,6 +156,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Dialog.cpp" />
     <ClCompile Include="..\Classes\BattleOperator.cpp" />
     <ClCompile Include="..\Classes\DialogScene.cpp" />
+    <ClCompile Include="..\Classes\DimensionGateController.cpp" />
     <ClCompile Include="..\Classes\EnterScene.cpp" />
     <ClCompile Include="..\Classes\FightLayer.cpp" />
     <ClCompile Include="..\Classes\GameScene.cpp" />
@@ -163,6 +164,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Hero.cpp" />
     <ClCompile Include="..\Classes\HeroMovementState.cpp" />
     <ClCompile Include="..\Classes\Monster.cpp" />
+    <ClCompile Include="..\Classes\Resources.cpp" />
+    <ClCompile Include="..\Classes\Slime.cpp" />
     <ClCompile Include="..\Classes\StartScene.cpp" />
     <ClCompile Include="..\Classes\StageClearLayer.cpp" />
     <ClCompile Include="..\Classes\MonsterSpawnScheduler.cpp" />
@@ -171,6 +174,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Stage.cpp" />
     <ClCompile Include="..\Classes\GameData.cpp" />
     <ClCompile Include="..\Classes\Unit.cpp" />
+    <ClCompile Include="..\Classes\UpgradeCompleteLayer.cpp" />
+    <ClCompile Include="..\Classes\UpgradeController.cpp" />
     <ClCompile Include="..\Classes\UpgradeLayer.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -182,11 +187,14 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Dialog.h" />
     <ClInclude Include="..\Classes\BattleOperator.h" />
     <ClInclude Include="..\Classes\DialogScene.h" />
+    <ClInclude Include="..\Classes\DimensionGateController.h" />
     <ClInclude Include="..\Classes\EnterScene.h" />
     <ClInclude Include="..\Classes\FightLayer.h" />
     <ClInclude Include="..\Classes\GameData.h" />
     <ClInclude Include="..\Classes\GameScene.h" />
     <ClInclude Include="..\Classes\GaugeLockChecker.h" />
+    <ClInclude Include="..\Classes\Resources.h" />
+    <ClInclude Include="..\Classes\Slime.h" />
     <ClInclude Include="..\Classes\StageClearLayer.h" />
     <ClInclude Include="..\Classes\Hero.h" />
     <ClInclude Include="..\Classes\HeroMovementState.h" />
@@ -197,6 +205,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Settings.h" />
     <ClInclude Include="..\Classes\Stage.h" />
     <ClInclude Include="..\Classes\Unit.h" />
+    <ClInclude Include="..\Classes\UpgradeCompleteLayer.h" />
+    <ClInclude Include="..\Classes\UpgradeController.h" />
     <ClInclude Include="..\Classes\UpgradeLayer.h" />
     <ClInclude Include="..\Classes\WindowSize.h" />
     <ClInclude Include="main.h" />

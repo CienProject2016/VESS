@@ -19,6 +19,7 @@ static Size smallResolutionSize = Size(1920, 1080);
 static Size mediumResolutionSize = Size(1920, 1080);
 static Size largeResolutionSize = Size(1920, 1080);
 
+
 /*	by. hyobin
 visibleSize <- 이런걸로 해당 레이어의 크기를 알아오고 싶었는데
 전체 윈도우 크기를 리턴해 버리는 바람에
@@ -41,6 +42,5 @@ static Size fightLayerSize = Size(
 	designResolutionSize.height);
 static Vec2 refinementLayerOrigin = Vec2(0, 0);
 static Vec2 fightLayerOrigin = Vec2(refinementLayerSize.width, 0);
-
 
 #endif

@@ -1,16 +1,11 @@
-﻿#pragma once
 #include "UpgradeLayer.h"
-#include "GameData.h"
 
-
-#define tag_number 50
-#define gold "GOLD"
-
-bool UpgradeLayer::init()
-{
+bool UpgradeLayer::init(){
 	if (!Layer::init()) {
 		return false;
 	}
+	currentUpgradePhase = NONE;
+	completeButtonPhase = CANNOT_CLICK;
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -18,10 +13,13 @@ bool UpgradeLayer::init()
 	listener->onTouchBegan = CC_CALLBACK_2(UpgradeLayer::onTouchBegan, this);
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 
-	auto upgrade_image = Sprite::create("Images/upgrade_button.png");
-	auto repair_image = Sprite::create("Images/repair_button.png");
-
-
+	auto upgradeCompleteLayer = UpgradeCompleteLayer::create();
+	upgradeCompleteLayer->setContentSize(Size(800, 600));
+	upgradeCompleteLayer->setAnchorPoint(Vec2(0, 0));
+	upgradeCompleteLayer->setPosition(Vec2(visibleSize.width * 0.01f, visibleSize.height * 0.17f));
+	upgradeCompleteLayer->setVisible(false);
+	upgradeCompleteLayer->setName("upgradeCompleteLayer");
+	this->addChild(upgradeCompleteLayer, ZOrder::UPGRADE_COMPLETE_LAYER);
 	
 	//키보드 입력
 	auto keyboardListener = EventListenerKeyboard::create();
@@ -56,17 +54,17 @@ bool UpgradeLayer::init()
 	quenchingImage->setPosition(Vec2(origin.x + visibleSize.width * 0.32f, origin.y + visibleSize.height*0.4f));
 	quenchingImage->setScale(1.0f);
 
-	upgradeImage->setPosition(Vec2(origin.x + visibleSize.width * 0.1f, origin.y + visibleSize.height*0.7f));
-	upgradeImage->setScale(1.3f);
+	upgradeImage->setPosition(Vec2(origin.x + visibleSize.width * 0.11f, origin.y + visibleSize.height*0.9f));
+	upgradeImage->setScale(1.0f);
 
-	repairImage->setPosition(Vec2(origin.x + visibleSize.width * 0.33f, origin.y + visibleSize.height*0.7f));
-	repairImage->setScale(1.5f);
+	repairImage->setPosition(Vec2(origin.x + visibleSize.width * 0.325f, origin.y + visibleSize.height*0.9f));
+	repairImage->setScale(1.0f);
 
-	smeltingImage->setTag(tag_number+1);
-	hammeringImage->setTag(tag_number+2);
-	quenchingImage->setTag(tag_number+3);
-	upgradeImage->setTag(tag_number+4);
-	repairImage->setTag(tag_number + 5);
+	smeltingImage->setTag(ZOrder::SMELTING_IMAGE);
+	hammeringImage->setTag(ZOrder::HAMMERING_IMAGE);
+	quenchingImage->setTag(ZOrder::QUENCHING_IMAGE);
+	upgradeImage->setTag(ZOrder::UPGRADE_IMAGE);
+	repairImage->setTag(ZOrder::REPAIR_IMAGE);
 
 	//smelting bar create
 	Sprite *smeltingTimeBar = Sprite::create("timebar.png");
@@ -78,7 +76,7 @@ bool UpgradeLayer::init()
 	smeltingBarGauge->setType(kCCProgressTimerTypeBar);
 	smeltingTimeOutLine = Sprite::create("timeoutline.png");
 	smeltingTimeOutLine->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.95));
-	smeltingGaugeDownSpeed = 10;
+	smeltingGaugeDownSpeed = 5;
 
 	//hammering bar create
 	Sprite *hammeringTimeBar = Sprite::create("timebar.png");
@@ -90,7 +88,7 @@ bool UpgradeLayer::init()
 	hammeringBarGauge->setType(kCCProgressTimerTypeBar);
 	hammeringTimeOutLine = Sprite::create("timeoutline.png");
 	hammeringTimeOutLine->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.9));
-	hammeringGaugeDownSpeed = 20;
+	hammeringGaugeDownSpeed = 10;
 
 	//quenching bar create
 	Sprite *quenchingTimeBar = Sprite::create("timebar.png");
@@ -102,7 +100,7 @@ bool UpgradeLayer::init()
 	quenchingBarGauge->setType(kCCProgressTimerTypeBar);
 	quenchingTimeOutLine = Sprite::create("timeoutline.png");
 	quenchingTimeOutLine->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.85));
-	quenchingGaugeDownSpeed = 25;
+	quenchingGaugeDownSpeed = 15;
 
 
 	// add the sprite as a child to this layer
@@ -110,33 +108,46 @@ bool UpgradeLayer::init()
 	this->addChild(background2Image);
 	this->addChild(smith_image);
 
-	int upgradeGold = GameData::getInstance()->getNeededUpgradeGold();
-	auto touchLabel1 = Label::createWithTTF("골드", "fonts/arial.ttf", 50);
-	touchLabel1->setString(StringUtils::format("%d%s", upgradeGold, gold));
+	upgradeGold = GameData::getInstance()->getNeededUpgradeGold();
+	auto upgradeLabel = Label::createWithTTF("강화골드", "fonts/arial.ttf", 50);
+	upgradeLabel->setString(StringUtils::format("%d%s", upgradeGold, "GOLD"));
 	// position the label on the center of the screen
-	touchLabel1->setPosition(Vec2(Vec2(origin.x + visibleSize.width * 0.15f, origin.y + visibleSize.height*0.8f)));
-	touchLabel1->setColor(ccc3(250, 250, 250)); 
-	this->addChild(touchLabel1, 1);
+	upgradeLabel->setPosition(Vec2(Vec2(origin.x + visibleSize.width * 0.11f, origin.y + visibleSize.height*0.86f)));
+	upgradeLabel->setColor(ccc3(250, 250, 250)); 
+	this->addChild(upgradeLabel, 1);
 
-	int repairGold = GameData::getInstance()->getNeededRepairGold();
-	auto touchLabel2 = Label::createWithTTF("골드", "fonts/arial.ttf", 50);
-	touchLabel2->setString(StringUtils::format("%d%s", repairGold, gold));
-	// position the label on the center of the screen
-	touchLabel2->setPosition(Vec2(origin.x + visibleSize.width * 0.33f, origin.y + visibleSize.height*0.8f));
-	touchLabel2->setColor(ccc3(250, 250, 250)); 
+	auto gateImage = Sprite::create(ImageResources::DIMENSION_GATE_BUTTON_PATH);
+	gateImage->setPosition(Vec2(visibleSize.width * 0.35f, visibleSize.height * 0.6f));
+	this->addChild(gateImage, ZOrder::DIMENSION_GATE_IMAGE);
 
-	this->addChild(touchLabel2, 2);
+	//업그레이드 레이어는 ItemMode의 반대 이미지를 보여줌
+	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
+		itemImage = Sprite::create("Images/shield.png");
+		itemName = Label::createWithSystemFont("방패 이름", "Arial", 50);
+	}
+	else {
+		itemImage = Sprite::create("Images/sword.png");
+		itemName = Label::createWithSystemFont("칼 이름", "Arial", 50);
+	}
+	itemImage->setPosition(Vec2(visibleSize.width * 0.35f, visibleSize.height * 0.6f));
+	itemImage->setName("itemImage");
+	itemName->setPosition(Vec2(origin.x+ visibleSize.width*0.35f, origin.x + visibleSize.height * 0.7f));
+	itemName->setVisible(true);
 
-	int Gold = GameData::getInstance()->getGold();
-	auto touchLabel3 = Label::createWithTTF("", "fonts/arial.ttf", 50);
-	touchLabel3->setString(StringUtils::format("%d%s", Gold,gold));
-	// position the label on the center of the screen
-	touchLabel3->setPosition(Vec2(origin.x + visibleSize.width * 0.9f, origin.y + visibleSize.height*0.9f));
-	touchLabel3->setColor(ccc3(0, 0, 0)); //black	
+	this->addChild(itemImage,ZOrder::ITEM_IMAGE);
+	this->addChild(itemName,ZOrder::ITEM_NAME);
 
-	this->addChild(touchLabel3, 3);
+	repairGold = GameData::getInstance()->getNeededRepairGold();
+	auto repairLabel = Label::createWithTTF("수리골드", "fonts/arial.ttf", 50);
+	repairLabel->setString(StringUtils::format("%d%s", repairGold, "GOLD"));
+	repairLabel->setPosition(Vec2(origin.x + visibleSize.width * 0.33f, origin.y + visibleSize.height*0.86f));
+	repairLabel->setColor(ccc3(250, 250, 250)); 
+	this->addChild(repairLabel, 2);
 
-	//setTouchListener();
+	completeUpgradeButton = Sprite::create("Images/upgrade_before_complete.png");
+	completeUpgradeButton->setPosition(Vec2(visibleSize.width * 0.22f, visibleSize.height *7/10));
+	completeUpgradeButton->setTag(ZOrder::COMPLETE_UPGRADE_BUTTON);
+	this->addChild(completeUpgradeButton);
 	this->addChild(smeltingImage);
 	this->addChild(hammeringImage);
 	this->addChild(quenchingImage);
@@ -148,12 +159,18 @@ bool UpgradeLayer::init()
 	this->addChild(hammeringTimeOutLine);
 	this->addChild(quenchingBarGauge,2);
 	this->addChild(quenchingTimeOutLine);
+	
 	this->scheduleUpdate();
-	//강화 게이지바 숨김
-	hideGauge();
+
+	hideBeforeUpgradeResources();
+	//망치,담금질 비활성화 색상으로 변경
+	hammeringImage->setOpacity(120);
+	quenchingImage->setOpacity(120);
 	
 	return true;
 }
+
+
 void UpgradeLayer::update(float delta) {
 
 	smeltingBarGauge->setPercentage(smeltingBarGauge->getPercentage() - delta * smeltingGaugeDownSpeed);
@@ -163,65 +180,123 @@ void UpgradeLayer::update(float delta) {
 	//checkLock();
 	if (GaugeLockChecker::isGaugeLocked(smeltingBarGauge->getPercentage(), 70))
 	{
-		lock_01 = true;
+		
 		hammeringImage->setOpacity(255);
 	}
 	if (GaugeLockChecker::isGaugeLocked(hammeringBarGauge->getPercentage(), 70))
 	{
-		lock_02 = true;
+		
 		quenchingImage->setOpacity(255);
 	}
 	if (GaugeLockChecker::isGaugeLocked(hammeringBarGauge->getPercentage(), 95) && !isUpgrade)
 	{
-		completeButton();
+		showCompleteButton();
 		isComplete = true;
 	}
+
+	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
+		itemImage->setTexture("Images/shield.png");
+		itemName->setString(GameData::getInstance()->getShield().getName());
+	}
+	else {
+		itemImage->setTexture("Images/sword.png");
+		itemName->setString(StringUtils::format("%s", GameData::getInstance()->getSword().getName().c_str()));
+	}
 }
-//void UpgradeLayer::checkLock() {
-//	// 나중에 강화마다 값을 다르게 할거면, 매개변수에 값을 받아오는 식으로 수정하시면 됩니다.
-//	if (smeltingBarGauge->getPercentage() >= 70)
-//	{
-//		lock_01 = true;
-//		hammeringImage->setOpacity(255);
-//		
-//	}
-//
-//	if (hammeringBarGauge->getPercentage() >= 70)
-//	{
-//		lock_02 = true;
-//		quenchingImage->setOpacity(255);
-//	}
-//	if (hammeringBarGauge->getPercentage() >= 95 && !isUpgrade)
-//	{
-//		completeButton();
-//		isComplete = true;
-//	}
-//
-//}
 
 
-void UpgradeLayer::gaugeIncrease(ProgressTimer* gauge)
+
+void UpgradeLayer::checkComplete() {
+	switch (currentUpgradePhase) {
+	case UpgradePhase::UPGRADE:
+		if (quenchingBarGauge->getPercentage() >= 70)
+		{
+			showCompleteButton();
+			completeButtonPhase = CompleteButtonPhase::CAN_CLICK;
+		}
+		break;
+	case UpgradePhase::REPAIR:
+		if (hammeringBarGauge->getPercentage() >= 70)
+		{
+			showCompleteButton();
+			completeButtonPhase = CompleteButtonPhase::CAN_CLICK;
+		}
+		break;
+	case UpgradePhase::NONE:
+		//Nothing To Do
+		break;
+	}
+}
+
+void UpgradeLayer::checkLock() {
+	// 나중에 강화마다 값을 다르게 할거면, 매개변수에 값을 받아오는 식으로 수정하시면 됩니다.
+	if (smeltingBarGauge->getPercentage() >= 70){
+		lockBeforeHammering = true;
+		hammeringImage->setOpacity(255);
+	}
+
+	if (hammeringBarGauge->getPercentage() >= 70){
+		lockBeforeQuenching = true;
+		quenchingImage->setOpacity(255);
+	}
+}
+
+
+void UpgradeLayer::increaseGauge(CCProgressTimer* gauge)
 {
 	float currentPercent = gauge->getPercentage();
 	gauge->setPercentage(currentPercent + (float)8);
+}
 
+void UpgradeLayer::showUiButton(UpgradePhase upgradePhase) {
+	if (upgradePhase == UpgradePhase::NONE) {
+		completeUpgradeButton->setVisible(false);
+		upgradeImage->setVisible(true);
+		repairImage->setVisible(true);
+		smeltingBarGauge->setVisible(false);
+		smeltingTimeOutLine->setVisible(false);
+		hammeringBarGauge->setVisible(false);
+		hammeringTimeOutLine->setVisible(false);
+		quenchingBarGauge->setVisible(false);
+		quenchingTimeOutLine->setVisible(false);
+	}
+	else {
+		completeUpgradeButton->setVisible(true);
+		upgradeImage->setVisible(false);
+		repairImage->setVisible(false);
+		smeltingBarGauge->setVisible(true);
+		smeltingTimeOutLine->setVisible(true);
+		hammeringBarGauge->setVisible(true);
+		hammeringTimeOutLine->setVisible(true);
+		quenchingBarGauge->setVisible(true);
+		quenchingTimeOutLine->setVisible(true);
+	}
 }
 
 
 void UpgradeLayer::upgradeClicked()
 {
-	upgradeImage->setVisible(false);
-	repairImage->setVisible(false);
-	smeltingBarGauge->setVisible(true);
-	smeltingTimeOutLine->setVisible(true);
-	hammeringBarGauge->setVisible(true);
-	hammeringTimeOutLine->setVisible(true);
-	quenchingBarGauge->setVisible(true);
-	quenchingTimeOutLine->setVisible(true);
-
-	smeltingImage->setOpacity(255);
-
+	currentUpgradePhase = UpgradePhase::UPGRADE;
+	log("Upgrade Phase");
+	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
+		//소드는 딸이 사용중이므로 방패강화
+		if (UpgradeController::payUpgradeCosts(upgradeGold, Item::SHIELD) == true) {
+			showUiButton(currentUpgradePhase);
+		}
+		else {
+			//돈이 없어 강화를 할 수 없는 경우
+		}
+	}
+	else {
+		if (UpgradeController::payUpgradeCosts(upgradeGold, Item::SWORD) == true) {
+			showUiButton(currentUpgradePhase);
+		}
+		else {
+			//돈이 없어 강화를 할 수 없는 경우
+		}
+	}
 }
+
 void UpgradeLayer::repairClicked()
 {
 	hammeringImage->setOpacity(255);
@@ -230,35 +305,32 @@ void UpgradeLayer::repairClicked()
 	hammeringBarGauge->setVisible(true);
 	hammeringTimeOutLine->setVisible(true);
 	
-	isUpgrade = false; // 강화인지 수리인지 체크하는 변수
-	lock_01 = true; // 수리의 경우 망치만 사용하므로 제한을 걸어둘 필요가 없다.
+	currentUpgradePhase = UpgradePhase::REPAIR; // 강화인지 수리인지 체크하는 변수
+	lockBeforeHammering = true; // 수리의 경우 망치만 사용하므로 제한을 걸어둘 필요가 없다.
 	getSword = GameData::getInstance()->getSword();
 
 
 }
 
 
-void UpgradeLayer::completeButton()
+void UpgradeLayer::showCompleteButton()
 {
-	if (!isUpgrade)
-	{
+	if (currentUpgradePhase == REPAIR)	{
 		Size visibleSize = Director::getInstance()->getVisibleSize();
 		Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-		auto complete_button = Sprite::create("Images/slime.png");
-		complete_button->setPosition(Vec2(origin.x + visibleSize.width*0.2f, origin.y + visibleSize.height*0.5f));
-		complete_button->setScale(2.0f);
-		complete_button->setTag(tag_number + 6);
-
-		this->addChild(complete_button);
+		completeUpgradeButton->setTexture("Images/upgrade_after_complete.png"); //TODO 바꿔야됨
 	}
-
-	// 현재 완료버튼은 수리가 완료됬을 경우에만 생성됨. 강화는 현재 미지원.
+	else if (currentUpgradePhase == UPGRADE) {
+		Size visibleSize = Director::getInstance()->getVisibleSize();
+		Vec2 origin = Director::getInstance()->getVisibleOrigin();
+		completeUpgradeButton->setTexture("Images/upgrade_after_complete.png");		
+	}
 }
 
 
-void UpgradeLayer::hideGauge()
+void UpgradeLayer::hideBeforeUpgradeResources()
 {
+	completeUpgradeButton->setVisible(false);
 	smeltingBarGauge->setVisible(false);
 	smeltingTimeOutLine->setVisible(false);
 	hammeringBarGauge->setVisible(false);
@@ -274,58 +346,74 @@ void UpgradeLayer::hideGauge()
 bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
 {
 	Point p = touch_->getLocation();
-    // 제련, 망치, 담금질 이미지
 
-
-	auto smelting = (Sprite*) this->getChildByTag(tag_number + 1);
-	Rect rect3 = smelting->getBoundingBox();
-	if (rect3.containsPoint(p)) {
-		gaugeIncrease(smeltingBarGauge);
+	auto smeltingButton = (Sprite*) this->getChildByTag(ZOrder::SMELTING_IMAGE);
+	Rect smeltingTouchRect = smeltingButton->getBoundingBox();
+	if (smeltingTouchRect.containsPoint(p)) {
+		increaseGauge(smeltingBarGauge);
 	}
 
-	auto hammering = (Sprite*) this->getChildByTag(tag_number + 2);
-	Rect rect4 = hammering->getBoundingBox();
-	if (rect4.containsPoint(p) && lock_01) {
-		gaugeIncrease(hammeringBarGauge);
+	auto hammeringButton = (Sprite*) this->getChildByTag(ZOrder::HAMMERING_IMAGE);
+	
+	Rect hammeringTouchRect = hammeringButton->getBoundingBox();
+	if (hammeringTouchRect.containsPoint(p) && lockBeforeHammering) {
+		increaseGauge(hammeringBarGauge);
 	}
 
-	auto quenching = (Sprite*) this->getChildByTag(tag_number + 3);
-	Rect rect5 = quenching->getBoundingBox();
-	if (rect5.containsPoint(p) && lock_02) {
-		gaugeIncrease(quenchingBarGauge);
+	auto quenchingButton = (Sprite*) this->getChildByTag(ZOrder::QUENCHING_IMAGE);
+	Rect quenchingTouchRect = quenchingButton->getBoundingBox();
+	if (quenchingTouchRect.containsPoint(p) && lockBeforeQuenching) {
+		increaseGauge(quenchingBarGauge);
 	}
 
 	// 강화, 수리 이미지
-	auto upgrade = (Sprite*) this->getChildByTag(tag_number + 4);
-	Rect rect6 = upgrade->getBoundingBox();
-	if (rect6.containsPoint(p)) {
+	auto upgradeButton = (Sprite*) this->getChildByTag(ZOrder::UPGRADE_IMAGE);
+	Rect upgradeTouchRect = upgradeButton->getBoundingBox();
+	if (upgradeTouchRect.containsPoint(p)) {
 		upgradeClicked();
 	}
 
-	auto repair = (Sprite*) this->getChildByTag(tag_number + 5);
-	Rect rect8 = repair->getBoundingBox();
-	if (rect8.containsPoint(p)) {
+	auto repairButton = (Sprite*) this->getChildByTag(ZOrder::REPAIR_IMAGE);
+	Rect repairTouchRect = repairButton->getBoundingBox();
+	if (repairTouchRect.containsPoint(p)) {
 		repairClicked();
 	}
 
-	if (isComplete) {
-		auto completeButton = (Sprite*) this->getChildByTag(tag_number + 6);
-		Rect rect9 = completeButton->getBoundingBox();
-		if (rect9.containsPoint(p)) {
-			getSword.setDurability(getSword.getMaxDurability());
-			log("complete!!");
-			log("%d", getSword.getDurability());
-			lock_01 = false; // 초기화
-			lock_02 = false;
-			isUpgrade = true;
-			isComplete = false;
-		}
-
+	if (completeButtonPhase == CAN_CLICK) {
+		auto completeUpgradeButton = (Sprite*) this->getChildByTag(ZOrder::COMPLETE_UPGRADE_BUTTON);
+		Rect completeUpgradeTouchRect = completeUpgradeButton->getBoundingBox();
+		if (completeUpgradeTouchRect.containsPoint(p)) {
+			completeClicked();
+		}		
 	}
 	return true;
-
 }
 
+void UpgradeLayer::completeClicked() {
+	lockBeforeHammering = false; // 초기화
+	lockBeforeQuenching = false;
+	isComplete = false;
+	log("complete!!");
+	switch (currentUpgradePhase) {
+	case UpgradePhase::UPGRADE:
+		UpgradeController::upgradeItem();
+		break;
+	case UpgradePhase::REPAIR:		
+		getSword.setDurability(getSword.getMaxDurability());
+		log("%d", getSword.getDurability());
+		break;
+	}
+
+	currentUpgradePhase = UpgradePhase::NONE;
+	showUiButton(currentUpgradePhase);
+	hideBeforeUpgradeResources();
+	hammeringImage->setOpacity(120);
+	quenchingImage->setOpacity(120);
+	completeButtonPhase = CompleteButtonPhase::CANNOT_CLICK;
+
+	auto upgradeCompleteLayer = (Layer*)getChildByName("upgradeCompleteLayer");
+	upgradeCompleteLayer->setVisible(true);
+}
 
 void UpgradeLayer::setTouchListener()
 {
@@ -359,33 +447,17 @@ void UpgradeLayer::keyPressed(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d
 {
 	if (key_code_ == EventKeyboard::KeyCode::KEY_A)
 	{
-		gaugeIncrease(smeltingBarGauge);
-		if (pressed_smelting)
-			smeltingImage->setTexture("Images/smelting2.png");
-		else
-			smeltingImage->setTexture("Images/smelting.png");
-
-		pressed_smelting = (pressed_smelting + 1) % 2;
+		increaseGauge(smeltingBarGauge);
 	}
 
-	if (key_code_ == EventKeyboard::KeyCode::KEY_S && lock_01)
+	if (key_code_ == EventKeyboard::KeyCode::KEY_S && lockBeforeHammering)
 	{
-		gaugeIncrease(hammeringBarGauge);
-		if (pressed_hammering)
-			hammeringImage->setTexture("Images/hammering2.png");
-		else
-			hammeringImage->setTexture("Images/hammering.png");
-		pressed_hammering = (pressed_hammering + 1) % 2;
+		increaseGauge(hammeringBarGauge);
 	}
 
-	if (key_code_ == EventKeyboard::KeyCode::KEY_D && lock_02)
+	if (key_code_ == EventKeyboard::KeyCode::KEY_D && lockBeforeQuenching)
 	{
-		gaugeIncrease(quenchingBarGauge);
-		if (pressed_quenching)
-			quenchingImage->setTexture("Images/quenching2.png");
-		else
-			quenchingImage->setTexture("Images/quenching.png");
-		pressed_quenching = (pressed_quenching + 1) % 2;
+		increaseGauge(quenchingBarGauge);
 	}
 }
 void UpgradeLayer::keyReleased(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d::Event *event_)
