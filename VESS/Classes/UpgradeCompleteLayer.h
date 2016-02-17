@@ -3,6 +3,7 @@
 #ifndef __UPGRADE_COMPLETE_LAYER_H__
 #define __UPGRADE_COMPLETE_LAYER_H__
 
+#include <string>
 #include "cocos2d.h"
 USING_NS_CC;
 using namespace std;

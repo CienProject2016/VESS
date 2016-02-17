@@ -153,6 +153,9 @@
     <ClCompile Include="..\Classes\UpgradeLayer.cpp">
       <Filter>src\View\Layer</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\GuageLockChecker.cpp">
+      <Filter>src\Controller</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\Slime.cpp">
       <Filter>src\Model\Unit</Filter>
     </ClCompile>
@@ -267,6 +270,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\HeroMovementState.h">
       <Filter>src\Model\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GaugeLockChecker.h">
+      <Filter>src\Controller</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Slime.h">
       <Filter>src\Model\Unit</Filter>

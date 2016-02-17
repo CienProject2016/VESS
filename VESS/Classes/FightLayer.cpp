@@ -1,4 +1,4 @@
-#pragma once
+
 #include "FightLayer.h"
 #include "Hero.h"
 #include "StageClearLayer.h"

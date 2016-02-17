@@ -8,6 +8,12 @@ const string ImageResources::DISABLE_BUTTON_PATH = IMAGE_PATH + "disable_button.
 const string ImageResources::GOLD_ICON_PATH = IMAGE_PATH + "gold.png";
 const string ImageResources::UPGRADE_COMPLETE_POPUP_FRAME_PATH = IMAGE_PATH + "upgrade_complete_popup.png";
 const string ImageResources::CONFIRM_BUTTON_PATH = IMAGE_PATH + "confirm_button.png";
+const string ImageResources::SMELTING_BUTTON = IMAGE_PATH + "smelting_button.png";
+const string ImageResources::SMELTING_BUTTON_ACTIVE = IMAGE_PATH + "smelting_button_active.png";
+const string ImageResources::QUENCHING_BUTTON = IMAGE_PATH + "quenching_button.png";
+const string ImageResources::QUENCHING_BUTTON_ACTIVE = IMAGE_PATH + "quenching_button_active.png";
+const string ImageResources::HAMMERING_BUTTON = IMAGE_PATH + "hammering_button.png";
+const string ImageResources::HAMMERING_BUTTON_ACTIVE = IMAGE_PATH + "hammering_button_active.png";
 
 //Audio Resources
 const string AudioResources::AUDIO_PATH = "audio/";

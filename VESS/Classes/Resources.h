@@ -10,6 +10,12 @@ public:
 	const static string GOLD_ICON_PATH;
 	const static string UPGRADE_COMPLETE_POPUP_FRAME_PATH;
 	const static string CONFIRM_BUTTON_PATH;
+	const static string SMELTING_BUTTON;
+	const static string SMELTING_BUTTON_ACTIVE;
+	const static string QUENCHING_BUTTON;
+	const static string QUENCHING_BUTTON_ACTIVE;
+	const static string HAMMERING_BUTTON;
+	const static string HAMMERING_BUTTON_ACTIVE;
 };
 
 struct AudioResources {
