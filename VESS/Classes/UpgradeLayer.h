@@ -13,6 +13,7 @@
 #include "UpgradeController.h"
 #include "UpgradeCompleteLayer.h"
 #include "Resources.h"
+#include "ui/CocosGUI.h"
 
 USING_NS_CC;
 using namespace std;
@@ -21,8 +22,9 @@ class UpgradeLayer : public Layer
 {
 public:
 	enum ZOrder {SMELTING_IMAGE, HAMMERING_IMAGE, QUENCHING_IMAGE, UPGRADE_IMAGE, REPAIR_IMAGE, COMPLETE_UPGRADE_BUTTON, DIMENSION_GATE_IMAGE, ITEM_IMAGE, ITEM_NAME,UPGRADE_COMPLETE_LAYER};
-	enum UpgradePhase { UPGRADE, REPAIR, NONE };
+	enum UpgradePhase { NONE, UPGRADE, REPAIR };
 	enum CompleteButtonPhase { CAN_CLICK , CANNOT_CLICK};
+	enum Gauge {SMELTING_GAUGE, HAMMERING_GAUGE, QUENCHING_GAUGE};
 	virtual bool init();
 	virtual void update(float delta);
 	void increaseGauge(CCProgressTimer* gauge);
@@ -34,6 +36,9 @@ public:
 	void checkLock();
 	void completeClicked();
 	void showUiButton(UpgradePhase);
+	void makeUpgradeCompleteLayer();
+	void setUpgradeButtonOpacity(UpgradePhase);
+	void clearGauge();
 	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 	virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 	virtual void onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event);
@@ -50,7 +55,6 @@ private:
 	bool lockBeforeHammering = false;
 	bool lockBeforeQuenching = false;
 	bool isUpgrade = true;
-	bool isComplete = false;
 	char attribute;	
 	UpgradePhase currentUpgradePhase;
 	CompleteButtonPhase completeButtonPhase;
@@ -58,7 +62,8 @@ private:
 	ProgressTimer *smeltingBarGauge, *hammeringBarGauge, *quenchingBarGauge;
 	Sprite* smeltingTimeOutLine, *hammeringTimeOutLine, *quenchingTimeOutLine;
 	float smeltingGaugeDownSpeed, hammeringGaugeDownSpeed, quenchingGaugeDownSpeed;
-	Sprite *smeltingImage, *hammeringImage, *quenchingImage;
+	cocos2d::ui::Button *smeltingButton, *hammeringButton, *quenchingButton;
+
 	Sprite *upgradeImage, *repairImage;
 	Sprite* completeUpgradeButton, completeRepairButton;
 	void setTouchListener();
