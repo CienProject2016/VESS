@@ -16,26 +16,32 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../../Classes/BackgroundObject.cpp \
                    ../../../Classes/BackgroundSpawnScheduler.cpp \
                    ../../../Classes/BattleOperator.cpp \
-                   ../../../Classes/DialogLayer.cpp \
+				   ../../../Classes/Dialog.cpp \
+                   ../../../Classes/DialogScene.cpp \
+				   ../../../Classes/DimensionGateController.cpp \
                    ../../../Classes/EnterScene.cpp \
-                   ../../../Classes/Event.cpp \
                    ../../../Classes/FightLayer.cpp \
                    ../../../Classes/GameData.cpp \
                    ../../../Classes/GameScene.cpp \
                    ../../../Classes/healthState.cpp \
                    ../../../Classes/Hero.cpp \
-                   ../../../Classes/Ingredient.cpp \
+				   ../../../Classes/HeroMovementState.cpp \
                    ../../../Classes/Item.cpp \
 		../../../Classes/monster.cpp \
                    ../../../Classes/MonsterSpawnScheduler.cpp \
-		../../../Classes/Settings.cpp \
+				   ../../../Classes/Reinforce.cpp \
+				   ../../../Classes/Resources.cpp \
+					../../../Classes/Settings.cpp \
+					../../../Classes/Slime.cpp \
                    ../../../Classes/Stage.cpp \
-    	         ../../../Classes/StageScene.cpp \
-                   ../../../Classes/StartScene.cpp \
+				   ../../../Classes/StageClearLayer.cpp \
+				 ../../../Classes/StartScene.cpp \
                    ../../../Classes/TestScene.cpp \
                    ../../../Classes/TextLayer.cpp \
                    ../../../Classes/Unit.cpp \
-                   ../../../Classes/Upgradelayer.cpp 
+				   ../../../Classes/UpgradeCompleteLayer.cpp \
+				   ../../../Classes/UpgradeController.cpp \
+				   ../../../Classes/UpgradeLayer.cpp 
 
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../Classes

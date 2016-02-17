@@ -48,13 +48,13 @@ void UpgradeCompleteLayer::showUpgradeInfo() {
 		nameLabel = Label::createWithSystemFont("", "Arial", 50);
 		nameLabel->setString(StringUtils::format("무기 이름 : %s", GameData::getInstance()->getSword().getName().c_str()));
 		statusLabel = Label::createWithSystemFont("", "Arial", 50);
-		statusLabel->setString(StringUtils::format("공격력: %s", to_string(GameData::getInstance()->getSword().getDamage()).c_str()));
+		statusLabel->setString(StringUtils::format("공격력: %d", GameData::getInstance()->getSword().getDamage()));
 		break;
 	case GameData::ItemMode::SHIELD:
 		nameLabel = Label::createWithSystemFont("", "Arial", 50);
 		nameLabel->setString(StringUtils::format("방패 이름 : %s", GameData::getInstance()->getShield().getName().c_str()));
 		statusLabel = Label::createWithSystemFont("", "Arial", 50);
-		statusLabel->setString(StringUtils::format("방어력 : %s", to_string(GameData::getInstance()->getShield().getDefense()).c_str()));
+		statusLabel->setString(StringUtils::format("방어력 : %d", GameData::getInstance()->getShield().getDefense()));
 		break;
 	}
 	nameLabel->setAnchorPoint(Vec2(0, 0));
@@ -74,12 +74,12 @@ void UpgradeCompleteLayer::update(float delta) {
 	auto statusLabel = (Label*)getChildByName("statusLabel");
 	switch (GameData::getInstance()->getUpgradeItemMode()) {
 	case GameData::ItemMode::SWORD:
-		nameLabel->setString(StringUtils::format("무기 이름 : %s", GameData::getInstance()->getSword().getName().c_str()));
-		statusLabel->setString(StringUtils::format("공격력: %s", to_string(GameData::getInstance()->getSword().getDamage()).c_str()));
+		nameLabel->setString(StringUtils::format("무기 이름 : %s",GameData::getInstance()->getSword().getName().c_str()));
+		statusLabel->setString(StringUtils::format("공격력: %d", GameData::getInstance()->getSword().getDamage()));
 		break;
 	case GameData::ItemMode::SHIELD:
 		nameLabel->setString(StringUtils::format("방패 이름 : %s", GameData::getInstance()->getShield().getName().c_str()));
-		statusLabel->setString(StringUtils::format("방어력 : %s", to_string(GameData::getInstance()->getShield().getDefense()).c_str()));
+		statusLabel->setString(StringUtils::format("방어력 : %d", GameData::getInstance()->getShield().getDefense()));
 		break;
 	}
 
