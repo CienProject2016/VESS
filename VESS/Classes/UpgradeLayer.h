@@ -39,6 +39,7 @@ public:
 	void makeUpgradeCompleteLayer();
 	void setUpgradeButtonOpacity(UpgradePhase);
 	void clearGauge();
+	void checkGaugeLock();
 	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 	virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 	virtual void onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event);
@@ -48,6 +49,8 @@ public:
 	CREATE_FUNC(UpgradeLayer);
 private:
 	Label* itemName;
+	Label* upgradeLabel;
+	Label* repairLabel;
 	Sprite* itemImage;	
 	Sword getSword;
 	int upgradeGold;
