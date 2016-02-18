@@ -11,39 +11,14 @@ public:
 	enum Type { SWORD, SHIELD };
 	Item();
 	~Item();
-	virtual string getName();
-	virtual void setName(string name);
-	virtual int getDurability();
-	virtual void setDurability(int durabillity);
-	virtual int getMaxDurability();
-	virtual void setMaxDurability(int maxDurabillity);
 protected :
 	CC_SYNTHESIZE(int, speed, Speed);
 	CC_SYNTHESIZE(int, upgradeId, UpgradeId);
-	string name_;
-	int durability_;
-	int max_durability_;
+	CC_SYNTHESIZE(string, name, Name);
+	CC_SYNTHESIZE(int, durability, Durability);
+	CC_SYNTHESIZE(int, maxDurability, MaxDurability);
 	Type itemType;	
 };
 
 #endif
-
-class Sword : public Item {
-private:
-	int damage_;
-public:
-	enum SwordType { Gum };
-	Sword();
-	~Sword();
-	int getDamage();
-	void setDamage(int damage);
-};
-
-class Shield : public Item {
-private :
-	CC_SYNTHESIZE(int, defense, Defense);
-public:
-	Shield();
-	~Shield();
-};
 

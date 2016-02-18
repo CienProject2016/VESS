@@ -40,8 +40,9 @@ private :
 	void initOperator();
 	void initDaughter();
 	void initHeart();
+	void initDurabilityLabel();
 
-	void redrawDurabiltyButton();
+	void redrawDurabilityButton();
 	void redrawGold();
 	void redrawTexture();
 

@@ -10,6 +10,9 @@ using namespace std;
 
 class UpgradeCompleteLayer : public Layer
 {
+private:
+	void updateUpgradeInfo();
+	void updateRepairInfo();
 public:
 	static cocos2d::Scene* createScene();
 	void confirmCallback(cocos2d::Ref*);

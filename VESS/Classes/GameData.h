@@ -12,12 +12,14 @@
 #include "rapidjson/stringbuffer.h"
 #include "rapidjson/filereadstream.h"
 #include "rapidjson/filewritestream.h"
-#include "Item.h"
+#include "Shield.h"
+#include "Sword.h"
 
 class GameData
 {
 public:
-	enum ItemMode { SWORD, SHIELD };	
+	enum ItemMode { SWORD, SHIELD };
+	enum UpgradePhase { UPGRADE, REPAIR};
 	static GameData* getInstance();
 	ItemMode getItemMode();
 	ItemMode getUpgradeItemMode();
@@ -31,12 +33,13 @@ private:
 	CC_SYNTHESIZE(int, costume, Costume);
 	CC_SYNTHESIZE(int, moving_distance, MovingDistance);
 	CC_SYNTHESIZE(vector<Dialog>*, dialogList, DialogList);
-	CC_SYNTHESIZE(vector<Sword>*, swordList, SwordList);
-	CC_SYNTHESIZE(vector<Shield>*, shieldList, ShieldList);
+	CC_SYNTHESIZE(vector<Sword*>*, swordList, SwordList);
+	CC_SYNTHESIZE(vector<Shield*>*, shieldList, ShieldList);
 	CC_SYNTHESIZE(int, needed_upgrade_gold, NeededUpgradeGold);
 	CC_SYNTHESIZE(int, needed_repair_gold , NeededRepairGold);
-	CC_SYNTHESIZE(Sword, sword, Sword);
-	CC_SYNTHESIZE(Shield, shield, Shield);
+	CC_SYNTHESIZE(Sword*, sword, Sword);
+	CC_SYNTHESIZE(Shield*, shield, Shield);
+	CC_SYNTHESIZE(UpgradePhase, recentUpgradePhase, RecentUpgradePhase);
 	GameData();
 	~GameData();
 	void setDialogInfo();

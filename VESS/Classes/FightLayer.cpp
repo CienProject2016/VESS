@@ -4,7 +4,8 @@
 #include "StageClearLayer.h"
 #include "DimensionGateController.h"
 #include "SimpleAudioEngine.h"
-#include "Resources.h"
+#include "ResourcePath.h"
+#include "DurabilityController.h"
 
 #define gold "GOLD"
 #define durabilityTag 300
@@ -24,14 +25,15 @@ bool FightLayer::init()
 	initGoldLabel();
 	initWeaponLabel();
 	initHeart();
+	initDurabilityLabel();
 
 	this->scheduleUpdate();
 
 	setTouchListener();
 
 	//효과음 준비
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioResources::SOUND_JUMP_PATH.c_str());
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioResources::SOUND_DIMENSION_GATE_PATH.c_str());
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_JUMP_PATH.c_str());
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_DIMENSION_GATE_PATH.c_str());
 
 	return true;
 }
@@ -47,15 +49,16 @@ void FightLayer::initDaughter() {
 	this->addChild(daughter, 0);
 }
 
-void FightLayer::initWeaponLabel() {
-	auto label = Label::createWithTTF("0", "fonts/arial.ttf", 50);
+void FightLayer::initDurabilityLabel() {
+	auto durabilityLabel = Label::createWithTTF("0", "fonts/arial.ttf", 50);
+	durabilityLabel->setPosition(Vec2(origin.x + visibleSize.width*0.550f, origin.y + visibleSize.height*0.15f));
+	durabilityLabel->setColor(ccc3(0, 0, 0)); //black
+	durabilityLabel->setString(StringUtils::format("%d", GameData::getInstance()->getSword()->getDurability()));
+	this->addChild(durabilityLabel, 1);
+	durabilityLabel->setName("durabilityLabel");
+}
 
-	int durabilitysword = GameData::getInstance()->getSword().getDurability();
-	label->setPosition(Vec2(origin.x + visibleSize.width*0.550f, origin.y + visibleSize.height*0.15f));
-	label->setColor(ccc3(0, 0, 0)); //black
-	label->setString(StringUtils::format("%d", durabilitysword));
-	this->addChild(label, 1);
-	label->setTag(durabilityTag);
+void FightLayer::initWeaponLabel() {
 
 	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
 		itemImage = Sprite::create("Images/sword.png");
@@ -70,9 +73,6 @@ void FightLayer::initWeaponLabel() {
 	itemName->setPosition(Vec2(visibleSize.width*0.35f, visibleSize.height * 0.7f));
 	itemName->setColor(ccc3(0, 0, 0));
 	this->addChild(itemName);
-
-
-	//dimensionMessage->setTag(dimensionTag);
 }
 
 void FightLayer::initGoldLabel() {
@@ -84,14 +84,14 @@ void FightLayer::initGoldLabel() {
 	currentGoldLabel->setName("goldLabel");
 	this->addChild(currentGoldLabel, 9999);
 
-	auto goldIcon = Sprite::create(ImageResources::GOLD_ICON_PATH);
+	auto goldIcon = Sprite::create(ImagePath::GOLD_ICON_PATH);
 	goldIcon->setPosition(Vec2(origin.x + visibleSize.width*0.49f, origin.y + visibleSize.height * 0.935f));
 	this->addChild(goldIcon);
 }
 
 void FightLayer::initButton() {
 
-	auto dimensionButton = MenuItemImage::create(ImageResources::DIMENSION_GATE_BUTTON_PATH, ImageResources::DIMENSION_GATE_BUTTON_PATH, ImageResources::DISABLE_BUTTON_PATH, CC_CALLBACK_1(FightLayer::dimensionCallback, this));
+	auto dimensionButton = MenuItemImage::create(ImagePath::DIMENSION_GATE_BUTTON_PATH, ImagePath::DIMENSION_GATE_BUTTON_PATH, ImagePath::DISABLE_BUTTON_PATH, CC_CALLBACK_1(FightLayer::dimensionCallback, this));
 	
 	dimensionButton->setScale(1.0f);
 	
@@ -100,10 +100,10 @@ void FightLayer::initButton() {
 	battleMenu->alignItemsHorizontally();
 	battleMenu->alignItemsHorizontallyWithPadding(visibleSize.width*0.05f);
 
-	auto durabiltyIcon = Sprite::create(ImageResources::SWORD_DURABILTY_ICON);
-	durabiltyIcon->setPosition(Vec2(origin.x + visibleSize.width * 0.49f, origin.y + visibleSize.height * 0.16f));
-	durabiltyIcon->setName("durabiltyIcon");
-	this->addChild(durabiltyIcon);
+	auto durabilityIcon = Sprite::create(ImagePath::SWORD_DURABILITY_ICON);
+	durabilityIcon->setPosition(Vec2(origin.x + visibleSize.width * 0.49f, origin.y + visibleSize.height * 0.16f));
+	durabilityIcon->setName("durabilityIcon");
+	this->addChild(durabilityIcon);
 
 	// add the sprite as a child to this layer
 	this->addChild(battleMenu, 2);
@@ -142,16 +142,17 @@ void FightLayer::initBackground() {
 void FightLayer::redrawGold() {
 	int currentGold = GameData::getInstance()->getGold();
 	currentGoldLabel->setString(StringUtils::format("%d", currentGold));
+
 }
 
 void FightLayer::redrawTexture() {
 	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
 		itemImage->setTexture("Images/sword.png");
-		itemName->setString(GameData::getInstance()->getSword().getName());
+		itemName->setString(GameData::getInstance()->getSword()->getName());
 	}
 	else {
 		itemImage->setTexture("Images/shield.png");
-		itemName->setString(GameData::getInstance()->getShield().getName());
+		itemName->setString(GameData::getInstance()->getShield()->getName());
 	}
 }
 
@@ -182,21 +183,24 @@ void FightLayer::monsterSpawnUpdate(float delta) {
 }
 
 void FightLayer::update(float delta) {
-	redrawDurabiltyButton();
+	redrawDurabilityButton();
 	redrawTexture();
 	monsterSpawnUpdate(delta);
 	backgroundSpawnScheduler.update(delta);
-
+	redrawGold();
 }
 
-void FightLayer::redrawDurabiltyButton() {
-	auto durabiltyIcon = (Sprite*)this->getChildByName("durabiltyIcon");
+void FightLayer::redrawDurabilityButton() {
+	auto durabilityIcon = (Sprite*)this->getChildByName("durabilityIcon");
+	auto durabilityLabel = (Label*)this->getChildByName("durabilityLabel");
 	switch (GameData::getInstance()->getItemMode()) {
 	case GameData::ItemMode::SWORD:
-		durabiltyIcon->setTexture(ImageResources::SWORD_DURABILTY_ICON);
+		durabilityIcon->setTexture(ImagePath::SWORD_DURABILITY_ICON);
+		durabilityLabel->setString(StringUtils::format("%d", GameData::getInstance()->getSword()->getDurability()));
 		break;
 	case GameData::ItemMode::SHIELD:
-		durabiltyIcon->setTexture(ImageResources::SHIELD_DURABILTY_ICON);
+		durabilityIcon->setTexture(ImagePath::SHIELD_DURABILITY_ICON);
+		durabilityLabel->setString(StringUtils::format("%d", GameData::getInstance()->getShield()->getDurability()));
 		break;
 	}
 }
@@ -216,7 +220,7 @@ void FightLayer::stageClear() {
 void FightLayer::dimensionCallback(cocos2d::Ref* pSender)
 {
 	DimensionGateController::changeItemPosition();
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioResources::SOUND_DIMENSION_GATE_PATH.c_str());
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_DIMENSION_GATE_PATH.c_str());
 }
 
 
@@ -236,11 +240,20 @@ void FightLayer::sitCallback(cocos2d::Ref* pSender)
 {
 	daughter->startSitDown();
 }
+
 void FightLayer::reduceDurability() {
-	auto label = (Label*)this->getChildByTag(durabilityTag);
-	int durability = GameData::getInstance()->getSword().getDurability();
-	GameData::getInstance()->getSword().setDurability(durability - 1);
-	label->setString(StringUtils::format("%d", durability));
+	auto durabilityLabel = (Label*)this->getChildByName("durabilityLabel");
+	switch (GameData::getInstance()->getItemMode()) {
+	case GameData::ItemMode::SWORD:
+		DurabilityController::reduceDurability(Item::Type::SWORD, 1);
+		durabilityLabel->setString(StringUtils::format("%d", GameData::getInstance()->getSword()->getDurability()));
+		break;
+	case GameData::ItemMode::SHIELD:
+		DurabilityController::reduceDurability(Item::Type::SHIELD, 1);
+		durabilityLabel->setString(StringUtils::format("%d", GameData::getInstance()->getShield()->getDurability()));
+		break;
+	}
+	
 }
 
 

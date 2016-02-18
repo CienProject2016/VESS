@@ -69,8 +69,6 @@ void AttackMovementState::update(float delta) {
 	verticalVelocity -= delta * gravity;
 	//parent->setPositionY(parent->getPositionY() + verticalVelocity);
 	//parent->setPositionX(parent->getPositionX() + direction * delta * moveDistance / maxTime);
-	parent->setPositionY(parent->getPositionY() + verticalVelocity);
-	parent->setPositionX(parent->getPositionX() + direction * delta * movingDistance / maxTime);
 	timer += delta;
 }
 void AttackMovementState::attackEvent() {
