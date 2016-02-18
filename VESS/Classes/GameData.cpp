@@ -9,6 +9,8 @@ GameData::GameData() : moving_distance_(0), itemMode(ItemMode::SWORD), stage_(),
 	
 	//강화 정보 설정
 	setUpgradeInfo();
+
+	setTutorialInfo();
 }
 
 GameData::~GameData()
@@ -37,18 +39,6 @@ void GameData::setTutorialInfo() {
 	for (auto iter = data.Begin(); iter != data.End(); iter++) {
 		Tutorial tutorial;
 		
-		if ((*iter)["position"] == NULL) {
-			tutorial.setPosition(Tutorial::Position::RIGHT);
-			log("GameData - Dialog position 정보 없음");
-		}
-		else {
-			if ((*iter)["position"] == "left") {
-				tutorial.setPosition(Tutorial::Position::LEFT);
-			}
-			else {
-				tutorial.setPosition(Tutorial::Position::RIGHT);
-			}
-		}
 		
 		if ((*iter)["lines"] == NULL) {
 			log("GameData - Dialog lines정보 없음");

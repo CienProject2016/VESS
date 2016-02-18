@@ -19,12 +19,12 @@ bool TutorialLayer::init()
 	tutorial_layer->setPosition(Vec2(0, 0));
 	this->addChild(tutorial_layer, 0, "tutorialLayer");
 
-	/*
-	tutorialData = GameData::getInstance()->getDialogList();
+	
+	tutorialData = GameData::getInstance()->getTutorialList();
 	tutorialIterator = tutorialData->begin();
 	
 
-	auto tutorial = CCString::createWithFormat((*tutorialIterator).getDialogue().c_str(), 50);
+	auto tutorial = CCString::createWithFormat((*tutorialIterator).getTutorial().c_str(), 50);
 	auto tutorialLabel = CCLabelTTF::create(tutorial->getCString(), "Arial", 50);
 	tutorialLabel->setAnchorPoint(Vec2(0, 0));
 	tutorialLabel->setColor(Color3B::WHITE);
@@ -32,11 +32,11 @@ bool TutorialLayer::init()
 	tutorial_layer->addChild(tutorialLabel, 1, "tutorialLabel");
 
 	tutorialIterator++;
-	*/
+	
 	this->setTouchListener();
 	return true;
 }
-/*
+
 bool TutorialLayer::hasNextTutorial()
 {
 	if (tutorialIterator != tutorialData->end()) {
@@ -47,11 +47,11 @@ bool TutorialLayer::hasNextTutorial()
 void TutorialLayer::showNextTutorial()
 {
 	CCLayer* tutorial_layer = (CCLayer*) this->getChildByName("tutorialLayer");
-	auto tutorial = CCString::createWithFormat((*tutorialIterator).getDialogue().c_str(), 50);
+	auto tutorial = CCString::createWithFormat((*tutorialIterator).getTutorial().c_str(), 50);
 	auto tutorialLabel = (CCLabelTTF*)tutorial_layer->getChildByName("tutorialLabel");
 	tutorialLabel->setString(tutorial->getCString());
 	tutorialIterator++;
-}*/
+}
 void TutorialLayer::setTouchListener()
 {
 	// make touch listener
@@ -80,13 +80,13 @@ void TutorialLayer::onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unus
 
 void TutorialLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
 {
-	/*if (hasNextTutorial()) {
+	if (hasNextTutorial()) {
 		showNextTutorial();
 	}
 	else {
 		Scene *gameScene = GameScene::createScene();
 		Director::getInstance()->replaceScene(TransitionFade::create(0.5, gameScene, Color3B(0, 255, 255)));
 	}
-	log("Touched");*/
+	log("Touched");
 
 }

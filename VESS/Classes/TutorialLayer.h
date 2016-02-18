@@ -17,15 +17,15 @@ class TutorialLayer : public Layer
 		virtual void onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 		virtual void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 
-		//vector<Tutorial> *tutorialData;
-		//vector<Tutorial>::iterator tutorialIterator;
+		vector<Tutorial> *tutorialData;
+		vector<Tutorial>::iterator tutorialIterator;
 
 		void setTouchListener();
 
 	public:
 		bool init();
-		//bool hasNextTutorial();
-		//void showNextTutorial();
+		bool hasNextTutorial();
+		void showNextTutorial();
 		CREATE_FUNC(TutorialLayer);
 };
 #endif
