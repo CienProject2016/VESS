@@ -22,10 +22,8 @@ public:
 	void createBackgound(EnumBackground::OBJECT object);
 	void monsterDead();
 	CREATE_FUNC(FightLayer);
-
-	void redrawTexture();
+	
 	void monsterSpawnUpdate(float delta);
-	void redrawGold();
 
 	Monster* getMonster();
 	Hero* getDaughter();
@@ -42,6 +40,10 @@ private :
 	void initOperator();
 	void initDaughter();
 	void initHeart();
+
+	void redrawDurabiltyButton();
+	void redrawGold();
+	void redrawTexture();
 
 	float movingDistanceReal = 0;		//int 형으로 변환할 때 소수값을 잃지 않기 위해 선언.
 	float movingVelocity = 50;			//단위 : 거리/초
@@ -66,6 +68,7 @@ private :
 	void jumpCallback(cocos2d::Ref* pSender);
 	void sitCallback(cocos2d::Ref* pSender);
 	void reduceDurability();
+	
 	void setTouchListener();
 
 	int damage = 20;

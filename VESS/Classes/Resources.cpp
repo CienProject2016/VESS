@@ -14,6 +14,8 @@ const string ImageResources::QUENCHING_BUTTON = IMAGE_PATH + "quenching_button.p
 const string ImageResources::QUENCHING_BUTTON_ACTIVE = IMAGE_PATH + "quenching_button_active.png";
 const string ImageResources::HAMMERING_BUTTON = IMAGE_PATH + "hammering_button.png";
 const string ImageResources::HAMMERING_BUTTON_ACTIVE = IMAGE_PATH + "hammering_button_active.png";
+const string ImageResources::SWORD_DURABILTY_ICON = IMAGE_PATH + "sword_durabilty_icon.png";
+const string ImageResources::SHIELD_DURABILTY_ICON = IMAGE_PATH + "shield_durabilty_icon.png";
 
 //Audio Resources
 const string AudioResources::AUDIO_PATH = "audio/";

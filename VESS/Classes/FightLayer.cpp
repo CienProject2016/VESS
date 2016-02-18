@@ -92,19 +92,18 @@ void FightLayer::initGoldLabel() {
 void FightLayer::initButton() {
 
 	auto dimensionButton = MenuItemImage::create(ImageResources::DIMENSION_GATE_BUTTON_PATH, ImageResources::DIMENSION_GATE_BUTTON_PATH, ImageResources::DISABLE_BUTTON_PATH, CC_CALLBACK_1(FightLayer::dimensionCallback, this));
-	auto attackButton = MenuItemImage::create("Images/AttackButton.png", "Images/AttackButton.png", ImageResources::DISABLE_BUTTON_PATH, CC_CALLBACK_1(FightLayer::attackCallback, this));
-	auto jumpButton = MenuItemImage::create(ImageResources::JUMP_BUTTON_PATH, ImageResources::JUMP_BUTTON_PATH, ImageResources::DISABLE_BUTTON_PATH, CC_CALLBACK_1(FightLayer::jumpCallback, this));
-
+	
 	dimensionButton->setScale(1.0f);
-	attackButton->setScale(2.0f);
-	jumpButton->setScale(1.5f);
-
-	auto battleMenu = Menu::create(dimensionButton, attackButton, jumpButton, NULL);//sit_Button
-	battleMenu->setPosition(Vec2(origin.x + visibleSize.width*0.325f, origin.y + visibleSize.height*0.15f));
+	
+	auto battleMenu = Menu::create(dimensionButton, NULL);
+	battleMenu->setPosition(Vec2(origin.x + visibleSize.width*0.18f, origin.y + visibleSize.height*0.15f));
 	battleMenu->alignItemsHorizontally();
 	battleMenu->alignItemsHorizontallyWithPadding(visibleSize.width*0.05f);
 
-
+	auto durabiltyIcon = Sprite::create(ImageResources::SWORD_DURABILTY_ICON);
+	durabiltyIcon->setPosition(Vec2(origin.x + visibleSize.width * 0.49f, origin.y + visibleSize.height * 0.16f));
+	durabiltyIcon->setName("durabiltyIcon");
+	this->addChild(durabiltyIcon);
 
 	// add the sprite as a child to this layer
 	this->addChild(battleMenu, 2);
@@ -183,11 +182,23 @@ void FightLayer::monsterSpawnUpdate(float delta) {
 }
 
 void FightLayer::update(float delta) {
-
+	redrawDurabiltyButton();
 	redrawTexture();
 	monsterSpawnUpdate(delta);
 	backgroundSpawnScheduler.update(delta);
 
+}
+
+void FightLayer::redrawDurabiltyButton() {
+	auto durabiltyIcon = (Sprite*)this->getChildByName("durabiltyIcon");
+	switch (GameData::getInstance()->getItemMode()) {
+	case GameData::ItemMode::SWORD:
+		durabiltyIcon->setTexture(ImageResources::SWORD_DURABILTY_ICON);
+		break;
+	case GameData::ItemMode::SHIELD:
+		durabiltyIcon->setTexture(ImageResources::SHIELD_DURABILTY_ICON);
+		break;
+	}
 }
 
 void FightLayer::stageClear() {
