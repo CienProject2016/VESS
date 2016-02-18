@@ -3,6 +3,7 @@
 #include "Stage.h"
 #include "Hero.h"
 #include "Dialog.h"
+#include "Tutorial.h"
 #include "rapidjson/rapidjson.h"
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
@@ -29,11 +30,12 @@ private:
 	CC_SYNTHESIZE(int, costume_, Costume);
 	CC_SYNTHESIZE(int, moving_distance_, MovingDistance);
 	CC_SYNTHESIZE(vector<Dialog>*, dialogList_, DialogList);
+	CC_SYNTHESIZE(vector<Tutorial>*, tutorialList_, TutorialList);
 	CC_SYNTHESIZE(int, needed_upgrade_gold_, NeededUpgradeGold);
 	CC_SYNTHESIZE(int, needed_repair_gold_ , NeededRepairGold);
 	CC_SYNTHESIZE(Sword, sword_, Sword);
 	CC_SYNTHESIZE(Shield, shield_, Shield);
-
+	void setTutorialInfo();
 	rapidjson::Document upgradeSwordInfo;
 	rapidjson::Document upgradeShieldInfo;
 	GameData();

@@ -25,6 +25,41 @@ GameData* GameData::getInstance()
 	return instance_;
 }
 
+void GameData::setTutorialInfo() {
+	auto tutorialFileData = FileUtils::getInstance()->getStringFromFile("json/tutorial.json");
+
+	tutorialList_ = new vector<Tutorial>();
+	rapidjson::Document doc;
+	doc.Parse(tutorialFileData.c_str());
+
+	auto& data = doc["opening"];
+
+	for (auto iter = data.Begin(); iter != data.End(); iter++) {
+		Tutorial tutorial;
+		
+		if ((*iter)["position"] == NULL) {
+			tutorial.setPosition(Tutorial::Position::RIGHT);
+			log("GameData - Dialog position 정보 없음");
+		}
+		else {
+			if ((*iter)["position"] == "left") {
+				tutorial.setPosition(Tutorial::Position::LEFT);
+			}
+			else {
+				tutorial.setPosition(Tutorial::Position::RIGHT);
+			}
+		}
+		
+		if ((*iter)["lines"] == NULL) {
+			log("GameData - Dialog lines정보 없음");
+			tutorial.setTutorial("");
+		}
+		else {
+			tutorial.setTutorial((*iter)["lines"].GetString());
+		}
+		tutorialList_->push_back(tutorial);
+	}
+}
 void GameData::setDialogInfo() {
 	auto dialogFileData = FileUtils::getInstance()->getStringFromFile("json/dialog.json");
 
@@ -63,7 +98,7 @@ void GameData::setDialogInfo() {
 				dialog.setPosition(Dialog::Position::RIGHT);
 			}
 		}
-		
+
 		if ((*iter)["lines"] == NULL) {
 			log("GameData - Dialog lines정보 없음");
 			dialog.setDialogue("");

@@ -172,6 +172,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Settings.cpp" />
     <ClCompile Include="..\Classes\Stage.cpp" />
     <ClCompile Include="..\Classes\GameData.cpp" />
+    <ClCompile Include="..\Classes\Tutorial.cpp" />
     <ClCompile Include="..\Classes\TutorialLayer.cpp" />
     <ClCompile Include="..\Classes\Unit.cpp" />
     <ClCompile Include="..\Classes\UpgradeCompleteLayer.cpp" />
@@ -203,6 +204,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\MonsterSpawnScheduler.h" />
     <ClInclude Include="..\Classes\Settings.h" />
     <ClInclude Include="..\Classes\Stage.h" />
+    <ClInclude Include="..\Classes\Tutorial.h" />
     <ClInclude Include="..\Classes\TutorialLayer.h" />
     <ClInclude Include="..\Classes\Unit.h" />
     <ClInclude Include="..\Classes\UpgradeCompleteLayer.h" />
