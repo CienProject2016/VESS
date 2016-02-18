@@ -20,6 +20,7 @@ protected:
 	Node* image;
 	Size windowSize;
 	Vec2 origin;
+	int damageMonsterGive =1;
 public:
 	RepeatForever* makeAction(char* plist, int imageCount, char* imageName, float frameTime);
 	bool isDead();

@@ -111,12 +111,14 @@ void FightLayer::initButton() {
 
 void FightLayer::initHeart() {
 	heart = (Sprite**)malloc(sizeof(Sprite*) * 3);
-	for (int i = 0; i < 3; i++) {
-		heart[i] = Sprite::create("Images/heart.png");
-		heart[i]->setTag(100000 + i);
-		heart[i]->setPosition(Vec2(fightLayerSize.width*(0.13f + 0.08f * i), fightLayerSize.height*0.93f));
-		heart[i]->setScale(0.55f);
-		this->addChild(heart[i]);
+
+	temp = lifeCount;
+	for (; temp < fullLifeCount; temp++) {
+		heart[temp] = Sprite::create("Images/heart.png");
+		heart[temp]->setTag(100000 + temp);
+		heart[temp]->setPosition(Vec2(fightLayerSize.width*(0.13f + 0.08f * temp), fightLayerSize.height*0.93f));
+		heart[temp]->setScale(0.55f);
+		this->addChild(heart[temp]);
 	}
 }
 
@@ -186,7 +188,7 @@ void FightLayer::update(float delta) {
 	redrawTexture();
 	monsterSpawnUpdate(delta);
 	backgroundSpawnScheduler.update(delta);
-
+	daughter->HeroLIfeCount(1);
 }
 
 void FightLayer::redrawDurabiltyButton() {
@@ -311,6 +313,18 @@ Monster* FightLayer::getMonster() {
 }
 Hero* FightLayer::getDaughter() {
 	return daughter;
+}
+
+void FightLayer::disappearHeartImage()
+{
+
+	if (lifeCount < fullLifeCount)
+	{
+		lifeCount--;
+		fullLifeCount = lifeCount;
+
+		heart[temp]->setOpacity(0);
+	}
 }
 
 void FightLayer::monsterDead() {

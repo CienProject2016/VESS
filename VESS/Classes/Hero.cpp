@@ -1,7 +1,7 @@
 ﻿#include "Hero.h"
 #include "FightLayer.h"
 #include "Resources.h"
-
+#include "Monster.h"
 #define ANIMATION 10000
 
 bool Hero::init()
@@ -112,4 +112,13 @@ void Hero::setMovementState(HeroMovementState* state) {
 	}
 	movementState = state;
 	action->gotoFrameAndPlay(0, 16, true);//달리는 모션
+}
+
+void Hero::HeroLIfeCount(int damageMonsterGive)
+{
+	if (damageMonsterGive != 0)
+	{
+		fakeHp -= damageMonsterGive;
+		field->disappearHeartImage();
+	}
 }

@@ -27,6 +27,8 @@ public:
 
 	Monster* getMonster();
 	Hero* getDaughter();
+
+	void disappearHeartImage();
 private : 
 	Size visibleSize;
 	Vec2 origin;
@@ -71,8 +73,10 @@ private :
 	
 	void setTouchListener();
 
+	int lifeCount = 3;
+	int fullLifeCount = lifeCount;
 	int damage = 20;
-
+	int temp;
 };
 
 #endif
