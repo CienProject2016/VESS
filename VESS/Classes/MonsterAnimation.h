@@ -6,12 +6,16 @@
 
 class MonsterAnimation {
 private:
+	enum animKind {stand, attack0, attack1, attack2, attack3, dead, damage};
 	void ReadyForPlist(char* plist);
 	RepeatForever* makeAction(int imageCount, char* imageName, float frameTime);
+	RepeatForever* makeAction(animKind kind);
 	Monster* monster;
 	MonsterAnimation();
-	RepeatForever *stand, **attack, *damage, *dead;
+
 	int attackCount;
+	void changeAction(animKind kind);
+
 public:
 	MonsterAnimation(Monster* monster);
 	void playAttack(int num);

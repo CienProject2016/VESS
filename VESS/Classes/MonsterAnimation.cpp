@@ -22,6 +22,22 @@ MonsterAnimation::MonsterAnimation(Monster* monster) {
 	}
 }
 
+void MonsterAnimation::changeAction(animKind kind) {
+	monster->image->stopAllActions();
+	//monster->image->runAction(animation);
+	monster->removeChild(monster->image);
+
+	
+	monster->image = Sprite::create("animation/basic_slime/stand/basic_slime_stand_00.png");
+	monster->image->setPosition(Vec2(fightLayerSize.width * 0.7f - 190, fightLayerSize.height * 0.4f + 110));
+	monster->image->setScale(2.8f);
+	monster->addChild(monster->image);
+	
+	monster->image->runAction(makeAction(20, "basic_slime_attack0_", 0.05f));
+
+
+}
+
 void MonsterAnimation::playAttack(int num) {
 	int number = 0;
 	if (num < attackCount && 0 <= num) number = num;
@@ -29,8 +45,7 @@ void MonsterAnimation::playAttack(int num) {
 	case Monster::Tauren:
 		break;
 	case Monster::Slime:
-		monster->image->stopAction(stand);
-		monster->image->runAction(attack[0]);
+		changeAction(attack[num]);
 		break;
 	}
 }
@@ -41,9 +56,13 @@ void MonsterAnimation::playStand() {
 	case Monster::Tauren:
 		break;
 	case Monster::Slime:
-		monster->image->runAction(stand);
+		changeAction(stand);
 		break;
 	}
+}
+
+RepeatForever* makeAction(animKind kind) {
+
 }
 
 void MonsterAnimation::ReadyForPlist(char* plist) {

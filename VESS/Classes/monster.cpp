@@ -125,9 +125,11 @@ MonsterBehaviorPattern::MonsterBehaviorPattern(Monster* parent) {
 	maxTimer = 3;
 	state = stand;
 	monster = parent;
-	//playAnimationForState();
+	playAnimationForState();
 }
-bool isStandState();
+bool MonsterBehaviorPattern::isStandState() {
+	return true;
+}
 
 MonsterBehaviorPattern::MonsterBehaviorPattern() {}
 
