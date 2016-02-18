@@ -16,6 +16,8 @@ public:
 	const static string QUENCHING_BUTTON_ACTIVE;
 	const static string HAMMERING_BUTTON;
 	const static string HAMMERING_BUTTON_ACTIVE;
+	const static string SWORD_DURABILTY_ICON;
+	const static string SHIELD_DURABILTY_ICON;
 };
 
 struct AudioResources {
