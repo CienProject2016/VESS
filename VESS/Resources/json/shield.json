@@ -1,7 +1,7 @@
 {
-  "ë°©íŒ¨": [
+  "¹æÆĞ": [
     {
-      "name": "ë²½ëŒ",
+      "name": "º®µ¹",
       "defense": 64,
       "speed": 1,
 	  "upgrade": 20,
@@ -9,7 +9,7 @@
       "durability": 20
     },
     {
-      "name": "ì¼ë°˜ ë²½ëŒ",
+      "name": "ÀÏ¹İ º®µ¹",
       "defense": 97,
       "speed": 1,
 	  "upgrade": 100,
@@ -17,7 +17,7 @@
       "durability": 25
     },
     {
-      "name": "ë‹¤ë“¬ì–´ì§„ ë²½ëŒ",
+      "name": "´Ùµë¾îÁø º®µ¹",
       "defense": 162,
       "speed": 1,
 	  "upgrade": 600,
