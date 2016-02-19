@@ -9,7 +9,7 @@
 
 #define gold "GOLD"
 #define durabilityTag 300
-#define kFinalDistance 4001
+#define kFinalDistance 2501
 
 bool FightLayer::init()
 {
