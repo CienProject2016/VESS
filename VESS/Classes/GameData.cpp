@@ -9,6 +9,8 @@ GameData::GameData() : moving_distance(0), sword(), shield(), itemMode(ItemMode:
 	
 	//강화 정보 설정
 	setUpgradeInfo();
+
+	setTutorialInfo();
 }
 
 GameData::~GameData()
@@ -25,6 +27,29 @@ GameData* GameData::getInstance()
 	return instance_;
 }
 
+void GameData::setTutorialInfo() {
+	auto tutorialFileData = FileUtils::getInstance()->getStringFromFile("json/tutorial.json");
+
+	tutorialList_ = new vector<Tutorial>();
+	rapidjson::Document doc;
+	doc.Parse(tutorialFileData.c_str());
+
+	auto& data = doc["opening"];
+
+	for (auto iter = data.Begin(); iter != data.End(); iter++) {
+		Tutorial tutorial;
+		
+		
+		if ((*iter)["lines"] == NULL) {
+			log("GameData - Dialog lines정보 없음");
+			tutorial.setTutorial("");
+		}
+		else {
+			tutorial.setTutorial((*iter)["lines"].GetString());
+		}
+		tutorialList_->push_back(tutorial);
+	}
+}
 void GameData::setDialogInfo() {
 	auto dialogFileData = FileUtils::getInstance()->getStringFromFile("json/dialog.json");
 
@@ -63,7 +88,7 @@ void GameData::setDialogInfo() {
 				dialog.setPosition(Dialog::Position::RIGHT);
 			}
 		}
-		
+
 		if ((*iter)["lines"] == NULL) {
 			log("GameData - Dialog lines정보 없음");
 			dialog.setDialogue("");

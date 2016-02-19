@@ -1,8 +1,10 @@
 #include "GameScene.h"
 
+#include "UpgradeLayer.h"
+#include "FightLayer.h"
+#include "TutorialLayer.h"
 #include "GameData.h"
 #include "Stage.h"
-
 #include "SimpleAudioEngine.h"
 
 USING_NS_CC;
@@ -23,6 +25,7 @@ Scene* GameScene::createScene()
 	// 'layer' is an autorelease object
 	auto upgrade_layer = UpgradeLayer::create();
 	auto fight_layer = FightLayer::create();
+	auto tutorial_layer = TutorialLayer::create();
 
 	upgrade_layer->setContentSize(Size(760, 1080));
 	upgrade_layer->setPosition(Vec2(0 , 0));//강화창
@@ -30,10 +33,14 @@ Scene* GameScene::createScene()
 	fight_layer->setContentSize(Size(1160, 1080));
 	fight_layer->setPosition(Vec2(760, 0));//전투창
 
+	tutorial_layer->setContentSize(Size(1160,1080));
+	tutorial_layer->setPosition(Vec2(838, 0));//튜토리얼창
+
 	// add layer as a child to scene
 	scene->addChild(upgrade_layer,1,"upgradeLayer");
 	scene->addChild(fight_layer,0);
-	
+	scene->addChild(tutorial_layer, 2);
+
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("audio/bgm_neorock.mp3");
 	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("audio/bgm_neorock.mp3");
 	// return the scene
@@ -55,9 +62,11 @@ bool GameScene::init()
 
 	auto upgrade_layer = UpgradeLayer::create();
 	auto fight_layer = FightLayer::create();
+	auto tutorial_layer = TutorialLayer::create();
 	this->addChild(upgrade_layer);
 	this->addChild(fight_layer);	
-
+	this->addChild(tutorial_layer);
+	
 	return true;
 }
 

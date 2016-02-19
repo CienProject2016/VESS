@@ -6,6 +6,7 @@
 #include "Stage.h"
 #include "Hero.h"
 #include "Dialog.h"
+#include "Tutorial.h"
 #include "rapidjson/rapidjson.h"
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
@@ -27,6 +28,8 @@ public:
 private:
 	ItemMode itemMode;
 	static GameData* instance_;
+	CC_SYNTHESIZE(vector<Tutorial>*, tutorialList_, TutorialList);
+	void setTutorialInfo();
 	CC_SYNTHESIZE(Stage, stage, Stage);
 	CC_SYNTHESIZE(int, hero_hp, HeroHp);
 	CC_SYNTHESIZE(int, gold, Gold);

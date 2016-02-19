@@ -177,6 +177,12 @@
     <ClCompile Include="..\Classes\MiniPopupLayer.cpp">
       <Filter>src\View\Layer</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\TutorialLayer.cpp">
+      <Filter>src\View\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Tutorial.cpp">
+      <Filter>src\Model\Data</Filter>
+	</ClCompile>
     <ClCompile Include="..\Classes\MonsterAnimation.cpp">
       <Filter>src\Model\Unit</Filter>
     </ClCompile>
@@ -319,6 +325,12 @@
     <ClInclude Include="..\Classes\MiniPopupLayer.h">
       <Filter>src\View\Layer</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\TutorialLayer.h">
+      <Filter>src\View\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tutorial.h">
+      <Filter>src\Model\Data</Filter>
+	</ClInclude>
     <ClInclude Include="..\Classes\MonsterAnimation.h">
       <Filter>src\Model\Unit</Filter>
     </ClInclude>
