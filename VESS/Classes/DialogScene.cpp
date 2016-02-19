@@ -52,7 +52,7 @@ bool DialogScene::init()
 	string imagePath = (*dialogIterator).getImage();
 	auto faceImage = Sprite::create("Images/" + imagePath + ".png");
 	faceImage->setAnchorPoint(Vec2(0, 0));
-	faceImage->setPosition(Vec2(visibleSize.width*0.7f, visibleSize.height *0.15f));
+	faceImage->setPosition(Vec2(visibleSize.width*0.6f, visibleSize.height *0.15f));
 	dialogLayer->addChild(faceImage, 3, "faceImage");
 
 

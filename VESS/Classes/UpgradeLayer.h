@@ -38,6 +38,7 @@ public:
 	void initMiniPopup(string);
 	void setListener();
 
+	void redrawUpgradeGoldLabel();
 	void increaseGauge(CCProgressTimer* gauge);
 	void upgradeClicked();
 	void repairClicked();

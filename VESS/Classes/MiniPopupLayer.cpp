@@ -29,7 +29,7 @@ bool MiniPopupLayer::init(string createMessage) {
 	this->addChild(miniPopupFrameImage);
 
 	auto popupMessage = Label::createWithSystemFont("", "Arial", 50);
-	popupMessage->setString("°ñµå°¡ ºÎÁ·ÇÕ´Ï´Ù");
+	popupMessage->setString("ê³¨ë“œê°€ ë¶€ì¡±í•©?ˆë‹¤");
 	popupMessage->setPosition(visibleSize.width * 0.5f, visibleSize.height * 0.5f);
 	this->addChild(popupMessage);
 
