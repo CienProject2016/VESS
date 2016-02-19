@@ -28,7 +28,7 @@ public:
 	MonsterAnimation* anim;
 	MonsterBehaviorPattern* behavior;
 
-	static Monster* create(FightLayer* layer, Monster::Kind);
+	static Monster* create(FightLayer* layer, Monster::Kind, int health);
 
 	void dropItem();
 	void damage(int dam);

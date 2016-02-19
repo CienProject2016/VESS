@@ -28,8 +28,10 @@ public:
 private:
 	ItemMode itemMode;
 	static GameData* instance_;
-	CC_SYNTHESIZE(vector<Tutorial>*, tutorialList_, TutorialList);
+	CC_SYNTHESIZE(vector<Tutorial>*, tutorialList, TutorialList);
+	CC_SYNTHESIZE(vector<Stage>*, stageList, StageList);
 	void setTutorialInfo();
+	CC_SYNTHESIZE(int, stageLevel, StageLevel);
 	CC_SYNTHESIZE(Stage, stage, Stage);
 	CC_SYNTHESIZE(int, hero_hp, HeroHp);
 	CC_SYNTHESIZE(int, gold, Gold);
@@ -47,6 +49,7 @@ private:
 	~GameData();
 	void setDialogInfo();
 	void setUpgradeInfo();
+	void setStageInfo();
 
 };
 

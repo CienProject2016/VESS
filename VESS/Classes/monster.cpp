@@ -87,10 +87,11 @@ void Monster::initHp() {
 	//hpBarDecreasing = CCProgressTimer::create(hpBar);
 }
 
-Monster* Monster::create(FightLayer* layer, Monster::Kind kind)
+Monster* Monster::create(FightLayer* layer, Monster::Kind kind, int health)
 {
 	Monster *monster = new Monster();
 	monster->init(layer, kind);
+	monster->setHp(health);
 	monster->autorelease();
 	return monster;
 }
@@ -108,7 +109,9 @@ void Monster::damage(int dam) {
 	log("monster HP is : %d", hp);
 	if (hp <= 0) {
 		int currentGold = GameData::getInstance()->getGold();
-		GameData::getInstance()->setGold(currentGold + 50);
+		int currentStageLevel = GameData::getInstance()->getStageLevel();
+		int monsterGold = GameData::getInstance()->getStageList()->at(currentStageLevel - 1).getGold();
+		GameData::getInstance()->setGold(currentGold + monsterGold);
 		field->monsterDead();
 	}
 }
