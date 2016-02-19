@@ -3,6 +3,8 @@
 //Image Resources
 const string ImagePath::IMAGE_PATH = "Images/";
 const string ImagePath::MINI_POPUP_IMAGE = IMAGE_PATH + "mini_popup.png";
+const string ImagePath::UPGRADE_BUTTON = IMAGE_PATH + "upgrade_button.png";
+const string ImagePath::REPAIR_BUTTON = IMAGE_PATH + "repair_button.png";
 const string ImagePath::UPGRADE_BEFORE_COMPLETE = IMAGE_PATH + "upgrade_before_complete.png";
 const string ImagePath::REPAIR_BEFORE_COMPLETE = IMAGE_PATH + "repair_before_complete.png";
 const string ImagePath::UPGRADE_AFTER_COMPLETE = IMAGE_PATH + "upgrade_after_complete.png";
