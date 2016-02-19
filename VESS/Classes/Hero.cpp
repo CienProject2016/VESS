@@ -95,7 +95,8 @@ void Hero::startJump() {
 
 void Hero::attackDamage() {
 	if (field->getMonster() != NULL) {
-		field->getMonster()->damage(30);
+		int damage = GameData::getInstance()->getSword()->getDamage();
+		field->getMonster()->damage(damage);
 		attackEffect(30);
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_ATTACK_PATH.c_str());
 	}

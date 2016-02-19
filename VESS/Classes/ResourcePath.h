@@ -26,6 +26,9 @@ public:
 	const static string HAMMERING_BUTTON_ACTIVE;
 	const static string SWORD_DURABILITY_ICON;
 	const static string SHIELD_DURABILITY_ICON;
+	const static string DUNGEON_DOOR_BEFORE;
+	const static string DUNGEON_DOOR_AFTER;
+	
 };
 
 struct AudioPath {
@@ -36,6 +39,7 @@ public:
 	const static string SOUND_DIMENSION_GATE_PATH;
 	const static string SOUND_JUMP_PATH;
 	const static string SOUND_ATTACK_PATH;
+	const static string SOUND_OPEN_DOOR;
 };
 
 struct ElementPath {

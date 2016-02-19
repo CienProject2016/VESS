@@ -160,7 +160,7 @@ void FightLayer::redrawTexture() {
 void FightLayer::monsterSpawnUpdate(float delta) {
 	int moving_distance = GameData::getInstance()->getMovingDistance();
 	int stageLevel = GameData::getInstance()->getStageLevel();
-	Stage stageData = GameData::getInstance()->getStageList()->at(stageLevel - 1);
+	Stage stageData = GameData::getInstance()->getStageList()->at(stageLevel);
 	vector<int> distance_data = stageData.getMonsterLengthInfo();
 	int monsterHealth = stageData.getHealth();
 	if (MonsterSpawnScheduler::isMonsterSpawnTime(moving_distance, distance_data) && this->monster == NULL) {

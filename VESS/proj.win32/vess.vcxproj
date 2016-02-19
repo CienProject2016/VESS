@@ -171,6 +171,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\MonsterInfo.cpp" />
     <ClCompile Include="..\Classes\ResourcePath.cpp" />
     <ClCompile Include="..\Classes\Shield.cpp" />
+    <ClCompile Include="..\Classes\StageLevelController.cpp" />
     <ClCompile Include="..\Classes\StartScene.cpp" />
     <ClCompile Include="..\Classes\StageClearLayer.cpp" />
     <ClCompile Include="..\Classes\MonsterSpawnScheduler.cpp" />
@@ -212,6 +213,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Hero.h" />
     <ClInclude Include="..\Classes\HeroMovementState.h" />
     <ClInclude Include="..\Classes\Monster.h" />
+    <ClInclude Include="..\Classes\StageLevelController.h" />
     <ClInclude Include="..\Classes\StartScene.h" />
     <ClInclude Include="..\Classes\Item.h" />
     <ClInclude Include="..\Classes\MonsterSpawnScheduler.h" />
