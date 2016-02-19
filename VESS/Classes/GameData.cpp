@@ -2,7 +2,7 @@
 
 GameData* GameData::instance_ = nullptr;
 
-GameData::GameData() : moving_distance_(0), itemMode(ItemMode::SWORD), stage_(), hero_hp_(100), gold_(150), costume_(0), needed_upgrade_gold_(150), needed_repair_gold_(15), upgradeSwordInfo()
+GameData::GameData() : moving_distance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), hero_hp(100), gold(150), costume(0), needed_upgrade_gold(150), needed_repair_gold(15)
 {
 	//대화 정보 설정
 	setDialogInfo();
@@ -28,13 +28,13 @@ GameData* GameData::getInstance()
 void GameData::setDialogInfo() {
 	auto dialogFileData = FileUtils::getInstance()->getStringFromFile("json/dialog.json");
 
-	dialogList_ = new vector<Dialog>();
+	dialogList = new vector<Dialog>();
 	rapidjson::Document doc;
 	doc.Parse(dialogFileData.c_str());
 
-	auto& data = doc["opening"];
+	rapidjson::Value& data = doc["opening"];
 
-	for (auto iter = data.Begin(); iter != data.End(); iter++) {
+	for (rapidjson::Value* iter = data.Begin(); iter != data.End(); iter++) {
 		Dialog dialog;
 		if ((*iter)["name"] == NULL) {
 			dialog.setName("");
@@ -71,40 +71,49 @@ void GameData::setDialogInfo() {
 		else {
 			dialog.setDialogue((*iter)["lines"].GetString());
 		}
-		dialogList_->push_back(dialog);
+		dialogList->push_back(dialog);
 	}
 }
 
 void GameData::setUpgradeInfo() {
+	swordList = new vector<Sword*>();
+	shieldList = new vector<Shield*>();
+	
 	auto upgradeSwordFileData = FileUtils::getInstance()->getStringFromFile("json/sword.json");
 
+
+	rapidjson::Document upgradeSwordInfo;
 	upgradeSwordInfo.Parse(upgradeSwordFileData.c_str());
-	auto& upgradeSwordData = upgradeSwordInfo["sword"]["1"];
-	Sword sword;
-	sword.setDamage(upgradeSwordData["damage"].GetInt());
-	sword.setName(upgradeSwordData["name"].GetString());
-	sword.setSpeed(upgradeSwordData["speed"].GetInt());
-	sword.setUpgradeId(1);
+	rapidjson::Value& upgradeSwordData = upgradeSwordInfo["sword"];
+	
+
+	for (rapidjson::Value* iter = upgradeSwordData.Begin(); iter != upgradeSwordData.End(); iter++) {
+		Sword* sword = new Sword;
+		sword->setDamage((*iter)["damage"].GetInt());
+		sword->setName((*iter)["name"].GetString());
+		sword->setSpeed((*iter)["speed"].GetInt());
+		swordList->push_back(sword);
+	}
+	Sword* sword = swordList->at(0);
+	sword->setUpgradeId(1);	
 	this->setSword(sword);
 
 	auto upgradeShieldFileData = FileUtils::getInstance()->getStringFromFile("json/shield.json");
 
+	rapidjson::Document upgradeShieldInfo;
 	upgradeShieldInfo.Parse(upgradeShieldFileData.c_str());
-	auto& upgradeShieldData = upgradeShieldInfo["방패"]["1"];
-	Shield shield;
-	shield.setDefense(upgradeShieldData["defense"].GetInt());
-	shield.setName(upgradeShieldData["name"].GetString());
-	shield.setSpeed(upgradeShieldData["speed"].GetInt());
-	shield.setUpgradeId(1);
+	rapidjson::Value& upgradeShieldData = upgradeShieldInfo["방패"];
+
+	for (rapidjson::Value* iter = upgradeShieldData.Begin(); iter != upgradeShieldData.End(); iter++) {
+		Shield* shield = new Shield();
+		shield->setDefense((*iter)["defense"].GetInt());
+		shield->setName((*iter)["name"].GetString());
+		shield->setSpeed((*iter)["speed"].GetInt());
+		shieldList->push_back(shield);
+	}
+	Shield* shield = shieldList->at(0);
+	shield->setUpgradeId(1);
 	this->setShield(shield);
-}
-
-rapidjson::Document& GameData::getUpgradeSwordInfo() {
-	return upgradeSwordInfo;
-}
-
-rapidjson::Document& GameData::getUpgradeShieldInfo() {
-	return upgradeShieldInfo;
 }
 
 void GameData::setItemMode(ItemMode itemMode) {

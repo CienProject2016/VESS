@@ -14,7 +14,7 @@ private:
 	MonsterBehaviorPattern();
 	enum MonsterState { stand, attack0, attack1, attack2, attack3, dead };
 	void decisionBehavior();
-	void AttackToHero();
+	void attackToHero();
 	void playAnimationForState();
 	void setStateAndTimer(MonsterState state, float maxTimer);
 	void setStateAndTimer(MonsterState state, float maxTimer, float attackTimer);

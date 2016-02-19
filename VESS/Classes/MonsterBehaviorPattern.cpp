@@ -62,7 +62,7 @@ void MonsterBehaviorPattern::playAnimationForState() {
 	}
 }
 
-void MonsterBehaviorPattern::AttackToHero() {
+void MonsterBehaviorPattern::attackToHero() {
 	switch (monster->kind) {
 	case Monster::Tauren:
 		break;
@@ -82,6 +82,6 @@ void MonsterBehaviorPattern::update(float delta) {
 
 	if (!isOneAnimationAttack && attackTimer < timer) {
 		isOneAnimationAttack = true;
-		AttackToHero();
+		attackToHero();
 	}
 }
