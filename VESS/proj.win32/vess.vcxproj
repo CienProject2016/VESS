@@ -164,8 +164,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\HeroMovementState.cpp" />
     <ClCompile Include="..\Classes\Monster.cpp" />
     <ClCompile Include="..\Classes\MonsterAnimation.cpp" />
+    <ClCompile Include="..\Classes\MonsterBehaviorPattern.cpp" />
+    <ClCompile Include="..\Classes\MonsterInfo.cpp" />
     <ClCompile Include="..\Classes\Resources.cpp" />
-    <ClCompile Include="..\Classes\Slime.cpp" />
     <ClCompile Include="..\Classes\StartScene.cpp" />
     <ClCompile Include="..\Classes\StageClearLayer.cpp" />
     <ClCompile Include="..\Classes\MonsterSpawnScheduler.cpp" />
@@ -193,8 +194,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\GameData.h" />
     <ClInclude Include="..\Classes\GameScene.h" />
     <ClInclude Include="..\Classes\MonsterAnimation.h" />
+    <ClInclude Include="..\Classes\MonsterBehaviorPattern.h" />
+    <ClInclude Include="..\Classes\MonsterInfo.h" />
     <ClInclude Include="..\Classes\Resources.h" />
-    <ClInclude Include="..\Classes\Slime.h" />
     <ClInclude Include="..\Classes\StageClearLayer.h" />
     <ClInclude Include="..\Classes\Hero.h" />
     <ClInclude Include="..\Classes\HeroMovementState.h" />

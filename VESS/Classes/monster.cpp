@@ -3,15 +3,19 @@
 #include "GameData.h"
 #include "FightLayer.h"
 #include "MonsterAnimation.h"
+#include "MonsterInfo.h"
+#include "MonsterBehaviorPattern.h"
 
 using namespace std;
 
 Monster::Monster() {}
 
-Monster::~Monster() {}
+Monster::~Monster() {
+	delete anim;
+	delete behavior;
+}
 
-void Monster::init(FightLayer* layer, Monster::Kind kind)
-{
+void Monster::init(FightLayer* layer, Monster::Kind kind){
 	if (Unit::init())
 	{
 		this->kind = kind;
@@ -109,86 +113,5 @@ void Monster::damage(int dam) {
 	}
 }
 
-int MonsterInfo::getHp(Monster::Kind kind) {
-	switch (kind) {
-	case Monster::Tauren:
-		break;
-	case Monster::Slime:
-		break;
-	}
-	return 100;
-}
 
-
-MonsterBehaviorPattern::MonsterBehaviorPattern(Monster* parent) {
-	timer = 0;
-	maxTimer = 3;
-	state = stand;
-	monster = parent;
-	playAnimationForState();
-}
-bool MonsterBehaviorPattern::isStandState() {
-	return true;
-}
-
-MonsterBehaviorPattern::MonsterBehaviorPattern() {}
-
-void MonsterBehaviorPattern::decisionBehavior() {
-	switch (monster->kind) {
-	case Monster::Tauren:
-		break;
-	case Monster::Slime:
-		if (state == stand) {
-			state = attack0;
-			maxTimer = 1;
-		}
-		else if (state == attack0) {
-			state = attack1;
-			maxTimer = 3.36f;
-		}
-		else if (state == attack1) {
-			state = stand;
-			maxTimer = 3;
-		}
-		else if (state == attack2) {
-		
-		}
-		else {
-		
-		}
-		playAnimationForState();
-		break;
-	}
-}
-
-void MonsterBehaviorPattern::playAnimationForState() {
-	switch (state) {
-	case stand:
-		monster->anim->playStand();
-		break;
-	case attack0:
-		monster->anim->playAttack(0);
-		break;
-	case attack1:
-		monster->anim->playAttack(1);
-		break;
-	case attack2:
-		monster->anim->playAttack(2);
-		break;
-	case attack3:
-		monster->anim->playAttack(3);
-		break;
-	case dead:
-		monster->anim->playDead();
-		break;
-	}
-}
-
-void MonsterBehaviorPattern::update(float delta) {
-	timer += delta;
-	if (maxTimer < timer) {
-		timer = 0;
-		decisionBehavior();
-	}
-}
 

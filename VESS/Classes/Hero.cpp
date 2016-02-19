@@ -1,6 +1,7 @@
 ﻿#include "Hero.h"
 #include "FightLayer.h"
 #include "Resources.h"
+#include "MonsterInfo.h"
 
 #define ANIMATION 10000
 
@@ -21,8 +22,7 @@ bool Hero::init()
 		this->scheduleUpdate();
 		avoidDistance = windowSize.width * 0.2f;
 		attackDistance = windowSize.width * 0.4f;
-		
-		
+		heroPosition = new HitArea();
 		setMovementState(new StayMovementState(this));
 		return true;
 	}
@@ -45,6 +45,18 @@ Hero* Hero::create()
 	}
 	CC_SAFE_DELETE(hero);
 	return nullptr;
+}
+
+//몬스터가 히어로를 때리려고 할 때 콜되는 함수.
+void Hero::monsterAttackToHero(HitArea* attackArea) {
+	if (HitArea::isIn(heroPosition->getArea(), attackArea->getArea())) //몬스터가 때렸는데 그 범위 안에 히어로가 있을 경우.
+	{
+		//여기에 하트가 감소되는 로직이 있어야 함
+	}
+}
+
+void Hero::setHitArea(int area) {
+	this->heroPosition->setArea(area);
 }
 
 //Hero 가 운동(회피, 공격, 점프, 앉기)중에는 다른 명령을 받지 않도록 만든다.

@@ -153,9 +153,6 @@
     <ClCompile Include="..\Classes\UpgradeLayer.cpp">
       <Filter>src\View\Layer</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Slime.cpp">
-      <Filter>src\Model\Unit</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\UpgradeController.cpp">
       <Filter>src\Controller</Filter>
     </ClCompile>
@@ -169,6 +166,12 @@
       <Filter>src\View\Layer</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MonsterAnimation.cpp">
+      <Filter>src\Model\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MonsterInfo.cpp">
+      <Filter>src\Model\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MonsterBehaviorPattern.cpp">
       <Filter>src\Model\Unit</Filter>
     </ClCompile>
   </ItemGroup>
@@ -271,9 +274,6 @@
     <ClInclude Include="..\Classes\HeroMovementState.h">
       <Filter>src\Model\Unit</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Slime.h">
-      <Filter>src\Model\Unit</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Monster.h">
       <Filter>src\Model\Unit</Filter>
     </ClInclude>
@@ -290,6 +290,12 @@
       <Filter>src\View\Layer</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MonsterAnimation.h">
+      <Filter>src\Model\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MonsterInfo.h">
+      <Filter>src\Model\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MonsterBehaviorPattern.h">
       <Filter>src\Model\Unit</Filter>
     </ClInclude>
   </ItemGroup>

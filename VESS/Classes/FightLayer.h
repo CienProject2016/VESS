@@ -10,7 +10,6 @@
 #include "Stage.h"
 #include "Hero.h"
 #include "Monster.h"
-#include "Slime.h"
 USING_NS_CC;
 
 class FightLayer : public Layer

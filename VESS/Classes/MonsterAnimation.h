@@ -3,18 +3,17 @@
 #define __MONSTER_ANIMATION_H__
 
 #include "Monster.h"
+#include "MonsterInfo.h"
 
 class MonsterAnimation {
 private:
-	enum animKind {stand, attack0, attack1, attack2, attack3, dead, damage};
 	void ReadyForPlist(char* plist);
-	RepeatForever* makeAction(int imageCount, char* imageName, float frameTime);
-	RepeatForever* makeAction(animKind kind);
+	RepeatForever* makeAction(MakeAnimationInfo* info);
 	Monster* monster;
 	MonsterAnimation();
 
 	int attackCount;
-	void changeAction(animKind kind);
+	void changePlistAction(MonsterInfo::AnimName anim);
 
 public:
 	MonsterAnimation(Monster* monster);

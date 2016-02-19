@@ -6,6 +6,7 @@
 #include "Unit.h"
 #include <string>
 #include "cocostudio\CocoStudio.h"
+
 using namespace std;
 using namespace cocostudio;
 
@@ -34,8 +35,8 @@ public:
 	virtual void update(float delta);
 	Kind kind;
 	Node* image;
-private:
 	FightLayer* field;
+private:
 	void init(FightLayer* layer, Monster::Kind);
 	void initWindowSize();
 	void initHp();
@@ -46,47 +47,5 @@ private:
 
 
 };
-
-
-
-
-
-//객체를 생성하지 않음. 그냥 리턴만 함. (Controller)
-class MonsterInfo {
-private: 
-	MonsterInfo();
-public:
-	static int getHp(Monster::Kind kind);
-};
-
-
-
-
-
-
-
-//객체를 생성 후 해당 몬스터가 갖고 있음. 왜냐하면, class M.B.P. 내에 update 가 실행되며, 패턴을 바꾸어야 하기 때문.
-class MonsterBehaviorPattern {
-private:
-	float timer;
-	float maxTimer;
-	Monster* monster;
-	MonsterBehaviorPattern();
-	enum MonsterState { stand, attack0, attack1, attack2, attack3, dead };
-	void decisionBehavior();
-	void playAnimationForState();
-public:
-	MonsterState state;
-	MonsterBehaviorPattern(Monster* parent);
-	bool isStandState();
-	void update(float delta);
-};
-
-
-
-
-
-
-
 
 #endif // __MONSTER_H__
