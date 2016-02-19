@@ -50,10 +50,6 @@ public:
 	void setUpgradeButtonOpacity(UpgradePhase);
 	void clearGauge();
 	void checkGaugeLock();
-	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event);
-	virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_event);
-	virtual void onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event);
-	virtual void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 	void keyPressed(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d::Event *event_);
 	void keyReleased(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d::Event *event_);
 	CREATE_FUNC(UpgradeLayer);
@@ -76,10 +72,8 @@ private:
 	ProgressTimer *smeltingBarGauge, *hammeringBarGauge, *quenchingBarGauge;
 	Sprite* smeltingTimeOutLine, *hammeringTimeOutLine, *quenchingTimeOutLine;
 	float smeltingGaugeDownSpeed, hammeringGaugeDownSpeed, quenchingGaugeDownSpeed;
-	cocos2d::ui::Button *smeltingButton, *hammeringButton, *quenchingButton, *completeUpgradeButton, *completeRepairButton;;
+	cocos2d::ui::Button *smeltingButton, *hammeringButton, *quenchingButton, *completeUpgradeButton, *completeRepairButton, *upgradeButton, *repairButton;
 
-	Sprite *upgradeButton, *repairButton;
-	void setTouchListener();
 
 };
 

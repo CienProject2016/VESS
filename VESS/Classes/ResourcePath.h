@@ -5,6 +5,8 @@ struct ImagePath {
 public:
 	const static string MINI_POPUP_IMAGE;
 	const static string UPGRADE_BEFORE_COMPLETE;
+	const static string UPGRADE_BUTTON;
+	const static string REPAIR_BUTTON;
 	const static string REPAIR_BEFORE_COMPLETE;
 	const static string UPGRADE_AFTER_COMPLETE;
 	const static string REPAIR_AFTER_COMPLETE;

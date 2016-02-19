@@ -78,9 +78,6 @@ void UpgradeLayer::initPhase() {
 }
 
 void UpgradeLayer::setListener() {
-	auto listener = EventListenerTouchOneByOne::create();
-	listener->onTouchBegan = CC_CALLBACK_2(UpgradeLayer::onTouchBegan, this);
-	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 
 	//키보드 입력
 	auto keyboardListener = EventListenerKeyboard::create();
@@ -159,16 +156,17 @@ void UpgradeLayer::initGaugeBar() {
 }
 
 void UpgradeLayer::initButtonUi() {
-	upgradeButton = Sprite::create("Images/upgrade_button.png");
+	upgradeButton = cocos2d::ui::Button::create(ImagePath::UPGRADE_BUTTON, ImagePath::UPGRADE_BUTTON, ImagePath::DISABLE_BUTTON_PATH);
 	upgradeButton->setPosition(Vec2(origin.x + visibleSize.width * 0.11f, origin.y + visibleSize.height*0.9f));
 	upgradeButton->setScale(1.0f);
 	upgradeButton->setTag(ZOrder::UPGRADE_IMAGE);
+	upgradeButton->addTouchEventListener(CC_CALLBACK_0(UpgradeLayer::upgradeClicked, this));
 
-	repairButton = Sprite::create("Images/repair_button.png");
+	repairButton = cocos2d::ui::Button::create(ImagePath::REPAIR_BUTTON, ImagePath::REPAIR_BUTTON, ImagePath::DISABLE_BUTTON_PATH);
 	repairButton->setPosition(Vec2(origin.x + visibleSize.width * 0.325f, origin.y + visibleSize.height*0.9f));
 	repairButton->setScale(1.0f);	
 	repairButton->setTag(ZOrder::REPAIR_IMAGE);
-
+	repairButton->addTouchEventListener(CC_CALLBACK_0(UpgradeLayer::repairClicked, this));
 
 	smeltingButton = cocos2d::ui::Button::create(ImagePath::SMELTING_BUTTON, ImagePath::SMELTING_BUTTON_ACTIVE, ImagePath::DISABLE_BUTTON_PATH);
 	smeltingButton->setPosition(Vec2(origin.x + visibleSize.width * 0.12f, origin.y + visibleSize.height*0.4f));
@@ -306,7 +304,9 @@ void UpgradeLayer::showUiButton(UpgradePhase upgradePhase) {
 		completeUpgradeButton->setVisible(false);
 		completeRepairButton->setVisible(false);
 		upgradeButton->setVisible(true);
+		upgradeButton->setTouchEnabled(true);
 		repairButton->setVisible(true);
+		repairButton->setTouchEnabled(true);
 		upgradeLabel->setVisible(true);
 		repairLabel->setVisible(true);
 		smeltingBarGauge->setVisible(false);
@@ -319,7 +319,9 @@ void UpgradeLayer::showUiButton(UpgradePhase upgradePhase) {
 	else if(upgradePhase == UpgradePhase::UPGRADE){
 		completeUpgradeButton->setVisible(true);
 		upgradeButton->setVisible(false);
+		upgradeButton->setTouchEnabled(false);
 		repairButton->setVisible(false);
+		repairButton->setTouchEnabled(false);
 		upgradeLabel->setVisible(false);
 		repairLabel->setVisible(false);
 		smeltingBarGauge->setVisible(true);
@@ -332,12 +334,13 @@ void UpgradeLayer::showUiButton(UpgradePhase upgradePhase) {
 	else if (upgradePhase == UpgradePhase::REPAIR) {
 		completeRepairButton->setVisible(true);
 		upgradeButton->setVisible(false);
+		upgradeButton->setTouchEnabled(false);
 		repairButton->setVisible(false);
+		repairButton->setTouchEnabled(false);
 		upgradeLabel->setVisible(false);
 		repairLabel->setVisible(false);
 		hammeringBarGauge->setVisible(true);
 		hammeringTimeOutLine->setVisible(true);
-
 	}
 }
 
@@ -450,7 +453,12 @@ void UpgradeLayer::showCompleteButton()
 
 void UpgradeLayer::hideBeforeUpgradeResources()
 {
+	completeUpgradeButton->loadTextures(ImagePath::UPGRADE_BEFORE_COMPLETE, ImagePath::UPGRADE_BEFORE_COMPLETE, ImagePath::DISABLE_BUTTON_PATH);
 	completeUpgradeButton->setVisible(false);
+	completeUpgradeButton->setTouchEnabled(false);
+	completeRepairButton->loadTextures(ImagePath::REPAIR_BEFORE_COMPLETE, ImagePath::REPAIR_BEFORE_COMPLETE, ImagePath::DISABLE_BUTTON_PATH);
+	completeRepairButton->setVisible(false);
+	completeRepairButton->setTouchEnabled(false);
 	smeltingBarGauge->setVisible(false);
 	smeltingTimeOutLine->setVisible(false);
 	hammeringBarGauge->setVisible(false);
@@ -459,25 +467,6 @@ void UpgradeLayer::hideBeforeUpgradeResources()
 	quenchingTimeOutLine->setVisible(false);
 }
 
-bool UpgradeLayer::onTouchBegan(Touch* touch_, Event* event_)
-{
-	Point p = touch_->getLocation();
-
-	// 강화, 수리 이미지
-	auto upgradeButton = (Sprite*) this->getChildByTag(ZOrder::UPGRADE_IMAGE);
-	Rect upgradeTouchRect = upgradeButton->getBoundingBox();
-	if (upgradeTouchRect.containsPoint(p)) {
-		upgradeClicked();
-	}
-
-	auto repairButton = (Sprite*) this->getChildByTag(ZOrder::REPAIR_IMAGE);
-	Rect repairTouchRect = repairButton->getBoundingBox();
-	if (repairTouchRect.containsPoint(p)) {
-		repairClicked();
-	}
-
-	return true;
-}
 
 void UpgradeLayer::completeClicked() {
 	lockBeforeHammering = false; // 초기화
@@ -511,33 +500,6 @@ void UpgradeLayer::clearGauge()
 	quenchingBarGauge->setPercentage(0);
 }
 
-void UpgradeLayer::setTouchListener()
-{
-	// make touch listener
-	auto listener = EventListenerTouchOneByOne::create();
-	listener->onTouchBegan = CC_CALLBACK_2(UpgradeLayer::onTouchBegan, this);
-	listener->onTouchMoved = CC_CALLBACK_2(UpgradeLayer::onTouchMoved, this);
-	listener->onTouchCancelled = CC_CALLBACK_2(UpgradeLayer::onTouchCancelled, this);
-	listener->onTouchEnded = CC_CALLBACK_2(UpgradeLayer::onTouchEnded, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-
-}
-
-
-void UpgradeLayer::onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_event)
-{
-
-}
-
-void UpgradeLayer::onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event)
-{
-
-}
-
-void UpgradeLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event)
-{
-
-}
 
 void UpgradeLayer::keyPressed(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d::Event *event_)
 {
