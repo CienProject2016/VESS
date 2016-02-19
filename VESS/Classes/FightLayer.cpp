@@ -162,8 +162,7 @@ void FightLayer::monsterSpawnUpdate(float delta) {
 	Stage stage_data = GameData::getInstance()->getStage();
 	vector<int> distance_data = stage_data.getMonsterLengthInfo();
 	if (MonsterSpawnScheduler::isMonsterSpawnTime(moving_distance, distance_data) && this->monster == NULL) {
-		monster = Monster::create();
-		monster->setParentLayer(this);
+		monster = Monster::create(this, Monster::Slime);
 		this->addChild(monster, 1);
 		GameData::getInstance()->setMovingDistance(moving_distance + 1);
 		*backgroundSpeed = 0;
@@ -189,6 +188,19 @@ void FightLayer::update(float delta) {
 	monsterSpawnUpdate(delta);
 	backgroundSpawnScheduler.update(delta);
 	redrawGold();
+	redrawHeart();
+}
+
+void FightLayer::redrawHeart() {
+	for (int i = 0; i<daughter->getFullHp(); i++) {
+		heart[i] = (Sprite*)getChildByTag(100000 + i);
+		if (i > daughter->getHp()-1) {
+			heart[i]->setVisible(false);
+		}
+		else {
+			heart[i]->setVisible(true);
+		}
+	}
 }
 
 void FightLayer::redrawDurabilityButton() {

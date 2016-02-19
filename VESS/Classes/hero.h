@@ -5,7 +5,6 @@
 #include "SimpleAudioEngine.h"
 #include "FightLayer.h"
 
-
 #ifndef __HERO_H__
 #define __HERO_H__
 #include"FightLayer.h"
@@ -13,6 +12,7 @@ using namespace cocostudio;
 
 
 class FightLayer;
+class HitArea;
 
 class Hero: public Unit {
 public:
@@ -29,8 +29,11 @@ public:
 	void attackEffect(int damage);
 	void getDamage(int damage);
 	void setMovementState(HeroMovementState* state);
+	void setHitArea(int area);
+	void monsterAttackToHero(HitArea* attackArea);
 	void decreaseHp(int);
 private:
+	HitArea* heroPosition;
 	const int SIZE_OF_LIFE = 3;
 	HeroMovementState* movementState;
 	FightLayer* field;
