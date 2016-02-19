@@ -2,16 +2,18 @@
 
 GameData* GameData::instance_ = nullptr;
 
-GameData::GameData() : moving_distance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), hero_hp(100), gold(150), costume(0), needed_upgrade_gold(150), needed_repair_gold(15)
+GameData::GameData() : stageLevel(1), moving_distance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), hero_hp(100), gold(5), costume(0), needed_upgrade_gold(10), needed_repair_gold(3)
 {
 	//대화 정보 설정
 	setDialogInfo();
 	
+	setStageInfo();
 	//강화 정보 설정
 	setUpgradeInfo();
 
 	setTutorialInfo();
 }
+
 
 GameData::~GameData()
 {
@@ -27,10 +29,38 @@ GameData* GameData::getInstance()
 	return instance_;
 }
 
+void GameData::setStageInfo() {
+	auto stageFileData = FileUtils::getInstance()->getStringFromFile("json/stage.json");
+	stageList = new vector<Stage>();
+	rapidjson::Document doc;
+	doc.Parse(stageFileData.c_str());
+
+	auto& data = doc["stage"];
+
+	for (auto iter = data.Begin(); iter != data.End(); iter++) {
+		Stage stage;
+		if ((*iter)["gold"] == NULL) {
+			log("GameData - Stage gold 정보 없음");
+			stage.setGold(1);
+		}
+		else {
+			stage.setGold((*iter)["gold"].GetInt());
+		}
+		if ((*iter)["health"] == NULL) {
+			log("GameData - Stage health 정보 없음");
+			stage.setHealth(1);
+		}
+		else {
+			stage.setHealth((*iter)["health"].GetInt());
+		}
+		stageList->push_back(stage);
+	}
+}
+
 void GameData::setTutorialInfo() {
 	auto tutorialFileData = FileUtils::getInstance()->getStringFromFile("json/tutorial.json");
 
-	tutorialList_ = new vector<Tutorial>();
+	tutorialList = new vector<Tutorial>();
 	rapidjson::Document doc;
 	doc.Parse(tutorialFileData.c_str());
 
@@ -47,9 +77,10 @@ void GameData::setTutorialInfo() {
 		else {
 			tutorial.setTutorial((*iter)["lines"].GetString());
 		}
-		tutorialList_->push_back(tutorial);
+		tutorialList->push_back(tutorial);
 	}
 }
+
 void GameData::setDialogInfo() {
 	auto dialogFileData = FileUtils::getInstance()->getStringFromFile("json/dialog.json");
 

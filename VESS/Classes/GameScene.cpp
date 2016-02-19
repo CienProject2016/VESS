@@ -18,7 +18,6 @@ Scene* GameScene::createScene()
 
 	//스테이지 정보를 게임데이터에서 얻어온다.
 	Document data = getGameData();
-	GameData::getInstance()->getStage().setStageLevel(data["stage"].GetInt());
 
 
 
