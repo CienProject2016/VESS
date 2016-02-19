@@ -110,7 +110,7 @@ void Monster::damage(int dam) {
 	if (hp <= 0) {
 		int currentGold = GameData::getInstance()->getGold();
 		int currentStageLevel = GameData::getInstance()->getStageLevel();
-		int monsterGold = GameData::getInstance()->getStageList()->at(currentStageLevel - 1).getGold();
+		int monsterGold = GameData::getInstance()->getStageList()->at(currentStageLevel).getGold();
 		GameData::getInstance()->setGold(currentGold + monsterGold);
 		field->monsterDead();
 	}

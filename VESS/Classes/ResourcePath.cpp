@@ -24,6 +24,8 @@ const string ImagePath::HAMMERING_BUTTON = IMAGE_PATH + "hammering_button.png";
 const string ImagePath::HAMMERING_BUTTON_ACTIVE = IMAGE_PATH + "hammering_button_active.png";
 const string ImagePath::SWORD_DURABILITY_ICON = IMAGE_PATH + "sword_durability_icon.png";
 const string ImagePath::SHIELD_DURABILITY_ICON = IMAGE_PATH + "shield_durability_icon.png";
+const string ImagePath::DUNGEON_DOOR_AFTER = IMAGE_PATH + "dungeon_door_after.png";
+const string ImagePath::DUNGEON_DOOR_BEFORE = IMAGE_PATH + "dungeon_door_before.png";
 
 //Audio Resources
 const string AudioPath::AUDIO_PATH = "audio/";
@@ -32,6 +34,7 @@ const string AudioPath::BGM = "bgm_";
 const string AudioPath::SOUND_DIMENSION_GATE_PATH = AUDIO_PATH + SOUND + "dimension_gate.wav";
 const string AudioPath::SOUND_JUMP_PATH = AUDIO_PATH + SOUND + "jump.mp3";
 const string AudioPath::SOUND_ATTACK_PATH = AUDIO_PATH + SOUND + "jab.mp3";
+const string AudioPath::SOUND_OPEN_DOOR = AUDIO_PATH + SOUND + "open_door.mp3";
 
 //Element Names
 const string ElementPath::UPGRADE_COMPLETE_LAYER = "UpgradeCompleteLayer";

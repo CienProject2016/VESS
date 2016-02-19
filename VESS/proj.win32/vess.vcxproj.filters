@@ -182,7 +182,7 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Tutorial.cpp">
       <Filter>src\Model\Data</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Classes\MonsterAnimation.cpp">
       <Filter>src\Model\Unit</Filter>
     </ClCompile>
@@ -191,8 +191,11 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MonsterBehaviorPattern.cpp">
       <Filter>src\Model\Unit</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Classes\GaugeLockChecker.cpp">
+      <Filter>src\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StageLevelController.cpp">
       <Filter>src\Controller</Filter>
     </ClCompile>
   </ItemGroup>
@@ -330,7 +333,7 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Tutorial.h">
       <Filter>src\Model\Data</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Classes\MonsterAnimation.h">
       <Filter>src\Model\Unit</Filter>
     </ClInclude>
@@ -339,6 +342,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MonsterBehaviorPattern.h">
       <Filter>src\Model\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StageLevelController.h">
+      <Filter>src\Controller</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
