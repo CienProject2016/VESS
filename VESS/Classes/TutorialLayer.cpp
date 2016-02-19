@@ -28,7 +28,7 @@ bool TutorialLayer::init()
 	auto tutorialLabel = CCLabelTTF::create(tutorial->getCString(), "Arial", 50);
 	tutorialLabel->setAnchorPoint(Vec2(0, 0));
 	tutorialLabel->setColor(Color3B::WHITE);
-	tutorialLabel->setPosition(Vec2(visibleSize.width *0.3f, visibleSize.height *0.1f));
+	tutorialLabel->setPosition(Vec2(visibleSize.width *0.03f, visibleSize.height *0.1f));
 	tutorial_layer->addChild(tutorialLabel, 1, "tutorialLabel");
 
 	tutorialIterator++;
@@ -84,8 +84,7 @@ void TutorialLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 		showNextTutorial();
 	}
 	else {
-		Scene *gameScene = GameScene::createScene();
-		Director::getInstance()->replaceScene(TransitionFade::create(0.5, gameScene, Color3B(0, 255, 255)));
+		this->setVisible(false);
 	}
 	log("Touched");
 
