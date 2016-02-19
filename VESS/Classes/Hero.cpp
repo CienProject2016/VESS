@@ -1,7 +1,7 @@
 ﻿#include "Hero.h"
 #include "FightLayer.h"
 #include "ResourcePath.h"
-
+#include "Monster.h"
 #define ANIMATION 10000
 
 bool Hero::init()
@@ -21,7 +21,8 @@ bool Hero::init()
 		this->scheduleUpdate();
 		avoidDistance = windowSize.width * 0.2f;
 		attackDistance = windowSize.width * 0.4f;
-		
+		fullHp = 3;
+		hp = fullHp;
 		
 		setMovementState(new StayMovementState(this));
 		return true;
@@ -90,16 +91,17 @@ void Hero::attackDamage() {
 void Hero::attackEffect(int attackDamage) {
 }
 
-void Hero::getDamage(bool damage) {
+void Hero::getDamage(int damage) {
+	decreaseHp(damage);
 	Sprite** heart = (Sprite**)malloc(sizeof(Sprite*)*SIZE_OF_LIFE);
 	for (int i = 0;i < SIZE_OF_LIFE;i++)
 	{
 		heart[i] = Sprite::create();
 		heart[i] = (Sprite*)getChildByTag(10000 + i);
 	}
-	if (numGetDamage == 0) { heart[0]->setOpacity(0); numGetDamage++; }
-	else if (numGetDamage == 1) { heart[1]->setOpacity(0); numGetDamage++; }
-	else if (numGetDamage == 2) { heart[2]->setOpacity(0); numGetDamage++;free(heart);}
+	if (hp == 0) { heart[0]->setOpacity(0);  }
+	else if (hp == 1) { heart[1]->setOpacity(0);  }
+	else if (hp == 2) { heart[2]->setOpacity(0);free(heart);}
 }
 
 void Hero::setParentLayer(FightLayer* layer) {
@@ -112,4 +114,9 @@ void Hero::setMovementState(HeroMovementState* state) {
 	}
 	movementState = state;
 	action->gotoFrameAndPlay(0, 16, true);//달리는 모션
+}
+
+void Hero::decreaseHp(int hpSize)
+{
+	this->hp -= hpSize;
 }
