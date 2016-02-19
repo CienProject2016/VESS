@@ -1,5 +1,6 @@
 #include "Hero.h"
 #include "HeroMovementState.h"
+#include "MonsterInfo.h"
 HeroMovementState::HeroMovementState() {}
 void HeroMovementState::update(float delta) {}
 void HeroMovementState::setGravity() {
@@ -18,6 +19,7 @@ void HeroMovementState::setVerticalVelocity() {
 StayMovementState::StayMovementState(Hero* parent) {
 	this->parent = parent;
 	initPos();
+	parent->setHitArea(HitArea::center);
 }
 bool StayMovementState::isAvailableCommand() {
 	return true;
@@ -29,7 +31,7 @@ JumpMovementState::JumpMovementState(Hero* parent) {
 	timer = movingDistance = 0;
 	setGravity();
 	setVerticalVelocity();
-
+	parent->setHitArea(HitArea::up);
 }
 
 void JumpMovementState::update(float delta) {
@@ -50,7 +52,7 @@ AttackMovementState::AttackMovementState(Hero* parent) {
 	movingDistance = fightLayerSize.width * 0.4f;
 	setGravity();
 	setVerticalVelocity();
-
+	parent->setHitArea(HitArea::left);
 }
 
 void AttackMovementState::update(float delta) {
@@ -69,8 +71,6 @@ void AttackMovementState::update(float delta) {
 	verticalVelocity -= delta * gravity;
 	//parent->setPositionY(parent->getPositionY() + verticalVelocity);
 	//parent->setPositionX(parent->getPositionX() + direction * delta * moveDistance / maxTime);
-	parent->setPositionY(parent->getPositionY() + verticalVelocity);
-	parent->setPositionX(parent->getPositionX() + direction * delta * movingDistance / maxTime);
 	timer += delta;
 }
 void AttackMovementState::attackEvent() {
@@ -85,6 +85,7 @@ AvoidMovementState::AvoidMovementState(Hero* parent) {
 	movingDistance = fightLayerSize.width * 0.2f;
 	setGravity();
 	setVerticalVelocity();
+	parent->setHitArea(HitArea::right);
 }
 void AvoidMovementState::update(float delta) {
 	if (maxTime <= timer) {
@@ -111,7 +112,7 @@ SitdownMovementState::SitdownMovementState(Hero* parent) {
 	timer = movingDistance = 0;
 	setGravity();
 	setVerticalVelocity();
-	
+	parent->setHitArea(HitArea::down);
 	
 
 

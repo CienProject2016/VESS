@@ -1,4 +1,3 @@
-#pragma once
 #include "StageClearLayer.h"
 #include "GameScene.h"
 #include "EnterScene.h"

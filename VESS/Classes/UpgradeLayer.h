@@ -1,6 +1,6 @@
 #pragma once
-#ifndef __Upgrade_LAYER_H__
-#define __Upgrade_LAYER_H__
+#ifndef __UPGRADE_LAYER_H__
+#define __UPGRADE_LAYER_H__
 
 #include "cocos2d.h"
 #include "rapidjson/document.h"
@@ -8,7 +8,13 @@
 #include "rapidjson/stringbuffer.h"
 #include "GameScene.h"
 #include "GameData.h"
-#include "Item.h"
+#include "Sword.h"
+#include "Shield.h"
+#include "GaugeLockChecker.h"
+#include "UpgradeController.h"
+#include "UpgradeCompleteLayer.h"
+#include "ResourcePath.h"
+#include "ui/CocosGUI.h"
 
 USING_NS_CC;
 using namespace std;
@@ -16,54 +22,61 @@ using namespace std;
 class UpgradeLayer : public Layer
 {
 public:
-	enum ZOrder {SMELTING_IMAGE, HAMMERING_IMAGE, QUENCHING_IMAGE, UPGRADE_IMAGE, REPAIR_IMAGE, COMPLETE_UPGRADE_BUTTON, DIMENSION_GATE_IMAGE, ITEM_IMAGE, ITEM_NAME,UPGRADE_COMPLETE_LAYER};
-	enum UpgradePhase { UPGRADE, REPAIR, NONE };
-	enum CompleteButtonPhase { CAN_CLICK , CANNOT_CLICK};
+	enum ZOrder {SMELTING_IMAGE, HAMMERING_IMAGE, QUENCHING_IMAGE, UPGRADE_IMAGE, REPAIR_IMAGE, COMPLETE_UPGRADE_BUTTON, COMPLETE_REPAIR_BUTTON, DIMENSION_GATE_IMAGE, ITEM_IMAGE, ITEM_NAME,UPGRADE_COMPLETE_LAYER, MINI_POPUP_LAYER};
+	enum UpgradePhase { NONE, UPGRADE, REPAIR };
+	enum Gauge {SMELTING_GAUGE, HAMMERING_GAUGE, QUENCHING_GAUGE};
 	virtual bool init();
 	virtual void update(float delta);
+
+	void initPhase();
+	void initSmithAndBackground();
+	void initButtonUi();
+	void initGaugeBar();
+	void initUpgradeCompleteLayer();
+	void initLabelInfo();
+	void initItemImage();
+	void initMiniPopup(string);
+	void setListener();
+
 	void increaseGauge(CCProgressTimer* gauge);
 	void upgradeClicked();
 	void repairClicked();
 	void hideBeforeUpgradeResources();
 	void showCompleteButton();
 	void checkComplete();
-	void checkLock();
 	void completeClicked();
 	void showUiButton(UpgradePhase);
-
-	Sword getSword;
+	
+	void setUpgradeButtonOpacity(UpgradePhase);
+	void clearGauge();
+	void checkGaugeLock();
+	void keyPressed(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d::Event *event_);
+	void keyReleased(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d::Event *event_);
 	CREATE_FUNC(UpgradeLayer);
-
 private:
+	Size visibleSize;
+	Vec2 origin;
 	Label* itemName;
+	Label* upgradeLabel;
+	Label* repairLabel;
 	Sprite* itemImage;	
+	Sword getSword;
 	int upgradeGold;
 	int repairGold;
 	bool lockBeforeHammering = false;
 	bool lockBeforeQuenching = false;
 	bool isUpgrade = true;
-	bool isComplete = false;
 	char attribute;	
 	UpgradePhase currentUpgradePhase;
-	CompleteButtonPhase completeButtonPhase;
-	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event);
-	virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_event);
-	virtual void onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event);
-	virtual void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 
-	void keyPressed(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d::Event *event_);
-	void keyReleased(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d::Event *event_);
-
-	CCProgressTimer *smeltingBarGauge, *hammeringBarGauge, *quenchingBarGauge;
-	CCSprite* smeltingTimeOutLine, *hammeringTimeOutLine, *quenchingTimeOutLine;
+	ProgressTimer *smeltingBarGauge, *hammeringBarGauge, *quenchingBarGauge;
+	Sprite* smeltingTimeOutLine, *hammeringTimeOutLine, *quenchingTimeOutLine;
 	float smeltingGaugeDownSpeed, hammeringGaugeDownSpeed, quenchingGaugeDownSpeed;
-	Sprite *smeltingImage, *hammeringImage, *quenchingImage;
-	Sprite *upgradeImage, *repairImage;
-	Sprite* completeUpgradeButton, completeRepairButton;
-	void setTouchListener();
-	
+	cocos2d::ui::Button *smeltingButton, *hammeringButton, *quenchingButton, *completeUpgradeButton, *completeRepairButton, *upgradeButton, *repairButton;
+
+
 };
 
 
-#endif
+#endif // __UPGRADE_LAYER_H___
 

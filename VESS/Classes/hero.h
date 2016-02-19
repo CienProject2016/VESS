@@ -3,15 +3,16 @@
 #include "cocostudio\CocoStudio.h"
 #include "HeroMovementState.h"
 #include "SimpleAudioEngine.h"
-
+#include "FightLayer.h"
 
 #ifndef __HERO_H__
 #define __HERO_H__
-
+#include"FightLayer.h"
 using namespace cocostudio;
 
 
 class FightLayer;
+class HitArea;
 
 class Hero: public Unit {
 public:
@@ -26,11 +27,14 @@ public:
 	void startSitDown();
 	void attackDamage();
 	void attackEffect(int damage);
-	void getDamage(bool damage);
+	void getDamage(int damage);
 	void setMovementState(HeroMovementState* state);
+	void setHitArea(int area);
+	void monsterAttackToHero(HitArea* attackArea);
+	void decreaseHp(int);
 private:
+	HitArea* heroPosition;
 	const int SIZE_OF_LIFE = 3;
-	int numGetDamage = 0;
 	HeroMovementState* movementState;
 	FightLayer* field;
 	Size windowSize;				//레이어 윈도우 사이즈
@@ -38,6 +42,5 @@ private:
 	timeline::ActionTimeline* action;
 	float avoidDistance;			//피할때 어디까지 피할지의 거리
 	float attackDistance;			//때릴때 어디쯤 때릴지의 거리
-
 };
 #endif
