@@ -195,11 +195,13 @@ void UpgradeLayer::initButtonUi() {
 	completeUpgradeButton->setPosition(Vec2(visibleSize.width * 0.22f, visibleSize.height * 7 / 10));
 	completeUpgradeButton->setTag(ZOrder::COMPLETE_UPGRADE_BUTTON);
 	completeUpgradeButton->addTouchEventListener(CC_CALLBACK_0(UpgradeLayer::completeClicked, this));
+	completeUpgradeButton->setTouchEnabled(false);
 
 	completeRepairButton = cocos2d::ui::Button::create(ImagePath::REPAIR_BEFORE_COMPLETE, ImagePath::REPAIR_BEFORE_COMPLETE, ImagePath::DISABLE_BUTTON_PATH);
 	completeRepairButton->setPosition(Vec2(visibleSize.width * 0.22f, visibleSize.height * 7 / 10));
 	completeRepairButton->setTag(ZOrder::COMPLETE_REPAIR_BUTTON);
 	completeRepairButton->addTouchEventListener(CC_CALLBACK_0(UpgradeLayer::completeClicked, this));
+	completeRepairButton->setTouchEnabled(false);
 
 	this->addChild(smeltingButton);
 	this->addChild(hammeringButton);

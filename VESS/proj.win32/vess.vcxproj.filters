@@ -153,9 +153,6 @@
     <ClCompile Include="..\Classes\UpgradeLayer.cpp">
       <Filter>src\View\Layer</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GuageLockChecker.cpp">
-      <Filter>src\Controller</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Slime.cpp">
       <Filter>src\Model\Unit</Filter>
     </ClCompile>
@@ -182,6 +179,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MiniPopupLayer.cpp">
       <Filter>src\View\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GaugeLockChecker.cpp">
+      <Filter>src\Controller</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
