@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Monster::Monster() {
+Monster::Monster(){
 }
 
 Monster::~Monster() {

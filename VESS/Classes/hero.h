@@ -27,7 +27,7 @@ public:
 	void startSitDown();
 	void attackDamage();
 	void attackEffect(int damage);
-	void getDamage(bool damage);
+	void getDamage(int damage);
 	void setMovementState(HeroMovementState* state);
 	void decreaseHp(int);
 private:
@@ -39,7 +39,5 @@ private:
 	timeline::ActionTimeline* action;
 	float avoidDistance;			//피할때 어디까지 피할지의 거리
 	float attackDistance;			//때릴때 어디쯤 때릴지의 거리
-	int fullHp;
-	int hp;
 };
 #endif

@@ -91,6 +91,7 @@ void Hero::attackDamage() {
 void Hero::attackEffect(int attackDamage) {
 }
 
+
 void Hero::getDamage(int damage) {
 	decreaseHp(damage);
 	Sprite** heart = (Sprite**)malloc(sizeof(Sprite*)*SIZE_OF_LIFE);
@@ -99,9 +100,9 @@ void Hero::getDamage(int damage) {
 		heart[i] = Sprite::create();
 		heart[i] = (Sprite*)getChildByTag(10000 + i);
 	}
-	if (hp == 0) { heart[0]->setOpacity(0);  }
-	else if (hp == 1) { heart[1]->setOpacity(0);  }
-	else if (hp == 2) { heart[2]->setOpacity(0);free(heart);}
+	if (this->hp == 0) { heart[0]->setOpacity(0);  }
+	else if (this->hp == 1) { heart[1]->setOpacity(0);  }
+	else if (this->hp == 2) { heart[2]->setOpacity(0);free(heart);}
 }
 
 void Hero::setParentLayer(FightLayer* layer) {
