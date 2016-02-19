@@ -148,6 +148,10 @@ void GameData::setUpgradeInfo() {
 		sword->setDamage((*iter)["damage"].GetInt());
 		sword->setName((*iter)["name"].GetString());
 		sword->setSpeed((*iter)["speed"].GetInt());
+		sword->setMaxDurability((*iter)["durability"].GetInt());
+		sword->setDurability((*iter)["durability"].GetInt());
+		sword->setUpgradeGold((*iter)["upgrade"].GetInt());
+		sword->setRepairGold((*iter)["repair"].GetInt());
 		swordList->push_back(sword);
 	}
 	Sword* sword = swordList->at(0);
@@ -165,6 +169,10 @@ void GameData::setUpgradeInfo() {
 		shield->setDefense((*iter)["defense"].GetInt());
 		shield->setName((*iter)["name"].GetString());
 		shield->setSpeed((*iter)["speed"].GetInt());
+		shield->setMaxDurability((*iter)["durability"].GetInt());
+		shield->setDurability((*iter)["durability"].GetInt());
+		shield->setUpgradeGold((*iter)["upgrade"].GetInt());
+		shield->setRepairGold((*iter)["repair"].GetInt());
 		shieldList->push_back(shield);
 	}
 	Shield* shield = shieldList->at(0);

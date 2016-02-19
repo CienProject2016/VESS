@@ -56,20 +56,20 @@ void UpgradeLayer::initItemImage() {
 }
 
 void UpgradeLayer::initLabelInfo() {
-	upgradeGold = GameData::getInstance()->getNeededUpgradeGold();
+	upgradeGold = GameData::getInstance()->getSword()->getUpgradeGold();
 	upgradeLabel = Label::createWithTTF("강화골드", "fonts/arial.ttf", 50);
 	upgradeLabel->setString(StringUtils::format("%d%s", upgradeGold, "GOLD"));
 	// position the label on the center of the screen
 	upgradeLabel->setPosition(Vec2(Vec2(origin.x + visibleSize.width * 0.11f, origin.y + visibleSize.height*0.86f)));
 	upgradeLabel->setColor(ccc3(250, 250, 250));
-	this->addChild(upgradeLabel, 1);
+	this->addChild(upgradeLabel, 1, "upgradeGoldLabel");
 
-	repairGold = GameData::getInstance()->getNeededRepairGold();
+	repairGold = GameData::getInstance()->getShield()->getRepairGold();
 	repairLabel = Label::createWithTTF("수리골드", "fonts/arial.ttf", 50);
 	repairLabel->setString(StringUtils::format("%d%s", repairGold, "GOLD"));
 	repairLabel->setPosition(Vec2(origin.x + visibleSize.width * 0.33f, origin.y + visibleSize.height*0.86f));
 	repairLabel->setColor(ccc3(250, 250, 250));
-	this->addChild(repairLabel, 2);
+	this->addChild(repairLabel, 2, "repairGoldLabel");
 
 }
 
@@ -250,6 +250,17 @@ void UpgradeLayer::update(float delta) {
 		itemImage->setTexture("Images/sword.png");
 		itemName->setString(StringUtils::format("%s", GameData::getInstance()->getSword()->getName().c_str()));
 	}
+}
+
+void UpgradeLayer::redrawUpgradeGoldLabel() {
+	auto upgradeGoldLabel = (Label*)getChildByName("upgradeGoldLabel");
+	auto repairGoldLabel = (Label*)getChildByName("repairGoldLabel");
+
+	upgradeGold = GameData::getInstance()->getSword()->getUpgradeGold();
+	upgradeLabel->setString(StringUtils::format("%d%s", upgradeGold, "GOLD"));
+	
+	repairGold = GameData::getInstance()->getShield()->getRepairGold();
+	repairLabel->setString(StringUtils::format("%d%s", repairGold, "GOLD"));
 }
 
 void UpgradeLayer::checkGaugeLock() {

@@ -17,6 +17,8 @@ protected :
 	CC_SYNTHESIZE(string, name, Name);
 	CC_SYNTHESIZE(int, durability, Durability);
 	CC_SYNTHESIZE(int, maxDurability, MaxDurability);
+	CC_SYNTHESIZE(int, upgradeGold, UpgradeGold);
+	CC_SYNTHESIZE(int, repairGold, RepairGold);
 	Type itemType;	
 };
 
