@@ -40,8 +40,10 @@ Scene* GameScene::createScene()
 	scene->addChild(fight_layer,0);
 	scene->addChild(tutorial_layer, 2);
 
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("audio/bgm_neorock.mp3");
-	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("audio/bgm_neorock.mp3");
+	//CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("audio/bgm_neorock.mp3");
+	//CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("audio/bgm_neorock.mp3");
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("audio/bgm_neorock.mp3", true);
+	
 	// return the scene
 	return scene;
 }
