@@ -1,7 +1,7 @@
 ﻿
 #include "Unit.h"
 
-Unit::Unit() : hp(100)
+Unit::Unit() : hp(0)
 {
 
 }

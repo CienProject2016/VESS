@@ -19,25 +19,34 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 				   ../../../Classes/Dialog.cpp \
                    ../../../Classes/DialogScene.cpp \
 				   ../../../Classes/DimensionGateController.cpp \
+				   ../../../Classes/DurabilityController.cpp \
                    ../../../Classes/EnterScene.cpp \
                    ../../../Classes/FightLayer.cpp \
                    ../../../Classes/GameData.cpp \
                    ../../../Classes/GameScene.cpp \
+				   ../../../Classes/GaugeLockChecker.cpp \
                    ../../../Classes/healthState.cpp \
                    ../../../Classes/Hero.cpp \
 				   ../../../Classes/HeroMovementState.cpp \
                    ../../../Classes/Item.cpp \
 		../../../Classes/monster.cpp \
+		../../../Classes/MiniPopupLayer.cpp \
+		../../../Classes/MonsterAnimation.cpp \
+					../../../Classes/MonsterAttackScheduler.cpp \
+					../../../Classes/MonsterBehaviorPattern.cpp \
+					../../../Classes/MonsterInfo.cpp \
                    ../../../Classes/MonsterSpawnScheduler.cpp \
-				   ../../../Classes/Reinforce.cpp \
-				   ../../../Classes/Resources.cpp \
+				   ../../../Classes/ResourcePath.cpp \
+				   ../../../Classes/Shield.cpp \
 					../../../Classes/Settings.cpp \
-					../../../Classes/Slime.cpp \
                    ../../../Classes/Stage.cpp \
 				   ../../../Classes/StageClearLayer.cpp \
+				   ../../../Classes/StageLevelController.cpp \
 				 ../../../Classes/StartScene.cpp \
-                   ../../../Classes/TestScene.cpp \
+				 ../../../Classes/Sword.cpp \
                    ../../../Classes/TextLayer.cpp \
+				   ../../../Classes/Tutorial.cpp \
+				   ../../../Classes/TutorialLayer.cpp \
                    ../../../Classes/Unit.cpp \
 				   ../../../Classes/UpgradeCompleteLayer.cpp \
 				   ../../../Classes/UpgradeController.cpp \

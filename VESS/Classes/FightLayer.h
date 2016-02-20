@@ -11,7 +11,6 @@
 #include "Hero.h"
 #include "Chest.h"
 #include "Monster.h"
-#include "Slime.h"
 USING_NS_CC;
 
 class FightLayer : public Layer
@@ -24,13 +23,13 @@ public:
 	void monsterDead();
 	void chestDead();
 	CREATE_FUNC(FightLayer);
-	
+
 	void monsterSpawnUpdate(float delta);
 
 	Monster* getMonster();
 	Hero* getDaughter();
 	Chest* getChest();
-private : 
+private: 
 	Size visibleSize;
 	Vec2 origin;
 
@@ -43,22 +42,25 @@ private :
 	void initOperator();
 	void initDaughter();
 	void initHeart();
+	void initDurabilityLabel();
 
-	void redrawDurabiltyButton();
+	void redrawDurabilityButton();
 	void redrawGold();
 	void redrawTexture();
+	void redrawHeart();
+	void redrawDimensionGate();
 
-	float movingDistanceReal = 0;		//int 형으로 변환할 때 소수값을 잃지 않기 위해 선언.
-	float movingVelocity = 50;			//단위 : 거리/초
+	float movingDistanceReal = 0;		
+	float movingVelocity = 50;			
 	float* backgroundSpeed;
 	Label* currentGoldLabel;
-	BattleOperator* operator_;		//기존에 오퍼레이터 라는 예약어가 있기 때문에 언더바를 붙임.
+	BattleOperator* operator_;		
 	Hero* daughter;
 	Monster* monster;
 	Chest* chest;
 	Sprite* itemImage;
 	Label* itemName;
-	
+
 	virtual void update(float delta);
 	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 	virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_event);
@@ -67,16 +69,18 @@ private :
 	BackgroundSpawnScheduler backgroundSpawnScheduler;
 
 	void stageClear();
-	void dimensionCallback(cocos2d::Ref* pSender);
+	void dimensionCallback(cocos2d::Ref*, ui::Widget::TouchEventType);
 	void attackCallback(cocos2d::Ref* pSender);
 	void jumpCallback(cocos2d::Ref* pSender);
 	void sitCallback(cocos2d::Ref* pSender);
 	void reduceDurability();
-	
+
 	void setTouchListener();
 
+	const int LIFE_COUNT = 3;
+	int fullLifeCount = LIFE_COUNT;
 	int damage = 20;
-
+	int temp;
 };
 
 #endif

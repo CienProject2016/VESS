@@ -1,0 +1,44 @@
+{
+  "stage": [
+    {
+      "gold": 1,
+      "health": 10
+    },
+    {
+      "gold": 5,
+      "health": 20
+    },
+    {
+      "gold": 25,
+      "health": 200
+    },
+    {
+      "gold": 125,
+      "health": 500
+    },
+    {
+      "gold": 625,
+      "health": 1000
+    },
+    {
+      "gold": 3125,
+      "health": 10000
+    },
+    {
+      "gold": 10000,
+      "health": 5000
+    },
+    {
+      "gold": 30000,
+      "health": 10000
+    },
+    {
+      "gold": 70000,
+      "health": 20000
+    },
+    {
+      "gold": 100000,
+      "health": 50000
+    }
+  ]
+}

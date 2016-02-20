@@ -1,6 +1,6 @@
 ﻿#include "Stage.h"
 
-Stage::Stage():stage_level_(1), monster_length_info_({100, 400, 830, 1230, 1600, 2000, 2500, 3000, 3500, 4000})
+Stage::Stage(): isClear(false), key(false), monsterLengthInfo({100, 300, 530, 730, 900, 1200, 1500, 1700, 2000, 2500}), gold(50), health(50)
 {
 	
 }
@@ -8,4 +8,8 @@ Stage::Stage():stage_level_(1), monster_length_info_({100, 400, 830, 1230, 1600,
 Stage::~Stage() 
 {
 
+}
+
+int Stage::getFinalDistance() {
+	return monsterLengthInfo.back();
 }

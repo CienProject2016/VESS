@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="win32">
@@ -153,26 +153,53 @@
     <ClCompile Include="..\Classes\UpgradeLayer.cpp">
       <Filter>src\View\Layer</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GuageLockChecker.cpp">
-      <Filter>src\Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Slime.cpp">
-      <Filter>src\Model\Unit</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\UpgradeController.cpp">
       <Filter>src\Controller</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\DimensionGateController.cpp">
       <Filter>src\Controller</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Resources.cpp">
+    <ClCompile Include="..\Classes\UpgradeCompleteLayer.cpp">
+      <Filter>src\View\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Sword.cpp">
+      <Filter>src\Model\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Shield.cpp">
+      <Filter>src\Model\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DurabilityController.cpp">
+      <Filter>src\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ResourcePath.cpp">
       <Filter>src\Vess</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\UpgradeCompleteLayer.cpp">
+    <ClCompile Include="..\Classes\MiniPopupLayer.cpp">
+      <Filter>src\View\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TutorialLayer.cpp">
       <Filter>src\View\Layer</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Chest.cpp">
       <Filter>src\Model\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Tutorial.cpp">
+      <Filter>src\Model\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MonsterAnimation.cpp">
+      <Filter>src\Model\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MonsterInfo.cpp">
+      <Filter>src\Model\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MonsterBehaviorPattern.cpp">
+      <Filter>src\Model\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GaugeLockChecker.cpp">
+      <Filter>src\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StageLevelController.cpp">
+      <Filter>src\Controller</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -277,9 +304,6 @@
     <ClInclude Include="..\Classes\GaugeLockChecker.h">
       <Filter>src\Controller</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Slime.h">
-      <Filter>src\Model\Unit</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Monster.h">
       <Filter>src\Model\Unit</Filter>
     </ClInclude>
@@ -289,14 +313,44 @@
     <ClInclude Include="..\Classes\DimensionGateController.h">
       <Filter>src\Controller</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Resources.h">
+    <ClInclude Include="..\Classes\UpgradeCompleteLayer.h">
+      <Filter>src\View\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Sword.h">
+      <Filter>src\Model\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Shield.h">
+      <Filter>src\Model\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DurabilityController.h">
+      <Filter>src\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ResourcePath.h">
       <Filter>src\Vess</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\UpgradeCompleteLayer.h">
+    <ClInclude Include="..\Classes\MiniPopupLayer.h">
+      <Filter>src\View\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TutorialLayer.h">
       <Filter>src\View\Layer</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Chest.h">
       <Filter>src\Model\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tutorial.h">
+      <Filter>src\Model\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MonsterAnimation.h">
+      <Filter>src\Model\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MonsterInfo.h">
+      <Filter>src\Model\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MonsterBehaviorPattern.h">
+      <Filter>src\Model\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StageLevelController.h">
+      <Filter>src\Controller</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,7 @@
 #include "cocos2d.h"
 #include "UpgradeLayer.h"
 #include "FightLayer.h"
+#include "TutorialLayer.h"
 #include "GameData.h"
 #include "Stage.h"
 #include "WindowSize.h"
