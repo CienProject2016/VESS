@@ -43,12 +43,12 @@ void Monster::initImage() {
 		image->setPosition(0, 0);
 		image->runAction(action);
 		action->gotoFrameAndPlay(26, 32, true);
-		this->setPosition(Vec2(windowSize.width * 0.7f, windowSize.height * 0.4f));
+		this->setPosition(Vec2(windowSize.width * 0.7f, windowSize.height * 0.38f));
 		break;
 	case Slime:
 		anim = new MonsterAnimation(this);
 		image = Sprite::create("animation/basic_slime/stand/basic_slime_stand_00.png");
-		image->setPosition(Vec2(windowSize.width * 0.7f - 190, windowSize.height * 0.4f + 110));
+		image->setPosition(Vec2(windowSize.width * 0.7f, windowSize.height * 0.45f));
 		image->setScale(2.8f);
 		this->addChild(image);
 		anim->playStand();

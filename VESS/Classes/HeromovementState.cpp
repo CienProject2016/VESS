@@ -10,7 +10,7 @@ bool HeroMovementState::isAvailableCommand() {
 	return false;
 }
 void HeroMovementState::initPos() {
-	parent->setPosition(Vec2(fightLayerSize.width * 0.3f, fightLayerSize.height * 0.4f));
+	parent->setPosition(Vec2(fightLayerSize.width * 0.28f, fightLayerSize.height * 0.3f));
 }
 void HeroMovementState::setVerticalVelocity() {
 	verticalVelocity = maxTime * gravity / 2;	//수직 속도를 설정

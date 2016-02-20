@@ -34,7 +34,7 @@ void UpgradeLayer::initMiniPopup(string) {
 
 void UpgradeLayer::initItemImage() {
 	auto gateImage = Sprite::create(ImagePath::DIMENSION_GATE_BUTTON_PATH);
-	gateImage->setPosition(Vec2(visibleSize.width * 0.35f, visibleSize.height * 0.6f));
+	gateImage->setPosition(Vec2(visibleSize.width * 0.35f, visibleSize.height * 0.60f));
 	this->addChild(gateImage, ZOrder::DIMENSION_GATE_IMAGE);
 
 	//업그레이드 레이어는 ItemMode의 반대 이미지를 보여줌

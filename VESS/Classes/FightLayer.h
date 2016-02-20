@@ -29,6 +29,7 @@ public:
 
 	void disappearHeartImage();
 private : 
+	const string DURABILITY_NAME = "³»±¸µµ";
 	Size visibleSize;
 	Vec2 origin;
 
@@ -47,15 +48,15 @@ private :
 	void redrawGold();
 	void redrawTexture();
 	void redrawHeart();
+	void redrawDimensionGate();
 
-	float movingDistanceReal = 0;		//int ÇüÀ¸·Î º¯È¯ÇÒ ¶§ ¼Ò¼ö°ªÀ» ÀÒÁö ¾Ê±â À§ÇØ ¼±¾ğ.
-	float movingVelocity = 50;			//´ÜÀ§ : °Å¸®/ÃÊ
+	float movingDistanceReal = 0;		//int ?•ìœ¼ë¡?ë³€?˜í•  ???Œìˆ˜ê°’ì„ ?ƒì? ?Šê¸° ?„í•´ ? ì–¸.
+	float movingVelocity = 50;			//?¨ìœ„ : ê±°ë¦¬/ì´?
 	float* backgroundSpeed;
 	Label* currentGoldLabel;
-	BattleOperator* operator_;		//±âÁ¸¿¡ ¿ÀÆÛ·¹ÀÌÅÍ ¶ó´Â ¿¹¾à¾î°¡ ÀÖ±â ¶§¹®¿¡ ¾ğ´õ¹Ù¸¦ ºÙÀÓ.
+	BattleOperator* operator_;		//ê¸°ì¡´???¤í¼?ˆì´???¼ëŠ” ?ˆì•½?´ê? ?ˆê¸° ?Œë¬¸???¸ë”ë°”ë? ë¶™ì„.
 	Hero* daughter;
 	Monster* monster;
-	Sprite* itemImage;
 	Label* itemName;
 	
 	virtual void update(float delta);

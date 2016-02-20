@@ -12,6 +12,7 @@ public:
 	const static string REPAIR_AFTER_COMPLETE;
 	const static string IMAGE_PATH;
 	const static string DIMENSION_GATE_BUTTON_PATH;
+	const static string DIMENSION_GATE_BUTTON_ACTIVE;
 	const static string JUMP_BUTTON_PATH;
 	const static string DISABLE_BUTTON_PATH;
 	const static string GOLD_ICON_PATH;
@@ -28,7 +29,9 @@ public:
 	const static string SHIELD_DURABILITY_ICON;
 	const static string DUNGEON_DOOR_BEFORE;
 	const static string DUNGEON_DOOR_AFTER;
-	
+	const static string POLE_IMAGE;
+	const static string SKY_IMAGE;
+	const static string TILE_BACKGROUND;
 };
 
 struct AudioPath {
