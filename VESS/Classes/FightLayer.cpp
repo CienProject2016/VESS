@@ -6,7 +6,7 @@
 #include "SimpleAudioEngine.h"
 #include "ResourcePath.h"
 #include "DurabilityController.h"
-#include "MiniPopupLayer.h"
+#include "GameoverPopupLayer.h"
 
 #define gold "GOLD"
 #define durabilityTag 300
@@ -125,11 +125,11 @@ void FightLayer::initHeart() {
 void FightLayer::initGameoverPopup(string)
 {
 	
-		auto gameoverPopup = MiniPopupLayer::create("Gameover");
+		auto gameoverPopup = GameoverPopupLayer::create("Gameover");
 		gameoverPopup->setTouchEnabled(false);
 		gameoverPopup->setVisible(false);
 		gameoverPopup->setName("gameover");
-		this->addChild(gameoverPopup);
+		this->addChild(gameoverPopup, ZOrder::MINI_POPUP_LAYER);
 	
 
 }
@@ -171,7 +171,7 @@ void FightLayer::redrawTexture() {
 }
 void FightLayer::showGameover()
 {
-	if (lifeCount == 0)
+	if (lifeCount == 3)
 	{
 		auto gameoverPopup = (Layer*)getChildByName("gameover");
 		gameoverPopup->setVisible(true);
