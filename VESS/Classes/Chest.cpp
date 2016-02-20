@@ -49,7 +49,7 @@ void Chest::initHp(int hp) {
 	this->fullHp = hp;
 	auto currentHp = Label::createWithTTF("0", "fonts/arial.ttf", 50);
 	currentHp->setPosition(Vec2(0, -40));
-	currentHp->setColor(ccc3(0, 0, 0)); //black
+	currentHp->setColor(Color3B(0, 0, 0)); //black
 	currentHp->setString(StringUtils::format("%d / %d", hp, fullHp));
 	this->addChild(currentHp, 1);
 	currentHp->setTag(3);

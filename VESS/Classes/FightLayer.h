@@ -17,7 +17,7 @@ class FightLayer : public Layer
 {
 public:
 	virtual bool init();
-
+	enum ZOrder { SMELTING_IMAGE, HAMMERING_IMAGE, QUENCHING_IMAGE, UPGRADE_IMAGE, REPAIR_IMAGE, COMPLETE_UPGRADE_BUTTON, COMPLETE_REPAIR_BUTTON, DIMENSION_GATE_IMAGE, ITEM_IMAGE, ITEM_NAME, UPGRADE_COMPLETE_LAYER, MINI_POPUP_LAYER };
 
 	void createBackgound(EnumBackground::OBJECT object);
 	void monsterDead();
@@ -25,6 +25,8 @@ public:
 	CREATE_FUNC(FightLayer);
 
 	void monsterSpawnUpdate(float delta);
+	void initGameoverPopup(string);
+	void showGameover();
 
 	Monster* getMonster();
 	Hero* getDaughter();

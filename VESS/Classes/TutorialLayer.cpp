@@ -15,7 +15,7 @@ bool TutorialLayer::init()
 	listener->onTouchBegan = CC_CALLBACK_2(TutorialLayer::onTouchBegan, this);
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 
-	auto tutorial_layer = CCLayerColor::create(ccc4(0, 0, 0, 255 * 0.7), winSize.width, winSize.height*0.2f);
+	auto tutorial_layer = CCLayerColor::create(Color4B(0, 0, 0, 255 * 0.7), winSize.width, winSize.height*0.2f);
 	tutorial_layer->setPosition(Vec2(0, 0));
 	this->addChild(tutorial_layer, 0, "tutorialLayer");
 

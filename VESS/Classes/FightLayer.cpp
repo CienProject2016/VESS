@@ -7,6 +7,7 @@
 #include "SimpleAudioEngine.h"
 #include "ResourcePath.h"
 #include "DurabilityController.h"
+#include "GameoverPopupLayer.h"
 #include "ui/CocosGUI.h"
 
 #define gold "GOLD"
@@ -27,6 +28,7 @@ bool FightLayer::init()
 	initWeaponLabel();
 	initHeart();
 	initDurabilityLabel();
+	initGameoverPopup("Gameover");
 
 	this->scheduleUpdate();
 
@@ -119,6 +121,16 @@ void FightLayer::initHeart() {
 		this->addChild(heart[i]);
 	}
 }
+void FightLayer::initGameoverPopup(string)
+{
+	
+	auto gameOverPopup = GameoverPopupLayer::create("Gameover");
+	gameOverPopup->setVisible(false);
+	gameOverPopup->setName("gameover");
+	gameOverPopup->setPosition(Vec2(visibleSize.width *0.3f, visibleSize.height * 0.4f));
+	this->addChild(gameOverPopup, ZOrder::MINI_POPUP_LAYER);
+
+}
 
 void FightLayer::initBackground() {
 	
@@ -149,7 +161,16 @@ void FightLayer::redrawTexture() {
 		itemName->setString(GameData::getInstance()->getShield()->getName());
 	}
 }
+void FightLayer::showGameover()
+{
+	if (daughter->getHp()==0)
+	{
+		auto gameoverPopup = (GameoverPopupLayer*)getChildByName("gameover");
+		gameoverPopup->setVisible(true);
+		gameoverPopup->setGameEnd(true);
+	}
 
+}
 void FightLayer::monsterSpawnUpdate(float delta) {
 	int moving_distance = GameData::getInstance()->getMovingDistance();
 	int stageLevel = GameData::getInstance()->getStageLevel();
@@ -192,6 +213,7 @@ void FightLayer::update(float delta) {
 	backgroundSpawnScheduler.update(delta);
 	redrawGold();
 	redrawHeart();
+	showGameover();
 	redrawDimensionGate();
 }
 
