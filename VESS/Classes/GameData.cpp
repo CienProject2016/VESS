@@ -2,7 +2,7 @@
 
 GameData* GameData::instance_ = nullptr;
 
-GameData::GameData() : moving_distance(0), itemMode(ItemMode::SWORD), stage(), hero_hp(100), gold(150), costume(0), needed_upgrade_gold(150), needed_repair_gold(15)
+GameData::GameData() : moving_distance(0), itemMode(ItemMode::SWORD), stage(), hero_hp(100), gold(150), costume(0), needed_upgrade_gold(150), needed_repair_gold(15), key(1)
 {
 	//대화 정보 설정
 	setDialogInfo();

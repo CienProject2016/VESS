@@ -171,8 +171,13 @@ void FightLayer::monsterSpawnUpdate(float delta) {
 	if (monster == NULL) {
 		movingDistanceReal += delta * movingVelocity;
 		if (moving_distance == kFinalDistance) {
-			this->stageClear();
-			CCLOG("stageClear");
+
+			chest = Chest::create();
+			chest->setParentLayer(this);
+			this->addChild(chest);
+			GameData::getInstance()->setMovingDistance(moving_distance + 1);
+			*backgroundSpeed = 0;
+
 		}
 	}
 	if (1 <= movingDistanceReal) {
@@ -312,11 +317,24 @@ Monster* FightLayer::getMonster() {
 Hero* FightLayer::getDaughter() {
 	return daughter;
 }
+Chest* FightLayer::getChest() {
+	return chest;
+}
 
 void FightLayer::monsterDead() {
 	this->removeChild(monster);
 	monster = NULL;
 	*backgroundSpeed = -100;
+}
+
+void FightLayer::chestDead() {
+	this->removeChild(chest);
+	chest = NULL;
+	*backgroundSpeed = -100;
+
+	this->stageClear();
+	CCLOG("stageClear");
+
 }
 
 void FightLayer::createBackgound(EnumBackground::OBJECT object) {

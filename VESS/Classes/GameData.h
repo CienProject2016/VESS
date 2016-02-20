@@ -37,6 +37,7 @@ private:
 	CC_SYNTHESIZE(int, needed_repair_gold , NeededRepairGold);
 	CC_SYNTHESIZE(Sword, sword, Sword);
 	CC_SYNTHESIZE(Shield, shield, Shield);
+	CC_SYNTHESIZE(int, key, Key);
 	GameData();
 	~GameData();
 	void setDialogInfo();

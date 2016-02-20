@@ -85,6 +85,11 @@ void Hero::attackDamage() {
 		attackEffect(30);
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioResources::SOUND_ATTACK_PATH.c_str());
 	}
+	else if (field->getChest() != NULL) {
+		field->getChest()->damage(30);
+		attackEffect(30);
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioResources::SOUND_ATTACK_PATH.c_str());
+	}
 }
 
 void Hero::attackEffect(int attackDamage) {

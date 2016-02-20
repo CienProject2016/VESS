@@ -171,6 +171,9 @@
     <ClCompile Include="..\Classes\UpgradeCompleteLayer.cpp">
       <Filter>src\View\Layer</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Chest.cpp">
+      <Filter>src\Model\Unit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -291,6 +294,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\UpgradeCompleteLayer.h">
       <Filter>src\View\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Chest.h">
+      <Filter>src\Model\Unit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

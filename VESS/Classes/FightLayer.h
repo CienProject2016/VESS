@@ -9,6 +9,7 @@
 #include "GameData.h"
 #include "Stage.h"
 #include "Hero.h"
+#include "Chest.h"
 #include "Monster.h"
 #include "Slime.h"
 USING_NS_CC;
@@ -21,12 +22,14 @@ public:
 
 	void createBackgound(EnumBackground::OBJECT object);
 	void monsterDead();
+	void chestDead();
 	CREATE_FUNC(FightLayer);
 	
 	void monsterSpawnUpdate(float delta);
 
 	Monster* getMonster();
 	Hero* getDaughter();
+	Chest* getChest();
 private : 
 	Size visibleSize;
 	Vec2 origin;
@@ -52,6 +55,7 @@ private :
 	BattleOperator* operator_;		//기존에 오퍼레이터 라는 예약어가 있기 때문에 언더바를 붙임.
 	Hero* daughter;
 	Monster* monster;
+	Chest* chest;
 	Sprite* itemImage;
 	Label* itemName;
 	
