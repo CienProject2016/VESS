@@ -9,7 +9,8 @@ const string ImagePath::UPGRADE_BEFORE_COMPLETE = IMAGE_PATH + "upgrade_before_c
 const string ImagePath::REPAIR_BEFORE_COMPLETE = IMAGE_PATH + "repair_before_complete.png";
 const string ImagePath::UPGRADE_AFTER_COMPLETE = IMAGE_PATH + "upgrade_after_complete.png";
 const string ImagePath::REPAIR_AFTER_COMPLETE = IMAGE_PATH + "repair_after_complete.png";
-const string ImagePath::DIMENSION_GATE_BUTTON_PATH = IMAGE_PATH + "dimension_gate_image.png";
+const string ImagePath::DIMENSION_GATE_BUTTON_PATH = IMAGE_PATH + "dimension_gate_image_before.png";
+const string ImagePath::DIMENSION_GATE_BUTTON_ACTIVE = IMAGE_PATH + "dimension_gate_image_active.png";
 const string ImagePath::JUMP_BUTTON_PATH = IMAGE_PATH + "jump_button.png";
 const string ImagePath::DISABLE_BUTTON_PATH = IMAGE_PATH + "disable_button.png";
 const string ImagePath::GOLD_ICON_PATH = IMAGE_PATH + "gold.png";
@@ -26,6 +27,9 @@ const string ImagePath::SWORD_DURABILITY_ICON = IMAGE_PATH + "sword_durability_i
 const string ImagePath::SHIELD_DURABILITY_ICON = IMAGE_PATH + "shield_durability_icon.png";
 const string ImagePath::DUNGEON_DOOR_AFTER = IMAGE_PATH + "dungeon_door_after.png";
 const string ImagePath::DUNGEON_DOOR_BEFORE = IMAGE_PATH + "dungeon_door_before.png";
+const string ImagePath::POLE_IMAGE = IMAGE_PATH + "pole.png";
+const string ImagePath::SKY_IMAGE = IMAGE_PATH + "sky_cave.png";
+const string ImagePath::TILE_BACKGROUND = IMAGE_PATH + "ground_blue.png";
 
 //Audio Resources
 const string AudioPath::AUDIO_PATH = "audio/";
