@@ -171,7 +171,7 @@ void FightLayer::redrawTexture() {
 }
 void FightLayer::showGameover()
 {
-	if (lifeCount == 3)
+	if (daughter->getHp()==0)
 	{
 		auto gameoverPopup = (Layer*)getChildByName("gameover");
 		gameoverPopup->setVisible(true);
