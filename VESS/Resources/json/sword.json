@@ -1,8 +1,8 @@
 {
   "sword": [
     {
-      "name": "ë…¹ìŠ¨ ì²­ë™ê²€",
-      "type": "ê²€",
+      "name": "³ì½¼ Ã»µ¿°Ë",
+      "type": "°Ë",
       "damage": 10,
       "speed": 1,
       "upgrade": 20,
@@ -10,8 +10,8 @@
       "durability": 20
     },
     {
-      "name": "ì²­ë™ê²€",
-      "type": "ê²€",
+      "name": "Ã»µ¿°Ë",
+      "type": "°Ë",
       "damage": 20,
       "speed": 1,
       "upgrade": 100,
@@ -19,8 +19,8 @@
       "durability": 25
     },
     {
-      "name": "ì‹ ë¹„í•œ ì²­ë™ê²€",
-      "type": "ê²€",
+      "name": "½ÅºñÇÑ Ã»µ¿°Ë",
+      "type": "°Ë",
       "damage": 30,
       "speed": 1,
       "upgrade": 600,
@@ -28,8 +28,8 @@
       "durability": 30
     },
     {
-      "name": "ë…¹ìŠ¨ ê°•ì² ê²€",
-      "type": "ê²€",
+      "name": "³ì½¼ °­Ã¶°Ë",
+      "type": "°Ë",
       "damage": 30,
       "speed": 1,
       "upgrade": 800,
@@ -37,8 +37,8 @@
       "durability": 35
     },
     {
-      "name": "ê°•ì² ê²€",
-      "type": "ê²€",
+      "name": "°­Ã¶°Ë",
+      "type": "°Ë",
       "damage": 70,
       "speed": 1,
       "upgrade": 1500,
@@ -46,8 +46,8 @@
       "durability": 40
     },
     {
-      "name": "ê¸°ì´í•œ ê°•ì² ê²€",
-      "type": "ê²€",
+      "name": "±âÀÌÇÑ °­Ã¶°Ë",
+      "type": "°Ë",
       "damage": 90,
       "speed": 1,
       "upgrade": 3000,
@@ -55,8 +55,8 @@
       "durability": 45
     },
     {
-      "name": "ì¡°ì¡í•œ ì—ë©”ë„ë“œê²€",
-      "type": "ê²€",
+      "name": "Á¶ÀâÇÑ ¿¡¸Ş¶öµå°Ë",
+      "type": "°Ë",
       "damage": 120,
       "speed": 1,
       "upgrade": 5000,
@@ -64,8 +64,8 @@
       "durability": 50
     },
     {
-      "name": "ì—ë©”ë„ë“œê²€",
-      "type": "ê²€",
+      "name": "¿¡¸Ş¶öµå°Ë",
+      "type": "°Ë",
       "damage": 150,
       "speed": 1,
       "upgrade": 20000,
@@ -73,8 +73,8 @@
       "durability": 55
     },
     {
-      "name": "ì˜ë¡±í•œ ì—ë©”ë„ë“œê²€",
-      "type": "ê²€",
+      "name": "¿µ·ÕÇÑ ¿¡¸Ş¶öµå°Ë",
+      "type": "°Ë",
       "damage": 180,
       "speed": 1,
       "upgrade": 30000,
@@ -82,8 +82,8 @@
       "durability": 60
     },
     {
-      "name": "ë¯¸ìŠ¤ë¦´ê²€",
-      "type": "ê²€",
+      "name": "¹Ì½º¸±°Ë",
+      "type": "°Ë",
       "damage": 220,
       "speed": 1,
       "upgrade": 50000,
@@ -91,8 +91,8 @@
       "durability": 65
     },
     {
-      "name": "ë¯¸ìŠ¤ë¦´ê²€",
-      "type": "ê²€",
+      "name": "¹Ì½º¸±°Ë",
+      "type": "°Ë",
       "damage": 260,
       "speed": 1,
       "upgrade": 100000,
