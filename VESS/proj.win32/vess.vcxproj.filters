@@ -168,7 +168,7 @@
     <ClCompile Include="..\Classes\UpgradeCompleteLayer.cpp">
       <Filter>src\View\Layer</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\EffectFactory.cpp">
+    <ClCompile Include="..\Classes\EffectController.cpp">
       <Filter>src\Controller</Filter>
     </ClCompile>
   </ItemGroup>
@@ -289,7 +289,7 @@
     <ClInclude Include="..\Classes\UpgradeCompleteLayer.h">
       <Filter>src\View\Layer</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\EffectFactory.h">
+    <ClInclude Include="..\Classes\EffectController.h">
       <Filter>src\Controller</Filter>
     </ClInclude>
   </ItemGroup>

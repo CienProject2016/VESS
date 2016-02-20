@@ -1,6 +1,7 @@
 ﻿#include "Hero.h"
 #include "FightLayer.h"
 #include "Resources.h"
+#include "EffectController.h"
 
 #define ANIMATION 10000
 
@@ -8,6 +9,8 @@ bool Hero::init()
 {
 	if (Unit::init())
 	{
+		effectEnd = false;
+		numGetDamage = 0;
 		windowSize = fightLayerSize;
 		origin = fightLayerOrigin;
 		Node* node = CSLoader::createNode("Hero.csb");
@@ -36,7 +39,7 @@ void Hero::update(float delta) {
 	if (effectEnd) {
 		effectTime += delta;
 		if (effectTime > 5) {
-			this->removeChild(effect);
+			this->removeChild(effectController);
 			effectTime = 0;
 		}
 	}
@@ -96,9 +99,10 @@ void Hero::attackDamage() {
 }
 
 void Hero::attackEffect(int attackDamage) {
-	effect = EffectController::create(this, "animation/Tauren.csb", 5, Vec2(50, 50), 1);
+	effectController = EffectController::create(this, "animation/Tauren.csb", 5, Vec2(50, 50), 1);
 	//EffectFactory::makeEffect(this, "animation/MainScene.csb",40,Vec2(50,50),1);
-	this->addChild(effect);
+	effectController->setName("effectController");
+	this->addChild(effectController);
 	effectEnd = true;
 }
 
