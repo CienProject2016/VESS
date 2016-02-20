@@ -85,7 +85,7 @@ void TutorialLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 	}
 	else {
 		this->setVisible(false);
+		this->setTouchEnabled(false);
 	}
-	log("Touched");
 
 }

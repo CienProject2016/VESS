@@ -15,6 +15,7 @@
 #include "rapidjson/filewritestream.h"
 #include "Shield.h"
 #include "Sword.h"
+#include <map>
 
 class GameData
 {
@@ -25,6 +26,7 @@ public:
 	ItemMode getItemMode();
 	ItemMode getUpgradeItemMode();
 	void setItemMode(ItemMode);
+	Stage getCurrentStageInfo();
 private:
 	ItemMode itemMode;
 	static GameData* instance_;
@@ -33,15 +35,13 @@ private:
 	void setTutorialInfo();
 	CC_SYNTHESIZE(int, stageLevel, StageLevel);
 	CC_SYNTHESIZE(Stage, stage, Stage);
-	CC_SYNTHESIZE(int, hero_hp, HeroHp);
 	CC_SYNTHESIZE(int, gold, Gold);
 	CC_SYNTHESIZE(int, costume, Costume);
-	CC_SYNTHESIZE(int, moving_distance, MovingDistance);
+	CC_SYNTHESIZE(int, movingDistance, MovingDistance);
 	CC_SYNTHESIZE(vector<Dialog>*, dialogList, DialogList);
+	CC_SYNTHESIZE(int, key, Key);
 	CC_SYNTHESIZE(vector<Sword*>*, swordList, SwordList);
 	CC_SYNTHESIZE(vector<Shield*>*, shieldList, ShieldList);
-	CC_SYNTHESIZE(int, needed_upgrade_gold, NeededUpgradeGold);
-	CC_SYNTHESIZE(int, needed_repair_gold , NeededRepairGold);
 	CC_SYNTHESIZE(Sword*, sword, Sword);
 	CC_SYNTHESIZE(Shield*, shield, Shield);
 	CC_SYNTHESIZE(UpgradePhase, recentUpgradePhase, RecentUpgradePhase);

@@ -36,6 +36,8 @@ bool StageClearLayer::init()
 	this->addChild(backgroundImage,1);
 	this->addChild(clearMenu,2);
 	
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(AudioPath::BGM_CLEAR.c_str());
+
 	return true;
 }
 

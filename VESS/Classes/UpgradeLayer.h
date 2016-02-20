@@ -40,12 +40,13 @@ public:
 
 	void redrawUpgradeGoldLabel();
 	void increaseGauge(CCProgressTimer* gauge);
-	void upgradeClicked();
-	void repairClicked();
+	void increaseGaugeCallback(Ref*, ui::Widget::TouchEventType, CCProgressTimer* gauge);
+	void upgradeClicked(Ref*, ui::Widget::TouchEventType);
+	void repairClicked(Ref*, ui::Widget::TouchEventType);
 	void hideBeforeUpgradeResources();
 	void showCompleteButton();
 	void checkComplete();
-	void completeClicked();
+	void completeClicked(Ref*, ui::Widget::TouchEventType);
 	void showUiButton(UpgradePhase);
 	
 	void setUpgradeButtonOpacity(UpgradePhase);

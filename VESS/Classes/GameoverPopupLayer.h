@@ -9,12 +9,13 @@ USING_NS_CC;
 using namespace std;
 class GameoverPopupLayer : public Layer {
 public:
-	
 	GameoverPopupLayer();
 	~GameoverPopupLayer();
 	virtual bool init(string);
 	static GameoverPopupLayer* create(string);
+	void setGameEnd(bool);
 private:
+	bool gameEnd;
 	string createMessage;
 	virtual bool onTouchBegan(Touch* touch_, Event* event_);
 };
