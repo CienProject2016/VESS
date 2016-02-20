@@ -32,7 +32,7 @@ bool DialogScene::init()
 	auto winSize = CCDirector::sharedDirector()->getWinSize();
 	dialogData = GameData::getInstance()->getDialogList();
 	dialogIterator = dialogData->begin();
-	auto dialogLayer = CCLayerColor::create(ccc4(0, 0, 0, 255 * 0.7), winSize.width, winSize.height * 0.35);
+	auto dialogLayer = CCLayerColor::create(Color4B(0, 0, 0, 255 * 0.7), winSize.width, winSize.height * 0.35);
 	dialogLayer->setPosition(Vec2(0, 0));
 	this->addChild(dialogLayer,0,"dialogLayer");
 

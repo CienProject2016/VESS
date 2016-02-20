@@ -125,12 +125,12 @@ void FightLayer::initHeart() {
 void FightLayer::initGameoverPopup(string)
 {
 	
-		auto gameoverPopup = GameoverPopupLayer::create("Gameover");
-		gameoverPopup->setTouchEnabled(false);
-		gameoverPopup->setVisible(false);
-		gameoverPopup->setName("gameover");
-		this->addChild(gameoverPopup, ZOrder::MINI_POPUP_LAYER);
-	
+	auto gameOverPopup = GameoverPopupLayer::create("Gameover");
+	gameOverPopup->setTouchEnabled(false);
+	gameOverPopup->setVisible(false);
+	gameOverPopup->setName("gameover");
+	gameOverPopup->setPosition(Vec2(visibleSize.width *0.3f, visibleSize.height * 0.4f));
+	this->addChild(gameOverPopup, ZOrder::MINI_POPUP_LAYER);
 
 }
 

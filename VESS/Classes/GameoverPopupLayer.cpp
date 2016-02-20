@@ -1,5 +1,6 @@
 #include "GameoverPopupLayer.h"
 #include "ResourcePath.h"
+#include "StartScene.h"
 
 GameoverPopupLayer::GameoverPopupLayer() {
 
@@ -24,12 +25,12 @@ bool GameoverPopupLayer::init(string createMessage) {
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	auto gameoverPopupFrameImage = Sprite::create(ImagePath::MINI_POPUP_IMAGE);
-	gameoverPopupFrameImage->setPosition(visibleSize.width * 0.5f, visibleSize.height * 0.5f);
+	gameoverPopupFrameImage->setPosition(0, 0);
 	this->addChild(gameoverPopupFrameImage);
 
 	auto gameoverMessage = Label::createWithSystemFont("", "Arial", 50);
-	gameoverMessage->setString("Game Over.");
-	gameoverMessage->setPosition(visibleSize.width * 0.5f, visibleSize.height * 0.5f);
+	gameoverMessage->setString("Game Over");
+	gameoverMessage->setPosition(0,0);
 	this->addChild(gameoverMessage);
 
 	auto listener = EventListenerTouchOneByOne::create();
@@ -40,6 +41,7 @@ bool GameoverPopupLayer::init(string createMessage) {
 
 bool GameoverPopupLayer::onTouchBegan(Touch* touch_, Event* event_)
 {
-	this->setVisible(false);
+	Scene* startScene = StartScene::createScene();
+	Director::getInstance()->replaceScene(startScene);
 	return true;
 }
