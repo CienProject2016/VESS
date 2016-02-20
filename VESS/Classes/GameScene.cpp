@@ -40,10 +40,8 @@ Scene* GameScene::createScene()
 	scene->addChild(upgrade_layer,1,"upgradeLayer");
 	scene->addChild(fight_layer,0);
 	scene->addChild(tutorial_layer, 2);
-
 	
-	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(AudioPath::BGM_NEO_ROCK.c_str());
-	// return the scene
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(AudioPath::BGM_NEO_ROCK.c_str(), true);
 	return scene;
 }
 

@@ -21,7 +21,7 @@ bool DialogScene::init()
 		return false;
 	}
 
-	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(AudioPath::BGM_DIALOG.c_str());
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(AudioPath::BGM_DIALOG.c_str(), true);
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
