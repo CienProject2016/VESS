@@ -4,32 +4,46 @@
 
 #include "cocostudio\CocoStudio.h"
 #include <string.h>
+#include "GameData.h"
+#include "cocos2d.h"
 USING_NS_CC;
 
-class Effect : public Node{
-public:
-	enum Name { default_ };
+//class Effect : public Node{
+//public:
+//	enum Name { default_ };
+//
+//};
 
-};
-
-class SelfDestroyEffect : public Effect {
+class EffectController : public Node {
 private:
-	SelfDestroyEffect();
-	~SelfDestroyEffect();
+	EffectController();
+	~EffectController();
+	
+	Node* object;
+	Node* particle;
 	float timer;
-	float maxTimer;
-	Node* parent;
+	float max_timer;
+
+	//CC_SYNTHESIZE(Node*, object_, object);
+	//CC_SYNTHESIZE(Node*, particle_, particle);
+	//CC_SYNTHESIZE(float, timer_, timer);
+	//CC_SYNTHESIZE(float, max_timer_, maxTimer);
+
 	virtual void update(float delta);
 public:
-	static SelfDestroyEffect* create();
-	void init(Node* parent, String path, float timer, Vec2 pos, float scale);
+	
+	static EffectController* create(Node* parent, String path, float timer, Vec2 pos, float scale);
+	virtual bool init();
+	//void init(Node* parent, String path, float timer, Vec2 pos, float scale);
 };
 
-class EffectFactory {
-public:
-	static void makeEffect(Node* parent, Effect::Name name);
-
-};
+//class EffectFactory {
+//private:
+//	virtual void update(float delta);
+//	CC_SYNTHESIZE(float, effect_timer_, effectTimer);
+//public:
+//	static void makeEffect(Node* parent,String path, float timer, Vec2 pos, float scale);
+//};
 
 
 

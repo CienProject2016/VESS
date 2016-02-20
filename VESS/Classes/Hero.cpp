@@ -33,6 +33,14 @@ void Hero::update(float delta) {
 	if (movementState != NULL) {
 		movementState->update(delta);
 	}
+	if (effectEnd) {
+		effectTime += delta;
+		if (effectTime > 5) {
+			this->removeChild(effect);
+			effectTime = 0;
+		}
+	}
+	//여기에 시간이 지나면 removeChild 하게 만들어주면됨.
 }
 
 Hero* Hero::create()
@@ -88,6 +96,10 @@ void Hero::attackDamage() {
 }
 
 void Hero::attackEffect(int attackDamage) {
+	effect = EffectController::create(this, "animation/Tauren.csb", 5, Vec2(50, 50), 1);
+	//EffectFactory::makeEffect(this, "animation/MainScene.csb",40,Vec2(50,50),1);
+	this->addChild(effect);
+	effectEnd = true;
 }
 
 void Hero::getDamage(bool damage) {

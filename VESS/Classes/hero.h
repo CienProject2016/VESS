@@ -3,6 +3,7 @@
 #include "cocostudio\CocoStudio.h"
 #include "HeroMovementState.h"
 #include "SimpleAudioEngine.h"
+#include "EffectFactory.h"
 
 
 #ifndef __HERO_H__
@@ -32,6 +33,10 @@ private:
 	const int SIZE_OF_LIFE = 3;
 	int numGetDamage = 0;
 	HeroMovementState* movementState;
+	EffectController* effect;
+	bool effectEnd = false;
+	float effectTime = 0;
+
 	FightLayer* field;
 	Size windowSize;				//레이어 윈도우 사이즈
 	Vec2 origin;					//레이어의 위치 좌표

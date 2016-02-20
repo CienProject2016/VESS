@@ -57,9 +57,11 @@ void AttackMovementState::update(float delta) {
 	if (maxTime <= timer) {
 		if (direction < 0) {
 			parent->setMovementState(new StayMovementState(this->parent));
+
 			return;
 		}
 		else {
+			//effectTime += delta;
 			timer = 0;
 			direction = -1;
 			attackEvent();
@@ -75,6 +77,7 @@ void AttackMovementState::update(float delta) {
 }
 void AttackMovementState::attackEvent() {
 	parent->attackDamage();
+	 
 }
 
 AvoidMovementState::AvoidMovementState(Hero* parent) {
