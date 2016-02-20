@@ -6,6 +6,7 @@
 #include "SimpleAudioEngine.h"
 #include "ResourcePath.h"
 #include "DurabilityController.h"
+#include "MiniPopupLayer.h"
 
 #define gold "GOLD"
 #define durabilityTag 300
@@ -26,6 +27,7 @@ bool FightLayer::init()
 	initWeaponLabel();
 	initHeart();
 	initDurabilityLabel();
+	initGameoverPopup("Gameover");
 
 	this->scheduleUpdate();
 
@@ -120,6 +122,17 @@ void FightLayer::initHeart() {
 		this->addChild(heart[i]);
 	}
 }
+void FightLayer::initGameoverPopup(string)
+{
+	
+		auto gameoverPopup = MiniPopupLayer::create("Gameover");
+		gameoverPopup->setTouchEnabled(false);
+		gameoverPopup->setVisible(false);
+		gameoverPopup->setName("gameover");
+		this->addChild(gameoverPopup);
+	
+
+}
 
 void FightLayer::initBackground() {
 	auto ground = Sprite::create("Images/ground_basic.png");
@@ -156,7 +169,15 @@ void FightLayer::redrawTexture() {
 		itemName->setString(GameData::getInstance()->getShield()->getName());
 	}
 }
+void FightLayer::showGameover()
+{
+	if (lifeCount == 0)
+	{
+		auto gameoverPopup = (Layer*)getChildByName("gameover");
+		gameoverPopup->setVisible(true);
+	}
 
+}
 void FightLayer::monsterSpawnUpdate(float delta) {
 	int moving_distance = GameData::getInstance()->getMovingDistance();
 	int stageLevel = GameData::getInstance()->getStageLevel();
@@ -191,6 +212,7 @@ void FightLayer::update(float delta) {
 	backgroundSpawnScheduler.update(delta);
 	redrawGold();
 	redrawHeart();
+	showGameover();
 }
 
 void FightLayer::redrawHeart() {

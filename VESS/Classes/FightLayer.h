@@ -17,7 +17,7 @@ class FightLayer : public Layer
 public:
 	virtual bool init();
 
-
+	enum ZOrder { SMELTING_IMAGE, HAMMERING_IMAGE, QUENCHING_IMAGE, UPGRADE_IMAGE, REPAIR_IMAGE, COMPLETE_UPGRADE_BUTTON, COMPLETE_REPAIR_BUTTON, DIMENSION_GATE_IMAGE, ITEM_IMAGE, ITEM_NAME, UPGRADE_COMPLETE_LAYER, MINI_POPUP_LAYER };
 	void createBackgound(EnumBackground::OBJECT object);
 	void monsterDead();
 	CREATE_FUNC(FightLayer);
@@ -47,6 +47,8 @@ private :
 	void redrawGold();
 	void redrawTexture();
 	void redrawHeart();
+	void showGameover();
+	void initGameoverPopup(string);
 
 	float movingDistanceReal = 0;		//int 형으로 변환할 때 소수값을 잃지 않기 위해 선언.
 	float movingVelocity = 50;			//단위 : 거리/초
