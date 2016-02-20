@@ -32,6 +32,7 @@ public:
 	const static string POLE_IMAGE;
 	const static string SKY_IMAGE;
 	const static string TILE_BACKGROUND;
+	const static string DUNGEON_DOOR_LOCK;
 };
 
 struct AudioPath {
@@ -43,9 +44,14 @@ public:
 	const static string SOUND_JUMP_PATH;
 	const static string SOUND_ATTACK_PATH;
 	const static string SOUND_OPEN_DOOR;
+	const static string BGM_NEO_ROCK;
+	const static string BGM_DIALOG;
+	const static string BGM_CLEAR;
 };
 
-struct ElementPath {
+struct ElementName {
 public:
 	const static string UPGRADE_COMPLETE_LAYER;
+	const static string DURABILITY_NAME;
+	const static string LOCKED;
 };

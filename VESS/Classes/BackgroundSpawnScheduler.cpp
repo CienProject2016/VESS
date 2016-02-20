@@ -14,8 +14,8 @@ BackgroundSpawnScheduler::BackgroundSpawnScheduler() {
 BackgroundSpawnScheduler::BackgroundSpawnScheduler(FightLayer* receiver) {
 	mountain = BackgroundSpawnSchedulerTimer(EnumBackground::MOUNTAIN, receiver, 3, EnumBackground::ArrangePosition::RANDOM);
 	pole = BackgroundSpawnSchedulerTimer(EnumBackground::POLE, receiver, 10, EnumBackground::ArrangePosition::RANDOM);
-	tile = BackgroundSpawnSchedulerTimer(EnumBackground::TILE, receiver, 3, EnumBackground::ArrangePosition::FIXED);
-	tile.setTimer(5);
+	tile = BackgroundSpawnSchedulerTimer(EnumBackground::TILE, receiver, 1.5, EnumBackground::ArrangePosition::FIXED);
+	tile.setTimer(1.5);
 }
 
 void BackgroundSpawnSchedulerTimer::setTimer(float timer) {

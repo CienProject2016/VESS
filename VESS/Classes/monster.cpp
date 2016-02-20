@@ -48,7 +48,7 @@ void Monster::initImage() {
 	case Slime:
 		anim = new MonsterAnimation(this);
 		image = Sprite::create("animation/basic_slime/stand/basic_slime_stand_00.png");
-		image->setPosition(Vec2(windowSize.width * 0.7f, windowSize.height * 0.45f));
+		image->setPosition(Vec2(windowSize.width * 0.6f, windowSize.height * 0.41f));
 		image->setScale(2.8f);
 		this->addChild(image);
 		anim->playStand();

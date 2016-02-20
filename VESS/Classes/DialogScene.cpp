@@ -20,6 +20,8 @@ bool DialogScene::init()
 	{
 		return false;
 	}
+
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(AudioPath::BGM_DIALOG.c_str(), true);
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -32,7 +34,7 @@ bool DialogScene::init()
 	auto winSize = CCDirector::sharedDirector()->getWinSize();
 	dialogData = GameData::getInstance()->getDialogList();
 	dialogIterator = dialogData->begin();
-	auto dialogLayer = CCLayerColor::create(ccc4(0, 0, 0, 255 * 0.7), winSize.width, winSize.height * 0.35);
+	auto dialogLayer = CCLayerColor::create(Color4B(0, 0, 0, 255 * 0.7), winSize.width, winSize.height * 0.35);
 	dialogLayer->setPosition(Vec2(0, 0));
 	this->addChild(dialogLayer,0,"dialogLayer");
 
@@ -121,6 +123,7 @@ void DialogScene::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_eve
 		showNextDialog();
 	}
 	else {
+		CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
 		Scene *gameScene = GameScene::createScene();
 		Director::getInstance()->replaceScene(TransitionFade::create(0.5, gameScene, Color3B(0, 255, 255)));
 	}

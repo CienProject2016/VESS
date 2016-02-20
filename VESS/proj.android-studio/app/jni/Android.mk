@@ -16,6 +16,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../../Classes/BackgroundObject.cpp \
                    ../../../Classes/BackgroundSpawnScheduler.cpp \
                    ../../../Classes/BattleOperator.cpp \
+				   ../../../Classes/Chest.cpp \
 				   ../../../Classes/Dialog.cpp \
                    ../../../Classes/DialogScene.cpp \
 				   ../../../Classes/DimensionGateController.cpp \

@@ -30,6 +30,7 @@ const string ImagePath::DUNGEON_DOOR_BEFORE = IMAGE_PATH + "dungeon_door_before.
 const string ImagePath::POLE_IMAGE = IMAGE_PATH + "pole.png";
 const string ImagePath::SKY_IMAGE = IMAGE_PATH + "sky_cave.png";
 const string ImagePath::TILE_BACKGROUND = IMAGE_PATH + "ground_blue.png";
+const string ImagePath::DUNGEON_DOOR_LOCK = IMAGE_PATH + "dungeon_door_locked.png";
 
 //Audio Resources
 const string AudioPath::AUDIO_PATH = "audio/";
@@ -39,6 +40,11 @@ const string AudioPath::SOUND_DIMENSION_GATE_PATH = AUDIO_PATH + SOUND + "dimens
 const string AudioPath::SOUND_JUMP_PATH = AUDIO_PATH + SOUND + "jump.mp3";
 const string AudioPath::SOUND_ATTACK_PATH = AUDIO_PATH + SOUND + "jab.mp3";
 const string AudioPath::SOUND_OPEN_DOOR = AUDIO_PATH + SOUND + "open_door.mp3";
+const string AudioPath::BGM_NEO_ROCK = AUDIO_PATH + BGM + "neo_rock.mp3";
+const string AudioPath::BGM_DIALOG = AUDIO_PATH + BGM + "dialog.mp3";
+const string AudioPath::BGM_CLEAR = AUDIO_PATH + BGM + "clear.mp3";
 
 //Element Names
-const string ElementPath::UPGRADE_COMPLETE_LAYER = "UpgradeCompleteLayer";
+const string ElementName::UPGRADE_COMPLETE_LAYER = "UpgradeCompleteLayer";
+const string ElementName::DURABILITY_NAME = "내구도";
+const string ElementName::LOCKED = "잠겨있음";

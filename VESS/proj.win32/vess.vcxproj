@@ -153,6 +153,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\BackgroundObject.cpp" />
     <ClCompile Include="..\Classes\BackgroundSpawnScheduler.cpp" />
+    <ClCompile Include="..\Classes\Chest.cpp" />
     <ClCompile Include="..\Classes\Dialog.cpp" />
     <ClCompile Include="..\Classes\BattleOperator.cpp" />
     <ClCompile Include="..\Classes\DialogScene.cpp" />
@@ -160,6 +161,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\DurabilityController.cpp" />
     <ClCompile Include="..\Classes\EnterScene.cpp" />
     <ClCompile Include="..\Classes\FightLayer.cpp" />
+    <ClCompile Include="..\Classes\GameoverPopupLayer.cpp" />
     <ClCompile Include="..\Classes\GameScene.cpp" />
     <ClCompile Include="..\Classes\GaugeLockChecker.cpp" />
     <ClCompile Include="..\Classes\Hero.cpp" />
@@ -193,6 +195,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\BackgroundObject.h" />
     <ClInclude Include="..\Classes\BackgroundSpawnScheduler.h" />
+    <ClInclude Include="..\Classes\Chest.h" />
     <ClInclude Include="..\Classes\Dialog.h" />
     <ClInclude Include="..\Classes\BattleOperator.h" />
     <ClInclude Include="..\Classes\DialogScene.h" />
@@ -201,6 +204,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\EnterScene.h" />
     <ClInclude Include="..\Classes\FightLayer.h" />
     <ClInclude Include="..\Classes\GameData.h" />
+    <ClInclude Include="..\Classes\GameoverPopupLayer.h" />
     <ClInclude Include="..\Classes\GameScene.h" />
     <ClInclude Include="..\Classes\MonsterAnimation.h" />
     <ClInclude Include="..\Classes\MonsterBehaviorPattern.h" />
