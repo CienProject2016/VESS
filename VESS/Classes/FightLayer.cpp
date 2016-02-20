@@ -33,9 +33,7 @@ bool FightLayer::init()
 	setTouchListener();
 
 	//효과음 준비
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_JUMP_PATH.c_str());
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_DIMENSION_GATE_PATH.c_str());
-
+	
 	return true;
 }
 
@@ -94,7 +92,7 @@ void FightLayer::initGoldLabel() {
 void FightLayer::initButton() {
 
 	auto dimensionGateButton = cocos2d::ui::Button::create(ImagePath::DIMENSION_GATE_BUTTON_PATH, ImagePath::DIMENSION_GATE_BUTTON_PATH, ImagePath::DISABLE_BUTTON_PATH);
-	dimensionGateButton->addTouchEventListener(CC_CALLBACK_1(FightLayer::dimensionCallback, this));
+	dimensionGateButton->addTouchEventListener(CC_CALLBACK_2(FightLayer::dimensionCallback, this));
 	dimensionGateButton->setName("dimensionGateButton");
 	dimensionGateButton->setScale(1.0f);
 	dimensionGateButton->setPosition(Vec2(origin.x + visibleSize.width*0.18f, origin.y + visibleSize.height*0.17f));
@@ -170,9 +168,15 @@ void FightLayer::monsterSpawnUpdate(float delta) {
 	int finalDistance = GameData::getInstance()->getCurrentStageInfo().getFinalDistance();
 	if (monster == NULL) {
 		movingDistanceReal += delta * movingVelocity;
-		if (moving_distance == finalDistance+1) {
-			this->stageClear();
+		if (moving_distance > finalDistance) {
+			*backgroundSpeed = 0;
+			chest = Chest::create();
+			chest->setParentLayer(this);
+			this->addChild(chest);
 			CCLOG("stageClear");
+		}
+		if (GameData::getInstance()->getCurrentStageInfo().getKey()) {
+			this->stageClear();
 		}
 	}
 	if (1 <= movingDistanceReal) {
@@ -221,19 +225,30 @@ void FightLayer::redrawDurabilityButton() {
 void FightLayer::stageClear() {
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
+	CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
 	auto stageClearLayer = StageClearLayer::create();
 	stageClearLayer->setContentSize(Size(100, 100));
 	stageClearLayer->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height*0.5f));
 	StageLevelController::clearStage(GameData::getInstance()->getStageLevel());
 	this->addChild(stageClearLayer, 10000);
-	CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+	
 }
 
-void FightLayer::dimensionCallback(cocos2d::Ref* pSender)
+void FightLayer::dimensionCallback(cocos2d::Ref* pSender, ui::Widget::TouchEventType type)
 {
-	DimensionGateController::changeItemPosition();
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_DIMENSION_GATE_PATH.c_str());
+	
+	switch (type) {
+	case ui::Widget::TouchEventType::BEGAN:
+		break;
+	case ui::Widget::TouchEventType::MOVED:
+		break;
+	case ui::Widget::TouchEventType::ENDED:
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_DIMENSION_GATE_PATH.c_str());
+		DimensionGateController::changeItemPosition();
+		break;
+	case ui::Widget::TouchEventType::CANCELED:
+		break;
+	}
 }
 
 
@@ -362,23 +377,25 @@ Monster* FightLayer::getMonster() {
 Hero* FightLayer::getDaughter() {
 	return daughter;
 }
-
-void FightLayer::disappearHeartImage()
-{
-
-	if (lifeCount < fullLifeCount)
-	{
-		lifeCount--;
-		fullLifeCount = lifeCount;
-
-		heart[temp]->setOpacity(0);
-	}
+Chest* FightLayer::getChest() {
+	return chest;
 }
+
 
 void FightLayer::monsterDead() {
 	this->removeChild(monster);
 	monster = NULL;
 	*backgroundSpeed = -200;
+}
+
+void FightLayer::chestDead() {
+	this->removeChild(chest);
+	chest = NULL;
+	*backgroundSpeed = -100;
+
+	this->stageClear();
+	CCLOG("stageClear");
+
 }
 
 void FightLayer::createBackgound(EnumBackground::OBJECT object) {

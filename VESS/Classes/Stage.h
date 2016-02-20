@@ -17,6 +17,7 @@ private:
 	CC_SYNTHESIZE(int, gold, Gold);
 	CC_SYNTHESIZE(int, health, Health);
 	CC_SYNTHESIZE(bool, isClear, IsClear);
+	CC_SYNTHESIZE(bool, key, Key);
 
 };
 

@@ -39,6 +39,7 @@ private:
 	CC_SYNTHESIZE(int, costume, Costume);
 	CC_SYNTHESIZE(int, movingDistance, MovingDistance);
 	CC_SYNTHESIZE(vector<Dialog>*, dialogList, DialogList);
+	CC_SYNTHESIZE(int, key, Key);
 	CC_SYNTHESIZE(vector<Sword*>*, swordList, SwordList);
 	CC_SYNTHESIZE(vector<Shield*>*, shieldList, ShieldList);
 	CC_SYNTHESIZE(Sword*, sword, Sword);

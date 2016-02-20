@@ -4,7 +4,6 @@
 
 USING_NS_CC;
 
-
 Scene* EnterScene::createScene()
 {
 	auto scene = Scene::create(); //Scene생성
@@ -20,41 +19,35 @@ bool EnterScene::init()
 	{
 		return false;
 	}
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(AudioPath::SOUND_OPEN_DOOR.c_str());
-	
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-	
-
-	auto myScene = Scene::create();
-
 	for (i = 0; i < 10; i++){
-		auto enterStage = ui::Button::create(ImagePath::DUNGEON_DOOR_BEFORE, ImagePath::DUNGEON_DOOR_AFTER, ImagePath::DISABLE_BUTTON_PATH	);
+		auto enterStageButton = ui::Button::create(ImagePath::DUNGEON_DOOR_BEFORE, ImagePath::DUNGEON_DOOR_AFTER, ImagePath::DISABLE_BUTTON_PATH);
 		auto stageLabel = Label::createWithSystemFont(StringUtils::format("Stage %d", i + 1), "Arial", 40);
+		enterStageButton->setTag(stageDoor + i);
+		enterStageButton->addTouchEventListener(CC_CALLBACK_2(EnterScene::enterCallback, this, i));
 		if (i > 0) {
 			if (GameData::getInstance()->getStageList()->at(i - 1).getIsClear() == false) {
-				enterStage->loadTextures(ImagePath::DUNGEON_DOOR_LOCK, ImagePath::DUNGEON_DOOR_LOCK, ImagePath::DISABLE_BUTTON_PATH);
+				enterStageButton->loadTextures(ImagePath::DUNGEON_DOOR_LOCK, ImagePath::DUNGEON_DOOR_LOCK, ImagePath::DISABLE_BUTTON_PATH);
 				stageLabel->setString(StringUtils::format("%s %d\n%s", "Stage", i + 1, ElementName::LOCKED.c_str()));
-				enterStage->setTouchEnabled(false);
+				enterStageButton->setTouchEnabled(false);
 			}
 			else {
-				enterStage->setTouchEnabled(true);
+				enterStageButton->setTouchEnabled(true);
 			}
 		}		
 		
 		if (i < 5){
-			enterStage->setPosition(Vec2(visibleSize.width * 0.3f+ (i - 1)*0.7*visibleSize.width/5 , visibleSize.height*0.35f));
+			enterStageButton->setPosition(Vec2(visibleSize.width * 0.3f+ (i - 1)*0.7*visibleSize.width/5 , visibleSize.height*0.35f));
 			stageLabel->setPosition(Vec2(visibleSize.width * 0.3f+ (i - 1)*0.7*visibleSize.width/5 , visibleSize.height*0.35f));
 		}
 		else {
-			enterStage->setPosition(Vec2(visibleSize.width * 0.3f + (i - 6)*0.7*(visibleSize.width / 5), visibleSize.height *0.7f));
+			enterStageButton->setPosition(Vec2(visibleSize.width * 0.3f + (i - 6)*0.7*(visibleSize.width / 5), visibleSize.height *0.7f));
 			stageLabel->setPosition(Vec2(visibleSize.width * 0.3f + (i - 6)*0.7*(visibleSize.width / 5), visibleSize.height *0.7f));
 		}
-		enterStage->setTag(stageDoor + i);
-		enterStage->addTouchEventListener(CC_CALLBACK_0(EnterScene::enterCallback, this, i));
-		this->addChild(enterStage);
+		
+		this->addChild(enterStageButton);
 		this->addChild(stageLabel);
 	}
 
@@ -67,18 +60,31 @@ bool EnterScene::init()
 	return true;
 }
 
-void EnterScene::enterCallback(int stageLevel) {
-	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(AudioPath::SOUND_OPEN_DOOR.c_str());
-	StageLevelController::setStageLevel(stageLevel);
-	if (stageLevel == 0) {
-		Scene *dialogScene = DialogScene::createScene();
-		Director::getInstance()->replaceScene(TransitionFade::create(0.5, dialogScene, Color3B(255, 255, 255)));
-		log("Touched");
+void EnterScene::enterCallback(Ref* sender, ui::Widget::TouchEventType type, int stageLevel) {
+	switch (type) {
+	case ui::Widget::TouchEventType::BEGAN:
+		break;
+	case ui::Widget::TouchEventType::MOVED:
+		break;
+	case ui::Widget::TouchEventType::ENDED:
+		log("Enter");
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_OPEN_DOOR.c_str());
+		StageLevelController::setStageLevel(stageLevel);
+		if (stageLevel == 0) {
+			Scene *dialogScene = DialogScene::createScene();
+			Director::getInstance()->replaceScene(TransitionFade::create(0.5, dialogScene, Color3B(255, 255, 255)));
+			
+		}
+		else {
+			Scene *gameScene = GameScene::createScene();
+			Director::getInstance()->replaceScene(TransitionFade::create(0.5, gameScene, Color3B(255, 255, 255)));
+			
+		}
+		break;
+	case ui::Widget::TouchEventType::CANCELED:
+		break;
 	}
-	else {
-		Scene *gameScene = GameScene::createScene();
-		Director::getInstance()->replaceScene(TransitionFade::create(0.5, gameScene, Color3B(255, 255, 255)));
-	}
+	
 }
 
 

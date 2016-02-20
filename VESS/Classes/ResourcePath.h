@@ -44,6 +44,9 @@ public:
 	const static string SOUND_JUMP_PATH;
 	const static string SOUND_ATTACK_PATH;
 	const static string SOUND_OPEN_DOOR;
+	const static string BGM_NEO_ROCK;
+	const static string BGM_DIALOG;
+	const static string BGM_CLEAR;
 };
 
 struct ElementName {
