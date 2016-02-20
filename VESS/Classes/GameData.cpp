@@ -2,7 +2,7 @@
 
 GameData* GameData::instance_ = nullptr;
 
-GameData::GameData() : stageLevel(1), moving_distance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), hero_hp(100), gold(5), costume(0), needed_upgrade_gold(10), needed_repair_gold(3)
+GameData::GameData() : stageLevel(0), movingDistance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), gold(15), costume(0)
 {
 	//대화 정보 설정
 	setDialogInfo();
@@ -12,8 +12,12 @@ GameData::GameData() : stageLevel(1), moving_distance(0), sword(), shield(), ite
 	setUpgradeInfo();
 
 	setTutorialInfo();
+
 }
 
+Stage GameData::getCurrentStageInfo() {
+	return this->getStageList()->at(this->stageLevel);
+}
 
 GameData::~GameData()
 {
@@ -28,6 +32,7 @@ GameData* GameData::getInstance()
 	}
 	return instance_;
 }
+
 
 void GameData::setStageInfo() {
 	auto stageFileData = FileUtils::getInstance()->getStringFromFile("json/stage.json");

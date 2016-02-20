@@ -3,6 +3,7 @@
 #include "Hero.h"
 #include "StageClearLayer.h"
 #include "DimensionGateController.h"
+#include "StageLevelController.h"
 #include "SimpleAudioEngine.h"
 #include "ResourcePath.h"
 #include "DurabilityController.h"
@@ -10,7 +11,6 @@
 
 #define gold "GOLD"
 #define durabilityTag 300
-#define kFinalDistance 2501
 
 bool FightLayer::init()
 {
@@ -54,7 +54,7 @@ void FightLayer::initDurabilityLabel() {
 	auto durabilityNameLabel = Label::createWithSystemFont("", "Arial", 50);
 	durabilityNameLabel->setPosition(Vec2(origin.x + visibleSize.width*0.510f, origin.y + visibleSize.height*0.15f));
 	durabilityNameLabel->setColor(Color3B(0, 0, 0));
-	durabilityNameLabel->setString(StringUtils::format("%s", DURABILITY_NAME.c_str()));
+	durabilityNameLabel->setString(StringUtils::format("%s", ElementName::DURABILITY_NAME.c_str()));
 	auto durabilityLabel = Label::createWithTTF("0", "fonts/arial.ttf", 50);
 	durabilityLabel->setPosition(Vec2(origin.x + visibleSize.width*0.510f, origin.y + visibleSize.height*0.1f));
 	durabilityLabel->setColor(Color3B(0, 0, 0)); //black
@@ -166,9 +166,11 @@ void FightLayer::monsterSpawnUpdate(float delta) {
 
 	}
 
+
+	int finalDistance = GameData::getInstance()->getCurrentStageInfo().getFinalDistance();
 	if (monster == NULL) {
 		movingDistanceReal += delta * movingVelocity;
-		if (moving_distance == kFinalDistance) {
+		if (moving_distance == finalDistance+1) {
 			this->stageClear();
 			CCLOG("stageClear");
 		}
@@ -223,9 +225,9 @@ void FightLayer::stageClear() {
 	auto stageClearLayer = StageClearLayer::create();
 	stageClearLayer->setContentSize(Size(100, 100));
 	stageClearLayer->setPosition(Vec2(origin.x + visibleSize.width *0.325f, origin.y + visibleSize.height*0.5f));
-
+	StageLevelController::clearStage(GameData::getInstance()->getStageLevel());
 	this->addChild(stageClearLayer, 10000);
-
+	CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
 }
 
 void FightLayer::dimensionCallback(cocos2d::Ref* pSender)
@@ -376,7 +378,7 @@ void FightLayer::disappearHeartImage()
 void FightLayer::monsterDead() {
 	this->removeChild(monster);
 	monster = NULL;
-	*backgroundSpeed = -100;
+	*backgroundSpeed = -200;
 }
 
 void FightLayer::createBackgound(EnumBackground::OBJECT object) {

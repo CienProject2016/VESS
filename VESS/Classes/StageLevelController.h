@@ -5,6 +5,7 @@
 class StageLevelController {
 public:
 	static void setStageLevel(int);
+	static void clearStage(int);
 };
 
 #endif

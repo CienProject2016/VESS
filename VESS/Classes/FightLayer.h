@@ -21,15 +21,14 @@ public:
 	void createBackgound(EnumBackground::OBJECT object);
 	void monsterDead();
 	CREATE_FUNC(FightLayer);
-	
+
 	void monsterSpawnUpdate(float delta);
 
 	Monster* getMonster();
 	Hero* getDaughter();
 
 	void disappearHeartImage();
-private : 
-	const string DURABILITY_NAME = "³»±¸µµ";
+private:
 	Size visibleSize;
 	Vec2 origin;
 
@@ -50,15 +49,15 @@ private :
 	void redrawHeart();
 	void redrawDimensionGate();
 
-	float movingDistanceReal = 0;		//int ?•ìœ¼ë¡?ë³€?˜í•  ???Œìˆ˜ê°’ì„ ?ƒì? ?Šê¸° ?„í•´ ? ì–¸.
-	float movingVelocity = 50;			//?¨ìœ„ : ê±°ë¦¬/ì´?
+	float movingDistanceReal = 0;		
+	float movingVelocity = 50;			
 	float* backgroundSpeed;
 	Label* currentGoldLabel;
-	BattleOperator* operator_;		//ê¸°ì¡´???¤í¼?ˆì´???¼ëŠ” ?ˆì•½?´ê? ?ˆê¸° ?Œë¬¸???¸ë”ë°”ë? ë¶™ì„.
+	BattleOperator* operator_;		
 	Hero* daughter;
 	Monster* monster;
 	Label* itemName;
-	
+
 	virtual void update(float delta);
 	virtual bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 	virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_event);
@@ -72,7 +71,7 @@ private :
 	void jumpCallback(cocos2d::Ref* pSender);
 	void sitCallback(cocos2d::Ref* pSender);
 	void reduceDurability();
-	
+
 	void setTouchListener();
 
 	int lifeCount = 3;
