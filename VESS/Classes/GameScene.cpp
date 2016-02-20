@@ -19,7 +19,8 @@ Scene* GameScene::createScene()
 	//스테이지 정보를 게임데이터에서 얻어온다.
 	Document data = getGameData();
 
-
+	//게임 거리정보 초기화
+	GameData::getInstance()->setMovingDistance(0);
 
 	// 'layer' is an autorelease object
 	auto upgrade_layer = UpgradeLayer::create();

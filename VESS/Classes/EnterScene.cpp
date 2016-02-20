@@ -32,7 +32,18 @@ bool EnterScene::init()
 
 	for (i = 0; i < 10; i++){
 		auto enterStage = ui::Button::create(ImagePath::DUNGEON_DOOR_BEFORE, ImagePath::DUNGEON_DOOR_AFTER, ImagePath::DISABLE_BUTTON_PATH	);
-		auto stageLabel = Label::createWithSystemFont(StringUtils::format("Stage %d", i+1), "Arial", 40);
+		auto stageLabel = Label::createWithSystemFont(StringUtils::format("Stage %d", i + 1), "Arial", 40);
+		if (i > 0) {
+			if (GameData::getInstance()->getStageList()->at(i - 1).getIsClear() == false) {
+				enterStage->loadTextures(ImagePath::DUNGEON_DOOR_LOCK, ImagePath::DUNGEON_DOOR_LOCK, ImagePath::DISABLE_BUTTON_PATH);
+				stageLabel->setString(StringUtils::format("%s %d\n%s", "Stage", i + 1, ElementName::LOCKED.c_str()));
+				enterStage->setTouchEnabled(false);
+			}
+			else {
+				enterStage->setTouchEnabled(true);
+			}
+		}		
+		
 		if (i < 5){
 			enterStage->setPosition(Vec2(visibleSize.width * 0.3f+ (i - 1)*0.7*visibleSize.width/5 , visibleSize.height*0.35f));
 			stageLabel->setPosition(Vec2(visibleSize.width * 0.3f+ (i - 1)*0.7*visibleSize.width/5 , visibleSize.height*0.35f));
