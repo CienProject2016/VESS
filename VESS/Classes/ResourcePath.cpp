@@ -40,6 +40,7 @@ const string AudioPath::SOUND_DIMENSION_GATE_PATH = AUDIO_PATH + SOUND + "dimens
 const string AudioPath::SOUND_JUMP_PATH = AUDIO_PATH + SOUND + "jump.mp3";
 const string AudioPath::SOUND_ATTACK_PATH = AUDIO_PATH + SOUND + "jab.mp3";
 const string AudioPath::SOUND_OPEN_DOOR = AUDIO_PATH + SOUND + "open_door.mp3";
+const string AudioPath::SOUND_BLOCK = AUDIO_PATH + SOUND + "block.mp3";
 const string AudioPath::BGM_NEO_ROCK = AUDIO_PATH + BGM + "neo_rock.mp3";
 const string AudioPath::BGM_DIALOG = AUDIO_PATH + BGM + "dialog.mp3";
 const string AudioPath::BGM_CLEAR = AUDIO_PATH + BGM + "clear.mp3";

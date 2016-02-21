@@ -33,6 +33,8 @@ public:
 	void dropItem();
 	void damage(int dam);
 	virtual void update(float delta);
+	Sprite * hpBar = Sprite::create("Images/hpBar.png");
+	ProgressTimer* hpBarDecreasing = ProgressTimer::create(hpBar);
 	Kind kind;
 	Node* image;
 	FightLayer* field;
@@ -44,8 +46,6 @@ private:
 	void initBehavior();
 	Size windowSize;
 	Vec2 origin;
-
-
 };
 
 #endif // __MONSTER_H__

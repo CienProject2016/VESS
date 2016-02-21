@@ -78,14 +78,19 @@ void Monster::update(float delta) {
 void Monster::initHp(int health) {
 	this->hp = health;
 	this->fullHp = health;
-	auto currentHp = Label::createWithTTF("0", "fonts/arial.ttf", 50);
-	currentHp->setPosition(Vec2(0, -40));
-	currentHp->setColor(ccc3(0, 0, 0)); //black
+	auto currentHp = Label::createWithTTF("0", "fonts/arial.ttf", 40);
+	currentHp->setPosition(Vec2(30, 80));
+	currentHp->setColor(Color3B(0, 0, 0)); //black
 	currentHp->setString(StringUtils::format("%d / %d", hp, fullHp));
 	this->addChild(currentHp, 1);
 	currentHp->setTag(3);
-    //hpBar = CCSprite::create("Images/monsterHpBar.png");
-	//hpBarDecreasing = CCProgressTimer::create(hpBar);
+  
+	hpBarDecreasing->setType(kCCProgressTimerTypeBar);
+	hpBarDecreasing->setPercentage(100.0f);
+	hpBarDecreasing->setPosition(Vec2(40, 80));
+	hpBarDecreasing->setMidpoint(Vec2(0, 1));
+	hpBarDecreasing->setBarChangeRate(Vec2(1,0));
+	this->addChild(hpBarDecreasing);
 }
 
 Monster* Monster::create(FightLayer* layer, Monster::Kind kind, int health)
@@ -102,7 +107,8 @@ void Monster::dropItem()
 
 void Monster::damage(int dam) {
 	hp -= dam;
-	
+	log("%f", 100 *hp / fullHp);
+	hpBarDecreasing->setPercentage(100*hp/fullHp);
 	auto currentHp = (Label*)getChildByTag(3);
 	currentHp->setString(StringUtils::format("%d / %d", hp, fullHp));
 

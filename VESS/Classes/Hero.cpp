@@ -161,6 +161,7 @@ void Hero::startDefense() {
 		setMovementState(new DefenseMovementState(this));
 		action->gotoFrameAndPlay(18, 25, false);//위회피
 		itemAction->gotoFrameAndPlay(18, 25, false);
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_BLOCK.c_str());
 	}
 }
 
