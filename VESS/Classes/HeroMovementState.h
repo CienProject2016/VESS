@@ -11,8 +11,10 @@ USING_NS_CC;
 
 class Hero;
 
+
 class HeroMovementState {
 protected:
+	
 	float maxTime;
 	float timer;
 	float verticalVelocity;
@@ -21,20 +23,23 @@ protected:
 	float movingDistance;
 	CC_SYNTHESIZE(ActionFrameValue*, actionFrameValue, ActionFrameValue);
 public:
+	enum State { attack0, attack1, avoid_up, avoid_left, avoid_down, run, stay, defence };
+	State state;
 	HeroMovementState();
 	virtual void update(float delta);
 	void setGravity();
 	void setVerticalVelocity();
 	void initPos();
-	virtual bool isAvailableCommand();
 };
 
-
+class RunMovementState : public HeroMovementState {
+public :
+	RunMovementState(Hero* parent);
+};
 
 class StayMovementState : public HeroMovementState {
 public:
 	StayMovementState(Hero* parent);
-	virtual bool isAvailableCommand();
 };
 
 class JumpMovementState : public HeroMovementState {

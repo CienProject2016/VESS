@@ -1,4 +1,4 @@
-#include "Hero.h"
+﻿#include "Hero.h"
 #include "FightLayer.h"
 #include "MonsterInfo.h"
 #include "Monster.h"
@@ -44,6 +44,42 @@ bool Hero::init()
 		return true;
 	}
 	return false;
+}
+
+void Hero::setAnimation(HeroMovementState::State anim) {
+	switch(anim) {
+	case HeroMovementState::attack0:
+		action->gotoFrameAndPlay(198, 211, false);//공격1
+		itemAction->gotoFrameAndPlay(198, 211, false);
+		break;
+	case HeroMovementState::attack1:
+		break;
+	case HeroMovementState::avoid_up:
+		action->gotoFrameAndPlay(97, 113, false);//위회피
+		itemAction->gotoFrameAndPlay(97, 113, false);//위회피
+		break;
+	case HeroMovementState::avoid_left:
+		action->gotoFrameAndPlay(175, 187, false);//중간회피 
+		itemAction->gotoFrameAndPlay(175, 187, false);
+		break;
+	case HeroMovementState::avoid_down:
+		action->gotoFrameAndPlay(116, 128, false);//아래회피(sit 대신 dodge
+		itemAction->gotoFrameAndPlay(116, 128, false);//아래회피(sit 대신 dodge
+		break;
+	case HeroMovementState::run:
+		action->gotoFrameAndPlay(0, 16, true);//달리는 모션
+		itemAction->gotoFrameAndPlay(0, 16, true);
+		break;
+	case HeroMovementState::stay:
+		action->gotoFrameAndPlay(75, 95, true);//대기 모션
+		itemAction->gotoFrameAndPlay(75, 95, true);
+		break;
+	case HeroMovementState::defence:
+		action->gotoFrameAndPlay(18, 25, false);//위회피
+		itemAction->gotoFrameAndPlay(18, 25, false);
+		break;
+
+	}
 }
 
 void Hero::update(float delta) {
@@ -117,53 +153,38 @@ void Hero::setHitArea(int area) {
 	this->heroPosition->setArea(area);
 }
 
-//Hero 가 운동(회피, 공격, 점프, 앉기)중에는 다른 명령을 받지 않도록 만든다.
-bool Hero::isAvailableCommand() {
-	if (movementState == NULL)	return true;
-	return movementState->isAvailableCommand();
-	action->gotoFrameAndPlay(75, 95, true);//대기 모션
-	itemAction->gotoFrameAndPlay(75, 95, true);
-}
-
 void Hero::startAttack() {
 	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
-		if (isAvailableCommand()) {
+		if (movementState->state == HeroMovementState::stay) {
 			setMovementState(new AttackMovementState(this));
-			action->gotoFrameAndPlay(198, 211, false);//공격1
-			itemAction->gotoFrameAndPlay(198, 211, false);
 			TutorialController::checkTutorialEvent("drag_01");
+		} else if (movementState->state == HeroMovementState::avoid_up) {
+			//점프시 공격을 눌렀을 때 attack1 발동 (두번째 공격방법)
+			//이곳에 코드를 넣으면 된다.
 		}
-	}	
+	}
 }
 
 void Hero::startAvoid() {
-	if (isAvailableCommand()) {
+	if (movementState->state == HeroMovementState::stay) {
 		setMovementState(new AvoidMovementState(this));
-		action->gotoFrameAndPlay(175, 187, false);//중간회피 
-		itemAction->gotoFrameAndPlay(175, 187, false);
 	}
 }
 void Hero::startSitDown() {
-	if (isAvailableCommand()) {
+	if (movementState->state == HeroMovementState::stay) {
 		setMovementState(new SitdownMovementState(this));
-		action->gotoFrameAndPlay(116, 128, false);//아래회피(sit 대신 dodge
-		itemAction->gotoFrameAndPlay(116, 128, false);//아래회피(sit 대신 dodge
 	}
 }
 void Hero::startJump() {
-	if (isAvailableCommand()) {
+	if (movementState->state == HeroMovementState::stay) {
 		setMovementState(new JumpMovementState(this));
-		action->gotoFrameAndPlay(97, 113, false);//위회피
-		itemAction->gotoFrameAndPlay(97, 113, false);//위회피
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_JUMP_PATH.c_str());
 	}
 }
 
 void Hero::startDefense() {
-	if (isAvailableCommand()) {
+	if (movementState->state == HeroMovementState::stay) {
 		setMovementState(new DefenseMovementState(this));
-		action->gotoFrameAndPlay(18, 25, false);//위회피
-		itemAction->gotoFrameAndPlay(18, 25, false);
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_BLOCK.c_str());
 	}
 }
@@ -197,8 +218,7 @@ void Hero::setMovementState(HeroMovementState* state) {
 		delete movementState;
 	}
 	movementState = state;
-	action->gotoFrameAndPlay(0, 16, true);//달리는 모션
-	itemAction->gotoFrameAndPlay(0, 16, true);
+	setAnimation(movementState->state);
 }
 
 void Hero::decreaseHp(int hpSize)

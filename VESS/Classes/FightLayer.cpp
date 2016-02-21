@@ -33,8 +33,6 @@ bool FightLayer::init()
 	this->scheduleUpdate();
 
 	setTouchListener();
-
-	//효과음 준비
 	
 	return true;
 }
@@ -48,6 +46,7 @@ void FightLayer::initDaughter() {
 	daughter = Hero::create();
 	daughter->setParentLayer(this);
 	this->addChild(daughter, 0);
+	daughter->setMovementState(new RunMovementState(daughter));
 }
 
 void FightLayer::initDurabilityLabel() {
@@ -183,7 +182,7 @@ void FightLayer::monsterSpawnUpdate(float delta) {
 		if (!GameData::getInstance()->getIsInTutorial()) {
 			GameData::getInstance()->setMovingDistance(moving_distance + 1);
 		}
-		
+		daughter->setMovementState(new StayMovementState(daughter));
 		*backgroundSpeed = 0;
 
 	}
@@ -412,6 +411,7 @@ void FightLayer::monsterDead() {
 	this->removeChild(monster);
 	monster = NULL;
 	*backgroundSpeed = -200;
+	daughter->setMovementState(new RunMovementState(daughter));
 }
 
 void FightLayer::chestDead() {

@@ -1,13 +1,12 @@
 #include "Hero.h"
 #include "HeroMovementState.h"
 #include "MonsterInfo.h"
-HeroMovementState::HeroMovementState() {}
+HeroMovementState::HeroMovementState() {
+	state = run;
+}
 void HeroMovementState::update(float delta) {}
 void HeroMovementState::setGravity() {
 	gravity = fightLayerSize.height * 0.2f;
-}
-bool HeroMovementState::isAvailableCommand() {
-	return false;
 }
 void HeroMovementState::initPos() {
 	parent->setPosition(Vec2(fightLayerSize.width * 0.28f, fightLayerSize.height * 0.3f));
@@ -16,13 +15,18 @@ void HeroMovementState::setVerticalVelocity() {
 	verticalVelocity = maxTime * gravity / 2;	//수직 속도를 설정
 }
 
+RunMovementState::RunMovementState(Hero* parent) {
+	this->parent = parent;
+	initPos();
+	parent->setHitArea(HitArea::center);
+	state = run;
+}
+
 StayMovementState::StayMovementState(Hero* parent) {
 	this->parent = parent;
 	initPos();
 	parent->setHitArea(HitArea::center);
-}
-bool StayMovementState::isAvailableCommand() {
-	return true;
+	state = stay;
 }
 
 JumpMovementState::JumpMovementState(Hero* parent) {
@@ -32,6 +36,7 @@ JumpMovementState::JumpMovementState(Hero* parent) {
 	setGravity();
 	setVerticalVelocity();
 	parent->setHitArea(HitArea::up);
+	state = avoid_up;
 }
 
 void JumpMovementState::update(float delta) {
@@ -53,6 +58,7 @@ AttackMovementState::AttackMovementState(Hero* parent) {
 	setGravity();
 	setVerticalVelocity();
 	parent->setHitArea(HitArea::left);
+	state = attack0;
 }
 
 void AttackMovementState::update(float delta) {
@@ -86,6 +92,7 @@ AvoidMovementState::AvoidMovementState(Hero* parent) {
 	setGravity();
 	setVerticalVelocity();
 	parent->setHitArea(HitArea::right);
+	state = avoid_left;
 }
 void AvoidMovementState::update(float delta) {
 	if (maxTime <= timer) {
@@ -113,9 +120,7 @@ SitdownMovementState::SitdownMovementState(Hero* parent) {
 	setGravity();
 	setVerticalVelocity();
 	parent->setHitArea(HitArea::down);
-	
-
-
+	state = avoid_down;
 }
 void SitdownMovementState::update(float delta) {
 	if (maxTime <= timer) {
