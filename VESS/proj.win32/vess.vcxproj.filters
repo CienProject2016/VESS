@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="win32">
@@ -39,6 +39,9 @@
     </Filter>
     <Filter Include="src\Vess">
       <UniqueIdentifier>{672a340d-6ce6-427c-9f2a-c984e8048cea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Model\MovementState">
+      <UniqueIdentifier>{4835c6a0-2c3f-470a-bb65-916cdff42a2f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -135,9 +138,6 @@
     <ClCompile Include="..\Classes\Hero.cpp">
       <Filter>src\Model\Unit</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\HeroMovementState.cpp">
-      <Filter>src\Model\Unit</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Monster.cpp">
       <Filter>src\Model\Unit</Filter>
     </ClCompile>
@@ -203,6 +203,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\GameoverPopupLayer.cpp">
       <Filter>src\View\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HeroMovementState.cpp">
+      <Filter>src\Model\MovementState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DefenseMovementState.cpp">
+      <Filter>src\Model\MovementState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ActionFrameValue.cpp">
+      <Filter>src\Model\Data</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -301,9 +310,6 @@
     <ClInclude Include="..\Classes\UpgradeLayer.h">
       <Filter>src\View\Layer</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\HeroMovementState.h">
-      <Filter>src\Model\Unit</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\GaugeLockChecker.h">
       <Filter>src\Controller</Filter>
     </ClInclude>
@@ -357,6 +363,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameoverPopupLayer.h">
       <Filter>src\View\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HeroMovementState.h">
+      <Filter>src\Model\MovementState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DefenseMovementState.h">
+      <Filter>src\Model\MovementState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ActionFrameValue.h">
+      <Filter>src\Model\Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

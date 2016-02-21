@@ -149,11 +149,13 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Classes\ActionFrameValue.cpp" />
     <ClCompile Include="..\Classes\AnimationScene.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\BackgroundObject.cpp" />
     <ClCompile Include="..\Classes\BackgroundSpawnScheduler.cpp" />
     <ClCompile Include="..\Classes\Chest.cpp" />
+    <ClCompile Include="..\Classes\DefenseMovementState.cpp" />
     <ClCompile Include="..\Classes\Dialog.cpp" />
     <ClCompile Include="..\Classes\BattleOperator.cpp" />
     <ClCompile Include="..\Classes\DialogScene.cpp" />
@@ -191,11 +193,13 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Classes\ActionFrameValue.h" />
     <ClInclude Include="..\Classes\AnimationScene.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\BackgroundObject.h" />
     <ClInclude Include="..\Classes\BackgroundSpawnScheduler.h" />
     <ClInclude Include="..\Classes\Chest.h" />
+    <ClInclude Include="..\Classes\DefenseMovementState.h" />
     <ClInclude Include="..\Classes\Dialog.h" />
     <ClInclude Include="..\Classes\BattleOperator.h" />
     <ClInclude Include="..\Classes\DialogScene.h" />
