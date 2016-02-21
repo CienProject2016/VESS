@@ -1,4 +1,4 @@
-﻿#include "StartScene.h"
+#include "StartScene.h"
 #include "Settings.h"
 #include "EnterScene.h"
 

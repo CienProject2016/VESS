@@ -7,7 +7,7 @@
 using namespace std;
 
 /*
-	´ëÈ­¸¦ À§ÇÑ Å¬·¡½º
+	ëŒ€í™”ë¥¼ ìœ„í•œ í´ë˜ìŠ¤
 */
 class Dialog
 {

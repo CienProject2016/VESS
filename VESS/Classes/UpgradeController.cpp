@@ -23,7 +23,7 @@ bool UpgradeController::upgradeItem(GameData::ItemMode itemMode) {
 		upgradeShield();		
 		break;
 	default : 
-		log("Item Mode Á¤º¸ ¿À·ù");
+		log("Item Mode ì •ë³´ ì˜¤ë¥˜");
 		return false;
 	}
 	GameData::getInstance()->setRecentUpgradePhase(GameData::UpgradePhase::UPGRADE);
@@ -39,7 +39,7 @@ bool UpgradeController::repairItem(GameData::ItemMode itemMode) {
 		repairShield();
 		break;
 	default:
-		log("Item Mode Á¤º¸ ¿À·ù2");
+		log("Item Mode ì •ë³´ ì˜¤ë¥˜2");
 		return false;
 	}
 	GameData::getInstance()->setRecentUpgradePhase(GameData::UpgradePhase::REPAIR);
@@ -93,7 +93,7 @@ bool UpgradeController::payRepairCosts(int neededGold, Item::Type itemType) {
 	}
 	return false;
 
-	//TODO ¼ö¸® ·ÎÁ÷ ÇÊ¿ä
+	//TODO ìˆ˜ë¦¬ ë¡œì§ í•„ìš”
 	if (itemType == Item::Type::SWORD) {
 
 	}

@@ -1,4 +1,4 @@
-﻿#include "BattleOperator.h"
+#include "BattleOperator.h"
 
 BattleOperatorMenu::BattleOperatorMenu() {}
 BattleOperatorMenu::BattleOperatorMenu(Sprite* image, Vec2 pos) {

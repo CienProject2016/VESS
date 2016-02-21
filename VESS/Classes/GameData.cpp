@@ -1,4 +1,4 @@
-﻿#include "GameData.h"
+#include "GameData.h"
 
 GameData* GameData::instance_ = nullptr;
 
