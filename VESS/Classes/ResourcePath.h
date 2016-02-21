@@ -72,6 +72,7 @@ public:
 	const static string UPGRADE_COMPLETE_LAYER;
 	const static string DURABILITY_NAME;
 	const static string LOCKED;
+	const static string TOUCH_SCREEN;
 };
 
 struct TutorialEventPath {

@@ -1,4 +1,4 @@
-#include "ResourcePath.h"
+﻿#include "ResourcePath.h"
 
 //Image Resources
 const string ImagePath::IMAGE_PATH = "Images/";
@@ -62,6 +62,7 @@ const int ActionPath::HERO_RUN_START_FRAME = 0;
 const string ElementName::UPGRADE_COMPLETE_LAYER = "UpgradeCompleteLayer";
 const string ElementName::DURABILITY_NAME = "내구도";
 const string ElementName::LOCKED = "[잠겨있음]";
+const string ElementName::TOUCH_SCREEN = "시작하시려면 화면을 터치하세요";
 
 //TutorialPath
 const string TutorialEventPath::DRAG_01 = "drag_01";
