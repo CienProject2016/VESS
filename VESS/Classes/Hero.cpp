@@ -35,8 +35,8 @@ void Hero::update(float delta) {
 		movementState->update(delta);
 	}
 
-	checkEffectEnd();
-	//여기에 시간이 지나면 removeChild 하게 만들어주면됨.
+	//checkEffectEnd();  
+	// 현재 Hero 용 이펙트는 따로 기획서에도 없었으므로 일단은 주석처리 해놓음.
 }
 
 void Hero::checkEffectEnd() {
@@ -95,13 +95,13 @@ void Hero::startJump() {
 void Hero::attackDamage() {
 	if (field->getMonster() != NULL) {
 		field->getMonster()->damage(30);
-		attackEffect(30);
+		//attackEffect(30);
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioResources::SOUND_ATTACK_PATH.c_str());
 	}
 }
 
 void Hero::attackEffect(int attackDamage) {
-	effectController = EffectController::create(this, "animation/Tauren.csb", 5, Vec2(50, 50), 1);
+	effectController = EffectController::create(this, "animation/Tauren.csb", 3, Vec2(50, 50), 1);
 	//EffectFactory::makeEffect(this, "animation/MainScene.csb",40,Vec2(50,50),1);
 	//effectController->setName("effectController23");
 	effectController->setTag(5623);
@@ -110,18 +110,6 @@ void Hero::attackEffect(int attackDamage) {
 	
 }
 
-void Hero::removeEffect() {
-	/*if (effectEnd == true) {
-	effectTime += timer;
-	log("%f", effectTime);
-	if (effectTime > 5) {
-	this->removeChild(effectController);
-	effectTime = 0;
-	}
-	}*/
-	this->removeChildByTag(5623);
-	effectController = NULL;
-}
 
 void Hero::getDamage(bool damage) {
 	Sprite** heart = (Sprite**)malloc(sizeof(Sprite*)*SIZE_OF_LIFE);

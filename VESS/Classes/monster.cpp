@@ -44,6 +44,15 @@ void Monster::initImage() {
 }
 
 void Monster::update(float delta) {
+	if (isStarted) {
+		damageEffectTimer -= delta;
+		if (damageEffectTimer <= 0) {
+			isStarted = false;
+			this->removeChildByTag(4);
+		}
+	}
+
+	//checkEffectEnd();
 
 }
 
@@ -91,7 +100,8 @@ void Monster::setParentLayer(FightLayer* layer) {
 
 void Monster::damage(int dam) {
 	hp -= dam;
-	
+	attackDamageEffect(dam);
+	//attackEffect();
 	auto currentHp = (Label*)getChildByTag(3);
 	currentHp->setString(StringUtils::format("%d / %d", hp, fullHp));
 
@@ -100,6 +110,34 @@ void Monster::damage(int dam) {
 		int currentGold = GameData::getInstance()->getGold();
 		GameData::getInstance()->setGold(currentGold + 50);
 		field->monsterDead();
+	}
+}
+
+// 공격 시 나타나는 effect
+void Monster::attackEffect() {
+	effectController = EffectController::create(this, "animation/Tauren.csb", 3, Vec2(50, 50), 1);
+	this->addChild(effectController);
+}
+
+// 공격 시 데미지 수치를 나타내는 effect
+void Monster::attackDamageEffect(int attackDamage) {
+	auto currentDamage = Label::createWithTTF("0", "fonts/arial.ttf", 50);
+	currentDamage->setPosition(Vec2(0, 200));
+	currentDamage->setColor(ccc3(0, 0, 0)); //black
+	currentDamage->setString(StringUtils::format("%d", attackDamage));
+	this->addChild(currentDamage, 1);
+	currentDamage->setTag(4);
+	isStarted = true;
+	//EffectFactory::makeEffect(this, "animation/MainScene.csb",40,Vec2(50,50),1);
+	//effectController->setName("effectController23");
+
+}
+void Monster::checkEffectEnd() {
+	if (effectController != NULL) {
+		if (effectController->checkIsOver()) {
+			this->removeChild(effectController);
+			effectController = NULL;
+		}
 	}
 }
 

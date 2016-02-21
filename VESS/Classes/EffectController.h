@@ -8,11 +8,10 @@
 #include "cocos2d.h"
 
 USING_NS_CC;
-class Hero;
+
 
 class EffectController : public Node {
-protected:
-	Hero* field;
+
 private:
 	EffectController();
 	~EffectController();

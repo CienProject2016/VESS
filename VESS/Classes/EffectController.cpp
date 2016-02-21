@@ -49,5 +49,5 @@ void EffectController::checkEraseEffect(float delta) {
 }
 
 bool EffectController::checkIsOver() {
-	return isOver;
+	return isOver; //현재 Hero.cpp와 Monster.cpp 둘 다 이 변수를 사용하기로 되어있다. 둘 다 사용중이 아니라서 현재는 오류가 없다. 현재는 주석처리가 되어있지만, 만약 둘 다 이펙트를 사용하게 된다면 오류가 발생할 수 있으니, 두개로 나눠서 사용하는 방법 등을 사용하길 바란다.
 }
