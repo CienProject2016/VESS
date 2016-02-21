@@ -21,7 +21,21 @@ void saveSword() {
 	int swordDurability = GameData::getInstance()->getSword()->getDurability();
 	int swordMaxDurability = GameData::getInstance()->getSword()->getMaxDurability();
 	UserDefault::getInstance()->setIntegerForKey("swordId", swordId);
-	UserDefault::getInstance()->getIntegerForKey("swordDamage", swordDamage);
-	UserDefault::getInstance()->getIntegerForKey("swordDurability", swordDurability);
-	UserDefault::getInstance()->getIntegerForKey("swordMaxDurability", swordMaxDurability);
+	UserDefault::getInstance()->setIntegerForKey("swordDamage", swordDamage);
+	UserDefault::getInstance()->setIntegerForKey("swordDurability", swordDurability);
+	UserDefault::getInstance()->setIntegerForKey("swordMaxDurability", swordMaxDurability);
+}
+
+void saveShield() {
+	int shieldId = GameData::getInstance()->getShield()->getUpgradeId();
+	int shieldDurability = GameData::getInstance()->getShield()->getDurability();
+	int shieldMaxDurability = GameData::getInstance()->getShield()->getMaxDurability();
+	UserDefault::getInstance()->setIntegerForKey("shieldId", shieldId);
+	UserDefault::getInstance()->setIntegerForKey("shieldDurability", shieldDurability);
+	UserDefault::getInstance()->setIntegerForKey("shieldMaxDurability", shieldMaxDurability);
+}
+
+void saveGold() {
+	int gold = GameData::getInstance()->getGold();
+	UserDefault::getInstance()->setIntegerForKey("gold", gold);
 }
