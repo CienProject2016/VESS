@@ -4,19 +4,100 @@
       "name": "녹슨 청동검",
       "type": "검",
       "damage": 10,
-      "speed": 1
+      "speed": 1,
+      "upgrade": 20,
+      "repair": 4,
+      "durability": 20
     },
     {
       "name": "청동검",
       "type": "검",
       "damage": 20,
-      "speed": 1
+      "speed": 1,
+      "upgrade": 100,
+      "repair": 20,
+      "durability": 25
     },
     {
       "name": "신비한 청동검",
       "type": "검",
       "damage": 30,
-      "speed": 1
+      "speed": 1,
+      "upgrade": 600,
+      "repair": 120,
+      "durability": 30
+    },
+    {
+      "name": "녹슨 강철검",
+      "type": "검",
+      "damage": 30,
+      "speed": 1,
+      "upgrade": 800,
+      "repair": 160,
+      "durability": 35
+    },
+    {
+      "name": "강철검",
+      "type": "검",
+      "damage": 70,
+      "speed": 1,
+      "upgrade": 1500,
+      "repair": 300,
+      "durability": 40
+    },
+    {
+      "name": "기이한 강철검",
+      "type": "검",
+      "damage": 90,
+      "speed": 1,
+      "upgrade": 3000,
+      "repair": 600,
+      "durability": 45
+    },
+    {
+      "name": "조잡한 에메랄드검",
+      "type": "검",
+      "damage": 120,
+      "speed": 1,
+      "upgrade": 5000,
+      "repair": 1000,
+      "durability": 50
+    },
+    {
+      "name": "에메랄드검",
+      "type": "검",
+      "damage": 150,
+      "speed": 1,
+      "upgrade": 20000,
+      "repair": 4000,
+      "durability": 55
+    },
+    {
+      "name": "영롱한 에메랄드검",
+      "type": "검",
+      "damage": 180,
+      "speed": 1,
+      "upgrade": 30000,
+      "repair": 6000,
+      "durability": 60
+    },
+    {
+      "name": "미스릴검",
+      "type": "검",
+      "damage": 220,
+      "speed": 1,
+      "upgrade": 50000,
+      "repair": 10000,
+      "durability": 65
+    },
+    {
+      "name": "미스릴검",
+      "type": "검",
+      "damage": 260,
+      "speed": 1,
+      "upgrade": 100000,
+      "repair": 20000,
+      "durability": 70
     }
   ]
 }

@@ -40,6 +40,9 @@
     <Filter Include="src\Vess">
       <UniqueIdentifier>{672a340d-6ce6-427c-9f2a-c984e8048cea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Model\MovementState">
+      <UniqueIdentifier>{4835c6a0-2c3f-470a-bb65-916cdff42a2f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -135,9 +138,6 @@
     <ClCompile Include="..\Classes\Hero.cpp">
       <Filter>src\Model\Unit</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\HeroMovementState.cpp">
-      <Filter>src\Model\Unit</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Monster.cpp">
       <Filter>src\Model\Unit</Filter>
     </ClCompile>
@@ -153,23 +153,68 @@
     <ClCompile Include="..\Classes\UpgradeLayer.cpp">
       <Filter>src\View\Layer</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GuageLockChecker.cpp">
-      <Filter>src\Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Slime.cpp">
-      <Filter>src\Model\Unit</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\UpgradeController.cpp">
       <Filter>src\Controller</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\DimensionGateController.cpp">
       <Filter>src\Controller</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Resources.cpp">
-      <Filter>src\Vess</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\UpgradeCompleteLayer.cpp">
       <Filter>src\View\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Sword.cpp">
+      <Filter>src\Model\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Shield.cpp">
+      <Filter>src\Model\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DurabilityController.cpp">
+      <Filter>src\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ResourcePath.cpp">
+      <Filter>src\Vess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MiniPopupLayer.cpp">
+      <Filter>src\View\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TutorialLayer.cpp">
+      <Filter>src\View\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Chest.cpp">
+      <Filter>src\Model\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Tutorial.cpp">
+      <Filter>src\Model\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MonsterAnimation.cpp">
+      <Filter>src\Model\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MonsterInfo.cpp">
+      <Filter>src\Model\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MonsterBehaviorPattern.cpp">
+      <Filter>src\Model\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GaugeLockChecker.cpp">
+      <Filter>src\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StageLevelController.cpp">
+      <Filter>src\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameoverPopupLayer.cpp">
+      <Filter>src\View\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HeroMovementState.cpp">
+      <Filter>src\Model\MovementState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DefenseMovementState.cpp">
+      <Filter>src\Model\MovementState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ActionFrameValue.cpp">
+      <Filter>src\Model\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SaveController.cpp">
+      <Filter>src\Controller</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -268,14 +313,8 @@
     <ClInclude Include="..\Classes\UpgradeLayer.h">
       <Filter>src\View\Layer</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\HeroMovementState.h">
-      <Filter>src\Model\Unit</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\GaugeLockChecker.h">
       <Filter>src\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Slime.h">
-      <Filter>src\Model\Unit</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Monster.h">
       <Filter>src\Model\Unit</Filter>
@@ -286,11 +325,59 @@
     <ClInclude Include="..\Classes\DimensionGateController.h">
       <Filter>src\Controller</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Resources.h">
-      <Filter>src\Vess</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\UpgradeCompleteLayer.h">
       <Filter>src\View\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Sword.h">
+      <Filter>src\Model\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Shield.h">
+      <Filter>src\Model\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DurabilityController.h">
+      <Filter>src\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ResourcePath.h">
+      <Filter>src\Vess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MiniPopupLayer.h">
+      <Filter>src\View\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TutorialLayer.h">
+      <Filter>src\View\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Chest.h">
+      <Filter>src\Model\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Tutorial.h">
+      <Filter>src\Model\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MonsterAnimation.h">
+      <Filter>src\Model\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MonsterInfo.h">
+      <Filter>src\Model\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MonsterBehaviorPattern.h">
+      <Filter>src\Model\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StageLevelController.h">
+      <Filter>src\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameoverPopupLayer.h">
+      <Filter>src\View\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HeroMovementState.h">
+      <Filter>src\Model\MovementState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DefenseMovementState.h">
+      <Filter>src\Model\MovementState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ActionFrameValue.h">
+      <Filter>src\Model\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SaveController.h">
+      <Filter>src\Controller</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

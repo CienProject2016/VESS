@@ -1,7 +1,7 @@
 ﻿#include "AppDelegate.h"
 #include "StartScene.h"
 #include "WindowSize.h"
-
+#include "ResourcePath.h"
 USING_NS_CC;
 
 
@@ -72,6 +72,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     register_all_packages();
 
+	preloadAllSound();
     // create a scene. it's an autorelease object
     auto startScene = StartScene::createScene();
 
@@ -79,6 +80,19 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->runWithScene(startScene);
 
     return true;
+}
+
+void AppDelegate::preloadAllSound() {
+	log("preload all sound");
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_JUMP_PATH.c_str());
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_DIMENSION_GATE_PATH.c_str());
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_OPEN_DOOR.c_str());
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_ATTACK_PATH.c_str());
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_BLOCK.c_str());
+
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(AudioPath::BGM_NEO_ROCK.c_str());
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(AudioPath::BGM_DIALOG.c_str());
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(AudioPath::BGM_CLEAR.c_str());
 }
 
 // This function will be called when the app is inactive. When comes a phone call,it's be invoked too

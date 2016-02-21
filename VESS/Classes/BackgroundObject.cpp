@@ -29,9 +29,9 @@ bool BackgroundObject::init() {
 	return false;
 }
 
-void BackgroundObject::update(float dt) {
+void BackgroundObject::update(float delta) {
 	Vec2 pos = this->getPosition();
-	pos.x += dt * speed;
+	pos.x += delta * speed;
 	this->setPosition(pos);
 
 
@@ -41,9 +41,9 @@ void BackgroundObject::update(float dt) {
 	}
 	else {
 		if (speed < *settingSpeed * localSpeed * 0.98f)
-			speed += accel * dt * localSpeed;
+			speed += accel * delta * localSpeed;
 		if (speed > *settingSpeed * localSpeed * 1.02f)
-			speed -= accel * dt * localSpeed;
+			speed -= accel * delta * localSpeed;
 	}
 }
 

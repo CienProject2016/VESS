@@ -4,7 +4,7 @@
 bool MonsterSpawnScheduler::isMonsterSpawnTime(int movingDistance, vector<int> distanceData)
 {
 	vector<int>::iterator iterator;
-	for (iterator = distanceData.begin(); iterator != distanceData.end(); ++iterator){
+	for (iterator = distanceData.begin(); iterator != distanceData.end()-1; ++iterator){
 		if (*iterator == movingDistance) {
 			return true;
 		}

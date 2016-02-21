@@ -2,13 +2,30 @@
 
 GameData* GameData::instance_ = nullptr;
 
-GameData::GameData() : moving_distance(0), itemMode(ItemMode::SWORD), stage(), hero_hp(100), gold(150), costume(0), needed_upgrade_gold(150), needed_repair_gold(15)
+GameData::GameData() : topStage(0), stageLevel(0), movingDistance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), gold(15), costume(0), key(1)
 {
+	//저장된 정보 불러옴
+	loadInfo();
+	
 	//대화 정보 설정
 	setDialogInfo();
 	
+	setStageInfo();
 	//강화 정보 설정
 	setUpgradeInfo();
+
+	setTutorialInfo();
+
+}
+
+void GameData::loadInfo() {
+	if (UserDefault::getInstance()->getIntegerForKey("topStageLevel") != NULL) {
+		this->topStage = UserDefault::getInstance()->getIntegerForKey("topStageLevel");
+	}
+}
+
+Stage GameData::getCurrentStageInfo() {
+	return this->getStageList()->at(this->stageLevel);
 }
 
 GameData::~GameData()
@@ -23,6 +40,59 @@ GameData* GameData::getInstance()
 		instance_ = new GameData();
 	}
 	return instance_;
+}
+
+
+void GameData::setStageInfo() {
+	auto stageFileData = FileUtils::getInstance()->getStringFromFile("json/stage.json");
+	stageList = new vector<Stage>();
+	rapidjson::Document doc;
+	doc.Parse(stageFileData.c_str());
+
+	auto& data = doc["stage"];
+
+	for (auto iter = data.Begin(); iter != data.End(); iter++) {
+		Stage stage;
+		if ((*iter)["gold"] == NULL) {
+			log("GameData - Stage gold 정보 없음");
+			stage.setGold(1);
+		}
+		else {
+			stage.setGold((*iter)["gold"].GetInt());
+		}
+		if ((*iter)["health"] == NULL) {
+			log("GameData - Stage health 정보 없음");
+			stage.setHealth(1);
+		}
+		else {
+			stage.setHealth((*iter)["health"].GetInt());
+		}
+		stageList->push_back(stage);
+	}
+}
+
+void GameData::setTutorialInfo() {
+	auto tutorialFileData = FileUtils::getInstance()->getStringFromFile("json/tutorial.json");
+
+	tutorialList = new vector<Tutorial>();
+	rapidjson::Document doc;
+	doc.Parse(tutorialFileData.c_str());
+
+	auto& data = doc["opening"];
+
+	for (auto iter = data.Begin(); iter != data.End(); iter++) {
+		Tutorial tutorial;
+		
+		
+		if ((*iter)["lines"] == NULL) {
+			log("GameData - Dialog lines정보 없음");
+			tutorial.setTutorial("");
+		}
+		else {
+			tutorial.setTutorial((*iter)["lines"].GetString());
+		}
+		tutorialList->push_back(tutorial);
+	}
 }
 
 void GameData::setDialogInfo() {
@@ -63,7 +133,7 @@ void GameData::setDialogInfo() {
 				dialog.setPosition(Dialog::Position::RIGHT);
 			}
 		}
-		
+
 		if ((*iter)["lines"] == NULL) {
 			log("GameData - Dialog lines정보 없음");
 			dialog.setDialogue("");
@@ -76,8 +146,8 @@ void GameData::setDialogInfo() {
 }
 
 void GameData::setUpgradeInfo() {
-	swordList = new vector<Sword>();
-	shieldList = new vector<Shield>();
+	swordList = new vector<Sword*>();
+	shieldList = new vector<Shield*>();
 	
 	auto upgradeSwordFileData = FileUtils::getInstance()->getStringFromFile("json/sword.json");
 
@@ -88,14 +158,18 @@ void GameData::setUpgradeInfo() {
 	
 
 	for (rapidjson::Value* iter = upgradeSwordData.Begin(); iter != upgradeSwordData.End(); iter++) {
-		Sword sword;
-		sword.setDamage((*iter)["damage"].GetInt());
-		sword.setName((*iter)["name"].GetString());
-		sword.setSpeed((*iter)["speed"].GetInt());
+		Sword* sword = new Sword;
+		sword->setDamage((*iter)["damage"].GetInt());
+		sword->setName((*iter)["name"].GetString());
+		sword->setSpeed((*iter)["speed"].GetInt());
+		sword->setMaxDurability((*iter)["durability"].GetInt());
+		sword->setDurability((*iter)["durability"].GetInt());
+		sword->setUpgradeGold((*iter)["upgrade"].GetInt());
+		sword->setRepairGold((*iter)["repair"].GetInt());
 		swordList->push_back(sword);
 	}
-	Sword sword = swordList->at(0);
-	sword.setUpgradeId(1);	
+	Sword* sword = swordList->at(0);
+	sword->setUpgradeId(1);	
 	this->setSword(sword);
 
 	auto upgradeShieldFileData = FileUtils::getInstance()->getStringFromFile("json/shield.json");
@@ -105,14 +179,18 @@ void GameData::setUpgradeInfo() {
 	rapidjson::Value& upgradeShieldData = upgradeShieldInfo["방패"];
 
 	for (rapidjson::Value* iter = upgradeShieldData.Begin(); iter != upgradeShieldData.End(); iter++) {
-		Shield shield;
-		shield.setDefense((*iter)["defense"].GetInt());
-		shield.setName((*iter)["name"].GetString());
-		shield.setSpeed((*iter)["speed"].GetInt());
+		Shield* shield = new Shield();
+		shield->setDefense((*iter)["defense"].GetInt());
+		shield->setName((*iter)["name"].GetString());
+		shield->setSpeed((*iter)["speed"].GetInt());
+		shield->setMaxDurability((*iter)["durability"].GetInt());
+		shield->setDurability((*iter)["durability"].GetInt());
+		shield->setUpgradeGold((*iter)["upgrade"].GetInt());
+		shield->setRepairGold((*iter)["repair"].GetInt());
 		shieldList->push_back(shield);
 	}
-	Shield shield = shieldList->at(0);
-	shield.setUpgradeId(1);
+	Shield* shield = shieldList->at(0);
+	shield->setUpgradeId(1);
 	this->setShield(shield);
 }
 

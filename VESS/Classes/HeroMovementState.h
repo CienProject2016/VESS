@@ -1,6 +1,8 @@
 #include "Unit.h"
 #include "WindowSize.h"
 #include "cocostudio\CocoStudio.h"
+#include "cocos2d.h"
+#include "ActionFrameValue.h"
 
 #ifndef __HERO_MOVEMENT_STATE__
 #define __HERO_MOVEMENT_STATE__
@@ -17,6 +19,7 @@ protected:
 	Hero* parent;
 	float gravity;
 	float movingDistance;
+	CC_SYNTHESIZE(ActionFrameValue*, actionFrameValue, ActionFrameValue);
 public:
 	HeroMovementState();
 	virtual void update(float delta);

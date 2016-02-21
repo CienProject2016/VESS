@@ -11,26 +11,30 @@ class FightLayer;
 
 class EnumBackground {
 public:
-	enum OBJECT {TREE, MOUNTAIN};
+	enum OBJECT {MOUNTAIN, POLE, TILE};
+	enum ArrangePosition {FIXED, RANDOM};
 };
 
 class BackgroundSpawnSchedulerTimer{
 private:
 	EnumBackground::OBJECT object;
-	float timer; //ì§„ì§œ ?€?´ë¨¸
-	float monsterSpawnInterval; //timeWhenObjectSpawn    ?¤ë¸Œ?íŠ¸ ?ì„±???¼ë§ˆ ?„ì— ?¤ìŒ ?¤ë¸Œ?íŠ¸ë¥??ì„±??ì§€ ê²°ì •?˜ëŠ” ê²?/ê¸°ë³¸ ?°ì‚° ë¡œì§??targetTImerScale??ê³±í•´ ê°„ê²© ë²”ìœ„ë¥?ì¡°ì ˆ 
-	float monsterSpawnIntervalScaling; //0~1ê¹Œì? ?¼ë§ˆ??ë²Œë¦´ì§€.->?¬ê¸° ì»¤ì§ˆ?˜ë¡ ?¤ë¸Œ?íŠ¸ê°€ ?ì„±?˜ëŠ” ê°„ê²©??ì»¤ì§
+	float timer; //ÁøÂ¥ Å¸ÀÌ¸Ó
+	float monsterSpawnInterval; //timeWhenObjectSpawn    ¿ÀºêÁ§Æ® »ı¼º½Ã ¾ó¸¶ ÈÄ¿¡ ´ÙÀ½ ¿ÀºêÁ§Æ®¸¦ »ı¼ºÇÒ Áö °áÁ¤ÇÏ´Â °Í//±âº» ¿¬»ê ·ÎÁ÷¿¡ targetTImerScaleÀ» °öÇØ °£°İ ¹üÀ§¸¦ Á¶Àı
+	float monsterSpawnIntervalScaling; //0~1±îÁö ¾ó¸¶³ª ¹ú¸±Áö.->Å©±â Ä¿Áú¼ö·Ï ¿ÀºêÁ§Æ®°¡ »ı¼ºµÇ´Â °£°İÀÌ Ä¿Áü
+	EnumBackground::ArrangePosition arrangePosition;
 	FightLayer* field;
 public:
-	void update(float deltaTime);//deltaTimeTime->?„ë ˆ???¬ì´ ê°„ê²©
+	void setTimer(float);
+	void update(float deltaTime);//deltaTimeTime->ÇÁ·¹ÀÓ »çÀÌ °£°İ
 	BackgroundSpawnSchedulerTimer();
-	BackgroundSpawnSchedulerTimer(EnumBackground::OBJECT object, FightLayer* layer, float scale);// ?´ë–¤?¤ë¸Œ?íŠ¸ ?ì„±? ì?, ?ì„±??ê±??´ë–¤?ˆì´?´ì— addchild ? ì?, ?¤ë¸Œ?íŠ¸ ?ì„± ê°„ê²© 
+	BackgroundSpawnSchedulerTimer(EnumBackground::OBJECT object, FightLayer* layer, float scale, EnumBackground::ArrangePosition arrangePosition);// ¾î¶²¿ÀºêÁ§Æ® »ı¼ºÇÒÁö, »ı¼ºÇÑ °É ¾î¶²·¹ÀÌ¾î¿¡ addchild ÇÒÁö, ¿ÀºêÁ§Æ® »ı¼º °£°İ
 };
 
-class BackgroundSpawnScheduler{ //fightlayer?ì„œ ???˜ë‚˜ ?ì„±. ê°ê°???¤ë¸Œ?íŠ¸?¤ì„ ?°ë¡œ?°ë¡œ ?ì„±,?´ìš©(ê°™ì´ ?€ì§ì´ì§€ ?ŠëŠ”??
+class BackgroundSpawnScheduler{ //fightlayer¿¡¼­ µü ÇÏ³ª »ı¼º. °¢°¢ÀÇ ¿ÀºêÁ§Æ®µéÀ» µû·Îµû·Î »ı¼º,¿î¿ë(°°ÀÌ ¿òÁ÷ÀÌÁö ¾Ê´Â´Ù)
 private:
 	BackgroundSpawnSchedulerTimer mountain;
-	BackgroundSpawnSchedulerTimer tree;
+	BackgroundSpawnSchedulerTimer pole;
+	BackgroundSpawnSchedulerTimer tile;
 	FightLayer* field;
 public:
 	BackgroundSpawnScheduler();
