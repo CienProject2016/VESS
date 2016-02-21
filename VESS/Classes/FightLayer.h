@@ -11,6 +11,7 @@
 #include "Hero.h"
 #include "Monster.h"
 #include "Slime.h"
+#include "EffectController.h"
 USING_NS_CC;
 
 class FightLayer : public Layer
@@ -21,6 +22,9 @@ public:
 	void createBackgound(EnumBackground::OBJECT object);
 	void spawnMonster(float);
 	void monsterDead();
+	
+	void monsterAttacked(); // effect 생성
+	void removeEffect(); // effect 제거
 	CREATE_FUNC(FightLayer);
 
 	Monster* getMonster();
@@ -29,8 +33,11 @@ private :
 	float movingDistanceReal = 0;		//int 형으로 변환할 때 소수값을 잃지 않기 위해 선언.
 	float movingVelocity = 50;			//단위 : 거리/초
 	float* backgroundSpeed;
+	float effectTime = 0;
+	bool effectEnd = false;
 	Label* currentGoldLabel;
 	BattleOperator* controller;
+	EffectController* effectController;
 	Hero* daughter;
 	Monster* monster;
 	Sprite* itemImage;

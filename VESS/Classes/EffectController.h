@@ -6,9 +6,13 @@
 #include <string.h>
 #include "GameData.h"
 #include "cocos2d.h"
+
 USING_NS_CC;
+class Hero;
 
 class EffectController : public Node {
+protected:
+	Hero* field;
 private:
 	EffectController();
 	~EffectController();
@@ -19,6 +23,8 @@ private:
 	virtual void update(float delta);
 public:
 	static EffectController* create(Node* parent, String path, float timer, Vec2 pos, float scale);
+	void setParentLayer(Hero* layer);
+	void eraseEffect(float delta);
 	virtual bool init();
 
 };

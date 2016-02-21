@@ -1,4 +1,5 @@
 #include "EffectController.h"
+#include "FightLayer.h"
 
 EffectController::EffectController() {}
 EffectController::~EffectController() {}
@@ -47,7 +48,23 @@ bool EffectController::init()
 }
 
 void EffectController::update(float delta) {
+	//eraseEffect(delta);
+	//log("%f",this->timer);
 
-	log("%f",this->timer);
+}
 
+void EffectController::setParentLayer(Hero* layer) {
+	field = layer;
+}
+
+void EffectController::eraseEffect(float delta) {
+	timer += delta;
+	log("%f",timer);
+
+	if (timer > max_timer) {
+		//field->removeEffect();
+		timer = 0;
+		this->setVisible(false);
+
+	}
 }

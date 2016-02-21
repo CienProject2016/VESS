@@ -1,7 +1,7 @@
 ﻿#include "Hero.h"
 #include "FightLayer.h"
 #include "Resources.h"
-#include "EffectController.h"
+
 
 #define ANIMATION 10000
 
@@ -36,13 +36,17 @@ void Hero::update(float delta) {
 	if (movementState != NULL) {
 		movementState->update(delta);
 	}
-	if (effectEnd) {
-		effectTime += delta;
-		if (effectTime > 5) {
-			this->removeChild(effectController);
-			effectTime = 0;
-		}
-	}
+	effectController->eraseEffect(delta);
+	//if (effectEnd == true) {
+	//	effectTime += delta;
+	//	log("%f",effectTime);
+	//	if (effectTime > 5) {
+	//		this->removeChild(effectController);
+	//		effectController = NULL;
+	//		effectTime = 0;
+	//		effectEnd = false;
+	//	}
+	//}
 	//여기에 시간이 지나면 removeChild 하게 만들어주면됨.
 }
 
@@ -101,9 +105,26 @@ void Hero::attackDamage() {
 void Hero::attackEffect(int attackDamage) {
 	effectController = EffectController::create(this, "animation/Tauren.csb", 5, Vec2(50, 50), 1);
 	//EffectFactory::makeEffect(this, "animation/MainScene.csb",40,Vec2(50,50),1);
-	effectController->setName("effectController");
+	//effectController->setName("effectController23");
+	effectController->setParentLayer(this);
+	effectController->setTag(5623);
 	this->addChild(effectController);
 	effectEnd = true;
+
+	
+}
+
+void Hero::removeEffect() {
+	/*if (effectEnd == true) {
+	effectTime += timer;
+	log("%f", effectTime);
+	if (effectTime > 5) {
+	this->removeChild(effectController);
+	effectTime = 0;
+	}
+	}*/
+	this->removeChildByTag(5623);
+	effectController = NULL;
 }
 
 void Hero::getDamage(bool damage) {

@@ -25,6 +25,7 @@ void FightLayer::update(float delta) {
 		itemImage->setTexture("Images/shield.png");
 		itemName->setString(GameData::getInstance()->getShield().getName());
 	}
+	//removeEffect(delta);
 }
 
 bool FightLayer::init()
@@ -247,7 +248,6 @@ void FightLayer::attackCallback(cocos2d::Ref* pSender)
 
 	daughter->startAttack();
 	reduceDurability();//reduce durability of weapon
-	
 	CCLOG("attackCallback");
 
 }
@@ -339,6 +339,7 @@ void FightLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_even
 	case 1:		//ATTACK
 		daughter->startAttack();
 		reduceDurability();//reduce durability of weapon
+		
 		break;
 	case 2:		//JUMP
 		daughter->startJump();
@@ -365,6 +366,28 @@ void FightLayer::monsterDead() {
 	monster = NULL;
 	*backgroundSpeed = -100;
 }
+
+//void FightLayer::monsterAttacked() {
+//	effectController = EffectController::create(this, "animation/Tauren.csb", 5, Vec2(50, 50), 1);
+//	//EffectFactory::makeEffect(this, "animation/MainScene.csb",40,Vec2(50,50),1);
+//	//effectController->setName("effectController");
+//	effectController->setParentLayer(this);
+//	this->addChild(effectController);
+//	effectEnd = true;
+//}
+
+//void FightLayer::removeEffect() {
+//	/*if (effectEnd == true) {
+//		effectTime += timer;
+//		log("%f", effectTime);
+//		if (effectTime > 5) {
+//			this->removeChild(effectController);
+//			effectTime = 0;
+//		}
+//	}*/
+//	this->removeChild(effectController);
+//	effectController = NULL;
+//}
 
 void FightLayer::createBackgound(EnumBackground::OBJECT object) {
 	if (object == EnumBackground::MOUNTAIN) {
