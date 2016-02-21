@@ -82,7 +82,7 @@ void FightLayer::initGoldLabel() {
 	currentGoldLabel = Label::createWithTTF("", "fonts/arial.ttf", 50);
 	currentGoldLabel->setString(StringUtils::format("%d", currentGold));
 	currentGoldLabel->setPosition(Vec2(origin.x + visibleSize.width * 0.540f, origin.y + visibleSize.height*0.935f));
-	currentGoldLabel->setColor(Color3B(0, 0, 0)); //black	
+	currentGoldLabel->setColor(Color3B(250, 250, 250)); //WHITE	
 	currentGoldLabel->setName("goldLabel");
 	this->addChild(currentGoldLabel, 9999);
 

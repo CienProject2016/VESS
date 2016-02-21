@@ -27,7 +27,8 @@ public:
 	ItemMode getUpgradeItemMode();
 	void setItemMode(ItemMode);
 	Stage getCurrentStageInfo();
-	void loadInfo();
+	void loadSaveInfo();
+	void resetInfo();
 private:
 	ItemMode itemMode;
 	static GameData* instance_;

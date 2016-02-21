@@ -33,6 +33,9 @@ const string ImagePath::TILE_BACKGROUND = IMAGE_PATH + "ground_blue.png";
 const string ImagePath::DUNGEON_DOOR_LOCK = IMAGE_PATH + "dungeon_door_locked.png";
 const string ImagePath::TUTORIAL_NO_BUTTON = IMAGE_PATH + "tutorial_no_button.png";
 const string ImagePath::TUTORIAL_YES_BUTTON = IMAGE_PATH + "tutorial_yes_button.png";
+const string ImagePath::LEVIATHAN_IMAGE = IMAGE_PATH + "leviathan_face_01.png";
+const string ImagePath::RESET_BUTTON = IMAGE_PATH + "reset_button.png";
+const string ImagePath::RESET_BUTTON_ACTIVE = IMAGE_PATH + "reset_button_active.png";
 
 //Audio Resources
 const string AudioPath::AUDIO_PATH = "audio/";
@@ -58,7 +61,7 @@ const int ActionPath::HERO_RUN_START_FRAME = 0;
 //Element Names
 const string ElementName::UPGRADE_COMPLETE_LAYER = "UpgradeCompleteLayer";
 const string ElementName::DURABILITY_NAME = "내구도";
-const string ElementName::LOCKED = "잠겨있음";
+const string ElementName::LOCKED = "[잠겨있음]";
 
 //TutorialPath
 const string TutorialEventPath::DRAG_01 = "drag_01";
