@@ -31,6 +31,8 @@ const string ImagePath::POLE_IMAGE = IMAGE_PATH + "pole.png";
 const string ImagePath::SKY_IMAGE = IMAGE_PATH + "sky_cave.png";
 const string ImagePath::TILE_BACKGROUND = IMAGE_PATH + "ground_blue.png";
 const string ImagePath::DUNGEON_DOOR_LOCK = IMAGE_PATH + "dungeon_door_locked.png";
+const string ImagePath::TUTORIAL_NO_BUTTON = IMAGE_PATH + "tutorial_no_button.png";
+const string ImagePath::TUTORIAL_YES_BUTTON = IMAGE_PATH + "tutorial_yes_button.png";
 
 //Audio Resources
 const string AudioPath::AUDIO_PATH = "audio/";
@@ -57,3 +59,8 @@ const int ActionPath::HERO_RUN_START_FRAME = 0;
 const string ElementName::UPGRADE_COMPLETE_LAYER = "UpgradeCompleteLayer";
 const string ElementName::DURABILITY_NAME = "내구도";
 const string ElementName::LOCKED = "잠겨있음";
+
+//TutorialPath
+const string TutorialEventPath::DRAG_01 = "drag_01";
+const string TutorialEventPath::EVADE_01 = "evade_01";
+const string TutorialEventPath::EVADE_02 = "evade_02";

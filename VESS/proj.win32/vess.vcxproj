@@ -185,6 +185,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Stage.cpp" />
     <ClCompile Include="..\Classes\GameData.cpp" />
     <ClCompile Include="..\Classes\Tutorial.cpp" />
+    <ClCompile Include="..\Classes\TutorialController.cpp" />
+    <ClCompile Include="..\Classes\TutorialInfo.cpp" />
     <ClCompile Include="..\Classes\TutorialLayer.cpp" />
     <ClCompile Include="..\Classes\Sword.cpp" />
     <ClCompile Include="..\Classes\Unit.cpp" />
@@ -230,6 +232,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Settings.h" />
     <ClInclude Include="..\Classes\Stage.h" />
     <ClInclude Include="..\Classes\Tutorial.h" />
+    <ClInclude Include="..\Classes\TutorialController.h" />
+    <ClInclude Include="..\Classes\TutorialInfo.h" />
     <ClInclude Include="..\Classes\TutorialLayer.h" />
     <ClInclude Include="..\Classes\Sword.h" />
     <ClInclude Include="..\Classes\Unit.h" />

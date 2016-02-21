@@ -4,6 +4,7 @@
 #include "Monster.h"
 #include "ResourcePath.h"
 #include "DefenseMovementState.h"
+#include "TutorialController.h"
 
 #define ANIMATION 10000
 
@@ -130,9 +131,11 @@ void Hero::startAttack() {
 			setMovementState(new AttackMovementState(this));
 			action->gotoFrameAndPlay(198, 211, false);//공격1
 			itemAction->gotoFrameAndPlay(198, 211, false);
+			TutorialController::checkTutorialEvent("drag_01");
 		}
 	}	
 }
+
 void Hero::startAvoid() {
 	if (isAvailableCommand()) {
 		setMovementState(new AvoidMovementState(this));
