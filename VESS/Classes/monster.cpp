@@ -15,7 +15,7 @@ Monster::~Monster() {
 	delete behavior;
 }
 
-void Monster::init(FightLayer* layer, Monster::Kind kind){
+void Monster::init(FightLayer* layer, Monster::Kind kind, int health){
 	if (Unit::init())
 	{
 		this->kind = kind;
@@ -23,7 +23,7 @@ void Monster::init(FightLayer* layer, Monster::Kind kind){
 		initWindowSize();
 		initImage();
 		initBehavior();
-		initHp();
+		initHp(health);
 		this->scheduleUpdate();
 	}	
 }
@@ -48,10 +48,11 @@ void Monster::initImage() {
 	case Slime:
 		anim = new MonsterAnimation(this);
 		image = Sprite::create("animation/basic_slime/stand/basic_slime_stand_00.png");
-		image->setPosition(Vec2(windowSize.width * 0.6f, windowSize.height * 0.41f));
+		image->setPosition(Vec2(0,0));
 		image->setScale(2.8f);
 		this->addChild(image);
 		anim->playStand();
+		this->setPosition(Vec2(windowSize.width * 0.6f, windowSize.height * 0.41f));
 		break;
 	}
 }
@@ -74,9 +75,9 @@ void Monster::update(float delta) {
 	behavior->update(delta);	
 }
 
-void Monster::initHp() {
-	this->hp = hp;
-	this->fullHp = hp;
+void Monster::initHp(int health) {
+	this->hp = health;
+	this->fullHp = health;
 	auto currentHp = Label::createWithTTF("0", "fonts/arial.ttf", 50);
 	currentHp->setPosition(Vec2(0, -40));
 	currentHp->setColor(ccc3(0, 0, 0)); //black
@@ -90,8 +91,7 @@ void Monster::initHp() {
 Monster* Monster::create(FightLayer* layer, Monster::Kind kind, int health)
 {
 	Monster *monster = new Monster();
-	monster->init(layer, kind);
-	monster->setHp(health);
+	monster->init(layer, kind, health);
 	monster->autorelease();
 	return monster;
 }

@@ -26,6 +26,7 @@ bool Hero::init()
 
 		itemNode = CSLoader::createNode("weapon_sword.csb");
 		itemNode->setName("itemNode");
+		itemNode->setScale(0.8f);
 		this->addChild(itemNode);
 		itemAction = CSLoader::createTimeline("weapon_sword.csb");
 		itemNode->setPosition(0, 0);
@@ -74,6 +75,7 @@ void Hero::changeItemAction(Item::Type itemType) {
 	this->removeChild(itemNode);
 	if (itemType == Item::Type::SWORD) {		
 		itemNode = CSLoader::createNode(ActionPath::SWORD_PATH);
+		itemNode->setScale(0.8f);
 		itemAction = CSLoader::createTimeline(ActionPath::SWORD_PATH);	
 		this->addChild(itemNode);
 		itemNode->runAction(itemAction);
@@ -81,12 +83,12 @@ void Hero::changeItemAction(Item::Type itemType) {
 	}
 	else if (itemType == Item::Type::SHIELD) {
 		itemNode = CSLoader::createNode(ActionPath::SHIELD_PATH);
+		itemNode->setScale(0.8f);
 		itemAction = CSLoader::createTimeline(ActionPath::SHIELD_PATH);	
 		this->addChild(itemNode);
 		itemNode->runAction(itemAction);
 		itemAction->gotoFrameAndPlay(0, 16, true);		
-	}
-	
+	}	
 }
 
 //몬스터가 히어로를 때리려고 할 때 콜되는 함수.
