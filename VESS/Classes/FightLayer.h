@@ -52,6 +52,9 @@ private:
 	void redrawHeart();
 	void redrawDimensionGate();
 
+	void pauseButton();
+	void createPauseSprite();
+
 	float movingDistanceReal = 0;		
 	float movingVelocity = 50;			
 	float* backgroundSpeed;

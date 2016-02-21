@@ -32,6 +32,8 @@ bool FightLayer::init()
 
 	this->scheduleUpdate();
 
+	pauseButton();
+
 	setTouchListener();
 
 	//효과음 준비
@@ -81,13 +83,13 @@ void FightLayer::initGoldLabel() {
 	int currentGold = GameData::getInstance()->getGold();
 	currentGoldLabel = Label::createWithTTF("", "fonts/arial.ttf", 50);
 	currentGoldLabel->setString(StringUtils::format("%d", currentGold));
-	currentGoldLabel->setPosition(Vec2(origin.x + visibleSize.width * 0.540f, origin.y + visibleSize.height*0.935f));
+	currentGoldLabel->setPosition(Vec2(origin.x + visibleSize.width * 0.460f, origin.y + visibleSize.height*0.935f));
 	currentGoldLabel->setColor(Color3B(0, 0, 0)); //black	
 	currentGoldLabel->setName("goldLabel");
 	this->addChild(currentGoldLabel, 9999);
 
 	auto goldIcon = Sprite::create(ImagePath::GOLD_ICON_PATH);
-	goldIcon->setPosition(Vec2(origin.x + visibleSize.width*0.49f, origin.y + visibleSize.height * 0.935f));
+	goldIcon->setPosition(Vec2(origin.x + visibleSize.width*0.40f, origin.y + visibleSize.height * 0.935f));
 	this->addChild(goldIcon);
 }
 
@@ -392,6 +394,44 @@ void FightLayer::redrawDimensionGate() {
 	
 	
 }
+
+void FightLayer::pauseButton()
+{
+	auto pauseButton = Sprite::create("Images/pauseButton.png");
+	pauseButton->setName("pauseButton");
+	pauseButton->setPosition(Vec2(visibleSize.width*0.55f, visibleSize.width*0.52f));
+	pauseButton->setScale(0.3f);
+	this->addChild(pauseButton);
+	if ( true == onTouchEnded)
+	{	
+		createPauseSprite();
+	}
+	//pauseButton이 터치를 받으면 createPauseSprite() 실행
+}
+
+void FightLayer::createPauseSprite()
+{
+	daughter->stopAllActions();
+	monster->stopAllActions();
+
+	auto pauseSprite = Sprite::create("Images/pauseButton.png");
+	//일시정지중이란 걸 스프라이트로 크게 띄워 표시
+	pauseSprite->setName("pauseSprite");
+	pauseSprite->setPosition(Vec2(visibleSize.width*0.3f, visibleSize.width*0.3f));
+	pauseSprite->setScale(1.0f);
+	this->addChild(pauseSprite);
+	//전체화면에서 터치를 받아와서
+	//아무 화면에서나 한번이라도 눌리면 게임이 재개 되도록.
+
+	if ( true == onTouchEnded )
+	{
+		delete pauseSprite;
+		//pauseSprite를 없애기 
+		daughter->runAction;
+		monster->runAction;
+	}
+}
+
 
 Monster* FightLayer::getMonster() {
 	return monster;
