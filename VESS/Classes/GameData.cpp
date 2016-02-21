@@ -2,8 +2,11 @@
 
 GameData* GameData::instance_ = nullptr;
 
-GameData::GameData() : stageLevel(0), movingDistance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), gold(15), costume(0), key(1)
+GameData::GameData() : topStage(0), stageLevel(0), movingDistance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), gold(15), costume(0), key(1)
 {
+	//저장된 정보 불러옴
+	loadInfo();
+	
 	//대화 정보 설정
 	setDialogInfo();
 	
@@ -13,6 +16,12 @@ GameData::GameData() : stageLevel(0), movingDistance(0), sword(), shield(), item
 
 	setTutorialInfo();
 
+}
+
+void GameData::loadInfo() {
+	if (UserDefault::getInstance()->getIntegerForKey("topStageLevel") != NULL) {
+		this->topStage = UserDefault::getInstance()->getIntegerForKey("topStageLevel");
+	}
 }
 
 Stage GameData::getCurrentStageInfo() {

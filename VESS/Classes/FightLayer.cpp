@@ -194,7 +194,6 @@ void FightLayer::monsterSpawnUpdate(float delta) {
 			chest = Chest::create();
 			chest->setParentLayer(this);
 			this->addChild(chest);
-			CCLOG("stageClear");
 		}
 		if (GameData::getInstance()->getCurrentStageInfo().getKey()) {
 			this->stageClear();
