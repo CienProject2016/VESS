@@ -87,7 +87,7 @@ void Monster::initHp(int health) {
   
 	hpBarDecreasing->setType(kCCProgressTimerTypeBar);
 	hpBarDecreasing->setPercentage(100.0f);
-	hpBarDecreasing->setPosition(Vec2(40, 80));
+	hpBarDecreasing->setPosition(Vec2(80, 80));
 	hpBarDecreasing->setMidpoint(Vec2(0, 1));
 	hpBarDecreasing->setBarChangeRate(Vec2(1,0));
 	this->addChild(hpBarDecreasing);

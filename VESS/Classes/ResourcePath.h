@@ -35,6 +35,9 @@ public:
 	const static string DUNGEON_DOOR_LOCK;
 	const static string TUTORIAL_YES_BUTTON;
 	const static string TUTORIAL_NO_BUTTON;
+	const static string LEVIATHAN_IMAGE;
+	const static string RESET_BUTTON;
+	const static string RESET_BUTTON_ACTIVE;
 };
 
 struct ActionPath {

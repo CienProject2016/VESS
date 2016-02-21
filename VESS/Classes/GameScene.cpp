@@ -31,7 +31,7 @@ Scene* GameScene::createScene()
 	scene->addChild(upgrade_layer, 1, "upgradeLayer");
 	scene->addChild(fight_layer, 0, "fightLayer");
 
-	if (GameData::getInstance()->getIsTutorial()) {
+	if (GameData::getInstance()->getStageLevel() == 0) {
 		auto tutorialLayer = TutorialLayer::create();
 
 		tutorialLayer->setContentSize(Size(1920, 1080));

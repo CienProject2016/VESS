@@ -4,24 +4,49 @@ GameData* GameData::instance_ = nullptr;
 
 GameData::GameData() : isInTutorial(false),isTutorial(false), topStage(0), stageLevel(0), movingDistance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), gold(15), costume(0), key(1)
 {
-	//저장된 정보 불러옴
-	loadInfo();
+	
 	
 	//대화 정보 설정
 	setDialogInfo();
 	
 	setStageInfo();
+
 	//강화 정보 설정
 	setUpgradeInfo();
 
 	setTutorialInfo();
 
+	//저장된 정보 불러옴
+	loadSaveInfo();
 }
 
-void GameData::loadInfo() {
+void GameData::resetInfo() {
+	log("Game Reset");
+	topStage = 0;
+	gold = 15;
+	setUpgradeInfo();
+}
+
+void GameData::loadSaveInfo() {
 	if (UserDefault::getInstance()->getIntegerForKey("topStageLevel") != NULL) {
 		this->topStage = UserDefault::getInstance()->getIntegerForKey("topStageLevel");
 		this->gold = UserDefault::getInstance()->getIntegerForKey("gold");
+		sword->setUpgradeId(UserDefault::getInstance()->getIntegerForKey("swordUpgradeGold"));
+		sword->setDamage(UserDefault::getInstance()->getIntegerForKey("swordDamage"));
+		sword->setDurability(UserDefault::getInstance()->getIntegerForKey("swordDurability"));
+		sword->setMaxDurability(UserDefault::getInstance()->getIntegerForKey("swordMaxDurability"));
+		sword->setRepairGold(UserDefault::getInstance()->getIntegerForKey("swordRepairGold"));
+		sword->setUpgradeGold(UserDefault::getInstance()->getIntegerForKey("swordUpgradeGold"));
+		sword->setSpeed(UserDefault::getInstance()->getIntegerForKey("swrodSpeed"));
+		sword->setName(UserDefault::getInstance()->getStringForKey("swordName"));
+		shield->setUpgradeId(UserDefault::getInstance()->getIntegerForKey("shieldUpgradeGold"));
+		shield->setDefense(UserDefault::getInstance()->getIntegerForKey("shieldDefense"));
+		shield->setDurability(UserDefault::getInstance()->getIntegerForKey("shieldDurability"));
+		shield->setMaxDurability(UserDefault::getInstance()->getIntegerForKey("shieldMaxDurability"));
+		shield->setRepairGold(UserDefault::getInstance()->getIntegerForKey("shieldRepairGold"));
+		shield->setUpgradeGold(UserDefault::getInstance()->getIntegerForKey("shieldUpgradeGold"));
+		shield->setSpeed(UserDefault::getInstance()->getIntegerForKey("swrodSpeed"));
+		shield->setName(UserDefault::getInstance()->getStringForKey("shieldName"));
 	}
 }
 
