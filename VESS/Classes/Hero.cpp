@@ -9,7 +9,7 @@ bool Hero::init()
 {
 	if (Unit::init())
 	{
-		effectEnd = false;
+		
 		numGetDamage = 0;
 		windowSize = fightLayerSize;
 		origin = fightLayerOrigin;
@@ -21,12 +21,10 @@ bool Hero::init()
 		node->setPosition(0, 0);
 		node->runAction(action);
 		action->gotoFrameAndPlay(0, 16, true);
-		this->scheduleUpdate();
 		avoidDistance = windowSize.width * 0.2f;
 		attackDistance = windowSize.width * 0.4f;
-		
-		
 		setMovementState(new StayMovementState(this));
+		this->scheduleUpdate();
 		return true;
 	}
 	return false;
@@ -36,18 +34,18 @@ void Hero::update(float delta) {
 	if (movementState != NULL) {
 		movementState->update(delta);
 	}
-	effectController->eraseEffect(delta);
-	//if (effectEnd == true) {
-	//	effectTime += delta;
-	//	log("%f",effectTime);
-	//	if (effectTime > 5) {
-	//		this->removeChild(effectController);
-	//		effectController = NULL;
-	//		effectTime = 0;
-	//		effectEnd = false;
-	//	}
-	//}
+
+	checkEffectEnd();
 	//여기에 시간이 지나면 removeChild 하게 만들어주면됨.
+}
+
+void Hero::checkEffectEnd() {
+	if (effectController != NULL) {
+		if (effectController->checkIsOver()) {
+			this->removeChild(effectController);
+			effectController = NULL;
+		}
+	}	
 }
 
 Hero* Hero::create()
@@ -106,10 +104,8 @@ void Hero::attackEffect(int attackDamage) {
 	effectController = EffectController::create(this, "animation/Tauren.csb", 5, Vec2(50, 50), 1);
 	//EffectFactory::makeEffect(this, "animation/MainScene.csb",40,Vec2(50,50),1);
 	//effectController->setName("effectController23");
-	effectController->setParentLayer(this);
 	effectController->setTag(5623);
 	this->addChild(effectController);
-	effectEnd = true;
 
 	
 }

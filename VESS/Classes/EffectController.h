@@ -16,16 +16,17 @@ protected:
 private:
 	EffectController();
 	~EffectController();
-	Node* object;
 	Node* particle;
 	float timer;
 	float max_timer;
+	bool isOver;
+	Node* parent;
 	virtual void update(float delta);
 public:
 	static EffectController* create(Node* parent, String path, float timer, Vec2 pos, float scale);
-	void setParentLayer(Hero* layer);
-	void eraseEffect(float delta);
-	virtual bool init();
+	void checkEraseEffect(float delta);
+	virtual bool init(int);
+	bool checkIsOver();
 
 };
 

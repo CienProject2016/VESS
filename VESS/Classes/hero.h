@@ -30,6 +30,7 @@ public:
 	void getDamage(bool damage);
 	void setMovementState(HeroMovementState* state);
 private:
+	void checkEffectEnd();
 	EffectController* effectController;
 	const int SIZE_OF_LIFE = 3;
 	int numGetDamage;
