@@ -56,8 +56,13 @@ void Monster::initHp(int hp) {
 	currentHp->setString(StringUtils::format("%d / %d", hp, fullHp));
 	this->addChild(currentHp, 1);
 	currentHp->setTag(3);
-    //hpBar = CCSprite::create("Images/monsterHpBar.png");
-	//hpBarDecreasing = CCProgressTimer::create(hpBar);
+  
+	hpBarDecreasing->setType(kCCProgressTimerTypeBar);
+	hpBarDecreasing->setPercentage(fullHp);
+	hpBarDecreasing->setPosition(Vec2(0, -40));
+	hpBarDecreasing->setMidpoint(Vec2(0, -40));
+	hpBarDecreasing->setBarChangeRate(Vec2(1, 0));
+	this->addChild(hpBarDecreasing);
 }
 
 bool Monster::isDead()
@@ -91,7 +96,7 @@ void Monster::setParentLayer(FightLayer* layer) {
 
 void Monster::damage(int dam) {
 	hp -= dam;
-	
+	hpBarDecreasing->setPercentage(hp);
 	auto currentHp = (Label*)getChildByTag(3);
 	currentHp->setString(StringUtils::format("%d / %d", hp, fullHp));
 
