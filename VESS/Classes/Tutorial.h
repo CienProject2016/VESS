@@ -7,7 +7,7 @@
 using namespace std;
 
 /*
-Æ©Åä¸®¾óÀ» À§ÇÑ Å¬·¡½º
+íŠœí† ë¦¬ì–¼ì„ ìœ„í•œ í´ë˜ìŠ¤
 */
 class Tutorial
 {

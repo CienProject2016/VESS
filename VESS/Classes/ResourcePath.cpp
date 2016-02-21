@@ -60,8 +60,8 @@ const int ActionPath::HERO_RUN_START_FRAME = 0;
 
 //Element Names
 const string ElementName::UPGRADE_COMPLETE_LAYER = "UpgradeCompleteLayer";
-const string ElementName::DURABILITY_NAME = "≥ª±∏µµ";
-const string ElementName::LOCKED = "[¿·∞‹¿÷¿Ω]";
+const string ElementName::DURABILITY_NAME = "ÎÇ¥Íµ¨ÎèÑ";
+const string ElementName::LOCKED = "[Ïû†Í≤®ÏûàÏùå]";
 
 //TutorialPath
 const string TutorialEventPath::DRAG_01 = "drag_01";

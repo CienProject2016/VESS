@@ -1,4 +1,4 @@
-﻿#include "Hero.h"
+#include "Hero.h"
 #include "FightLayer.h"
 #include "MonsterInfo.h"
 #include "Monster.h"

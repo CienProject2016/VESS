@@ -4,7 +4,7 @@ Sword::Sword() {
 	this->setName("wooden sword");
 	this->damage = 10;
 	this->setMaxDurability(10);
-	this->setDurability(10); // ÇöÀç Å×½ºÆÃ ¿ëÀ¸·Î ÀÏºÎ·¯ 5·Î ³·Ãç³õÀ½
+	this->setDurability(10); // í˜„ìž¬ í…ŒìŠ¤íŒ… ìš©ìœ¼ë¡œ ì¼ë¶€ëŸ¬ 5ë¡œ ë‚®ì¶°ë†“ìŒ
 }
 
 Sword::~Sword() {

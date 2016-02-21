@@ -18,19 +18,19 @@ public:
 class BackgroundSpawnSchedulerTimer{
 private:
 	EnumBackground::OBJECT object;
-	float timer; //ÁøÂ¥ Å¸ÀÌ¸Ó
-	float monsterSpawnInterval; //timeWhenObjectSpawn    ¿ÀºêÁ§Æ® »ı¼º½Ã ¾ó¸¶ ÈÄ¿¡ ´ÙÀ½ ¿ÀºêÁ§Æ®¸¦ »ı¼ºÇÒ Áö °áÁ¤ÇÏ´Â °Í//±âº» ¿¬»ê ·ÎÁ÷¿¡ targetTImerScaleÀ» °öÇØ °£°İ ¹üÀ§¸¦ Á¶Àı
-	float monsterSpawnIntervalScaling; //0~1±îÁö ¾ó¸¶³ª ¹ú¸±Áö.->Å©±â Ä¿Áú¼ö·Ï ¿ÀºêÁ§Æ®°¡ »ı¼ºµÇ´Â °£°İÀÌ Ä¿Áü
+	float timer; //ì§„ì§œ íƒ€ì´ë¨¸
+	float monsterSpawnInterval; //timeWhenObjectSpawn    ì˜¤ë¸Œì íŠ¸ ìƒì„±ì‹œ ì–¼ë§ˆ í›„ì— ë‹¤ìŒ ì˜¤ë¸Œì íŠ¸ë¥¼ ìƒì„±í•  ì§€ ê²°ì •í•˜ëŠ” ê²ƒ//ê¸°ë³¸ ì—°ì‚° ë¡œì§ì— targetTImerScaleì„ ê³±í•´ ê°„ê²© ë²”ìœ„ë¥¼ ì¡°ì ˆ
+	float monsterSpawnIntervalScaling; //0~1ê¹Œì§€ ì–¼ë§ˆë‚˜ ë²Œë¦´ì§€.->í¬ê¸° ì»¤ì§ˆìˆ˜ë¡ ì˜¤ë¸Œì íŠ¸ê°€ ìƒì„±ë˜ëŠ” ê°„ê²©ì´ ì»¤ì§
 	EnumBackground::ArrangePosition arrangePosition;
 	FightLayer* field;
 public:
 	void setTimer(float);
-	void update(float deltaTime);//deltaTimeTime->ÇÁ·¹ÀÓ »çÀÌ °£°İ
+	void update(float deltaTime);//deltaTimeTime->í”„ë ˆì„ ì‚¬ì´ ê°„ê²©
 	BackgroundSpawnSchedulerTimer();
-	BackgroundSpawnSchedulerTimer(EnumBackground::OBJECT object, FightLayer* layer, float scale, EnumBackground::ArrangePosition arrangePosition);// ¾î¶²¿ÀºêÁ§Æ® »ı¼ºÇÒÁö, »ı¼ºÇÑ °É ¾î¶²·¹ÀÌ¾î¿¡ addchild ÇÒÁö, ¿ÀºêÁ§Æ® »ı¼º °£°İ
+	BackgroundSpawnSchedulerTimer(EnumBackground::OBJECT object, FightLayer* layer, float scale, EnumBackground::ArrangePosition arrangePosition);// ì–´ë–¤ì˜¤ë¸Œì íŠ¸ ìƒì„±í• ì§€, ìƒì„±í•œ ê±¸ ì–´ë–¤ë ˆì´ì–´ì— addchild í• ì§€, ì˜¤ë¸Œì íŠ¸ ìƒì„± ê°„ê²©
 };
 
-class BackgroundSpawnScheduler{ //fightlayer¿¡¼­ µü ÇÏ³ª »ı¼º. °¢°¢ÀÇ ¿ÀºêÁ§Æ®µéÀ» µû·Îµû·Î »ı¼º,¿î¿ë(°°ÀÌ ¿òÁ÷ÀÌÁö ¾Ê´Â´Ù)
+class BackgroundSpawnScheduler{ //fightlayerì—ì„œ ë”± í•˜ë‚˜ ìƒì„±. ê°ê°ì˜ ì˜¤ë¸Œì íŠ¸ë“¤ì„ ë”°ë¡œë”°ë¡œ ìƒì„±,ìš´ìš©(ê°™ì´ ì›€ì§ì´ì§€ ì•ŠëŠ”ë‹¤)
 private:
 	BackgroundSpawnSchedulerTimer mountain;
 	BackgroundSpawnSchedulerTimer pole;
