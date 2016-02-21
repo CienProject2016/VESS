@@ -2,13 +2,13 @@
 
 GameData* GameData::instance_ = nullptr;
 
-GameData::GameData() : isInTutorial(false),isTutorial(false), topStage(0), stageLevel(0), movingDistance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), gold(15), costume(0), key(1)
+GameData::GameData() : isInTutorial(false), isTutorial(false), topStage(0), stageLevel(0), movingDistance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), gold(15), costume(0), key(1)
 {
-	
-	
+
+
 	//대화 정보 설정
 	setDialogInfo();
-	
+
 	setStageInfo();
 
 	//강화 정보 설정
@@ -108,8 +108,8 @@ void GameData::setTutorialInfo() {
 
 	for (auto iter = data.Begin(); iter != data.End(); iter++) {
 		Tutorial tutorial;
-		
-		
+
+
 		if ((*iter)["lines"] == NULL) {
 			log("GameData - Dialog lines정보 없음");
 			tutorial.setLines("");
@@ -181,14 +181,14 @@ void GameData::setDialogInfo() {
 void GameData::setUpgradeInfo() {
 	swordList = new vector<Sword*>();
 	shieldList = new vector<Shield*>();
-	
+
 	auto upgradeSwordFileData = FileUtils::getInstance()->getStringFromFile("json/sword.json");
 
 
 	rapidjson::Document upgradeSwordInfo;
 	upgradeSwordInfo.Parse(upgradeSwordFileData.c_str());
 	rapidjson::Value& upgradeSwordData = upgradeSwordInfo["sword"];
-	
+
 
 	for (rapidjson::Value* iter = upgradeSwordData.Begin(); iter != upgradeSwordData.End(); iter++) {
 		Sword* sword = new Sword;
@@ -202,14 +202,14 @@ void GameData::setUpgradeInfo() {
 		swordList->push_back(sword);
 	}
 	Sword* sword = swordList->at(0);
-	sword->setUpgradeId(1);	
+	sword->setUpgradeId(1);
 	this->setSword(sword);
 
 	auto upgradeShieldFileData = FileUtils::getInstance()->getStringFromFile("json/shield.json");
 
 	rapidjson::Document upgradeShieldInfo;
 	upgradeShieldInfo.Parse(upgradeShieldFileData.c_str());
-	rapidjson::Value& upgradeShieldData = upgradeShieldInfo["방패"];
+	rapidjson::Value& upgradeShieldData = upgradeShieldInfo["shield"];
 
 	for (rapidjson::Value* iter = upgradeShieldData.Begin(); iter != upgradeShieldData.End(); iter++) {
 		Shield* shield = new Shield();

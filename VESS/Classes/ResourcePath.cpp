@@ -63,6 +63,7 @@ const string ElementName::UPGRADE_COMPLETE_LAYER = "UpgradeCompleteLayer";
 const string ElementName::DURABILITY_NAME = "내구도";
 const string ElementName::LOCKED = "[잠겨있음]";
 const string ElementName::TOUCH_SCREEN = "시작하시려면 화면을 터치하세요";
+const string ElementName::START_MESSAGE = "본격 강화 피지컬 액션 RPG";
 
 //TutorialPath
 const string TutorialEventPath::DRAG_01 = "drag_01";

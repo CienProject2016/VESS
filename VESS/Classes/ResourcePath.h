@@ -38,6 +38,7 @@ public:
 	const static string LEVIATHAN_IMAGE;
 	const static string RESET_BUTTON;
 	const static string RESET_BUTTON_ACTIVE;
+	
 };
 
 struct ActionPath {
@@ -49,7 +50,7 @@ public:
 	const static int HERO_RUN_END_FRAME;
 	const static string SWORD_PATH;
 	const static string SHIELD_PATH;
-
+	
 };
 
 struct AudioPath {
@@ -73,6 +74,7 @@ public:
 	const static string DURABILITY_NAME;
 	const static string LOCKED;
 	const static string TOUCH_SCREEN;
+	const static string START_MESSAGE;
 };
 
 struct TutorialEventPath {
