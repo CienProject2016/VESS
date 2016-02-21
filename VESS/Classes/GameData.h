@@ -27,12 +27,14 @@ public:
 	ItemMode getUpgradeItemMode();
 	void setItemMode(ItemMode);
 	Stage getCurrentStageInfo();
+	void loadInfo();
 private:
 	ItemMode itemMode;
 	static GameData* instance_;
-	CC_SYNTHESIZE(vector<Tutorial>*, tutorialList, TutorialList);
-	CC_SYNTHESIZE(vector<Stage>*, stageList, StageList);
 	void setTutorialInfo();
+	CC_SYNTHESIZE(vector<Tutorial>*, tutorialList, TutorialList);
+	CC_SYNTHESIZE(vector<Stage>*, stageList, StageList);	
+	CC_SYNTHESIZE(int, topStage, TopStage);
 	CC_SYNTHESIZE(int, stageLevel, StageLevel);
 	CC_SYNTHESIZE(Stage, stage, Stage);
 	CC_SYNTHESIZE(int, gold, Gold);
