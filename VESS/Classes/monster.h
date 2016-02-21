@@ -37,9 +37,9 @@ public:
 	Node* image;
 	FightLayer* field;
 private:
-	void init(FightLayer* layer, Monster::Kind);
+	void init(FightLayer* layer, Monster::Kind, int health);
 	void initWindowSize();
-	void initHp();
+	void initHp(int);
 	void initImage();
 	void initBehavior();
 	Size windowSize;

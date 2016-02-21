@@ -266,7 +266,7 @@ void FightLayer::dimensionCallback(cocos2d::Ref* pSender, ui::Widget::TouchEvent
 		break;
 	case ui::Widget::TouchEventType::ENDED:
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_DIMENSION_GATE_PATH.c_str());
-		DimensionGateController::changeItemPosition();
+		DimensionGateController::changeItemPosition(daughter);
 		break;
 	case ui::Widget::TouchEventType::CANCELED:
 		break;

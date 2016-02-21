@@ -76,7 +76,6 @@ private:
 	void jumpCallback(cocos2d::Ref* pSender);
 	void sitCallback(cocos2d::Ref* pSender);
 	void reduceDurability();
-
 	void setTouchListener();
 
 	const int LIFE_COUNT = 3;

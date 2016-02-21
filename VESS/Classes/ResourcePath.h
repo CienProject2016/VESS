@@ -35,6 +35,18 @@ public:
 	const static string DUNGEON_DOOR_LOCK;
 };
 
+struct ActionPath {
+public:
+	const static string HERO_PATH;
+	const static int HERO_DEFENSE_START_FRAME;
+	const static int HERO_DEFENSE_END_FRAME;
+	const static int HERO_RUN_START_FRAME;
+	const static int HERO_RUN_END_FRAME;
+	const static string SWORD_PATH;
+	const static string SHIELD_PATH;
+
+};
+
 struct AudioPath {
 public:
 	const static string AUDIO_PATH;

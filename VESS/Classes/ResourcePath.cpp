@@ -44,6 +44,14 @@ const string AudioPath::BGM_NEO_ROCK = AUDIO_PATH + BGM + "neo_rock.mp3";
 const string AudioPath::BGM_DIALOG = AUDIO_PATH + BGM + "dialog.mp3";
 const string AudioPath::BGM_CLEAR = AUDIO_PATH + BGM + "clear.mp3";
 
+//Action Path
+const string ActionPath::HERO_PATH = "character.csb";
+const string ActionPath::SWORD_PATH = "weapon_sword.csb";
+const string ActionPath::SHIELD_PATH = "weapon_shield.csb";
+const int ActionPath::HERO_DEFENSE_START_FRAME = 18;
+const int ActionPath::HERO_DEFENSE_END_FRAME = 25;
+const int ActionPath::HERO_RUN_START_FRAME = 0;
+
 //Element Names
 const string ElementName::UPGRADE_COMPLETE_LAYER = "UpgradeCompleteLayer";
 const string ElementName::DURABILITY_NAME = "³»±¸µµ";
