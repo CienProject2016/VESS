@@ -17,7 +17,8 @@ public:
 	~Tutorial();
 private:
 	CC_SYNTHESIZE(Tutorial::Position, position, Position);
-	CC_SYNTHESIZE(string, tutorial, Tutorial);
+	CC_SYNTHESIZE(string, lines, Lines);
+	CC_SYNTHESIZE(string, eventType, EventType);
 	
 };
 

@@ -2,7 +2,7 @@
 
 GameData* GameData::instance_ = nullptr;
 
-GameData::GameData() : topStage(0), stageLevel(0), movingDistance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), gold(15), costume(0), key(1)
+GameData::GameData() : isInTutorial(false),isTutorial(false), topStage(0), stageLevel(0), movingDistance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), gold(15), costume(0), key(1)
 {
 	//저장된 정보 불러옴
 	loadInfo();
@@ -86,10 +86,17 @@ void GameData::setTutorialInfo() {
 		
 		if ((*iter)["lines"] == NULL) {
 			log("GameData - Dialog lines정보 없음");
-			tutorial.setTutorial("");
+			tutorial.setLines("");
 		}
 		else {
-			tutorial.setTutorial((*iter)["lines"].GetString());
+			tutorial.setLines((*iter)["lines"].GetString());
+		}
+		if ((*iter)["eventType"] == NULL) {
+			log("GameData - Dialog lines정보 없음");
+			tutorial.setEventType("");
+		}
+		else {
+			tutorial.setEventType((*iter)["eventType"].GetString());
 		}
 		tutorialList->push_back(tutorial);
 	}

@@ -180,25 +180,32 @@ void FightLayer::monsterSpawnUpdate(float delta) {
 	if (MonsterSpawnScheduler::isMonsterSpawnTime(moving_distance, distance_data) && this->monster == NULL) {
 		monster = Monster::create(this, Monster::Slime, monsterHealth);
 		this->addChild(monster, 1);
-		GameData::getInstance()->setMovingDistance(moving_distance + 1);
+		if (!GameData::getInstance()->getIsInTutorial()) {
+			GameData::getInstance()->setMovingDistance(moving_distance + 1);
+		}
+		
 		*backgroundSpeed = 0;
 
 	}
 
 
 	int finalDistance = GameData::getInstance()->getCurrentStageInfo().getFinalDistance();
+
 	if (monster == NULL) {
-		movingDistanceReal += delta * movingVelocity;
-		if (moving_distance > finalDistance) {
-			*backgroundSpeed = 0;
-			chest = Chest::create();
-			chest->setParentLayer(this);
-			this->addChild(chest);
-		}
-		if (GameData::getInstance()->getCurrentStageInfo().getKey()) {
-			this->stageClear();
+		if (!GameData::getInstance()->getIsInTutorial()) {
+			movingDistanceReal += delta * movingVelocity;
+			if (moving_distance > finalDistance) {
+				*backgroundSpeed = 0;
+				chest = Chest::create();
+				chest->setParentLayer(this);
+				this->addChild(chest);
+			}
+			if (GameData::getInstance()->getCurrentStageInfo().getKey()) {
+				this->stageClear();
+			}
 		}
 	}
+
 	if (1 <= movingDistanceReal) {
 		GameData::getInstance()->setMovingDistance(moving_distance + (int)movingDistanceReal);
 		movingDistanceReal -= (int)movingDistanceReal;
@@ -388,8 +395,6 @@ void FightLayer::redrawDimensionGate() {
 		}
 		break;
 	}
-	
-	
 }
 
 Monster* FightLayer::getMonster() {

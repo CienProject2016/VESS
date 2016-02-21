@@ -14,7 +14,7 @@ Scene* EnterScene::createScene()
 
 bool EnterScene::init()
 {
-	int i;
+	
 	if (!Layer::init())
 	{
 		return false;
@@ -22,7 +22,7 @@ bool EnterScene::init()
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	for (i = 0; i < 10; i++){
+	for (int i = 0; i < 10; i++){
 		auto enterStageButton = ui::Button::create(ImagePath::DUNGEON_DOOR_BEFORE, ImagePath::DUNGEON_DOOR_AFTER, ImagePath::DISABLE_BUTTON_PATH);
 		auto stageLabel = Label::createWithSystemFont(StringUtils::format("Stage %d", i + 1), "Arial", 40);
 		enterStageButton->setTag(stageDoor + i);
@@ -71,12 +71,11 @@ void EnterScene::enterCallback(Ref* sender, ui::Widget::TouchEventType type, int
 		if (stageLevel == 0) {
 			Scene *dialogScene = DialogScene::createScene();
 			Director::getInstance()->replaceScene(TransitionFade::create(0.5, dialogScene, Color3B(255, 255, 255)));
-			
+			GameData::getInstance()->setIsTutorial(true);
 		}
 		else {
 			Scene *gameScene = GameScene::createScene();
 			Director::getInstance()->replaceScene(TransitionFade::create(0.5, gameScene, Color3B(255, 255, 255)));
-			
 		}
 		break;
 	case ui::Widget::TouchEventType::CANCELED:

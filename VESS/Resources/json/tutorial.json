@@ -1,13 +1,60 @@
 {
-  "opening":[
+  "opening": [
+	{
+		"lines" : "튜토리얼을 보시겠습니까?",
+		"eventType" : "none"
+	},
     {
-      
-      
-      "lines" : "전투하는 법을 알려줄게."
+      "lines": "전투하는 법을 알려줄게.",
+      "eventType": "none"
     },
     {
-      
-      "lines" : "화면을 우측으로 드래그하면 적을 공격 할 수 있어."
+      "lines": "화면을 우측으로 드래그하면 적을 공격 할 수 있어. 몬스터가 나타나면 우측으로 드래그 해봐",
+      "eventType": "drag_01"
+    },
+    {
+      "lines": "잘했어!",
+      "eventType": "none"
+    },
+    {
+      "lines": "이번에는 몬스터의 공격을 피해보자",
+      "eventType": "none"
+    },
+    {
+      "lines": "첫 공격은 뒤로 드래그해 피하고, \n두 번째 공격은 위로 드래그를 하면 돼",
+      "eventType": "none"
+    },
+    {
+      "lines": "좀 어려울지도 모르지만.. 일단 맞으면서 배워 보자구",
+      "eventType": "none"
+    },
+    {
+      "lines": "자.. 피해보자!",
+      "eventType": "evade_01"
+    },
+    {
+      "lines": "음.. 나쁘지 않았어",
+      "eventType": "none"
+    },
+    {
+      "lines": "한번 더 피해볼까.",
+      "eventType": "none"
+    },
+    {
+      "lines": "첫 공격은 뒤로 피하고, 두 번째 공격은 위로 회피, 잊지 않았지?",
+      "eventType": "none"
+    },
+    {
+      "lines": "자.. 피해봐!",
+      "eventType": "evade_02"
+    },
+    {
+      "lines": "잘했어!",
+      "eventType": "none"
+    },
+    {
+      "lines": "Stage1에서는 언제든 튜토리얼을 다시 확인해 볼 수 있으니 기억해!",
+      "eventType": "none"
     }
   ]
 }

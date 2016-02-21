@@ -47,6 +47,8 @@ private:
 	CC_SYNTHESIZE(Sword*, sword, Sword);
 	CC_SYNTHESIZE(Shield*, shield, Shield);
 	CC_SYNTHESIZE(UpgradePhase, recentUpgradePhase, RecentUpgradePhase);
+	CC_SYNTHESIZE(bool, isTutorial, IsTutorial);
+	CC_SYNTHESIZE(bool, isInTutorial, IsInTutorial);
 	GameData();
 	~GameData();
 	void setDialogInfo();

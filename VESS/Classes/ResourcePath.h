@@ -33,6 +33,8 @@ public:
 	const static string SKY_IMAGE;
 	const static string TILE_BACKGROUND;
 	const static string DUNGEON_DOOR_LOCK;
+	const static string TUTORIAL_YES_BUTTON;
+	const static string TUTORIAL_NO_BUTTON;
 };
 
 struct ActionPath {
@@ -67,4 +69,11 @@ public:
 	const static string UPGRADE_COMPLETE_LAYER;
 	const static string DURABILITY_NAME;
 	const static string LOCKED;
+};
+
+struct TutorialEventPath {
+public:
+	const static string DRAG_01;
+	const static string EVADE_01;
+	const static string EVADE_02;
 };
