@@ -230,7 +230,7 @@ void UpgradeLayer::update(float delta) {
 	smeltingBarGauge->setPercentage(smeltingBarGauge->getPercentage() - delta * smeltingGaugeDownSpeed);
 	hammeringBarGauge->setPercentage(hammeringBarGauge->getPercentage() - delta * hammeringGaugeDownSpeed);
 	quenchingBarGauge->setPercentage(quenchingBarGauge->getPercentage() - delta * quenchingGaugeDownSpeed);
-
+	gaugeChecker();
 	checkComplete();
 	if (currentUpgradePhase == UpgradePhase::UPGRADE) {
 		checkGaugeLock();
@@ -368,7 +368,33 @@ void UpgradeLayer::showUiButton(UpgradePhase upgradePhase) {
 		hammeringTimeOutLine->setVisible(true);
 	}
 }
-
+void UpgradeLayer::gaugeChecker()
+{
+	//각 게이지 바가 40~60 범위내로 오면 1을 반환하고
+	//강화클릭시에 이 숫자를 이용하여 강화등급을 판정
+	if(40 <=smeltingBarGauge->getPercentage()&& smeltingBarGauge->getPercentage() <=60)
+		gaugeStatus[0] = 1;
+	else 
+		gaugeStatus[0] = 0;
+	if (40 <= hammeringBarGauge->getPercentage()&& hammeringBarGauge->getPercentage() <=60)
+		gaugeStatus[1] = 1;
+	else
+		gaugeStatus[1] = 0;
+	if (40 <= quenchingBarGauge->getPercentage()&& quenchingBarGauge->getPercentage() <=60)
+		gaugeStatus[2] = 1;
+	else
+		gaugeStatus[2] = 0;
+	
+}
+void UpgradeLayer::upgradeResult()
+{
+	if (gaugeStatus[0] + gaugeStatus[1] + gaugeStatus[2] == 3)
+		upgradeCoefficient=10;
+	else if (gaugeStatus[0] + gaugeStatus[1] + gaugeStatus[2] == 2)
+		upgradeCoefficient = 7;
+	else
+		upgradeCoefficient = 5;
+}
 
 void UpgradeLayer::upgradeClicked(Ref* sender, ui::Widget::TouchEventType type)
 {
@@ -515,6 +541,7 @@ void UpgradeLayer::hideBeforeUpgradeResources()
 
 
 void UpgradeLayer::completeClicked(Ref* sender, ui::Widget::TouchEventType type) {
+	upgradeResult();
 	switch (type) {
 	case ui::Widget::TouchEventType::BEGAN:
 		break;
@@ -526,7 +553,7 @@ void UpgradeLayer::completeClicked(Ref* sender, ui::Widget::TouchEventType type)
 		log("complete!!");
 		switch (currentUpgradePhase) {
 		case UpgradePhase::UPGRADE:
-			UpgradeController::upgradeItem(GameData::getInstance()->getUpgradeItemMode());
+			UpgradeController::upgradeItem(GameData::getInstance()->getUpgradeItemMode(),upgradeCoefficient);
 			break;
 		case UpgradePhase::REPAIR:
 			UpgradeController::repairItem(GameData::getInstance()->getUpgradeItemMode());
