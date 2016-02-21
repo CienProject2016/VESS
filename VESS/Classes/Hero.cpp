@@ -49,6 +49,8 @@ void Hero::update(float delta) {
 	if (movementState != NULL) {
 		movementState->update(delta);
 	}
+	
+
 }
 
 Hero* Hero::create()
@@ -93,7 +95,7 @@ void Hero::changeItemAction(Item::Type itemType) {
 
 //몬스터가 히어로를 때리려고 할 때 콜되는 함수.
 void Hero::monsterAttackToHero(HitArea* attackArea) {
-	if (HitArea::isIn(heroPosition->getArea(), attackArea->getArea())) //몬스터가 때렸는데 그 범위 안에 히어로가 있을 경우.
+	if (HitArea::isIn(heroPosition->getArea(), attackArea->getArea())&&hp!=0) //몬스터가 때렸는데 그 범위 안에 히어로가 있을 경우. 그리고 피가 0이 아닌경우
 	{
 		if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SHIELD) {
 			int durability = GameData::getInstance()->getShield()->getDurability();
@@ -119,17 +121,17 @@ void Hero::setHitArea(int area) {
 //Hero 가 운동(회피, 공격, 점프, 앉기)중에는 다른 명령을 받지 않도록 만든다.
 bool Hero::isAvailableCommand() {
 	if (movementState == NULL)	return true;
+	action->gotoFrameAndPlay(0, 16, true);//대기 모션
+	itemAction->gotoFrameAndPlay(0, 16, true);
 	return movementState->isAvailableCommand();
-	action->gotoFrameAndPlay(75, 95, true);//대기 모션
-	itemAction->gotoFrameAndPlay(75, 95, true);
 }
 
 void Hero::startAttack() {
 	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
 		if (isAvailableCommand()) {
 			setMovementState(new AttackMovementState(this));
-			action->gotoFrameAndPlay(198, 211, false);//공격1
-			itemAction->gotoFrameAndPlay(198, 211, false);
+			action->gotoFrameAndPlay(304, 318, false);//공격1
+			itemAction->gotoFrameAndPlay(304,318,false);
 		}
 	}	
 }
@@ -172,7 +174,7 @@ void Hero::attackDamage() {
 			field->getMonster()->damage(damage);
 			attackEffect(damage);
 			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_ATTACK_PATH.c_str());
-		}		
+		}
 	}
 	else if (field->getChest() != NULL) {
 		field->getChest()->damage(30);
@@ -180,7 +182,6 @@ void Hero::attackDamage() {
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_ATTACK_PATH.c_str());
 	}
 }
-
 void Hero::attackEffect(int attackDamage) {
 }
 
@@ -194,12 +195,21 @@ void Hero::setMovementState(HeroMovementState* state) {
 		delete movementState;
 	}
 	movementState = state;
-	action->gotoFrameAndPlay(0, 16, true);//달리는 모션
+	action->gotoFrameAndPlay(0, 16, true);
 	itemAction->gotoFrameAndPlay(0, 16, true);
+	
 }
 
 void Hero::decreaseHp(int hpSize)
 {
 	this->hp -= hpSize;
+	if (hp == 0) {
+		
+		action->gotoFrameAndPlay(145, 174, false);//145-174
+		itemAction->gotoFrameAndPlay(145, 174, false);
+		
+		
+	}
+	
 	
 }

@@ -129,6 +129,7 @@ void FightLayer::initGameoverPopup(string)
 	gameOverPopup->setName("gameover");
 	gameOverPopup->setPosition(Vec2(visibleSize.width *0.3f, visibleSize.height * 0.4f));
 	this->addChild(gameOverPopup, ZOrder::MINI_POPUP_LAYER);
+	
 
 }
 
