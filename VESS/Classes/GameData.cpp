@@ -21,6 +21,7 @@ GameData::GameData() : isInTutorial(false),isTutorial(false), topStage(0), stage
 void GameData::loadInfo() {
 	if (UserDefault::getInstance()->getIntegerForKey("topStageLevel") != NULL) {
 		this->topStage = UserDefault::getInstance()->getIntegerForKey("topStageLevel");
+		this->gold = UserDefault::getInstance()->getIntegerForKey("gold");
 	}
 }
 
