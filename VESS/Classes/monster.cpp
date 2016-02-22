@@ -61,17 +61,17 @@ void Monster::initBehavior() {
 	behavior = new MonsterBehaviorPattern(this);
 }
 
-//¿¹½Ã ÇÔ¼ö.
+//ì˜ˆì‹œ í•¨ìˆ˜.
 void sangTeaESangUpdate() {}
 
 void Monster::update(float delta) {
 
-	sangTeaESangUpdate();	//ex »óÅÂÀÌ»ó.
+	sangTeaESangUpdate();	//ex ìƒíƒœì´ìƒ.
 
-	//Çàµ¿ÆÐÅÏ ¾÷µ¥ÀÌÆ® ºÎºÐ.
-	//³ªÁß¿¡ Ãß°¡µÉ »óÅÂÀÌ»ó Ã³¸®¶ó´øÁöÀÇ ³»¿ëÀº Çàµ¿ÆÐÅÏ¿¡ µé¾î°¡±â ¾Ë¸ÂÁö ¾ÊÀ¸¹Ç·Î.
-	//¸ó½ºÅÍÀÇ ¾÷µ¥ÀÌÆ®¿¡¼­ behavior ·Î update ¸¦ Àü´ÞÇÔÀ¸·Î½á
-	//ÇÁ·Î±×·¡¸Ó°¡ Á÷°üÀûÀ¸·Î ¹«¾ùÀÌ ¸ÕÀú ½ÇÇàµÉÁö¸¦ ¾Ë ¼ö ÀÖ´Ù.
+	//í–‰ë™íŒ¨í„´ ì—…ë°ì´íŠ¸ ë¶€ë¶„.
+	//ë‚˜ì¤‘ì— ì¶”ê°€ë  ìƒíƒœì´ìƒ ì²˜ë¦¬ë¼ë˜ì§€ì˜ ë‚´ìš©ì€ í–‰ë™íŒ¨í„´ì— ë“¤ì–´ê°€ê¸° ì•Œë§žì§€ ì•Šìœ¼ë¯€ë¡œ.
+	//ëª¬ìŠ¤í„°ì˜ ì—…ë°ì´íŠ¸ì—ì„œ behavior ë¡œ update ë¥¼ ì „ë‹¬í•¨ìœ¼ë¡œì¨
+	//í”„ë¡œê·¸ëž˜ë¨¸ê°€ ì§ê´€ì ìœ¼ë¡œ ë¬´ì—‡ì´ ë¨¼ì € ì‹¤í–‰ë ì§€ë¥¼ ì•Œ ìˆ˜ ìžˆë‹¤.
 	behavior->update(delta);	
 }
 
@@ -87,7 +87,7 @@ void Monster::initHp(int health) {
   
 	hpBarDecreasing->setType(kCCProgressTimerTypeBar);
 	hpBarDecreasing->setPercentage(100.0f);
-	hpBarDecreasing->setPosition(Vec2(40, 80));
+	hpBarDecreasing->setPosition(Vec2(80, 80));
 	hpBarDecreasing->setMidpoint(Vec2(0, 1));
 	hpBarDecreasing->setBarChangeRate(Vec2(1,0));
 	this->addChild(hpBarDecreasing);

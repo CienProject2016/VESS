@@ -11,12 +11,14 @@ LOCAL_MODULE := cocos2dcpp_shared
 LOCAL_MODULE_FILENAME := libcocos2dcpp
 
 LOCAL_SRC_FILES := hellocpp/main.cpp \
+					../../../Classes/ActionFrameValue.cpp \
                    ../../../Classes/AnimationScene.cpp \
                    ../../../Classes/AppDelegate.cpp \
                    ../../../Classes/BackgroundObject.cpp \
                    ../../../Classes/BackgroundSpawnScheduler.cpp \
                    ../../../Classes/BattleOperator.cpp \
 				   ../../../Classes/Chest.cpp \
+				   ../../../Classes/DefenseMovementState.cpp \
 				   ../../../Classes/Dialog.cpp \
                    ../../../Classes/DialogScene.cpp \
 				   ../../../Classes/DimensionGateController.cpp \
@@ -24,9 +26,9 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../../Classes/EnterScene.cpp \
                    ../../../Classes/FightLayer.cpp \
                    ../../../Classes/GameData.cpp \
+				   ../../../Classes/GameoverPopupLayer.cpp \
                    ../../../Classes/GameScene.cpp \
 				   ../../../Classes/GaugeLockChecker.cpp \
-                   ../../../Classes/healthState.cpp \
                    ../../../Classes/Hero.cpp \
 				   ../../../Classes/HeroMovementState.cpp \
                    ../../../Classes/Item.cpp \
@@ -38,6 +40,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 					../../../Classes/MonsterInfo.cpp \
                    ../../../Classes/MonsterSpawnScheduler.cpp \
 				   ../../../Classes/ResourcePath.cpp \
+				   ../../../Classes/SaveController.cpp \
 				   ../../../Classes/Shield.cpp \
 					../../../Classes/Settings.cpp \
                    ../../../Classes/Stage.cpp \
@@ -45,8 +48,9 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 				   ../../../Classes/StageLevelController.cpp \
 				 ../../../Classes/StartScene.cpp \
 				 ../../../Classes/Sword.cpp \
-                   ../../../Classes/TextLayer.cpp \
 				   ../../../Classes/Tutorial.cpp \
+				   ../../../Classes/TutorialController.cpp \
+				   ../../../Classes/TutorialInfo.cpp \
 				   ../../../Classes/TutorialLayer.cpp \
                    ../../../Classes/Unit.cpp \
 				   ../../../Classes/UpgradeCompleteLayer.cpp \

@@ -20,6 +20,11 @@ MiniPopupLayer* MiniPopupLayer::create(string createMessage) {
 	return nullptr;
 }
 
+void MiniPopupLayer::setMessage(string message) {
+	auto popupMessageLabel = (Label*)getChildByName("popupMessageLabel");
+	popupMessageLabel->setString(StringUtils::format("%s", message.c_str()));
+}
+
 bool MiniPopupLayer::init(string createMessage) {
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -29,8 +34,9 @@ bool MiniPopupLayer::init(string createMessage) {
 	this->addChild(miniPopupFrameImage);
 
 	auto popupMessage = Label::createWithSystemFont("", "Arial", 50);
-	popupMessage->setString("골드가 부족합니다.");
+	popupMessage->setString(createMessage);
 	popupMessage->setPosition(visibleSize.width * 0.5f, visibleSize.height * 0.5f);
+	popupMessage->setName("popupMessageLabel");
 	this->addChild(popupMessage);
 
 	auto listener = EventListenerTouchOneByOne::create();

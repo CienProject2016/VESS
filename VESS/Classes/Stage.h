@@ -13,7 +13,7 @@ public:
 	~Stage();
 	int getFinalDistance();
 private:
-	CC_SYNTHESIZE(vector<int>, monsterLengthInfo, MonsterLengthInfo); //Json±¸Á¶·Î °¡Á®¿Ã ¼ö ÀÖ´ÂÁö ¹®Á¦
+	CC_SYNTHESIZE(vector<int>, monsterLengthInfo, MonsterLengthInfo); //Jsonêµ¬ì¡°ë¡œ ê°€ì ¸ì˜¬ ìˆ˜ ìžˆëŠ”ì§€ ë¬¸ì œ
 	CC_SYNTHESIZE(int, gold, Gold);
 	CC_SYNTHESIZE(int, health, Health);
 	CC_SYNTHESIZE(bool, isClear, IsClear);

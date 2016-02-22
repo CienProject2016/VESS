@@ -81,15 +81,17 @@ void FightLayer::initGoldLabel() {
 	int currentGold = GameData::getInstance()->getGold();
 	currentGoldLabel = Label::createWithTTF("", "fonts/arial.ttf", 50);
 	currentGoldLabel->setString(StringUtils::format("%d", currentGold));
-	currentGoldLabel->setPosition(Vec2(origin.x + visibleSize.width * 0.540f, origin.y + visibleSize.height*0.935f));
-	currentGoldLabel->setColor(Color3B(0, 0, 0)); //black	
+	currentGoldLabel->setPosition(Vec2(origin.x + visibleSize.width * 0.450f, origin.y + visibleSize.height*0.935f));
+	currentGoldLabel->setColor(Color3B(250, 250, 250)); //WHITE	
 	currentGoldLabel->setName("goldLabel");
 	this->addChild(currentGoldLabel, 9999);
 
 	auto goldIcon = Sprite::create(ImagePath::GOLD_ICON_PATH);
-	goldIcon->setPosition(Vec2(origin.x + visibleSize.width*0.49f, origin.y + visibleSize.height * 0.935f));
+	goldIcon->setPosition(Vec2(origin.x + visibleSize.width*0.41f, origin.y + visibleSize.height * 0.935f));
 	this->addChild(goldIcon);
 }
+
+
 
 void FightLayer::initButton() {
 
@@ -181,25 +183,32 @@ void FightLayer::monsterSpawnUpdate(float delta) {
 	if (MonsterSpawnScheduler::isMonsterSpawnTime(moving_distance, distance_data) && this->monster == NULL) {
 		monster = Monster::create(this, Monster::Slime, monsterHealth);
 		this->addChild(monster, 1);
-		GameData::getInstance()->setMovingDistance(moving_distance + 1);
+		if (!GameData::getInstance()->getIsInTutorial()) {
+			GameData::getInstance()->setMovingDistance(moving_distance + 1);
+		}
+		
 		*backgroundSpeed = 0;
 
 	}
 
 
 	int finalDistance = GameData::getInstance()->getCurrentStageInfo().getFinalDistance();
+
 	if (monster == NULL) {
-		movingDistanceReal += delta * movingVelocity;
-		if (moving_distance > finalDistance) {
-			*backgroundSpeed = 0;
-			chest = Chest::create();
-			chest->setParentLayer(this);
-			this->addChild(chest);
-		}
-		if (GameData::getInstance()->getCurrentStageInfo().getKey()) {
-			this->stageClear();
+		if (!GameData::getInstance()->getIsInTutorial()) {
+			movingDistanceReal += delta * movingVelocity;
+			if (moving_distance > finalDistance) {
+				*backgroundSpeed = 0;
+				chest = Chest::create();
+				chest->setParentLayer(this);
+				this->addChild(chest);
+			}
+			if (GameData::getInstance()->getCurrentStageInfo().getKey()) {
+				this->stageClear();
+			}
 		}
 	}
+
 	if (1 <= movingDistanceReal) {
 		GameData::getInstance()->setMovingDistance(moving_distance + (int)movingDistanceReal);
 		movingDistanceReal -= (int)movingDistanceReal;
@@ -389,8 +398,6 @@ void FightLayer::redrawDimensionGate() {
 		}
 		break;
 	}
-	
-	
 }
 
 Monster* FightLayer::getMonster() {

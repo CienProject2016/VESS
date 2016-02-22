@@ -5,27 +5,54 @@ bool UpgradeLayer::init() {
 	if (!Layer::init()) {
 		return false;
 	}	
+	cheatCount = 0;
 	visibleSize = Director::getInstance()->getVisibleSize();
 	origin = Director::getInstance()->getVisibleOrigin();
-
+	upgradeCoefficient = Item::Grade::A;
 	initPhase();
-	initMiniPopup("골드가 부족합니다.");
+	initMiniPopup(ElementName::NOT_ENOUGH_GOLD);
 	initSmithAndBackground();
 	initGaugeBar();
 	initButtonUi();
+	initPercentageLabel();
 	initUpgradeCompleteLayer();
 	initLabelInfo();
 	initItemImage();
+	initPauseButton();
 	hideBeforeUpgradeResources();
 	setUpgradeButtonOpacity(currentUpgradePhase);
 	setListener();
+
 	
 	this->scheduleUpdate();
 	return true;
 }
+void UpgradeLayer::initPercentageLabel() {
+	int upgradePercent = GameData::getInstance()->getShield()->getUpgradePercent();
+	upgradePercentLabel = Label::createWithSystemFont("", "Arial", 40);
+	upgradePercentLabel->setString(StringUtils::format("%s : %d%%", ElementName::UPGRADE_PERCENT.c_str(), upgradePercent));
+	upgradePercentLabel->setPosition(Vec2(visibleSize.width * 0.1f, visibleSize.height * 0.78f));
+	upgradePercentLabel->setVisible(false);
+	this->addChild(upgradePercentLabel);
 
-void UpgradeLayer::initMiniPopup(string) {
-	auto miniPopup = MiniPopupLayer::create("골드가 부족합니다");
+	int repairPercent = GameData::getInstance()->getShield()->getRepairPercent();
+	repairPercentLabel = Label::createWithSystemFont("", "Arial", 40);
+	repairPercentLabel->setString(StringUtils::format("%s : %d%%", ElementName::REPAIR_PERCENT.c_str(), repairPercent));
+	repairPercentLabel->setPosition(Vec2(visibleSize.width * 0.3f, visibleSize.height * 0.78f));
+	repairPercentLabel->setVisible(false);
+	this->addChild(repairPercentLabel);
+}
+
+void UpgradeLayer::updatePercentLabel() {
+	int upgradePercent = GameData::getInstance()->getShield()->getUpgradePercent();
+	int repairPercent = GameData::getInstance()->getShield()->getRepairPercent();
+
+	upgradePercentLabel->setString(StringUtils::format("%s : %d%%", ElementName::UPGRADE_PERCENT.c_str(), upgradePercent));
+	repairPercentLabel->setString(StringUtils::format("%s : %d%%", ElementName::REPAIR_PERCENT.c_str(), repairPercent));
+}
+
+void UpgradeLayer::initMiniPopup(string message) {
+	auto miniPopup = MiniPopupLayer::create(message);
 	miniPopup->setTouchEnabled(false);
 	miniPopup->setVisible(false);
 	miniPopup->setName("miniPopup");
@@ -112,7 +139,7 @@ void UpgradeLayer::initSmithAndBackground() {
 
 void UpgradeLayer::initGaugeBar() {
 	//smelting bar create
-	Sprite *smeltingTimeBar = Sprite::create("timebar.png");
+	Sprite *smeltingTimeBar = Sprite::create(ImagePath::BAR_1);
 	smeltingBarGauge = ProgressTimer::create(smeltingTimeBar);
 	smeltingBarGauge->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.95));
 	smeltingBarGauge->setPercentage(0);
@@ -124,7 +151,7 @@ void UpgradeLayer::initGaugeBar() {
 	smeltingGaugeDownSpeed = 5;
 
 	//hammering bar create
-	Sprite *hammeringTimeBar = Sprite::create("timebar.png");
+	Sprite *hammeringTimeBar = Sprite::create(ImagePath::BAR_2);
 	hammeringBarGauge = ProgressTimer::create(hammeringTimeBar);
 	hammeringBarGauge->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.9));
 	hammeringBarGauge->setPercentage(0);
@@ -136,7 +163,7 @@ void UpgradeLayer::initGaugeBar() {
 	hammeringGaugeDownSpeed = 10;
 
 	//quenching bar create
-	Sprite *quenchingTimeBar = Sprite::create("timebar.png");
+	Sprite *quenchingTimeBar = Sprite::create(ImagePath::BAR_3);
 	quenchingBarGauge = ProgressTimer::create(quenchingTimeBar);
 	quenchingBarGauge->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.85));
 	quenchingBarGauge->setPercentage(0);
@@ -180,9 +207,9 @@ void UpgradeLayer::initButtonUi() {
 	quenchingButton->setPosition(Vec2(origin.x + visibleSize.width * 0.32f, origin.y + visibleSize.height*0.4f));
 	quenchingButton->setScale(1.0f);
 
-	smeltingButton->addTouchEventListener(CC_CALLBACK_2(UpgradeLayer::increaseGaugeCallback, this, smeltingBarGauge));
-	hammeringButton->addTouchEventListener(CC_CALLBACK_2(UpgradeLayer::increaseGaugeCallback, this, hammeringBarGauge));
-	quenchingButton->addTouchEventListener(CC_CALLBACK_2(UpgradeLayer::increaseGaugeCallback, this, quenchingBarGauge));
+	smeltingButton->addTouchEventListener(CC_CALLBACK_2(UpgradeLayer::increaseGaugeCallback, this, smeltingBarGauge, GaugeType::SMELTING));
+	hammeringButton->addTouchEventListener(CC_CALLBACK_2(UpgradeLayer::increaseGaugeCallback, this, hammeringBarGauge, GaugeType::HAMMERING));
+	quenchingButton->addTouchEventListener(CC_CALLBACK_2(UpgradeLayer::increaseGaugeCallback, this, quenchingBarGauge, GaugeType::QUENCHING));
 	
 	smeltingButton->setTag(ZOrder::SMELTING_IMAGE);
 	hammeringButton->setTag(ZOrder::HAMMERING_IMAGE);
@@ -226,11 +253,11 @@ void UpgradeLayer::initUpgradeCompleteLayer(){
 
 void UpgradeLayer::update(float delta) {
 	showUiButton(currentUpgradePhase);	
-
+	redrawUpgradeGoldLabel();
 	smeltingBarGauge->setPercentage(smeltingBarGauge->getPercentage() - delta * smeltingGaugeDownSpeed);
 	hammeringBarGauge->setPercentage(hammeringBarGauge->getPercentage() - delta * hammeringGaugeDownSpeed);
 	quenchingBarGauge->setPercentage(quenchingBarGauge->getPercentage() - delta * quenchingGaugeDownSpeed);
-
+	gaugeChecker();
 	checkComplete();
 	if (currentUpgradePhase == UpgradePhase::UPGRADE) {
 		checkGaugeLock();
@@ -239,13 +266,18 @@ void UpgradeLayer::update(float delta) {
 	}else{
 
 	}
-	
 
-	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
+	if (GameData::getInstance()->getUpgradeItemMode() == GameData::ItemMode::SHIELD) {
 		itemImage->setTexture("Images/shield.png");
 		itemName->setString(GameData::getInstance()->getShield()->getName());
+		updatePercentLabel();
+		upgradePercentLabel->setVisible(true);
+		repairPercentLabel->setVisible(true);
+		
 	}
 	else {
+		upgradePercentLabel->setVisible(false);
+		repairPercentLabel->setVisible(false);
 		itemImage->setTexture("Images/sword.png");
 		itemName->setString(StringUtils::format("%s", GameData::getInstance()->getSword()->getName().c_str()));
 	}
@@ -255,27 +287,36 @@ void UpgradeLayer::redrawUpgradeGoldLabel() {
 	auto upgradeGoldLabel = (Label*)getChildByName("upgradeGoldLabel");
 	auto repairGoldLabel = (Label*)getChildByName("repairGoldLabel");
 
-	upgradeGold = GameData::getInstance()->getSword()->getUpgradeGold();
-	upgradeLabel->setString(StringUtils::format("%d%s", upgradeGold, "GOLD"));
-	
-	repairGold = GameData::getInstance()->getShield()->getRepairGold();
-	repairLabel->setString(StringUtils::format("%d%s", repairGold, "GOLD"));
+	switch (GameData::getInstance()->getUpgradeItemMode()) {
+	case GameData::ItemMode::SWORD:
+		upgradeGold = GameData::getInstance()->getSword()->getUpgradeGold();
+		upgradeLabel->setString(StringUtils::format("%d%s", upgradeGold, "GOLD"));
+		repairGold = GameData::getInstance()->getSword()->getRepairGold();
+		repairLabel->setString(StringUtils::format("%d%s", repairGold, "GOLD"));
+		break;
+	case GameData::ItemMode::SHIELD:
+		upgradeGold = GameData::getInstance()->getShield()->getUpgradeGold();
+		upgradeLabel->setString(StringUtils::format("%d%s", upgradeGold, "GOLD"));
+		repairGold = GameData::getInstance()->getShield()->getRepairGold();
+		repairLabel->setString(StringUtils::format("%d%s", repairGold, "GOLD"));
+		break;
+	}	
 }
 
 void UpgradeLayer::checkGaugeLock() {
-	if (GaugeLockChecker::isGaugeLocked(smeltingBarGauge->getPercentage(), 70))
+	if (GaugeLockChecker::isGaugeLocked(smeltingBarGauge->getPercentage(), 33))
 	{
 		lockBeforeHammering = true;
 		hammeringButton->setOpacity(255);
 		hammeringButton->setTouchEnabled(true);
 	}
-	if (GaugeLockChecker::isGaugeLocked(hammeringBarGauge->getPercentage(), 70))
+	if (GaugeLockChecker::isGaugeLocked(hammeringBarGauge->getPercentage(), 33))
 	{
 		lockBeforeQuenching = true;
 		quenchingButton->setOpacity(255);
 		quenchingButton->setTouchEnabled(true);
 	}
-	if (GaugeLockChecker::isGaugeLocked(hammeringBarGauge->getPercentage(), 70) && !isUpgrade)
+	if (GaugeLockChecker::isGaugeLocked(hammeringBarGauge->getPercentage(), 33) && !isUpgrade)
 	{
 		showCompleteButton();
 	}
@@ -284,14 +325,14 @@ void UpgradeLayer::checkGaugeLock() {
 void UpgradeLayer::checkComplete() {	
 	switch (currentUpgradePhase) {
 	case UpgradePhase::UPGRADE:
-		if (quenchingBarGauge->getPercentage() >= 70)
+		if (quenchingBarGauge->getPercentage() >= 33)
 		{
 			showCompleteButton();
 			completeUpgradeButton->setTouchEnabled(true);
 		}
 		break;
 	case UpgradePhase::REPAIR:
-		if (hammeringBarGauge->getPercentage() >= 70)
+		if (hammeringBarGauge->getPercentage() >= 33)
 		{
 			showCompleteButton();
 			completeRepairButton->setTouchEnabled(true);
@@ -308,20 +349,73 @@ void UpgradeLayer::increaseGauge(CCProgressTimer* gauge) {
 	gauge->setPercentage(currentPercent + (float)8);
 }
 
-void UpgradeLayer::increaseGaugeCallback(Ref* sender, ui::Widget::TouchEventType type, CCProgressTimer* gauge)
-{
+
+void UpgradeLayer::pauseCallback(cocos2d::Ref* pSender, ui::Widget::TouchEventType type) {
 	switch (type) {
 	case ui::Widget::TouchEventType::BEGAN:
 		break;
 	case ui::Widget::TouchEventType::MOVED:
 		break;
+	case ui::Widget::TouchEventType::ENDED: {
+		cheatCount += 1;
+		if (cheatCount == 5) {
+			GameData::getInstance()->setGold(100000000);
+		}
+		auto pauseButton = (ui::Button*)getChildByName("pauseButton");
+		if (!GameData::getInstance()->getIsPause()) {
+			GameData::getInstance()->setIsPause(true);
+			Director::getInstance()->pause();
+			auto grayLayer = CCLayerColor::create(Color4B(0, 0, 0, 255 * 0.5), visibleSize.width, visibleSize.height);
+			grayLayer->setPosition(Vec2(0, 0));
+			this->addChild(grayLayer, GRAY_LAYER, "grayLayer");
+			pauseButton->loadTextures(ImagePath::RESUME_BUTTON, ImagePath::RESUME_BUTTON_ACTIVE, ImagePath::DISABLE_BUTTON_PATH);
+
+		}
+		else {
+			GameData::getInstance()->setIsPause(false);
+			auto grayLayer = getChildByName("grayLayer");
+			removeChild(grayLayer);
+			Director::getInstance()->resume();
+			pauseButton->loadTextures(ImagePath::PAUSE_BUTTON, ImagePath::PAUSE_BUTTON_ACTIVE, ImagePath::DISABLE_BUTTON_PATH);
+
+		}
+	}
+	break;
+	case ui::Widget::TouchEventType::CANCELED:
+		break;
+	}
+}
+
+void UpgradeLayer::increaseGaugeCallback(Ref* sender, ui::Widget::TouchEventType type, CCProgressTimer* gauge, GaugeType gaugeType)
+{
+	switch (type) {
+	case ui::Widget::TouchEventType::BEGAN:
+		showSoundEffect(gaugeType);
+		break;
+	case ui::Widget::TouchEventType::MOVED:
+		break;
 	case ui::Widget::TouchEventType::ENDED:
+		
 		increaseGauge(gauge);
 		break;
 	case ui::Widget::TouchEventType::CANCELED:
 		break;
 	}
 
+}
+
+void UpgradeLayer::showSoundEffect(GaugeType gaugeType) {
+	switch (gaugeType) {
+	case HAMMERING:
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_HAMMER.c_str());
+		break;
+	case QUENCHING:
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_QUENCHING.c_str());
+		break;
+	case SMELTING:
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_SMELTING.c_str());
+		break;
+	}
 }
 
 void UpgradeLayer::showUiButton(UpgradePhase upgradePhase) {
@@ -334,6 +428,8 @@ void UpgradeLayer::showUiButton(UpgradePhase upgradePhase) {
 		repairButton->setTouchEnabled(true);
 		upgradeLabel->setVisible(true);
 		repairLabel->setVisible(true);
+		upgradePercentLabel->setVisible(true);
+		repairPercentLabel->setVisible(true);
 		smeltingBarGauge->setVisible(false);
 		smeltingTimeOutLine->setVisible(false);
 		hammeringBarGauge->setVisible(false);
@@ -342,6 +438,8 @@ void UpgradeLayer::showUiButton(UpgradePhase upgradePhase) {
 		quenchingTimeOutLine->setVisible(false);
 	}
 	else if(upgradePhase == UpgradePhase::UPGRADE){
+		upgradePercentLabel->setVisible(false);
+		repairPercentLabel->setVisible(false);
 		completeUpgradeButton->setVisible(true);
 		upgradeButton->setVisible(false);
 		upgradeButton->setTouchEnabled(false);
@@ -357,6 +455,8 @@ void UpgradeLayer::showUiButton(UpgradePhase upgradePhase) {
 		quenchingTimeOutLine->setVisible(true);
 	}
 	else if (upgradePhase == UpgradePhase::REPAIR) {
+		upgradePercentLabel->setVisible(false);
+		repairPercentLabel->setVisible(false);
 		completeRepairButton->setVisible(true);
 		upgradeButton->setVisible(false);
 		upgradeButton->setTouchEnabled(false);
@@ -368,26 +468,61 @@ void UpgradeLayer::showUiButton(UpgradePhase upgradePhase) {
 		hammeringTimeOutLine->setVisible(true);
 	}
 }
-
+void UpgradeLayer::gaugeChecker()
+{
+	//각 게이지 바가 40~60 범위내로 오면 1을 반환하고
+	//강화클릭시에 이 숫자를 이용하여 강화등급을 판정
+	if(33 <=smeltingBarGauge->getPercentage()&& smeltingBarGauge->getPercentage() <=66)
+		gaugeStatus[0] = 1;
+	else 
+		gaugeStatus[0] = 0;
+	if (33 <= hammeringBarGauge->getPercentage()&& hammeringBarGauge->getPercentage() <=66)
+		gaugeStatus[1] = 1;
+	else
+		gaugeStatus[1] = 0;
+	if (33 <= quenchingBarGauge->getPercentage()&& quenchingBarGauge->getPercentage() <=66)
+		gaugeStatus[2] = 1;
+	else
+		gaugeStatus[2] = 0;
+	
+}
+void UpgradeLayer::upgradeResult()
+{
+	if (gaugeStatus[0] + gaugeStatus[1] + gaugeStatus[2] == 3)
+		upgradeCoefficient= Item::Grade::A;
+	else if (gaugeStatus[0] + gaugeStatus[1] + gaugeStatus[2] == 2)
+		upgradeCoefficient = Item::Grade::B;
+	else
+		upgradeCoefficient = Item::Grade::C;
+	GameData::getInstance()->setCurrentUpgradeGrade(upgradeCoefficient);
+}
 
 void UpgradeLayer::upgradeClicked(Ref* sender, ui::Widget::TouchEventType type)
 {
 	switch (type) {
 	case ui::Widget::TouchEventType::BEGAN:
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_PUI.c_str());
 		break;
 	case ui::Widget::TouchEventType::MOVED:
 		break;
 	case ui::Widget::TouchEventType::ENDED:
 		log("Upgrade Phase");
-		if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
-			//소드는 딸이 사용중이므로 방패강화
+		if (GameData::getInstance()->getUpgradeItemMode() == GameData::ItemMode::SHIELD) {
 			if (UpgradeController::payUpgradeCosts(upgradeGold, Item::SHIELD) == true) {
-				currentUpgradePhase = UpgradePhase::UPGRADE;
+				if (UpgradeController::upgradeItem(GameData::getInstance()->getUpgradeItemMode(), upgradeCoefficient)) {
+					showUpgradeCompleteLayer(true);
+				}
+				else {
+					auto miniPopup = (MiniPopupLayer*)getChildByName("miniPopup");
+					miniPopup->setMessage(ElementName::UPGRADE_FAILED);
+					miniPopup->setVisible(true);
+				}		
+				currentUpgradePhase = UpgradePhase::NONE;
 				showUiButton(currentUpgradePhase);
-				setUpgradeButtonOpacity(currentUpgradePhase);
 			}
 			else {
-				auto miniPopup = (Layer*)getChildByName("miniPopup");
+				auto miniPopup = (MiniPopupLayer*)getChildByName("miniPopup");
+				miniPopup->setMessage(ElementName::NOT_ENOUGH_GOLD);
 				miniPopup->setVisible(true);
 			}
 		}
@@ -398,7 +533,8 @@ void UpgradeLayer::upgradeClicked(Ref* sender, ui::Widget::TouchEventType type)
 				setUpgradeButtonOpacity(currentUpgradePhase);
 			}
 			else {
-				auto miniPopup = (Layer*)getChildByName("miniPopup");
+				auto miniPopup = (MiniPopupLayer*)getChildByName("miniPopup");
+				miniPopup->setMessage(ElementName::NOT_ENOUGH_GOLD);
 				miniPopup->setVisible(true);
 			}
 		}
@@ -437,6 +573,7 @@ void UpgradeLayer::repairClicked(Ref* sender, ui::Widget::TouchEventType type)
 {
 	switch (type) {
 	case ui::Widget::TouchEventType::BEGAN:
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_PUI.c_str());
 		break;
 	case ui::Widget::TouchEventType::MOVED:
 		break;
@@ -449,15 +586,21 @@ void UpgradeLayer::repairClicked(Ref* sender, ui::Widget::TouchEventType type)
 
 		lockBeforeHammering = true; // 수리의 경우 망치만 사용하므로 제한을 걸어둘 필요가 없다.
 
-		if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
+		if (GameData::getInstance()->getUpgradeItemMode() == GameData::ItemMode::SHIELD) {
 			//소드는 딸이 사용중이므로 방패강화
 			if (UpgradeController::payRepairCosts(repairGold, Item::SHIELD) == true) {
-				currentUpgradePhase = UpgradePhase::REPAIR;
-				showUiButton(currentUpgradePhase);
-				setUpgradeButtonOpacity(currentUpgradePhase);
+				if (UpgradeController::repairItem(GameData::ItemMode::SHIELD)) {
+					showUpgradeCompleteLayer(true);
+				}
+				else {
+					auto miniPopup = (MiniPopupLayer*)getChildByName("miniPopup");
+					miniPopup->setMessage(ElementName::REPAIR_FAILED);
+					miniPopup->setVisible(true);
+				}
 			}
 			else {
-				auto miniPopup = (Layer*)getChildByName("miniPopup");
+				auto miniPopup = (MiniPopupLayer*)getChildByName("miniPopup");
+				miniPopup->setMessage(ElementName::NOT_ENOUGH_GOLD);
 				miniPopup->setVisible(true);
 			}
 		}
@@ -479,6 +622,14 @@ void UpgradeLayer::repairClicked(Ref* sender, ui::Widget::TouchEventType type)
 	
 
 
+}
+
+void UpgradeLayer::initPauseButton() {
+	auto pauseButton = ui::Button::create(ImagePath::PAUSE_BUTTON, ImagePath::PAUSE_BUTTON_ACTIVE, ImagePath::DISABLE_BUTTON_PATH);
+	pauseButton->setPosition(Vec2(visibleSize.width * 0.95f, visibleSize.height * 0.91f));
+	pauseButton->addTouchEventListener(CC_CALLBACK_2(UpgradeLayer::pauseCallback, this));
+	pauseButton->setName("pauseButton");
+	this->addChild(pauseButton, ZOrder::PAUSE_BUTTON);
 }
 
 
@@ -515,6 +666,7 @@ void UpgradeLayer::hideBeforeUpgradeResources()
 
 
 void UpgradeLayer::completeClicked(Ref* sender, ui::Widget::TouchEventType type) {
+	upgradeResult();
 	switch (type) {
 	case ui::Widget::TouchEventType::BEGAN:
 		break;
@@ -526,7 +678,7 @@ void UpgradeLayer::completeClicked(Ref* sender, ui::Widget::TouchEventType type)
 		log("complete!!");
 		switch (currentUpgradePhase) {
 		case UpgradePhase::UPGRADE:
-			UpgradeController::upgradeItem(GameData::getInstance()->getUpgradeItemMode());
+			UpgradeController::upgradeItem(GameData::getInstance()->getUpgradeItemMode(),upgradeCoefficient);
 			break;
 		case UpgradePhase::REPAIR:
 			UpgradeController::repairItem(GameData::getInstance()->getUpgradeItemMode());
@@ -541,14 +693,22 @@ void UpgradeLayer::completeClicked(Ref* sender, ui::Widget::TouchEventType type)
 		hideBeforeUpgradeResources();
 
 
-		auto upgradeCompleteLayer = (Layer*)getChildByName("upgradeCompleteLayer");
-		upgradeCompleteLayer->setVisible(true);
+		showUpgradeCompleteLayer(true);
 	}
 		break;
 	case ui::Widget::TouchEventType::CANCELED:
 		break;
 	}
 	
+	
+}
+
+void UpgradeLayer::showUpgradeCompleteLayer(bool show) {
+	auto upgradeCompleteLayer = (Layer*)getChildByName("upgradeCompleteLayer");
+	upgradeCompleteLayer->setVisible(true);
+	if (show) {
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_UPGRADE_COMPLETE.c_str());
+	}
 	
 }
 

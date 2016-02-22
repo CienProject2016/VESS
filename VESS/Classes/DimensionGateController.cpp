@@ -15,7 +15,7 @@ void DimensionGateController::changeItemPosition(Hero* daughter) {
 		CCLOG("ItemMode - SWORD");
 		break;
 	default:
-		CCLOG("DimensionGateController - ItemMode Á¤º¸ ¿À·ù");
+		CCLOG("DimensionGateController - ItemMode ì •ë³´ ì˜¤ë¥˜");
 		break;
 	}
 }

@@ -1,4 +1,4 @@
-﻿#include "AnimationScene.h"
+#include "AnimationScene.h"
 #include "cocostudio\CocoStudio.h"
 
 

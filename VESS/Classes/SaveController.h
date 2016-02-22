@@ -5,6 +5,11 @@
 class SaveController {
 public:
 	static void save();
+private:
+	static void saveSword();
+	static void saveShield();
+	static void saveGold();
+	static void saveTopStage();
 };
 
 #endif // !__SAVE_CONTROLLER_H__

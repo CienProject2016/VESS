@@ -41,11 +41,11 @@ private:
 	const int SIZE_OF_LIFE = 3;
 	HeroMovementState* movementState;
 	FightLayer* field;
-	Size windowSize;				//·¹ÀÌ¾î À©µµ¿ì »çÀÌÁî
-	Vec2 origin;					//·¹ÀÌ¾îÀÇ À§Ä¡ ÁÂÇ¥
+	Size windowSize;				//ë ˆì´ì–´ ìœˆë„ìš° ì‚¬ì´ì¦ˆ
+	Vec2 origin;					//ë ˆì´ì–´ì˜ ìœ„ì¹˜ ì¢Œí‘œ
 	Node* actionNode, *itemNode;
 	timeline::ActionTimeline* action, *itemAction;
-	float avoidDistance;			//ÇÇÇÒ¶§ ¾îµğ±îÁö ÇÇÇÒÁöÀÇ °Å¸®
-	float attackDistance;			//¶§¸±¶§ ¾îµğÂë ¶§¸±ÁöÀÇ °Å¸®
+	float avoidDistance;			//í”¼í• ë•Œ ì–´ë””ê¹Œì§€ í”¼í• ì§€ì˜ ê±°ë¦¬
+	float attackDistance;			//ë•Œë¦´ë•Œ ì–´ë””ì¯¤ ë•Œë¦´ì§€ì˜ ê±°ë¦¬
 };
 #endif

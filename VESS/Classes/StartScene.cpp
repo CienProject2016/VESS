@@ -1,7 +1,7 @@
-﻿#include "StartScene.h"
+#include "StartScene.h"
 #include "Settings.h"
 #include "EnterScene.h"
-
+#include "ResourcePath.h"
 USING_NS_CC;
 
 Scene* StartScene::createScene()
@@ -50,7 +50,8 @@ bool StartScene::init()
 
     // add a label shows "Hello World"
     // create and initialize a label
-	auto subLabel = Label::createWithSystemFont("본격 강화 피지컬 액션 RPG", "Arial", 70);
+	auto subLabel = Label::createWithSystemFont("", "Arial", 70);
+	subLabel->setString(StringUtils::format("%s", ElementName::START_MESSAGE.c_str()));
 	subLabel->setPosition(Vec2(origin.x + visibleSize.width *0.25f, origin.y + visibleSize.height *0.5f));
 	subLabel->setColor(Color3B(0, 0, 0));
 	this->addChild(subLabel);
@@ -62,7 +63,8 @@ bool StartScene::init()
 		origin.y + visibleSize.height - label->getContentSize().height*2.5));
 	label->setColor(Color3B(0, 0, 0)); //black
 
-	auto touchLabel = Label::createWithSystemFont("시작하시려면 화면을 터치하세요", "Arial", 70);
+	auto touchLabel = Label::createWithSystemFont("", "Arial", 70);
+	touchLabel->setString(StringUtils::format("%s", ElementName::TOUCH_SCREEN.c_str()));
 	touchLabel->setPosition(Vec2(origin.x + visibleSize.width / 2 + 10,
 		origin.y + visibleSize.height - touchLabel->getContentSize().height * 12));
 	touchLabel->setColor(Color3B(0, 0, 0));

@@ -2,6 +2,7 @@
 #include "MonsterAnimation.h"
 #include "FightLayer.h"
 #include "MonsterInfo.h"
+#include "TutorialController.h"
 
 MonsterBehaviorPattern::MonsterBehaviorPattern(Monster* parent) {
 	timer = 0;
@@ -68,7 +69,12 @@ void MonsterBehaviorPattern::attackToHero() {
 		break;
 	case Monster::Slime:
 		if (state == attack0)	monster->field->getDaughter()->monsterAttackToHero(new HitArea(HitArea::center + HitArea::left));
-		else if (state == attack1)	monster->field->getDaughter()->monsterAttackToHero(new HitArea(HitArea::center + HitArea::left));
+		else if (state == attack1) {
+			monster->field->getDaughter()->monsterAttackToHero(new HitArea(HitArea::center + HitArea::left));
+			if (!TutorialController::checkTutorialEvent("evade_01")) {
+				TutorialController::checkTutorialEvent("evade_02");
+			}
+		}
 		break;
 	}
 }

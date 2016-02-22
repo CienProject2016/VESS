@@ -1,9 +1,10 @@
-﻿#include "Hero.h"
+#include "Hero.h"
 #include "FightLayer.h"
 #include "MonsterInfo.h"
 #include "Monster.h"
 #include "ResourcePath.h"
 #include "DefenseMovementState.h"
+#include "TutorialController.h"
 
 #define ANIMATION 10000
 
@@ -130,11 +131,27 @@ void Hero::startAttack() {
 	if (GameData::getInstance()->getItemMode() == GameData::ItemMode::SWORD) {
 		if (isAvailableCommand()) {
 			setMovementState(new AttackMovementState(this));
-			action->gotoFrameAndPlay(304, 318, false);//공격1
-			itemAction->gotoFrameAndPlay(304,318,false);
+			int randomNum = rand() % 3;
+			switch (randomNum) {
+			case 0:
+				action->gotoFrameAndPlay(37, 49, false);//공격1
+				itemAction->gotoFrameAndPlay(37, 49, false);
+				break;
+			case 1:
+				action->gotoFrameAndPlay(198, 211, false);//공격1
+				itemAction->gotoFrameAndPlay(198, 211, false);
+				break;
+			case 2:
+				action->gotoFrameAndPlay(218, 228, false);//공격1
+				itemAction->gotoFrameAndPlay(218, 228, false);
+				break;
+			}
+			
+			TutorialController::checkTutorialEvent("drag_01");
 		}
 	}	
 }
+
 void Hero::startAvoid() {
 	if (isAvailableCommand()) {
 		setMovementState(new AvoidMovementState(this));

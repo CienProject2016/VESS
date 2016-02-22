@@ -23,8 +23,8 @@ protected:
 public:
 	enum Kind { Tauren, Slime };
 
-	// ¹ØÀÇ µÎ º¯¼ö´Â ¼­·Î ¿¬°ü¼ºÀÌ ÀÖ±â ¶§¹®¿¡ public À¸·Î µÎ°í ¼­·Î ÀÐÀ» ¼ö ÀÖµµ·Ï ÇßÀ½.
-	// ¾Æ¿¡ ´Ù¸¥ Å¬·¡½º¿¡¼­ ÀÌµéÀ» º¼ ¼ö ÀÖ´Ù´Â ´ÜÁ¡ÀÌ ÀÖÁö¸¸, ºÁµµ ¹¹ ¾²Áö¸¸ ¾ÊÀ¸¸é »ó°ü ¾øÀ» °Í °°Àºµ¥?
+	// ë°‘ì˜ ë‘ ë³€ìˆ˜ëŠ” ì„œë¡œ ì—°ê´€ì„±ì´ ìžˆê¸° ë•Œë¬¸ì— public ìœ¼ë¡œ ë‘ê³  ì„œë¡œ ì½ì„ ìˆ˜ ìžˆë„ë¡ í–ˆìŒ.
+	// ì•„ì— ë‹¤ë¥¸ í´ëž˜ìŠ¤ì—ì„œ ì´ë“¤ì„ ë³¼ ìˆ˜ ìžˆë‹¤ëŠ” ë‹¨ì ì´ ìžˆì§€ë§Œ, ë´ë„ ë­ ì“°ì§€ë§Œ ì•Šìœ¼ë©´ ìƒê´€ ì—†ì„ ê²ƒ ê°™ì€ë°?
 	MonsterAnimation* anim;
 	MonsterBehaviorPattern* behavior;
 

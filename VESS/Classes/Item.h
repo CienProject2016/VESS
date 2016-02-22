@@ -9,6 +9,7 @@ using namespace std;
 class Item {
 public:
 	enum Type { SWORD, SHIELD };
+	enum Grade { A=10, B=7 ,C=5 };
 	Item();
 	~Item();
 protected :
