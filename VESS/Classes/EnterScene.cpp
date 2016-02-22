@@ -2,6 +2,9 @@
 #include "SimpleAudioEngine.h"
 #include "StageLevelController.h"
 
+
+#define gold "GOLD"
+
 USING_NS_CC;
 
 Scene* EnterScene::createScene()
@@ -65,9 +68,34 @@ bool EnterScene::init()
 	backButton->setScale(0.2f);
 	this->addChild(backButton,0);
 	this->scheduleUpdate();
+
 	
+	int currentGold = GameData::getInstance()->getGold();
+	currentGoldLabel = Label::createWithTTF("", "fonts/arial.ttf", 50);
+	currentGoldLabel->setString(StringUtils::format("%d", currentGold));
+	currentGoldLabel->setPosition(Vec2(origin.x + visibleSize.width * 0.450f, origin.y + visibleSize.height*0.935f));
+	currentGoldLabel->setColor(Color3B(250, 250, 250)); //WHITE	
+	this->addChild(currentGoldLabel, 9999);
+
+	auto goldIcon = Sprite::create(ImagePath::GOLD_ICON_PATH);
+	goldIcon->setPosition(Vec2(origin.x + visibleSize.width*0.41f, origin.y + visibleSize.height * 0.935f));
+	this->addChild(goldIcon);
+	
+	
+	GameData::getInstance()->getSword()->getName();
+	itemName = Label::createWithTTF("", "fonts/arial.ttf", 50);
+	itemName->setString(StringUtils::format("%s", itemName));
+	itemName->setPosition(Vec2(origin.x + visibleSize.width * 0.450f, origin.y + visibleSize.height*0.935f));
+	itemName->setColor(Color3B(250, 250, 250));
+	this->addChild(itemName);
+
+
+
 	return true;
 }
+
+
+
 
 void EnterScene::restartCallback(Ref* sender, ui::Widget::TouchEventType type) {
 	switch (type) {
@@ -82,6 +110,8 @@ void EnterScene::restartCallback(Ref* sender, ui::Widget::TouchEventType type) {
 		break;
 	}
 }
+
+
 
 void EnterScene::update(float delta) {
 	for (int i = 0; i < 10; i++) {
