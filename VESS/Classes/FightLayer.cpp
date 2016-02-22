@@ -180,16 +180,22 @@ void FightLayer::monsterSpawnUpdate(float delta) {
 	vector<int> distance_data = stageData.getMonsterLengthInfo();
 	int monsterHealth = stageData.getHealth();
 	if (MonsterSpawnScheduler::isMonsterSpawnTime(moving_distance, distance_data) && this->monster == NULL) {
-		monster = Monster::create(this, Monster::Slime, monsterHealth);
+
+		//이부분이 실제 몬스터를 추가하는 로직.
+		//지금은 랜덤하게 몬스터를 타우렌과 슬라임을 생성한다.
+		int randomNum = rand() % 2;
+		if (randomNum == 0) monster = Monster::create(this, Monster::Tauren, monsterHealth);
+		else  monster = Monster::create(this, Monster::Slime, monsterHealth);
 		this->addChild(monster, 1);
+		//여기까지가 실제 몬스터를 추가하는 로직.
+		//몬스터::크리에이트(디스, 몬스터::이름, 헬뜨) 에서 몬스터::이름 만 변경하면 몬스터의 종류가 바뀐다!!
+
 		if (!GameData::getInstance()->getIsInTutorial()) {
 			GameData::getInstance()->setMovingDistance(moving_distance + 1);
 		}
 		daughter->setMovementState(new StayMovementState(daughter));
 		backgroundSpawnScheduler->setBackgroundSpeed(0);
-
 	}
-
 
 	int finalDistance = GameData::getInstance()->getCurrentStageInfo().getFinalDistance();
 
@@ -197,6 +203,8 @@ void FightLayer::monsterSpawnUpdate(float delta) {
 		if (!GameData::getInstance()->getIsInTutorial()) {
 			movingDistanceReal += delta * movingVelocity;
 			if (moving_distance > finalDistance) {
+				movingVelocity = 0;
+				moving_distance -= 100;
 				backgroundSpawnScheduler->setBackgroundSpeed(0);
 				chest = Chest::create();
 				chest->setParentLayer(this);
@@ -412,7 +420,9 @@ Chest* FightLayer::getChest() {
 
 
 void FightLayer::monsterDead() {
-	this->removeChild(monster);
+	if (monster->kind == Monster::Slime) {
+		this->removeChild(monster);
+	}
 	monster = NULL;
 	backgroundSpawnScheduler->setBackgroundSpeed(-200);
 	daughter->setMovementState(new RunMovementState(daughter));

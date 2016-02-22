@@ -15,11 +15,6 @@ public:
 	void setArea(Area area);
 	void setArea(int area);
 	int getArea();
-	static bool isCenter(int area);
-	static bool isUp(int area);
-	static bool isRight(int area);
-	static bool isLeft(int area);
-	static bool isDown(int area);
 	static bool isIn(int heroArea, int hitArea);
 };
 
@@ -35,6 +30,16 @@ public:
 	}
 };
 
+class CsbFrameTimeInfo {
+public:
+	int start;
+	int end;
+	CsbFrameTimeInfo(int start, int end) {
+		this->start = start;
+		this->end = end;
+	}
+};
+
 //객체를 생성하지 않음. 그냥 리턴만 함. (Controller)
 class MonsterInfo {
 private:
@@ -43,6 +48,7 @@ public:
 	enum AnimName { stand, attack0, attack1, attack2, attack3, dead, damage };
 	static int getHp(Monster::Kind kind);
 	static MakeAnimationInfo* getAnimationInfo(Monster::Kind monster, AnimName anim);
+	static CsbFrameTimeInfo* getCsbActionInfo(Monster::Kind monster, AnimName anim);
 };
 
 #endif // __MONSTER_INFO_H__

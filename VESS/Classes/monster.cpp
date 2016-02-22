@@ -20,6 +20,7 @@ void Monster::init(FightLayer* layer, Monster::Kind kind, int health){
 	{
 		this->kind = kind;
 		field = layer;
+		isDead = false;
 		initWindowSize();
 		initImage();
 		initBehavior();
@@ -34,17 +35,18 @@ void Monster::initWindowSize() {
 }
 
 void Monster::initImage() {
-	timeline::ActionTimeline* action;
+	anim = new MonsterAnimation(this);
 	switch (kind) {
 	case Tauren:
 		image = CSLoader::createNode("animation/Tauren.csb");
 		this->addChild(image);
-		action = CSLoader::createTimeline("animation/Tauren.csb");
+		csbAction = CSLoader::createTimeline("animation/Tauren.csb");
 		image->setPosition(0, 0);
-		image->runAction(action);
-		action->gotoFrameAndPlay(26, 32, true);
-		targetPosition = windowSize.width * 0.7f;
-		this->setPosition(Vec2(windowSize.width, windowSize.height * 0.38f));
+		image->runAction(csbAction);
+		image->setScale(2);
+		csbAction->gotoFrameAndPlay(26, 32, true);
+		targetPosition = windowSize.width * 0.6f;
+		this->setPosition(Vec2(windowSize.width, windowSize.height * 0.28f));
 		break;
 	case Slime:
 		anim = new MonsterAnimation(this);
@@ -67,10 +69,26 @@ void Monster::initBehavior() {
 void sangTeaESangUpdate() {}
 
 void Monster::positionUpdate(float delta) {
-	Vec2 pos = this->getPosition();
-	float x = (pos.x - targetPosition) * delta * 5;
-	pos.x -= x;
-	this->setPosition(pos);
+	if (isDead) {
+		Vec2 pos = this->getPosition();
+		pos.x -= delta * 500;
+		this->setPosition(pos);
+	}
+	else {
+		Vec2 pos = this->getPosition();
+		float x = (pos.x - targetPosition) * delta * 5;
+		pos.x -= x;
+		this->setPosition(pos);
+	}
+}
+
+void Monster::update_forDead(float delta) {
+	if (isDead) {
+		int op = this->image->getOpacity();
+		op -= delta * 200;
+		if (op < 0)	this->removeFromParent();
+		else this->image->setOpacity(op);
+	}
 }
 
 void Monster::update(float delta) {
@@ -81,7 +99,8 @@ void Monster::update(float delta) {
 	//나중에 추가될 상태이상 처리라던지의 내용은 행동패턴에 들어가기 알맞지 않으므로.
 	//몬스터의 업데이트에서 behavior 로 update 를 전달함으로써
 	//프로그래머가 직관적으로 무엇이 먼저 실행될지를 알 수 있다.
-	behavior->update(delta);	
+	if(!isDead)	behavior->update(delta);	
+	update_forDead(delta);
 }
 
 void Monster::initHp(int health) {
@@ -126,6 +145,10 @@ void Monster::damage(int dam) {
 		int currentStageLevel = GameData::getInstance()->getStageLevel();
 		int monsterGold = GameData::getInstance()->getStageList()->at(currentStageLevel).getGold();
 		GameData::getInstance()->setGold(currentGold + monsterGold);
+		isDead = true;
+		if (kind == Tauren) {
+			anim->playDead();
+		}
 		if (kind == Slime) {
 			EffectFactory* dead = EffectFactory::create(EffectFactory::SlimeDeadAnimation, Vec2(0, 0));
 			field->addChild(dead);
