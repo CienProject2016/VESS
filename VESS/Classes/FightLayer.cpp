@@ -187,9 +187,7 @@ void FightLayer::monsterSpawnUpdate(float delta) {
 		}
 		daughter->setMovementState(new StayMovementState(daughter));
 		backgroundSpawnScheduler->setBackgroundSpeed(0);
-
 	}
-
 
 	int finalDistance = GameData::getInstance()->getCurrentStageInfo().getFinalDistance();
 

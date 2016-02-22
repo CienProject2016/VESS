@@ -51,7 +51,7 @@ void JumpMovementState::update(float delta) {
 
 AttackMovementState::AttackMovementState(Hero* parent) {
 	this->parent = parent;
-	maxTime = 0.28f;
+	maxTime = 0.35f;
 	timer = 0;
 	direction = 1;
 	movingDistance = fightLayerSize.width * 0.4f;
@@ -75,8 +75,6 @@ void AttackMovementState::update(float delta) {
 		}
 	}
 	verticalVelocity -= delta * gravity;
-	//parent->setPositionY(parent->getPositionY() + verticalVelocity);
-	//parent->setPositionX(parent->getPositionX() + direction * delta * moveDistance / maxTime);
 	timer += delta;
 }
 void AttackMovementState::attackEvent() {
@@ -107,8 +105,6 @@ void AvoidMovementState::update(float delta) {
 		}
 	}
 	verticalVelocity -= delta * gravity;
-	//parent->setPositionY(parent->getPositionY() + verticalVelocity);
-	//parent->setPositionX(parent->getPositionX() - direction * delta * moveDistance / maxTime);
 	timer += delta;
 }
 
@@ -128,6 +124,5 @@ void SitdownMovementState::update(float delta) {
 		return;
 	}
 	verticalVelocity -= delta * gravity;
-	//parent->setPositionY(parent->getPositionY() + verticalVelocity);
 	timer += delta;
 }

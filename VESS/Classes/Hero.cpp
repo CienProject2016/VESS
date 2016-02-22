@@ -131,7 +131,8 @@ void Hero::changeItemAction(Item::Type itemType) {
 		itemAction = CSLoader::createTimeline(ActionPath::SWORD_PATH);	
 		this->addChild(itemNode);
 		itemNode->runAction(itemAction);
-		itemAction->gotoFrameAndPlay(0, 16, true);		
+		itemAction->gotoFrameAndPlay(0, 16, true);	
+		action->gotoFrameAndPlay(0, 16, true);
 	}
 	else if (itemType == Item::Type::SHIELD) {
 		itemNode = CSLoader::createNode(ActionPath::SHIELD_PATH);
@@ -139,7 +140,8 @@ void Hero::changeItemAction(Item::Type itemType) {
 		itemAction = CSLoader::createTimeline(ActionPath::SHIELD_PATH);	
 		this->addChild(itemNode);
 		itemNode->runAction(itemAction);
-		itemAction->gotoFrameAndPlay(0, 16, true);		
+		itemAction->gotoFrameAndPlay(0, 16, true);	
+		action->gotoFrameAndPlay(0, 16, true);
 	}	
 }
 
