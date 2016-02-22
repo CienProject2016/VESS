@@ -51,6 +51,7 @@ private:
 	CC_SYNTHESIZE(bool, isTutorial, IsTutorial);
 	CC_SYNTHESIZE(bool, isInTutorial, IsInTutorial);
 	CC_SYNTHESIZE(bool, isPause, IsPause);
+	CC_SYNTHESIZE(bool, isCheatMode, IsCheatMode);
 	GameData();
 	~GameData();
 	void setDialogInfo();

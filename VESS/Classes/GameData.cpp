@@ -24,29 +24,32 @@ void GameData::resetInfo() {
 	log("Game Reset");
 	topStage = 0;
 	gold = 15;
-	setUpgradeInfo();
+	UserDefault::getInstance()->reset();
+	setUpgradeInfo();	
 }
 
 void GameData::loadSaveInfo() {
-	if (UserDefault::getInstance()->getIntegerForKey("topStageLevel") != NULL) {
-		this->topStage = UserDefault::getInstance()->getIntegerForKey("topStageLevel");
-		this->gold = UserDefault::getInstance()->getIntegerForKey("gold");
-		sword->setUpgradeId(UserDefault::getInstance()->getIntegerForKey("swordUpgradeGold"));
-		sword->setDamage(UserDefault::getInstance()->getIntegerForKey("swordDamage"));
-		sword->setDurability(UserDefault::getInstance()->getIntegerForKey("swordDurability"));
-		sword->setMaxDurability(UserDefault::getInstance()->getIntegerForKey("swordMaxDurability"));
-		sword->setRepairGold(UserDefault::getInstance()->getIntegerForKey("swordRepairGold"));
-		sword->setUpgradeGold(UserDefault::getInstance()->getIntegerForKey("swordUpgradeGold"));
-		sword->setSpeed(UserDefault::getInstance()->getIntegerForKey("swrodSpeed"));
-		sword->setName(UserDefault::getInstance()->getStringForKey("swordName"));
-		shield->setUpgradeId(UserDefault::getInstance()->getIntegerForKey("shieldUpgradeGold"));
-		shield->setDefense(UserDefault::getInstance()->getIntegerForKey("shieldDefense"));
-		shield->setDurability(UserDefault::getInstance()->getIntegerForKey("shieldDurability"));
-		shield->setMaxDurability(UserDefault::getInstance()->getIntegerForKey("shieldMaxDurability"));
-		shield->setRepairGold(UserDefault::getInstance()->getIntegerForKey("shieldRepairGold"));
-		shield->setUpgradeGold(UserDefault::getInstance()->getIntegerForKey("shieldUpgradeGold"));
-		shield->setSpeed(UserDefault::getInstance()->getIntegerForKey("swrodSpeed"));
-		shield->setName(UserDefault::getInstance()->getStringForKey("shieldName"));
+	if (UserDefault::getInstance()->isXMLFileExist()){
+		if (topStage != 0) {
+			this->topStage = UserDefault::getInstance()->getIntegerForKey("topStageLevel");
+			this->gold = UserDefault::getInstance()->getIntegerForKey("gold");
+			sword->setUpgradeId(UserDefault::getInstance()->getIntegerForKey("swordUpgradeGold"));
+			sword->setDamage(UserDefault::getInstance()->getIntegerForKey("swordDamage"));
+			sword->setDurability(UserDefault::getInstance()->getIntegerForKey("swordDurability"));
+			sword->setMaxDurability(UserDefault::getInstance()->getIntegerForKey("swordMaxDurability"));
+			sword->setRepairGold(UserDefault::getInstance()->getIntegerForKey("swordRepairGold"));
+			sword->setUpgradeGold(UserDefault::getInstance()->getIntegerForKey("swordUpgradeGold"));
+			sword->setSpeed(UserDefault::getInstance()->getIntegerForKey("swordSpeed"));
+			sword->setName(UserDefault::getInstance()->getStringForKey("swordName"));
+			shield->setUpgradeId(UserDefault::getInstance()->getIntegerForKey("shieldUpgradeGold"));
+			shield->setRepairPercent(UserDefault::getInstance()->getIntegerForKey("shieldRepairPercent"));
+			shield->setUpgradePercent(UserDefault::getInstance()->getIntegerForKey("shieldUpgradePercent"));
+			shield->setDurability(UserDefault::getInstance()->getIntegerForKey("shieldDurability"));
+			shield->setMaxDurability(UserDefault::getInstance()->getIntegerForKey("shieldMaxDurability"));
+			shield->setRepairGold(UserDefault::getInstance()->getIntegerForKey("shieldRepairGold"));
+			shield->setUpgradeGold(UserDefault::getInstance()->getIntegerForKey("shieldUpgradeGold"));
+			shield->setName(UserDefault::getInstance()->getStringForKey("shieldName"));
+		}		
 	}
 }
 
@@ -213,13 +216,13 @@ void GameData::setUpgradeInfo() {
 
 	for (rapidjson::Value* iter = upgradeShieldData.Begin(); iter != upgradeShieldData.End(); iter++) {
 		Shield* shield = new Shield();
-		shield->setDefense((*iter)["defense"].GetInt());
 		shield->setName((*iter)["name"].GetString());
-		shield->setSpeed((*iter)["speed"].GetInt());
 		shield->setMaxDurability((*iter)["durability"].GetInt());
 		shield->setDurability((*iter)["durability"].GetInt());
-		shield->setUpgradeGold((*iter)["upgrade"].GetInt());
-		shield->setRepairGold((*iter)["repair"].GetInt());
+		shield->setUpgradeGold((*iter)["upgradeGold"].GetInt());
+		shield->setRepairGold((*iter)["repairGold"].GetInt());
+		shield->setRepairPercent((*iter)["repairPercent"].GetInt());
+		shield->setUpgradePercent((*iter)["upgradePercent"].GetInt());
 		shieldList->push_back(shield);
 	}
 	Shield* shield = shieldList->at(0);

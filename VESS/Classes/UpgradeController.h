@@ -7,9 +7,10 @@
 class UpgradeController {
 private :
 	static void upgradeSword();
-	static void upgradeShield();
+	static bool upgradeShield();
 	static void repairSword();
-	static void repairShield();
+	static bool repairShield();
+	static bool isSuccess(int);
 public:
 	static bool upgradeItem(GameData::ItemMode);
 	static bool repairItem(GameData::ItemMode);

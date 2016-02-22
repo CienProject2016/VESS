@@ -59,7 +59,6 @@ void UpgradeCompleteLayer::showUpgradeInfo() {
 		nameLabel = Label::createWithSystemFont("", "Arial", 50);
 		nameLabel->setString(StringUtils::format("%s : %s", SHIELD_NAME, GameData::getInstance()->getShield()->getName().c_str()));
 		statusLabel = Label::createWithSystemFont("", "Arial", 50);
-		statusLabel->setString(StringUtils::format("%s : %d", DEFENSE_NAME, GameData::getInstance()->getShield()->getDefense()));
 		durabilityLabel = Label::createWithSystemFont("", "Arial", 50);
 		durabilityLabel->setString(StringUtils::format("%s : %d", MAX_DURABILITY_NAME, GameData::getInstance()->getShield()->getDurability()));
 		break;
@@ -122,7 +121,6 @@ void UpgradeCompleteLayer::updateUpgradeInfo() {
 		break;
 	case GameData::ItemMode::SHIELD:
 		nameLabel->setString(StringUtils::format("%s : %s", SHIELD_NAME, GameData::getInstance()->getShield()->getName().c_str()));
-		statusLabel->setString(StringUtils::format("%s : %d", DEFENSE_NAME, GameData::getInstance()->getShield()->getDefense()));
 		break;
 	}
 }

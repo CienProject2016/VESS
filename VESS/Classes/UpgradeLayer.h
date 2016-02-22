@@ -37,8 +37,10 @@ public:
 	void initLabelInfo();
 	void initItemImage();
 	void initMiniPopup(string);
+	void initPercentageLabel();
 	void setListener();
 
+	void updatePercentLabel();
 	void redrawUpgradeGoldLabel();
 	void increaseGauge(CCProgressTimer* gauge);
 	void increaseGaugeCallback(Ref*, ui::Widget::TouchEventType, CCProgressTimer* gauge);
@@ -50,6 +52,7 @@ public:
 	void checkComplete();
 	void completeClicked(Ref*, ui::Widget::TouchEventType);
 	void showUiButton(UpgradePhase);
+	void showUpgradeCompleteLayer(bool);
 	
 	void setUpgradeButtonOpacity(UpgradePhase);
 	void clearGauge();
@@ -58,11 +61,13 @@ public:
 	void keyReleased(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d::Event *event_);
 	CREATE_FUNC(UpgradeLayer);
 private:
+	int cheatCount;
 	Size visibleSize;
 	Vec2 origin;
 	Label* itemName;
 	Label* upgradeLabel;
 	Label* repairLabel;
+	Label *repairPercentLabel, *upgradePercentLabel;
 	Sprite* itemImage;	
 	Sword getSword;
 	int upgradeGold;

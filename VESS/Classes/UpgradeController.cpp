@@ -14,36 +14,42 @@ bool UpgradeController::payUpgradeCosts(int neededGold, Item::Type itemType) { /
 }
 
 bool UpgradeController::upgradeItem(GameData::ItemMode itemMode) {
+	GameData::getInstance()->setRecentUpgradePhase(GameData::UpgradePhase::UPGRADE);
 	switch (itemMode) {
 	case GameData::ItemMode::SWORD:
 		upgradeSword();
 		break;
 	case GameData::ItemMode::SHIELD:
 		log("ShieldUpgradePhase");
-		upgradeShield();		
+		if (upgradeShield()) {
+			return true;
+		}
+		return false;
 		break;
 	default : 
 		log("Item Mode 정보 오류");
 		return false;
 	}
-	GameData::getInstance()->setRecentUpgradePhase(GameData::UpgradePhase::UPGRADE);
 	return true;
 }
 
 bool UpgradeController::repairItem(GameData::ItemMode itemMode) {
+	GameData::getInstance()->setRecentUpgradePhase(GameData::UpgradePhase::REPAIR);
 	switch (itemMode) {
 	case GameData::ItemMode::SWORD:
 		repairSword();
+		return true;
 		break;
 	case GameData::ItemMode::SHIELD:
-		repairShield();
+		if (repairShield()) {
+			return true;
+		}		
 		break;
 	default:
 		log("Item Mode 정보 오류2");
 		return false;
-	}
-	GameData::getInstance()->setRecentUpgradePhase(GameData::UpgradePhase::REPAIR);
-	return true;
+	}	
+	return false;
 }
 
 void UpgradeController::upgradeSword() {
@@ -65,24 +71,40 @@ void UpgradeController::repairSword() {
 	GameData::getInstance()->setSword(oldSword);
 }
 
-void UpgradeController::repairShield() {
+bool UpgradeController::repairShield() {
 	Shield* oldShield = GameData::getInstance()->getShield();
-	oldShield->setDurability(oldShield->getMaxDurability());
-	GameData::getInstance()->setShield(oldShield);
+	if (isSuccess(oldShield->getRepairPercent())) {
+		Shield* oldShield = GameData::getInstance()->getShield();
+		oldShield->setDurability(oldShield->getMaxDurability());
+		oldShield->setMaxDurability(oldShield->getMaxDurability());
+		return true;
+	}	
+	return false;
 }
 
-void UpgradeController::upgradeShield() {
+bool UpgradeController::upgradeShield() {
 	Shield* oldShield = GameData::getInstance()->getShield();
 
 	int upgradeId = oldShield->getUpgradeId() + 1;
 	vector<Shield*>* shieldList = GameData::getInstance()->getShieldList();
 	log("upgrade SHIELD id : %d", upgradeId);
 	if (shieldList->size() > upgradeId-1) {
-		Shield* newShield = shieldList->at(upgradeId-1);
-		newShield->setUpgradeId(upgradeId);
-		GameData::getInstance()->setShield(newShield);
-		log("%s", GameData::getInstance()->getShield()->getName().c_str());
+		if (isSuccess(oldShield->getUpgradePercent())) {
+			Shield* newShield = shieldList->at(upgradeId - 1);
+			newShield->setUpgradeId(upgradeId);
+			GameData::getInstance()->setShield(newShield);
+			log("%s", GameData::getInstance()->getShield()->getName().c_str());
+			return true;
+		}		
 	}
+	return false;
+}
+
+bool UpgradeController::isSuccess(int percentRate) {
+	if (percentRate == 100) {
+		return true;
+	}
+	return (rand()%100) <= percentRate;
 }
 
 bool UpgradeController::payRepairCosts(int neededGold, Item::Type itemType) {

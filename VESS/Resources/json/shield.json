@@ -1,28 +1,60 @@
 {
   "shield": [
     {
-      "name": "벽돌",
-      "defense": 64,
-      "speed": 1,
-	  "upgrade": 20,
-      "repair": 4,
-      "durability": 20
+      "name": "낡은 나무방패",
+      "durability": 5,
+      "upgradeGold": 20,
+      "repairGold": 4,
+      "upgradePercent": 70,
+      "repairPercent": 100
     },
     {
-      "name": "일반 벽돌",
-      "defense": 97,
-      "speed": 1,
-	  "upgrade": 100,
-      "repair": 20,
-      "durability": 25
+      "name": "단단한 나무방패",
+      "durability": 7,
+      "upgradeGold": 800,
+      "repairGold": 160,
+      "upgradePercent": 50,
+      "repairPercent": 70
     },
     {
-      "name": "다듬어진 벽돌",
-      "defense": 162,
-      "speed": 1,
-	  "upgrade": 600,
-      "repair": 120,
-      "durability": 30
+      "name": "구리 방패",
+      "durability": 10,
+      "upgradeGold": 5000,
+      "repairGold": 1000,
+      "upgradePercent": 30,
+      "repairPercent": 60
+    },
+    {
+      "name": "강철 방패",
+      "durability": 12,
+      "upgradeGold": 50000,
+      "repairGold": 10000,
+      "upgradePercent": 20,
+      "repairPercent": 50
+    },
+    {
+      "name": "티타늄 방패",
+      "durability": 15,
+      "upgradeGold": 500000,
+      "repairGold": 100000,
+      "upgradePercent": 15,
+      "repairPercent": 50
+    },
+    {
+      "name": "사드배치 방패",
+      "durability": 18,
+      "upgradeGold": 1500000,
+      "repairGold": 300000,
+      "upgradePercent": 10,
+      "repairPercent": 40
+    },
+    {
+      "name": "방패왕 방패방패",
+      "durability": 20,
+      "upgradeGold": 5000000,
+      "repairGold": 1000000,
+      "upgradePercent": 0,
+      "repairPercent": 30
     }
   ]
 }

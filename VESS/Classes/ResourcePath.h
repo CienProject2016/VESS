@@ -65,6 +65,7 @@ public:
 	const static string SOUND_JUMP_PATH;
 	const static string SOUND_ATTACK_PATH;
 	const static string SOUND_BLOCK;
+	const static string SOUND_UPGRADE_COMPLETE;
 	const static string SOUND_OPEN_DOOR;
 	const static string BGM_NEO_ROCK;
 	const static string BGM_DIALOG;
@@ -78,6 +79,11 @@ public:
 	const static string LOCKED;
 	const static string TOUCH_SCREEN;
 	const static string START_MESSAGE;
+	const static string NOT_ENOUGH_GOLD;
+	const static string UPGRADE_FAILED;
+	const static string UPGRADE_PERCENT;
+	const static string REPAIR_PERCENT;
+	const static string REPAIR_FAILED;
 };
 
 struct TutorialEventPath {

@@ -5,7 +5,8 @@
 #include "cocos2d.h"
 class Shield : public Item {
 private:
-	CC_SYNTHESIZE(int, defense, Defense);
+	CC_SYNTHESIZE(int, repairPercent, RepairPercent);
+	CC_SYNTHESIZE(int, upgradePercent, UpgradePercent);
 public:
 	Shield();
 	~Shield();
