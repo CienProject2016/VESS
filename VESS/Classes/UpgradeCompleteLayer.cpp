@@ -124,7 +124,7 @@ void UpgradeCompleteLayer::updateUpgradeInfo() {
 	vector<Sword*>* swordList = GameData::getInstance()->getSwordList();
 	oldSword = swordList->at(swUpgradeId - 1);
 	newSword = swordList->at(swUpgradeId );
-
+//////////////////
 	Shield* oldShield = GameData::getInstance()->getShield();
 	Shield* newShield = GameData::getInstance()->getShield();
 	int shUpgradeId = oldShield->getUpgradeId() + 1;
