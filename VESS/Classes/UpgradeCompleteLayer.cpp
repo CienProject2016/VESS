@@ -67,14 +67,16 @@ void UpgradeCompleteLayer::showUpgradeInfo() {
 
 	nameLabel->setAnchorPoint(Vec2(0, 0));
 	statusLabel->setAnchorPoint(Vec2(0, 0));
+	durabilityLabel->setAnchorPoint(Vec2(0, 0));
 	nameLabel->setColor(Color3B(0, 0, 0));
 	statusLabel->setColor(Color3B(0, 0, 0));
-	nameLabel->setPosition(Vec2(visibleSize.width * 0.23f, visibleSize.height*0.32f));
-	statusLabel->setPosition(Vec2(visibleSize.width * 0.23f, visibleSize.height*0.22f));
+	durabilityLabel->setColor(Color3B(0, 0, 0));
+	nameLabel->setPosition(Vec2(visibleSize.width * 0.21f, visibleSize.height*0.32f));
+	statusLabel->setPosition(Vec2(visibleSize.width * 0.21f, visibleSize.height*0.27f));
+	durabilityLabel->setPosition(Vec2(visibleSize.width * 0.21f, visibleSize.height*0.22f));
 	nameLabel->setName("nameLabel");
 	statusLabel->setName("statusLabel");
 	durabilityLabel->setName("durabilityLabel");
-	durabilityLabel->setPosition(Vec2(visibleSize.width * 0.23f, visibleSize.height * 0.42f));
 	this->addChild(durabilityLabel);
 	this->addChild(nameLabel);
 	this->addChild(statusLabel);
@@ -101,11 +103,11 @@ void UpgradeCompleteLayer::updateRepairInfo() {
 	switch (GameData::getInstance()->getUpgradeItemMode()) {
 	case GameData::ItemMode::SWORD:
 		nameLabel->setString(StringUtils::format("%s : %s", SWORD_NAME, GameData::getInstance()->getSword()->getName().c_str()));
-		durabilityLabel->setString(StringUtils::format("%s : %d", DURABILITY_NAME, GameData::getInstance()->getSword()->getDurability()));
+		durabilityLabel->setString(StringUtils::format("%s : %d/%d", DURABILITY_NAME, GameData::getInstance()->getSword()->getDurability(), GameData::getInstance()->getSword()->getMaxDurability()));
 		break;
 	case GameData::ItemMode::SHIELD:
 		nameLabel->setString(StringUtils::format("%s : %s", SHIELD_NAME, GameData::getInstance()->getShield()->getName().c_str()));
-		durabilityLabel->setString(StringUtils::format("%s : %d", DURABILITY_NAME, GameData::getInstance()->getShield()->getDurability()));
+		durabilityLabel->setString(StringUtils::format("%s : %d/%d", DURABILITY_NAME, GameData::getInstance()->getShield()->getDurability(), GameData::getInstance()->getShield()->getMaxDurability()));
 		break;
 	}
 }
@@ -115,14 +117,28 @@ void UpgradeCompleteLayer::updateUpgradeInfo() {
 	auto statusLabel = (Label*)getChildByName("statusLabel");
 	auto upgradeCompleteFrameImage = (Sprite*)getChildByName("upgradeCompleteFrameImage");
 	upgradeCompleteFrameImage->setTexture(ImagePath::UPGRADE_COMPLETE_POPUP_FRAME_PATH);
+
+	Sword* oldSword = GameData::getInstance()->getSword();
+	Sword* newSword = GameData::getInstance()->getSword();
+	int swUpgradeId = oldSword->getUpgradeId() + 1;
+	vector<Sword*>* swordList = GameData::getInstance()->getSwordList();
+	oldSword = swordList->at(swUpgradeId - 1);
+	newSword = swordList->at(swUpgradeId );
+
+	Shield* oldShield = GameData::getInstance()->getShield();
+	Shield* newShield = GameData::getInstance()->getShield();
+	int shUpgradeId = oldShield->getUpgradeId() + 1;
+	vector<Shield*>* shieldList = GameData::getInstance()->getShieldList();
+	oldShield = shieldList->at(shUpgradeId - 1);
+	newShield = shieldList->at(shUpgradeId );
 	switch (GameData::getInstance()->getUpgradeItemMode()) {
 	case GameData::ItemMode::SWORD:
 		nameLabel->setString(StringUtils::format("%s : %s", SWORD_NAME, GameData::getInstance()->getSword()->getName().c_str()));
-		statusLabel->setString(StringUtils::format("%s : %d", ATTACK_NAME, GameData::getInstance()->getSword()->getDamage()));
+		statusLabel->setString(StringUtils::format("%s : %d->%d", ATTACK_NAME, oldSword->getDamage(), newSword->getDamage()));
 		break;
 	case GameData::ItemMode::SHIELD:
 		nameLabel->setString(StringUtils::format("%s : %s", SHIELD_NAME, GameData::getInstance()->getShield()->getName().c_str()));
-		statusLabel->setString(StringUtils::format("%s : %d", DEFENSE_NAME, GameData::getInstance()->getShield()->getDefense()));
+		statusLabel->setString(StringUtils::format("%s : %d->%d", DEFENSE_NAME, oldShield->getDefense(), newShield->getDefense()));
 		break;
 	}
 }
