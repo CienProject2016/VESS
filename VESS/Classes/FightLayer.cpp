@@ -81,15 +81,17 @@ void FightLayer::initGoldLabel() {
 	int currentGold = GameData::getInstance()->getGold();
 	currentGoldLabel = Label::createWithTTF("", "fonts/arial.ttf", 50);
 	currentGoldLabel->setString(StringUtils::format("%d", currentGold));
-	currentGoldLabel->setPosition(Vec2(origin.x + visibleSize.width * 0.540f, origin.y + visibleSize.height*0.935f));
+	currentGoldLabel->setPosition(Vec2(origin.x + visibleSize.width * 0.450f, origin.y + visibleSize.height*0.935f));
 	currentGoldLabel->setColor(Color3B(250, 250, 250)); //WHITE	
 	currentGoldLabel->setName("goldLabel");
 	this->addChild(currentGoldLabel, 9999);
 
 	auto goldIcon = Sprite::create(ImagePath::GOLD_ICON_PATH);
-	goldIcon->setPosition(Vec2(origin.x + visibleSize.width*0.49f, origin.y + visibleSize.height * 0.935f));
+	goldIcon->setPosition(Vec2(origin.x + visibleSize.width*0.41f, origin.y + visibleSize.height * 0.935f));
 	this->addChild(goldIcon);
 }
+
+
 
 void FightLayer::initButton() {
 

@@ -36,6 +36,10 @@ const string ImagePath::TUTORIAL_YES_BUTTON = IMAGE_PATH + "tutorial_yes_button.
 const string ImagePath::LEVIATHAN_IMAGE = IMAGE_PATH + "leviathan_face_01.png";
 const string ImagePath::RESET_BUTTON = IMAGE_PATH + "reset_button.png";
 const string ImagePath::RESET_BUTTON_ACTIVE = IMAGE_PATH + "reset_button_active.png";
+const string ImagePath::PAUSE_BUTTON = IMAGE_PATH + "pause_button.png";
+const string ImagePath::PAUSE_BUTTON_ACTIVE = IMAGE_PATH + "pause_button_active.png";
+const string ImagePath::RESUME_BUTTON = IMAGE_PATH + "resume_button.png";
+const string ImagePath::RESUME_BUTTON_ACTIVE = IMAGE_PATH + "resume_button_active.png";
 
 //Audio Resources
 const string AudioPath::AUDIO_PATH = "audio/";
