@@ -115,14 +115,15 @@ void UpgradeLayer::setListener() {
 }
 
 void UpgradeLayer::initSmithAndBackground() {
-	auto backgroundImage = Sprite::create("Images/background_image.png");
+	auto backgroundImage = Sprite::create("Images/smith_background.png");
 	auto background2Image = Sprite::create("Images/background2_image.png");
 	auto smithImage = Sprite::create("Images/smith_image.png");
 
 
 	// position the sprite on the center of the screen
-	backgroundImage->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.4f));
-	backgroundImage->setScale(2.4f);
+	backgroundImage->setPosition(Vec2(origin.x + 0, origin.x +0));
+	backgroundImage->setAnchorPoint(Vec2(0, 0));
+	smithImage->setScale(1.0f);
 
 	background2Image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.4f));
 	background2Image->setScale(2.0f);

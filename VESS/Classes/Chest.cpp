@@ -97,7 +97,6 @@ void Chest::damage(int dam) {
 	GameData::getInstance()->getCurrentStageInfo().setKey(true);
 	log("chest HP is : %d", hp);
 	if (hp <= 0) {
-		
 		field->chestDead();
 	}
 }

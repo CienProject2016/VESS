@@ -211,9 +211,6 @@ void FightLayer::monsterSpawnUpdate(float delta) {
 				this->addChild(chest);
 				daughter->setMovementState(new StayMovementState(daughter));
 			}
-			if (GameData::getInstance()->getCurrentStageInfo().getKey()) {
-				this->stageClear();
-			}
 		}
 	}
 
@@ -430,7 +427,6 @@ void FightLayer::monsterDead() {
 
 void FightLayer::chestDead() {
 	this->removeChild(chest);
-	chest = NULL;
 	backgroundSpawnScheduler->setBackgroundSpeed(-100);
 
 	this->stageClear();
