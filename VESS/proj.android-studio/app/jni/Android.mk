@@ -23,6 +23,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../../Classes/DialogScene.cpp \
 				   ../../../Classes/DimensionGateController.cpp \
 				   ../../../Classes/DurabilityController.cpp \
+				   ../../../Classes/EffectFactory.cpp \
                    ../../../Classes/EnterScene.cpp \
                    ../../../Classes/FightLayer.cpp \
                    ../../../Classes/GameData.cpp \
