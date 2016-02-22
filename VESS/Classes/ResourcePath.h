@@ -33,6 +33,27 @@ public:
 	const static string SKY_IMAGE;
 	const static string TILE_BACKGROUND;
 	const static string DUNGEON_DOOR_LOCK;
+	const static string TUTORIAL_YES_BUTTON;
+	const static string TUTORIAL_NO_BUTTON;
+	const static string LEVIATHAN_IMAGE;
+	const static string RESET_BUTTON;
+	const static string RESET_BUTTON_ACTIVE;
+	const static string PAUSE_BUTTON;
+	const static string PAUSE_BUTTON_ACTIVE;
+	const static string RESUME_BUTTON;
+	const static string RESUME_BUTTON_ACTIVE;	
+};
+
+struct ActionPath {
+public:
+	const static string HERO_PATH;
+	const static int HERO_DEFENSE_START_FRAME;
+	const static int HERO_DEFENSE_END_FRAME;
+	const static int HERO_RUN_START_FRAME;
+	const static int HERO_RUN_END_FRAME;
+	const static string SWORD_PATH;
+	const static string SHIELD_PATH;
+	
 };
 
 struct AudioPath {
@@ -43,10 +64,14 @@ public:
 	const static string SOUND_DIMENSION_GATE_PATH;
 	const static string SOUND_JUMP_PATH;
 	const static string SOUND_ATTACK_PATH;
+	const static string SOUND_BLOCK;
+	const static string SOUND_UPGRADE_COMPLETE;
+	const static string SOUND_PUI;
 	const static string SOUND_OPEN_DOOR;
 	const static string BGM_NEO_ROCK;
 	const static string BGM_DIALOG;
 	const static string BGM_CLEAR;
+	const static string BGM_ENTER;
 };
 
 struct ElementName {
@@ -54,4 +79,18 @@ public:
 	const static string UPGRADE_COMPLETE_LAYER;
 	const static string DURABILITY_NAME;
 	const static string LOCKED;
+	const static string TOUCH_SCREEN;
+	const static string START_MESSAGE;
+	const static string NOT_ENOUGH_GOLD;
+	const static string UPGRADE_FAILED;
+	const static string UPGRADE_PERCENT;
+	const static string REPAIR_PERCENT;
+	const static string REPAIR_FAILED;
+};
+
+struct TutorialEventPath {
+public:
+	const static string DRAG_01;
+	const static string EVADE_01;
+	const static string EVADE_02;
 };

@@ -27,12 +27,15 @@ public:
 	ItemMode getUpgradeItemMode();
 	void setItemMode(ItemMode);
 	Stage getCurrentStageInfo();
+	void loadSaveInfo();
+	void resetInfo();
 private:
 	ItemMode itemMode;
 	static GameData* instance_;
-	CC_SYNTHESIZE(vector<Tutorial>*, tutorialList, TutorialList);
-	CC_SYNTHESIZE(vector<Stage>*, stageList, StageList);
 	void setTutorialInfo();
+	CC_SYNTHESIZE(vector<Tutorial>*, tutorialList, TutorialList);
+	CC_SYNTHESIZE(vector<Stage>*, stageList, StageList);	
+	CC_SYNTHESIZE(int, topStage, TopStage);
 	CC_SYNTHESIZE(int, stageLevel, StageLevel);
 	CC_SYNTHESIZE(Stage, stage, Stage);
 	CC_SYNTHESIZE(int, gold, Gold);
@@ -45,6 +48,11 @@ private:
 	CC_SYNTHESIZE(Sword*, sword, Sword);
 	CC_SYNTHESIZE(Shield*, shield, Shield);
 	CC_SYNTHESIZE(UpgradePhase, recentUpgradePhase, RecentUpgradePhase);
+	CC_SYNTHESIZE(bool, isTutorial, IsTutorial);
+	CC_SYNTHESIZE(bool, isInTutorial, IsInTutorial);
+	CC_SYNTHESIZE(bool, isPause, IsPause);
+	CC_SYNTHESIZE(bool, isCheatMode, IsCheatMode);
+	CC_SYNTHESIZE(Item::Grade, currentUpgradeGrade, CurrentUpgradeGrade);
 	GameData();
 	~GameData();
 	void setDialogInfo();

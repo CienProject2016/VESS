@@ -1,4 +1,4 @@
-#include "ResourcePath.h"
+﻿#include "ResourcePath.h"
 
 //Image Resources
 const string ImagePath::IMAGE_PATH = "Images/";
@@ -31,6 +31,15 @@ const string ImagePath::POLE_IMAGE = IMAGE_PATH + "pole.png";
 const string ImagePath::SKY_IMAGE = IMAGE_PATH + "sky_cave.png";
 const string ImagePath::TILE_BACKGROUND = IMAGE_PATH + "ground_blue.png";
 const string ImagePath::DUNGEON_DOOR_LOCK = IMAGE_PATH + "dungeon_door_locked.png";
+const string ImagePath::TUTORIAL_NO_BUTTON = IMAGE_PATH + "tutorial_no_button.png";
+const string ImagePath::TUTORIAL_YES_BUTTON = IMAGE_PATH + "tutorial_yes_button.png";
+const string ImagePath::LEVIATHAN_IMAGE = IMAGE_PATH + "leviathan_face_01.png";
+const string ImagePath::RESET_BUTTON = IMAGE_PATH + "reset_button.png";
+const string ImagePath::RESET_BUTTON_ACTIVE = IMAGE_PATH + "reset_button_active.png";
+const string ImagePath::PAUSE_BUTTON = IMAGE_PATH + "pause_button.png";
+const string ImagePath::PAUSE_BUTTON_ACTIVE = IMAGE_PATH + "pause_button_active.png";
+const string ImagePath::RESUME_BUTTON = IMAGE_PATH + "resume_button.png";
+const string ImagePath::RESUME_BUTTON_ACTIVE = IMAGE_PATH + "resume_button_active.png";
 
 //Audio Resources
 const string AudioPath::AUDIO_PATH = "audio/";
@@ -40,11 +49,36 @@ const string AudioPath::SOUND_DIMENSION_GATE_PATH = AUDIO_PATH + SOUND + "dimens
 const string AudioPath::SOUND_JUMP_PATH = AUDIO_PATH + SOUND + "jump.mp3";
 const string AudioPath::SOUND_ATTACK_PATH = AUDIO_PATH + SOUND + "jab.mp3";
 const string AudioPath::SOUND_OPEN_DOOR = AUDIO_PATH + SOUND + "open_door.mp3";
+const string AudioPath::SOUND_UPGRADE_COMPLETE = AUDIO_PATH + SOUND + "upgrade_complete.wav";
+const string AudioPath::SOUND_PUI = AUDIO_PATH + SOUND + "pui.mp3";
+const string AudioPath::SOUND_BLOCK = AUDIO_PATH + SOUND + "block.mp3";
 const string AudioPath::BGM_NEO_ROCK = AUDIO_PATH + BGM + "neo_rock.mp3";
 const string AudioPath::BGM_DIALOG = AUDIO_PATH + BGM + "dialog.mp3";
 const string AudioPath::BGM_CLEAR = AUDIO_PATH + BGM + "clear.mp3";
+const string AudioPath::BGM_ENTER = AUDIO_PATH + BGM + "enter.mp3";
+
+
+//Action Path
+const string ActionPath::HERO_PATH = "character.csb";
+const string ActionPath::SWORD_PATH = "weapon_sword.csb";
+const string ActionPath::SHIELD_PATH = "weapon_shield.csb";
+const int ActionPath::HERO_DEFENSE_START_FRAME = 18;
+const int ActionPath::HERO_DEFENSE_END_FRAME = 25;
+const int ActionPath::HERO_RUN_START_FRAME = 0;
 
 //Element Names
 const string ElementName::UPGRADE_COMPLETE_LAYER = "UpgradeCompleteLayer";
-const string ElementName::DURABILITY_NAME = "������";
-const string ElementName::LOCKED = "�������";
+const string ElementName::DURABILITY_NAME = "내구도";
+const string ElementName::LOCKED = "[잠겨있음]";
+const string ElementName::TOUCH_SCREEN = "시작하시려면 화면을 터치하세요";
+const string ElementName::START_MESSAGE = "본격 강화 피지컬 액션 RPG";
+const string ElementName::NOT_ENOUGH_GOLD = "골드가 부족합니다.";
+const string ElementName::UPGRADE_FAILED = "강화 실패!";
+const string ElementName::UPGRADE_PERCENT = "강화 확률";
+const string ElementName::REPAIR_PERCENT = "수리 확률";
+const string ElementName::REPAIR_FAILED = "수리 실패!";
+
+//TutorialPath
+const string TutorialEventPath::DRAG_01 = "drag_01";
+const string TutorialEventPath::EVADE_01 = "evade_01";
+const string TutorialEventPath::EVADE_02 = "evade_02";

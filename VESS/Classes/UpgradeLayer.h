@@ -22,12 +22,13 @@ using namespace std;
 class UpgradeLayer : public Layer
 {
 public:
-	enum ZOrder {SMELTING_IMAGE, HAMMERING_IMAGE, QUENCHING_IMAGE, UPGRADE_IMAGE, REPAIR_IMAGE, COMPLETE_UPGRADE_BUTTON, COMPLETE_REPAIR_BUTTON, DIMENSION_GATE_IMAGE, ITEM_IMAGE, ITEM_NAME,UPGRADE_COMPLETE_LAYER, MINI_POPUP_LAYER};
+	enum ZOrder {SMELTING_IMAGE, HAMMERING_IMAGE, QUENCHING_IMAGE, UPGRADE_IMAGE, REPAIR_IMAGE, COMPLETE_UPGRADE_BUTTON, COMPLETE_REPAIR_BUTTON, DIMENSION_GATE_IMAGE, ITEM_IMAGE, ITEM_NAME,UPGRADE_COMPLETE_LAYER, MINI_POPUP_LAYER, GRAY_LAYER, PAUSE_BUTTON};
 	enum UpgradePhase { NONE, UPGRADE, REPAIR };
 	enum Gauge {SMELTING_GAUGE, HAMMERING_GAUGE, QUENCHING_GAUGE};
 	virtual bool init();
 	virtual void update(float delta);
 
+	void initPauseButton();
 	void initPhase();
 	void initSmithAndBackground();
 	void initButtonUi();
@@ -36,20 +37,24 @@ public:
 	void initLabelInfo();
 	void initItemImage();
 	void initMiniPopup(string);
+	void initPercentageLabel();
 	void setListener();
 
+	void updatePercentLabel();
 	void redrawUpgradeGoldLabel();
 	void increaseGauge(CCProgressTimer* gauge);
 	void increaseGaugeCallback(Ref*, ui::Widget::TouchEventType, CCProgressTimer* gauge);
 	void gaugeChecker();
 	void upgradeClicked(Ref*, ui::Widget::TouchEventType);
 	void repairClicked(Ref*, ui::Widget::TouchEventType);
+	void pauseCallback(cocos2d::Ref*, ui::Widget::TouchEventType);
 	void hideBeforeUpgradeResources();
 	void showCompleteButton();
 	void checkComplete();
 	void upgradeResult();
 	void completeClicked(Ref*, ui::Widget::TouchEventType);
 	void showUiButton(UpgradePhase);
+	void showUpgradeCompleteLayer(bool);
 	
 	void setUpgradeButtonOpacity(UpgradePhase);
 	void clearGauge();
@@ -58,17 +63,19 @@ public:
 	void keyReleased(cocos2d::EventKeyboard::KeyCode key_code_, cocos2d::Event *event_);
 	CREATE_FUNC(UpgradeLayer);
 private:
+	int cheatCount;
 	Size visibleSize;
 	Vec2 origin;
 	Label* itemName;
 	Label* upgradeLabel;
 	Label* repairLabel;
+	Label *repairPercentLabel, *upgradePercentLabel;
 	Sprite* itemImage;	
 	Sword getSword;
 	int upgradeGold;
 	int repairGold;
 	int gaugeStatus[3];
-	int upgradeCoefficient=0;
+	Item::Grade upgradeCoefficient;
 	bool lockBeforeHammering = false;
 	bool lockBeforeQuenching = false;
 	bool isUpgrade = true;

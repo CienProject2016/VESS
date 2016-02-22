@@ -6,12 +6,13 @@
 
 class UpgradeController {
 private :
-	static void upgradeSword(int upgradeCoefficient);
-	static void upgradeShield(int upgradeCoefficient);
+	static void upgradeSword(Item::Grade upgradeCoefficient);
+	static bool upgradeShield();
 	static void repairSword();
-	static void repairShield();
+	static bool repairShield();
+	static bool isSuccess(int);
 public:
-	static bool upgradeItem(GameData::ItemMode,int upgradeCoefficient);
+	static bool upgradeItem(GameData::ItemMode, Item::Grade upgradeCoefficient);
 	static bool repairItem(GameData::ItemMode);
 	static bool payUpgradeCosts(int, Item::Type);	
 	static bool payRepairCosts(int, Item::Type);

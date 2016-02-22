@@ -149,11 +149,13 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Classes\ActionFrameValue.cpp" />
     <ClCompile Include="..\Classes\AnimationScene.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\BackgroundObject.cpp" />
     <ClCompile Include="..\Classes\BackgroundSpawnScheduler.cpp" />
     <ClCompile Include="..\Classes\Chest.cpp" />
+    <ClCompile Include="..\Classes\DefenseMovementState.cpp" />
     <ClCompile Include="..\Classes\Dialog.cpp" />
     <ClCompile Include="..\Classes\BattleOperator.cpp" />
     <ClCompile Include="..\Classes\DialogScene.cpp" />
@@ -172,6 +174,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\MonsterBehaviorPattern.cpp" />
     <ClCompile Include="..\Classes\MonsterInfo.cpp" />
     <ClCompile Include="..\Classes\ResourcePath.cpp" />
+    <ClCompile Include="..\Classes\SaveController.cpp" />
     <ClCompile Include="..\Classes\Shield.cpp" />
     <ClCompile Include="..\Classes\StageLevelController.cpp" />
     <ClCompile Include="..\Classes\StartScene.cpp" />
@@ -182,6 +185,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Stage.cpp" />
     <ClCompile Include="..\Classes\GameData.cpp" />
     <ClCompile Include="..\Classes\Tutorial.cpp" />
+    <ClCompile Include="..\Classes\TutorialController.cpp" />
+    <ClCompile Include="..\Classes\TutorialInfo.cpp" />
     <ClCompile Include="..\Classes\TutorialLayer.cpp" />
     <ClCompile Include="..\Classes\Sword.cpp" />
     <ClCompile Include="..\Classes\Unit.cpp" />
@@ -191,11 +196,13 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Classes\ActionFrameValue.h" />
     <ClInclude Include="..\Classes\AnimationScene.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\BackgroundObject.h" />
     <ClInclude Include="..\Classes\BackgroundSpawnScheduler.h" />
     <ClInclude Include="..\Classes\Chest.h" />
+    <ClInclude Include="..\Classes\DefenseMovementState.h" />
     <ClInclude Include="..\Classes\Dialog.h" />
     <ClInclude Include="..\Classes\BattleOperator.h" />
     <ClInclude Include="..\Classes\DialogScene.h" />
@@ -212,6 +219,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\GaugeLockChecker.h" />
     <ClInclude Include="..\Classes\MiniPopupLayer.h" />
     <ClInclude Include="..\Classes\ResourcePath.h" />
+    <ClInclude Include="..\Classes\SaveController.h" />
     <ClInclude Include="..\Classes\Shield.h" />
     <ClInclude Include="..\Classes\StageClearLayer.h" />
     <ClInclude Include="..\Classes\Hero.h" />
@@ -224,6 +232,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Settings.h" />
     <ClInclude Include="..\Classes\Stage.h" />
     <ClInclude Include="..\Classes\Tutorial.h" />
+    <ClInclude Include="..\Classes\TutorialController.h" />
+    <ClInclude Include="..\Classes\TutorialInfo.h" />
     <ClInclude Include="..\Classes\TutorialLayer.h" />
     <ClInclude Include="..\Classes\Sword.h" />
     <ClInclude Include="..\Classes\Unit.h" />

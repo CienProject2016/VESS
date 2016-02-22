@@ -35,7 +35,7 @@ public:
 	}
 };
 
-//°´Ã¼¸¦ »ı¼ºÇÏÁö ¾ÊÀ½. ±×³É ¸®ÅÏ¸¸ ÇÔ. (Controller)
+//ê°ì²´ë¥¼ ìƒì„±í•˜ì§€ ì•ŠìŒ. ê·¸ëƒ¥ ë¦¬í„´ë§Œ í•¨. (Controller)
 class MonsterInfo {
 private:
 	MonsterInfo();

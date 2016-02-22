@@ -12,6 +12,7 @@ public:
 	~MiniPopupLayer();
 	virtual bool init(string);
 	static MiniPopupLayer* create(string);
+	void setMessage(string);
 private:
 	string createMessage;
 	virtual bool onTouchBegan(Touch* touch_, Event* event_);

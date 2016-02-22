@@ -59,14 +59,18 @@ void UpgradeCompleteLayer::showUpgradeInfo() {
 		nameLabel = Label::createWithSystemFont("", "Arial", 50);
 		nameLabel->setString(StringUtils::format("%s : %s", SHIELD_NAME, GameData::getInstance()->getShield()->getName().c_str()));
 		statusLabel = Label::createWithSystemFont("", "Arial", 50);
-		statusLabel->setString(StringUtils::format("%s : %d", DEFENSE_NAME, GameData::getInstance()->getShield()->getDefense()));
 		durabilityLabel = Label::createWithSystemFont("", "Arial", 50);
 		durabilityLabel->setString(StringUtils::format("%s : %d", MAX_DURABILITY_NAME, GameData::getInstance()->getShield()->getDurability()));
 		break;
 	}
 
+	gradeLabel = Label::createWithSystemFont("", "Arial", 60);
+	
+	gradeLabel->setPosition(Vec2(visibleSize.width * 0.25f, visibleSize.height*0.38f));
+
 	nameLabel->setAnchorPoint(Vec2(0, 0));
 	statusLabel->setAnchorPoint(Vec2(0, 0));
+	durabilityLabel->setAnchorPoint(Vec2(0, 0));
 	nameLabel->setColor(Color3B(0, 0, 0));
 	statusLabel->setColor(Color3B(0, 0, 0));
 	nameLabel->setPosition(Vec2(visibleSize.width * 0.23f, visibleSize.height*0.32f));
@@ -75,6 +79,7 @@ void UpgradeCompleteLayer::showUpgradeInfo() {
 	statusLabel->setName("statusLabel");
 	durabilityLabel->setName("durabilityLabel");
 	durabilityLabel->setPosition(Vec2(visibleSize.width * 0.23f, visibleSize.height * 0.42f));
+	this->addChild(gradeLabel);
 	this->addChild(durabilityLabel);
 	this->addChild(nameLabel);
 	this->addChild(statusLabel);
@@ -93,6 +98,7 @@ void UpgradeCompleteLayer::update(float delta) {
 }
 
 void UpgradeCompleteLayer::updateRepairInfo() {
+	
 	auto nameLabel = (Label*)getChildByName("nameLabel");
 	auto statusLabel = (Label*)getChildByName("statusLabel");
 	auto durabilityLabel = (Label*)getChildByName("durabilityLabel");
@@ -100,10 +106,13 @@ void UpgradeCompleteLayer::updateRepairInfo() {
 	upgradeCompleteFrameImage->setTexture(ImagePath::REPAIR_COMPLETE_POPUP_FRAME_PATH);
 	switch (GameData::getInstance()->getUpgradeItemMode()) {
 	case GameData::ItemMode::SWORD:
+
+		gradeLabel->setVisible(false);
 		nameLabel->setString(StringUtils::format("%s : %s", SWORD_NAME, GameData::getInstance()->getSword()->getName().c_str()));
 		durabilityLabel->setString(StringUtils::format("%s : %d", DURABILITY_NAME, GameData::getInstance()->getSword()->getDurability()));
 		break;
 	case GameData::ItemMode::SHIELD:
+		gradeLabel->setVisible(false);
 		nameLabel->setString(StringUtils::format("%s : %s", SHIELD_NAME, GameData::getInstance()->getShield()->getName().c_str()));
 		durabilityLabel->setString(StringUtils::format("%s : %d", DURABILITY_NAME, GameData::getInstance()->getShield()->getDurability()));
 		break;
@@ -116,13 +125,31 @@ void UpgradeCompleteLayer::updateUpgradeInfo() {
 	auto upgradeCompleteFrameImage = (Sprite*)getChildByName("upgradeCompleteFrameImage");
 	upgradeCompleteFrameImage->setTexture(ImagePath::UPGRADE_COMPLETE_POPUP_FRAME_PATH);
 	switch (GameData::getInstance()->getUpgradeItemMode()) {
-	case GameData::ItemMode::SWORD:
+	case GameData::ItemMode::SWORD: {
+		string grade = setGrade();
+		gradeLabel->setString(StringUtils::format("%s : %s", UPGRADE_GRADE, grade.c_str()));
+		gradeLabel->setVisible(true);
 		nameLabel->setString(StringUtils::format("%s : %s", SWORD_NAME, GameData::getInstance()->getSword()->getName().c_str()));
 		statusLabel->setString(StringUtils::format("%s : %d", ATTACK_NAME, GameData::getInstance()->getSword()->getDamage()));
+	}
 		break;
 	case GameData::ItemMode::SHIELD:
+		gradeLabel->setVisible(false);
 		nameLabel->setString(StringUtils::format("%s : %s", SHIELD_NAME, GameData::getInstance()->getShield()->getName().c_str()));
-		statusLabel->setString(StringUtils::format("%s : %d", DEFENSE_NAME, GameData::getInstance()->getShield()->getDefense()));
+		break;
+	}
+}
+
+string UpgradeCompleteLayer::setGrade() {
+	switch (GameData::getInstance()->getCurrentUpgradeGrade()) {
+	case Item::Grade::A:
+		return "A";
+		break;
+	case Item::Grade::B:
+		return "B";
+		break;
+	case Item::Grade::C:
+		return "C";
 		break;
 	}
 }

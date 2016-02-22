@@ -15,7 +15,7 @@ Monster::~Monster() {
 	delete behavior;
 }
 
-void Monster::init(FightLayer* layer, Monster::Kind kind){
+void Monster::init(FightLayer* layer, Monster::Kind kind, int health){
 	if (Unit::init())
 	{
 		this->kind = kind;
@@ -23,7 +23,7 @@ void Monster::init(FightLayer* layer, Monster::Kind kind){
 		initWindowSize();
 		initImage();
 		initBehavior();
-		initHp();
+		initHp(health);
 		this->scheduleUpdate();
 	}	
 }
@@ -48,10 +48,11 @@ void Monster::initImage() {
 	case Slime:
 		anim = new MonsterAnimation(this);
 		image = Sprite::create("animation/basic_slime/stand/basic_slime_stand_00.png");
-		image->setPosition(Vec2(windowSize.width * 0.6f, windowSize.height * 0.41f));
+		image->setPosition(Vec2(0,0));
 		image->setScale(2.8f);
 		this->addChild(image);
 		anim->playStand();
+		this->setPosition(Vec2(windowSize.width * 0.6f, windowSize.height * 0.41f));
 		break;
 	}
 }
@@ -60,38 +61,42 @@ void Monster::initBehavior() {
 	behavior = new MonsterBehaviorPattern(this);
 }
 
-//¿¹½Ã ÇÔ¼ö.
+//ì˜ˆì‹œ í•¨ìˆ˜.
 void sangTeaESangUpdate() {}
 
 void Monster::update(float delta) {
 
-	sangTeaESangUpdate();	//ex »óÅÂÀÌ»ó.
+	sangTeaESangUpdate();	//ex ìƒíƒœì´ìƒ.
 
-	//Çàµ¿ÆÐÅÏ ¾÷µ¥ÀÌÆ® ºÎºÐ.
-	//³ªÁß¿¡ Ãß°¡µÉ »óÅÂÀÌ»ó Ã³¸®¶ó´øÁöÀÇ ³»¿ëÀº Çàµ¿ÆÐÅÏ¿¡ µé¾î°¡±â ¾Ë¸ÂÁö ¾ÊÀ¸¹Ç·Î.
-	//¸ó½ºÅÍÀÇ ¾÷µ¥ÀÌÆ®¿¡¼­ behavior ·Î update ¸¦ Àü´ÞÇÔÀ¸·Î½á
-	//ÇÁ·Î±×·¡¸Ó°¡ Á÷°üÀûÀ¸·Î ¹«¾ùÀÌ ¸ÕÀú ½ÇÇàµÉÁö¸¦ ¾Ë ¼ö ÀÖ´Ù.
+	//í–‰ë™íŒ¨í„´ ì—…ë°ì´íŠ¸ ë¶€ë¶„.
+	//ë‚˜ì¤‘ì— ì¶”ê°€ë  ìƒíƒœì´ìƒ ì²˜ë¦¬ë¼ë˜ì§€ì˜ ë‚´ìš©ì€ í–‰ë™íŒ¨í„´ì— ë“¤ì–´ê°€ê¸° ì•Œë§žì§€ ì•Šìœ¼ë¯€ë¡œ.
+	//ëª¬ìŠ¤í„°ì˜ ì—…ë°ì´íŠ¸ì—ì„œ behavior ë¡œ update ë¥¼ ì „ë‹¬í•¨ìœ¼ë¡œì¨
+	//í”„ë¡œê·¸ëž˜ë¨¸ê°€ ì§ê´€ì ìœ¼ë¡œ ë¬´ì—‡ì´ ë¨¼ì € ì‹¤í–‰ë ì§€ë¥¼ ì•Œ ìˆ˜ ìžˆë‹¤.
 	behavior->update(delta);	
 }
 
-void Monster::initHp() {
-	this->hp = hp;
-	this->fullHp = hp;
-	auto currentHp = Label::createWithTTF("0", "fonts/arial.ttf", 50);
-	currentHp->setPosition(Vec2(0, -40));
-	currentHp->setColor(ccc3(0, 0, 0)); //black
+void Monster::initHp(int health) {
+	this->hp = health;
+	this->fullHp = health;
+	auto currentHp = Label::createWithTTF("0", "fonts/arial.ttf", 40);
+	currentHp->setPosition(Vec2(30, 80));
+	currentHp->setColor(Color3B(0, 0, 0)); //black
 	currentHp->setString(StringUtils::format("%d / %d", hp, fullHp));
 	this->addChild(currentHp, 1);
 	currentHp->setTag(3);
-    //hpBar = CCSprite::create("Images/monsterHpBar.png");
-	//hpBarDecreasing = CCProgressTimer::create(hpBar);
+  
+	hpBarDecreasing->setType(kCCProgressTimerTypeBar);
+	hpBarDecreasing->setPercentage(100.0f);
+	hpBarDecreasing->setPosition(Vec2(80, 80));
+	hpBarDecreasing->setMidpoint(Vec2(0, 1));
+	hpBarDecreasing->setBarChangeRate(Vec2(1,0));
+	this->addChild(hpBarDecreasing);
 }
 
 Monster* Monster::create(FightLayer* layer, Monster::Kind kind, int health)
 {
 	Monster *monster = new Monster();
-	monster->init(layer, kind);
-	monster->setHp(health);
+	monster->init(layer, kind, health);
 	monster->autorelease();
 	return monster;
 }
@@ -102,7 +107,8 @@ void Monster::dropItem()
 
 void Monster::damage(int dam) {
 	hp -= dam;
-	
+	log("%f", 100 *hp / fullHp);
+	hpBarDecreasing->setPercentage(100*hp/fullHp);
 	auto currentHp = (Label*)getChildByTag(3);
 	currentHp->setString(StringUtils::format("%d / %d", hp, fullHp));
 

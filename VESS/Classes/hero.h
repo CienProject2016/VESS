@@ -1,18 +1,20 @@
+
+#ifndef __HERO_H__
+#define __HERO_H__
+
+class FightLayer;
+class HitArea;
+
 #include "Unit.h"
 #include "WindowSize.h"
 #include "cocostudio\CocoStudio.h"
 #include "HeroMovementState.h"
 #include "SimpleAudioEngine.h"
 #include "FightLayer.h"
+#include "Item.h"
 
-#ifndef __HERO_H__
-#define __HERO_H__
-#include"FightLayer.h"
 using namespace cocostudio;
 
-
-class FightLayer;
-class HitArea;
 
 class Hero: public Unit {
 public:
@@ -24,23 +26,26 @@ public:
 	void startAttack();
 	void startJump();
 	void startAvoid();
+	void startDefense();
 	void startSitDown();
 	void attackDamage();
 	void attackEffect(int damage);
-	void getDamage(int damage);
 	void setMovementState(HeroMovementState* state);
 	void setHitArea(int area);
 	void monsterAttackToHero(HitArea* attackArea);
 	void decreaseHp(int);
+	void changeAction(string, int, int);
+	void changeItemAction(Item::Type itemType);
 private:
 	HitArea* heroPosition;
 	const int SIZE_OF_LIFE = 3;
 	HeroMovementState* movementState;
 	FightLayer* field;
-	Size windowSize;				//·¹ÀÌ¾î À©µµ¿ì »çÀÌÁî
-	Vec2 origin;					//·¹ÀÌ¾îÀÇ À§Ä¡ ÁÂÇ¥
-	timeline::ActionTimeline* action;
-	float avoidDistance;			//ÇÇÇÒ¶§ ¾îµğ±îÁö ÇÇÇÒÁöÀÇ °Å¸®
-	float attackDistance;			//¶§¸±¶§ ¾îµğÂë ¶§¸±ÁöÀÇ °Å¸®
+	Size windowSize;				//ë ˆì´ì–´ ìœˆë„ìš° ì‚¬ì´ì¦ˆ
+	Vec2 origin;					//ë ˆì´ì–´ì˜ ìœ„ì¹˜ ì¢Œí‘œ
+	Node* actionNode, *itemNode;
+	timeline::ActionTimeline* action, *itemAction;
+	float avoidDistance;			//í”¼í• ë•Œ ì–´ë””ê¹Œì§€ í”¼í• ì§€ì˜ ê±°ë¦¬
+	float attackDistance;			//ë•Œë¦´ë•Œ ì–´ë””ì¯¤ ë•Œë¦´ì§€ì˜ ê±°ë¦¬
 };
 #endif

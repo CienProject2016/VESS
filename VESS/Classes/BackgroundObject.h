@@ -11,7 +11,7 @@ private:
 	float* settingSpeed;
 	float localSpeed;
 	float accel;
-	float accelTime;	//ÇØ´ç ½ºÇÇµå±îÁö µµ´ŞÇÏ´Âµ¥ °É¸®´Â ½Ã°£(´ÜÀ§ : ÃÊ)
+	float accelTime;	//í•´ë‹¹ ìŠ¤í”¼ë“œê¹Œì§€ ë„ë‹¬í•˜ëŠ”ë° ê±¸ë¦¬ëŠ” ì‹œê°„(ë‹¨ìœ„ : ì´ˆ)
 	int imageWidth;
 	BackgroundObject();
 public:

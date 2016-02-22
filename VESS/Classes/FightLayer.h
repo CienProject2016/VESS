@@ -71,12 +71,11 @@ private:
 	BackgroundSpawnScheduler backgroundSpawnScheduler;
 
 	void stageClear();
-	void dimensionCallback(cocos2d::Ref*, ui::Widget::TouchEventType);
+	void dimensionCallback(cocos2d::Ref*, ui::Widget::TouchEventType);	
 	void attackCallback(cocos2d::Ref* pSender);
 	void jumpCallback(cocos2d::Ref* pSender);
 	void sitCallback(cocos2d::Ref* pSender);
 	void reduceDurability();
-
 	void setTouchListener();
 
 	const int LIFE_COUNT = 3;

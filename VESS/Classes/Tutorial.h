@@ -7,7 +7,7 @@
 using namespace std;
 
 /*
-Æ©Åä¸®¾óÀ» À§ÇÑ Å¬·¡½º
+íŠœí† ë¦¬ì–¼ì„ ìœ„í•œ í´ë˜ìŠ¤
 */
 class Tutorial
 {
@@ -17,7 +17,8 @@ public:
 	~Tutorial();
 private:
 	CC_SYNTHESIZE(Tutorial::Position, position, Position);
-	CC_SYNTHESIZE(string, tutorial, Tutorial);
+	CC_SYNTHESIZE(string, lines, Lines);
+	CC_SYNTHESIZE(string, eventType, EventType);
 	
 };
 

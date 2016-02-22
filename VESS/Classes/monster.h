@@ -23,8 +23,8 @@ protected:
 public:
 	enum Kind { Tauren, Slime };
 
-	// ¹ØÀÇ µÎ º¯¼ö´Â ¼­·Î ¿¬°ü¼ºÀÌ ÀÖ±â ¶§¹®¿¡ public À¸·Î µÎ°í ¼­·Î ÀĞÀ» ¼ö ÀÖµµ·Ï ÇßÀ½.
-	// ¾Æ¿¡ ´Ù¸¥ Å¬·¡½º¿¡¼­ ÀÌµéÀ» º¼ ¼ö ÀÖ´Ù´Â ´ÜÁ¡ÀÌ ÀÖÁö¸¸, ºÁµµ ¹¹ ¾²Áö¸¸ ¾ÊÀ¸¸é »ó°ü ¾øÀ» °Í °°Àºµ¥?
+	// ë°‘ì˜ ë‘ ë³€ìˆ˜ëŠ” ì„œë¡œ ì—°ê´€ì„±ì´ ìˆê¸° ë•Œë¬¸ì— public ìœ¼ë¡œ ë‘ê³  ì„œë¡œ ì½ì„ ìˆ˜ ìˆë„ë¡ í–ˆìŒ.
+	// ì•„ì— ë‹¤ë¥¸ í´ë˜ìŠ¤ì—ì„œ ì´ë“¤ì„ ë³¼ ìˆ˜ ìˆë‹¤ëŠ” ë‹¨ì ì´ ìˆì§€ë§Œ, ë´ë„ ë­ ì“°ì§€ë§Œ ì•Šìœ¼ë©´ ìƒê´€ ì—†ì„ ê²ƒ ê°™ì€ë°?
 	MonsterAnimation* anim;
 	MonsterBehaviorPattern* behavior;
 
@@ -33,19 +33,19 @@ public:
 	void dropItem();
 	void damage(int dam);
 	virtual void update(float delta);
+	Sprite * hpBar = Sprite::create("Images/hpBar.png");
+	ProgressTimer* hpBarDecreasing = ProgressTimer::create(hpBar);
 	Kind kind;
 	Node* image;
 	FightLayer* field;
 private:
-	void init(FightLayer* layer, Monster::Kind);
+	void init(FightLayer* layer, Monster::Kind, int health);
 	void initWindowSize();
-	void initHp();
+	void initHp(int);
 	void initImage();
 	void initBehavior();
 	Size windowSize;
 	Vec2 origin;
-
-
 };
 
 #endif // __MONSTER_H__

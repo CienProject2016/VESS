@@ -1,18 +1,56 @@
-﻿#include "GameData.h"
+#include "GameData.h"
 
 GameData* GameData::instance_ = nullptr;
 
-GameData::GameData() : stageLevel(0), movingDistance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), gold(1500), costume(0), key(1)
+GameData::GameData() : currentUpgradeGrade(Item::Grade::A), isPause(false), isInTutorial(false), isTutorial(false), topStage(0), stageLevel(0), movingDistance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), gold(15), costume(0), key(1)
+
 {
+
 	//대화 정보 설정
 	setDialogInfo();
-	
+
 	setStageInfo();
+
 	//강화 정보 설정
 	setUpgradeInfo();
 
 	setTutorialInfo();
 
+	//저장된 정보 불러옴
+	loadSaveInfo();
+}
+
+void GameData::resetInfo() {
+	log("Game Reset");
+	topStage = 0;
+	gold = 15;
+	UserDefault::getInstance()->reset();
+	setUpgradeInfo();	
+}
+
+void GameData::loadSaveInfo() {
+	if (UserDefault::getInstance()->isXMLFileExist()){
+		if (topStage != 0) {
+			this->topStage = UserDefault::getInstance()->getIntegerForKey("topStageLevel");
+			this->gold = UserDefault::getInstance()->getIntegerForKey("gold");
+			sword->setUpgradeId(UserDefault::getInstance()->getIntegerForKey("swordUpgradeGold"));
+			sword->setDamage(UserDefault::getInstance()->getIntegerForKey("swordDamage"));
+			sword->setDurability(UserDefault::getInstance()->getIntegerForKey("swordDurability"));
+			sword->setMaxDurability(UserDefault::getInstance()->getIntegerForKey("swordMaxDurability"));
+			sword->setRepairGold(UserDefault::getInstance()->getIntegerForKey("swordRepairGold"));
+			sword->setUpgradeGold(UserDefault::getInstance()->getIntegerForKey("swordUpgradeGold"));
+			sword->setSpeed(UserDefault::getInstance()->getIntegerForKey("swordSpeed"));
+			sword->setName(UserDefault::getInstance()->getStringForKey("swordName"));
+			shield->setUpgradeId(UserDefault::getInstance()->getIntegerForKey("shieldUpgradeGold"));
+			shield->setRepairPercent(UserDefault::getInstance()->getIntegerForKey("shieldRepairPercent"));
+			shield->setUpgradePercent(UserDefault::getInstance()->getIntegerForKey("shieldUpgradePercent"));
+			shield->setDurability(UserDefault::getInstance()->getIntegerForKey("shieldDurability"));
+			shield->setMaxDurability(UserDefault::getInstance()->getIntegerForKey("shieldMaxDurability"));
+			shield->setRepairGold(UserDefault::getInstance()->getIntegerForKey("shieldRepairGold"));
+			shield->setUpgradeGold(UserDefault::getInstance()->getIntegerForKey("shieldUpgradeGold"));
+			shield->setName(UserDefault::getInstance()->getStringForKey("shieldName"));
+		}		
+	}
 }
 
 Stage GameData::getCurrentStageInfo() {
@@ -73,14 +111,21 @@ void GameData::setTutorialInfo() {
 
 	for (auto iter = data.Begin(); iter != data.End(); iter++) {
 		Tutorial tutorial;
-		
-		
+
+
 		if ((*iter)["lines"] == NULL) {
 			log("GameData - Dialog lines정보 없음");
-			tutorial.setTutorial("");
+			tutorial.setLines("");
 		}
 		else {
-			tutorial.setTutorial((*iter)["lines"].GetString());
+			tutorial.setLines((*iter)["lines"].GetString());
+		}
+		if ((*iter)["eventType"] == NULL) {
+			log("GameData - Dialog lines정보 없음");
+			tutorial.setEventType("");
+		}
+		else {
+			tutorial.setEventType((*iter)["eventType"].GetString());
 		}
 		tutorialList->push_back(tutorial);
 	}
@@ -139,14 +184,14 @@ void GameData::setDialogInfo() {
 void GameData::setUpgradeInfo() {
 	swordList = new vector<Sword*>();
 	shieldList = new vector<Shield*>();
-	
+
 	auto upgradeSwordFileData = FileUtils::getInstance()->getStringFromFile("json/sword.json");
 	
 
 	rapidjson::Document upgradeSwordInfo;
 	upgradeSwordInfo.Parse(upgradeSwordFileData.c_str());
 	rapidjson::Value& upgradeSwordData = upgradeSwordInfo["sword"];
-	
+
 
 	for (rapidjson::Value* iter = upgradeSwordData.Begin(); iter != upgradeSwordData.End(); iter++) {
 		Sword* sword = new Sword;
@@ -160,24 +205,24 @@ void GameData::setUpgradeInfo() {
 		swordList->push_back(sword);
 	}
 	Sword* sword = swordList->at(0);
-	sword->setUpgradeId(1);	
+	sword->setUpgradeId(1);
 	this->setSword(sword);
 
 	auto upgradeShieldFileData = FileUtils::getInstance()->getStringFromFile("json/shield.json");
 
 	rapidjson::Document upgradeShieldInfo;
 	upgradeShieldInfo.Parse(upgradeShieldFileData.c_str());
-	rapidjson::Value& upgradeShieldData = upgradeShieldInfo["방패"];
+	rapidjson::Value& upgradeShieldData = upgradeShieldInfo["shield"];
 
 	for (rapidjson::Value* iter = upgradeShieldData.Begin(); iter != upgradeShieldData.End(); iter++) {
 		Shield* shield = new Shield();
-		shield->setDefense((*iter)["defense"].GetInt());
 		shield->setName((*iter)["name"].GetString());
-		shield->setSpeed((*iter)["speed"].GetInt());
 		shield->setMaxDurability((*iter)["durability"].GetInt());
 		shield->setDurability((*iter)["durability"].GetInt());
-		shield->setUpgradeGold((*iter)["upgrade"].GetInt());
-		shield->setRepairGold((*iter)["repair"].GetInt());
+		shield->setUpgradeGold((*iter)["upgradeGold"].GetInt());
+		shield->setRepairGold((*iter)["repairGold"].GetInt());
+		shield->setRepairPercent((*iter)["repairPercent"].GetInt());
+		shield->setUpgradePercent((*iter)["upgradePercent"].GetInt());
 		shieldList->push_back(shield);
 	}
 	Shield* shield = shieldList->at(0);
