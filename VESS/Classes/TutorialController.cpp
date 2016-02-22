@@ -11,7 +11,7 @@ bool TutorialController::checkTutorialEvent(string eventType) {
 				auto tutorialLayer = (TutorialLayer*)gameScene->getChildByName("tutorialLayer");
 				tutorialLayer->setVisible(true);
 				tutorialLayer->setTouchEnabled(true);
-				tutorialLayer->showNextTutorial();				
+				tutorialLayer->showNextTutorial();	
 				return true;
 			}
 		}

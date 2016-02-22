@@ -20,6 +20,7 @@ bool EnterScene::init()
 		return false;
 	}
 
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(AudioPath::BGM_ENTER.c_str());
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	auto leviathanImage = Sprite::create(ImagePath::LEVIATHAN_IMAGE);
@@ -110,13 +111,18 @@ void EnterScene::enterCallback(Ref* sender, ui::Widget::TouchEventType type, int
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_OPEN_DOOR.c_str());
 		StageLevelController::setStageLevel(stageLevel);
 		if (stageLevel == 0) {
+			CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
 			Scene *dialogScene = DialogScene::createScene();
 			Director::getInstance()->replaceScene(TransitionFade::create(0.5, dialogScene, Color3B(255, 255, 255)));
 			GameData::getInstance()->setIsTutorial(true);
+
+			
 		}
 		else {
+			CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
 			Scene *gameScene = GameScene::createScene();
 			Director::getInstance()->replaceScene(TransitionFade::create(0.5, gameScene, Color3B(255, 255, 255)));
+			
 		}
 		break;
 	case ui::Widget::TouchEventType::CANCELED:

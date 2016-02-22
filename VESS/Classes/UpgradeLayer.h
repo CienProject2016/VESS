@@ -44,12 +44,14 @@ public:
 	void redrawUpgradeGoldLabel();
 	void increaseGauge(CCProgressTimer* gauge);
 	void increaseGaugeCallback(Ref*, ui::Widget::TouchEventType, CCProgressTimer* gauge);
+	void gaugeChecker();
 	void upgradeClicked(Ref*, ui::Widget::TouchEventType);
 	void repairClicked(Ref*, ui::Widget::TouchEventType);
 	void pauseCallback(cocos2d::Ref*, ui::Widget::TouchEventType);
 	void hideBeforeUpgradeResources();
 	void showCompleteButton();
 	void checkComplete();
+	void upgradeResult();
 	void completeClicked(Ref*, ui::Widget::TouchEventType);
 	void showUiButton(UpgradePhase);
 	void showUpgradeCompleteLayer(bool);
@@ -72,6 +74,8 @@ private:
 	Sword getSword;
 	int upgradeGold;
 	int repairGold;
+	int gaugeStatus[3];
+	Item::Grade upgradeCoefficient;
 	bool lockBeforeHammering = false;
 	bool lockBeforeQuenching = false;
 	bool isUpgrade = true;

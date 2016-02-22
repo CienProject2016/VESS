@@ -52,6 +52,7 @@ private:
 	CC_SYNTHESIZE(bool, isInTutorial, IsInTutorial);
 	CC_SYNTHESIZE(bool, isPause, IsPause);
 	CC_SYNTHESIZE(bool, isCheatMode, IsCheatMode);
+	CC_SYNTHESIZE(Item::Grade, currentUpgradeGrade, CurrentUpgradeGrade);
 	GameData();
 	~GameData();
 	void setDialogInfo();

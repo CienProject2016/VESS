@@ -160,6 +160,7 @@ void TutorialLayer::onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_e
 			this->setVisible(false);
 			this->setZOrder(-3);
 			Director::getInstance()->resume();
+			TutorialInfo::getInstance()->initTutorialInfo();
 			GameData::getInstance()->setIsInTutorial(false);
 			auto gameScene = (GameScene*)Director::getInstance()->getRunningScene();
 			gameScene->removeChild(this);

@@ -17,8 +17,11 @@ private:
 	const char* MAX_DURABILITY_NAME = "최대 내구도";
 	const char* DEFENSE_NAME = "방어력";
 	const char* ATTACK_NAME = "공격력";
+	const char* UPGRADE_GRADE = "강화등급";
+	Label* gradeLabel;
 	void updateUpgradeInfo();
 	void updateRepairInfo();
+	string setGrade();
 public:
 	static cocos2d::Scene* createScene();
 	void confirmCallback(cocos2d::Ref*);

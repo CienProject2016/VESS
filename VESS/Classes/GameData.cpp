@@ -2,9 +2,9 @@
 
 GameData* GameData::instance_ = nullptr;
 
-GameData::GameData() : isPause(false), isInTutorial(false), isTutorial(false), topStage(0), stageLevel(0), movingDistance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), gold(15), costume(0), key(1)
-{
+GameData::GameData() : currentUpgradeGrade(Item::Grade::A), isPause(false), isInTutorial(false), isTutorial(false), topStage(0), stageLevel(0), movingDistance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), gold(15), costume(0), key(1)
 
+{
 
 	//대화 정보 설정
 	setDialogInfo();
@@ -186,7 +186,7 @@ void GameData::setUpgradeInfo() {
 	shieldList = new vector<Shield*>();
 
 	auto upgradeSwordFileData = FileUtils::getInstance()->getStringFromFile("json/sword.json");
-
+	
 
 	rapidjson::Document upgradeSwordInfo;
 	upgradeSwordInfo.Parse(upgradeSwordFileData.c_str());
