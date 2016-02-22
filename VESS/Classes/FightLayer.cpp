@@ -203,10 +203,7 @@ void FightLayer::monsterSpawnUpdate(float delta) {
 		if (!GameData::getInstance()->getIsInTutorial()) {
 			movingDistanceReal += delta * movingVelocity;
 			if (moving_distance > finalDistance) {
-				movingVelocity = 0;
-				moving_distance -= 100;
 				backgroundSpawnScheduler->setBackgroundSpeed(0);
-				daughter->setMovementState(new StayMovementState(daughter));
 				chest = Chest::create();
 				chest->setParentLayer(this);
 				this->addChild(chest);
