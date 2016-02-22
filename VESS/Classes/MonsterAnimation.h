@@ -13,7 +13,7 @@ private:
 
 	int attackCount;
 	void changePlistAction(MonsterInfo::AnimName anim);
-
+	void changeCsbAction(MonsterInfo::AnimName anim);
 public:
 	MonsterAnimation(Monster* monster);
 	void playAttack(int num);

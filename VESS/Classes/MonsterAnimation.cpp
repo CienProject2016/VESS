@@ -11,9 +11,18 @@ void MonsterAnimation::changePlistAction(MonsterInfo::AnimName anim) {
 	monster->image->runAction(makeAction(MonsterInfo::getAnimationInfo(monster->kind, anim)));
 }
 
+void MonsterAnimation::changeCsbAction(MonsterInfo::AnimName anim) {
+	CsbFrameTimeInfo* info = MonsterInfo::getCsbActionInfo(monster->kind, anim);
+	monster->csbAction->gotoFrameAndPlay(info->start, info->end, true);
+}
+
 void MonsterAnimation::playAttack(int num) {
 	switch (monster->kind) {
 	case Monster::Tauren:
+		if (num == 0)	changeCsbAction(MonsterInfo::attack0);
+		if (num == 1)	changeCsbAction(MonsterInfo::attack1);
+		if (num == 2)	changeCsbAction(MonsterInfo::attack2);
+		if (num == 3)	changeCsbAction(MonsterInfo::attack3);
 		break;
 	case Monster::Slime:
 		if (num == 0)	changePlistAction(MonsterInfo::attack0);
@@ -23,11 +32,26 @@ void MonsterAnimation::playAttack(int num) {
 		break;
 	}
 }
-void MonsterAnimation::playDamage() {}
-void MonsterAnimation::playDead() {}
+void MonsterAnimation::playDamage() {
+	switch (monster->kind) {
+	case Monster::Tauren:
+		changeCsbAction(MonsterInfo::damage);
+		break;
+	case Monster::Slime:
+		break;
+	}
+}
+void MonsterAnimation::playDead() {
+	switch (monster->kind) {
+	case Monster::Tauren:
+		changeCsbAction(MonsterInfo::dead);
+		break;
+	}
+}
 void MonsterAnimation::playStand() {
 	switch (monster->kind) {
 	case Monster::Tauren:
+		changeCsbAction(MonsterInfo::stand);
 		break;
 	case Monster::Slime:
 		changePlistAction(MonsterInfo::stand);

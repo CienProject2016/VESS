@@ -180,7 +180,7 @@ void FightLayer::monsterSpawnUpdate(float delta) {
 	vector<int> distance_data = stageData.getMonsterLengthInfo();
 	int monsterHealth = stageData.getHealth();
 	if (MonsterSpawnScheduler::isMonsterSpawnTime(moving_distance, distance_data) && this->monster == NULL) {
-		monster = Monster::create(this, Monster::Slime, monsterHealth);
+		monster = Monster::create(this, Monster::Tauren, monsterHealth);
 		this->addChild(monster, 1);
 		if (!GameData::getInstance()->getIsInTutorial()) {
 			GameData::getInstance()->setMovingDistance(moving_distance + 1);
@@ -411,7 +411,9 @@ Chest* FightLayer::getChest() {
 
 
 void FightLayer::monsterDead() {
-	this->removeChild(monster);
+	if (monster->kind == Monster::Slime) {
+		this->removeChild(monster);
+	}
 	monster = NULL;
 	backgroundSpawnScheduler->setBackgroundSpeed(-200);
 	daughter->setMovementState(new RunMovementState(daughter));

@@ -57,7 +57,7 @@ AttackMovementState::AttackMovementState(Hero* parent) {
 	movingDistance = fightLayerSize.width * 0.4f;
 	setGravity();
 	setVerticalVelocity();
-	parent->setHitArea(HitArea::left);
+	parent->setHitArea(HitArea::right);
 	state = attack0;
 }
 
@@ -91,7 +91,7 @@ AvoidMovementState::AvoidMovementState(Hero* parent) {
 	movingDistance = fightLayerSize.width * 0.2f;
 	setGravity();
 	setVerticalVelocity();
-	parent->setHitArea(HitArea::right);
+	parent->setHitArea(HitArea::left);
 	state = avoid_left;
 }
 void AvoidMovementState::update(float delta) {
