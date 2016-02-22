@@ -186,12 +186,13 @@ void Hero::startDefense() {
 
 void Hero::attackDamage() {
 	if (field->getMonster() != NULL) {
-		if (GameData::getInstance()->getSword()->getDurability() > 0) {
-			int damage = GameData::getInstance()->getSword()->getDamage();
-			field->getMonster()->damage(damage);
-			attackEffect(damage);
-			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_ATTACK_PATH.c_str());
+		int damage = GameData::getInstance()->getSword()->getDamage();
+		if (GameData::getInstance()->getSword()->getDurability() <= 0) {
+			damage *= 0.2;
 		}
+		field->getMonster()->damage(damage);
+		attackEffect(damage);
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_ATTACK_PATH.c_str());
 	}
 	else if (field->getChest() != NULL) {
 		field->getChest()->damage(30);
