@@ -7,7 +7,7 @@ DefenseMovementState::DefenseMovementState(Hero* parent, ActionFrameValue* actio
 	maxTime = 0.5f;
 	timer = 0;
 	setGravity();
-	setVerticalVelocity();
+	state = defence;
 }
 
 DefenseMovementState::~DefenseMovementState() {

@@ -1,5 +1,6 @@
 #include "MonsterInfo.h"
 #include "MonsterAnimation.h"
+#include "FightLayer.h"
 
 HitArea::HitArea() {
 	setArea(center);

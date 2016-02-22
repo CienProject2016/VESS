@@ -22,7 +22,6 @@ public:
 	virtual bool init();
 	void setParentLayer(FightLayer* layer);
 	virtual void update(float delta);
-	bool isAvailableCommand();
 	void startAttack();
 	void startJump();
 	void startAvoid();
@@ -36,6 +35,7 @@ public:
 	void decreaseHp(int);
 	void changeAction(string, int, int);
 	void changeItemAction(Item::Type itemType);
+	void setAnimation(HeroMovementState::State state);
 private:
 	HitArea* heroPosition;
 	const int SIZE_OF_LIFE = 3;

@@ -222,6 +222,9 @@
     <ClCompile Include="..\Classes\TutorialController.cpp">
       <Filter>src\Controller</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\EffectFactory.cpp">
+      <Filter>src\Controller</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -389,6 +392,9 @@
       <Filter>src\Model\Data</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\TutorialController.h">
+      <Filter>src\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EffectFactory.h">
       <Filter>src\Controller</Filter>
     </ClInclude>
   </ItemGroup>

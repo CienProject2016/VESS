@@ -3,6 +3,7 @@
 using namespace std;
 struct ImagePath {
 public:
+	const static string BACKGROUND_PATH;
 	const static string MINI_POPUP_IMAGE;
 	const static string UPGRADE_BEFORE_COMPLETE;
 	const static string UPGRADE_BUTTON;
@@ -45,6 +46,15 @@ public:
 	const static string BAR_1;
 	const static string BAR_2;
 	const static string BAR_3;
+	const static string BACKGROUND_CAVE_1_0;
+	const static string BACKGROUND_CAVE_1_1;
+	const static string BACKGROUND_CAVE_1_2;
+	const static string BACKGROUND_CAVE_1_3;
+	const static string BACKGROUND_CAVE_2_0;
+	const static string BACKGROUND_CAVE_2_1;
+	const static string BACKGROUND_CAVE_2_2;
+	const static string BACKGROUND_CAVE_2_3;
+	const static string BACKGROUND_CAVE_2_4;
 };
 
 struct ActionPath {
@@ -56,7 +66,6 @@ public:
 	const static int HERO_RUN_END_FRAME;
 	const static string SWORD_PATH;
 	const static string SHIELD_PATH;
-	
 };
 
 struct AudioPath {
@@ -78,6 +87,7 @@ public:
 	const static string SOUND_QUENCHING;
 	const static string SOUND_HAMMER;
 	const static string SOUND_SMELTING;
+	const static string SOUND_SLIME_DEAD;
 };
 
 struct ElementName {

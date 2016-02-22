@@ -73,6 +73,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
 	preloadAllSound();
+	preloadAllPlists();
     // create a scene. it's an autorelease object
     auto startScene = StartScene::createScene();
 
@@ -80,6 +81,17 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->runWithScene(startScene);
 
     return true;
+}
+
+void AppDelegate::preloadAllPlists() {
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animation/basic_slime/dead/basic_slime_dead.plist");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animation/basic_slime/attack1/slime_attack_effect_0.plist");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animation/basic_slime/stand/basic_slime_stand.plist");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animation/basic_slime/attack1/basic_slime_attack0.plist");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animation/basic_slime/attack2/basic_slime_attack1_0.plist");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animation/basic_slime/attack2/basic_slime_attack1_1.plist");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animation/damage_effect/damage_effect_0/damage_effect.plist");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animation/damage_effect/damage_effect_1/damage_effect_1.plist");
 }
 
 void AppDelegate::preloadAllSound() {
@@ -94,6 +106,7 @@ void AppDelegate::preloadAllSound() {
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_QUENCHING.c_str());
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_SMELTING.c_str());
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_HAMMER.c_str());
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_SLIME_DEAD.c_str());
 
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(AudioPath::BGM_NEO_ROCK.c_str());
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(AudioPath::BGM_DIALOG.c_str());

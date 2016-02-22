@@ -2,6 +2,7 @@
 
 //Image Resources
 const string ImagePath::IMAGE_PATH = "Images/";
+const string ImagePath::BACKGROUND_PATH = IMAGE_PATH + "background/";
 const string ImagePath::MINI_POPUP_IMAGE = IMAGE_PATH + "mini_popup.png";
 const string ImagePath::UPGRADE_BUTTON = IMAGE_PATH + "upgrade_button.png";
 const string ImagePath::REPAIR_BUTTON = IMAGE_PATH + "repair_button.png";
@@ -28,7 +29,7 @@ const string ImagePath::SHIELD_DURABILITY_ICON = IMAGE_PATH + "shield_durability
 const string ImagePath::DUNGEON_DOOR_AFTER = IMAGE_PATH + "dungeon_door_after.png";
 const string ImagePath::DUNGEON_DOOR_BEFORE = IMAGE_PATH + "dungeon_door_before.png";
 const string ImagePath::POLE_IMAGE = IMAGE_PATH + "pole.png";
-const string ImagePath::SKY_IMAGE = IMAGE_PATH + "sky_cave.png";
+const string ImagePath::SKY_IMAGE = BACKGROUND_PATH + "background0.png";
 const string ImagePath::TILE_BACKGROUND = IMAGE_PATH + "ground_blue.png";
 const string ImagePath::DUNGEON_DOOR_LOCK = IMAGE_PATH + "dungeon_door_locked.png";
 const string ImagePath::TUTORIAL_NO_BUTTON = IMAGE_PATH + "tutorial_no_button.png";
@@ -43,6 +44,15 @@ const string ImagePath::RESUME_BUTTON_ACTIVE = IMAGE_PATH + "resume_button_activ
 const string ImagePath::BAR_1 = IMAGE_PATH + "bar1.png";
 const string ImagePath::BAR_2 = IMAGE_PATH + "bar2.png";
 const string ImagePath::BAR_3 = IMAGE_PATH + "bar3.png";
+const string ImagePath::BACKGROUND_CAVE_1_0 = BACKGROUND_PATH + "background1_0.png";
+const string ImagePath::BACKGROUND_CAVE_1_1 = BACKGROUND_PATH + "background1_1.png";
+const string ImagePath::BACKGROUND_CAVE_1_2 = BACKGROUND_PATH + "background1_2.png";
+const string ImagePath::BACKGROUND_CAVE_1_3 = BACKGROUND_PATH + "background1_3.png";
+const string ImagePath::BACKGROUND_CAVE_2_0 = BACKGROUND_PATH + "background2_0.png";
+const string ImagePath::BACKGROUND_CAVE_2_1 = BACKGROUND_PATH + "background2_1.png";
+const string ImagePath::BACKGROUND_CAVE_2_2 = BACKGROUND_PATH + "background2_2.png";
+const string ImagePath::BACKGROUND_CAVE_2_3 = BACKGROUND_PATH + "background2_3.png";
+const string ImagePath::BACKGROUND_CAVE_2_4 = BACKGROUND_PATH + "background2_4.png";
 
 //Audio Resources
 const string AudioPath::AUDIO_PATH = "audio/";
@@ -62,7 +72,7 @@ const string AudioPath::BGM_NEO_ROCK = AUDIO_PATH + BGM + "neo_rock.mp3";
 const string AudioPath::BGM_DIALOG = AUDIO_PATH + BGM + "dialog.mp3";
 const string AudioPath::BGM_CLEAR = AUDIO_PATH + BGM + "clear.mp3";
 const string AudioPath::BGM_ENTER = AUDIO_PATH + BGM + "enter.mp3";
-
+const string AudioPath::SOUND_SLIME_DEAD = AUDIO_PATH + "sound_slime_dead.mp3";
 
 //Action Path
 const string ActionPath::HERO_PATH = "character.csb";

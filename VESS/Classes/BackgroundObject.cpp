@@ -9,6 +9,18 @@ void BackgroundObject::setSpeed(float* speed, float accel, float localSpeed) {
 	this->localSpeed = localSpeed;
 }
 
+void BackgroundObject::setNoAccelSpeed() {
+	speed = *settingSpeed * localSpeed;
+}
+
+float BackgroundObject::initBackgroundObject(float exObjectPos, float interval) {
+	Vec2 pos = this->getPosition();
+	int xx = (exObjectPos)* fightLayerSize.width;
+	pos.x = xx + imageWidth;
+	this->setPosition(pos);
+	return ((float)(xx - scale * interval * imageWidth))/((float)fightLayerSize.width);
+}
+
 BackgroundObject* BackgroundObject::create() {
 	BackgroundObject *background = new BackgroundObject();
 	if (background && background->init()){
@@ -22,7 +34,6 @@ BackgroundObject* BackgroundObject::create() {
 bool BackgroundObject::init() {
 	if (Node::init()){
 		speed = accel = imageWidth = 0;
-		accelTime = 1;
 		this->scheduleUpdate();
 		return true;
 	}
@@ -104,6 +115,7 @@ void BackgroundObject::setImage(string fileName, Vec2 position, float scale, Bac
 	}
 	imageWidth = size.x / 2;
 	screenPosition = Vec2(position.x * fightLayerSize.width, position.y * fightLayerSize.height);
+	this->scale = rate;
 	this->setPosition(screenPosition + localPosition + pixel_of_TR);
 	this->addChild(image);
 }

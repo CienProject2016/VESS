@@ -346,7 +346,7 @@ void UpgradeLayer::checkComplete() {
 
 void UpgradeLayer::increaseGauge(CCProgressTimer* gauge) {
 	float currentPercent = gauge->getPercentage();
-	gauge->setPercentage(currentPercent + (float)8);
+	gauge->setPercentage(currentPercent + (float)15);
 }
 
 
@@ -619,9 +619,6 @@ void UpgradeLayer::repairClicked(Ref* sender, ui::Widget::TouchEventType type)
 	case ui::Widget::TouchEventType::CANCELED:
 		break;
 	}
-	
-
-
 }
 
 void UpgradeLayer::initPauseButton() {
@@ -691,8 +688,6 @@ void UpgradeLayer::completeClicked(Ref* sender, ui::Widget::TouchEventType type)
 		showUiButton(currentUpgradePhase);
 		setUpgradeButtonOpacity(currentUpgradePhase);
 		hideBeforeUpgradeResources();
-
-
 		showUpgradeCompleteLayer(true);
 	}
 		break;

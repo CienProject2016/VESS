@@ -11,14 +11,16 @@ private:
 	float* settingSpeed;
 	float localSpeed;
 	float accel;
-	float accelTime;	//해당 스피드까지 도달하는데 걸리는 시간(단위 : 초)
 	int imageWidth;
+	float scale;
 	BackgroundObject();
 public:
 	enum ScaleMode {FIGHTLAYER_WIDTH, FIGHTLAYER_HEIGHT, CUSTOMIZED_SIZE};
 	enum AlignMode {CENTER, BOTTOM, TOP, LEFT, RIGHT, RIGHT_TOP, RIGHT_BOTTOM, LEFT_TOP, LEFT_BOTTOM};
 	~BackgroundObject();
 	void setSpeed(float* speed, float accel, float localSpeed);
+	void setNoAccelSpeed();
+	float initBackgroundObject(float exObjectPos, float interval);
 	static BackgroundObject* create();
 	virtual bool init();
 	virtual void update(float dt);

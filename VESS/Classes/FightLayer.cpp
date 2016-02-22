@@ -33,8 +33,6 @@ bool FightLayer::init()
 	this->scheduleUpdate();
 
 	setTouchListener();
-
-	//효과음 준비
 	
 	return true;
 }
@@ -48,6 +46,7 @@ void FightLayer::initDaughter() {
 	daughter = Hero::create();
 	daughter->setParentLayer(this);
 	this->addChild(daughter, 0);
+	daughter->setMovementState(new RunMovementState(daughter));
 }
 
 void FightLayer::initDurabilityLabel() {
@@ -146,8 +145,8 @@ void FightLayer::initBackground() {
 	sky->setPosition(Vec2(fightLayerSize.width / 2, fightLayerSize.height - (sky_height / 2)));
 	this->addChild(sky, -200);
 
-	backgroundSpawnScheduler = BackgroundSpawnScheduler(this);
-	backgroundSpeed = new float(-100);
+	backgroundSpawnScheduler = new BackgroundSpawnScheduler(this);
+	
 }
 
 void FightLayer::redrawGold() {
@@ -186,8 +185,8 @@ void FightLayer::monsterSpawnUpdate(float delta) {
 		if (!GameData::getInstance()->getIsInTutorial()) {
 			GameData::getInstance()->setMovingDistance(moving_distance + 1);
 		}
-		
-		*backgroundSpeed = 0;
+		daughter->setMovementState(new StayMovementState(daughter));
+		backgroundSpawnScheduler->setBackgroundSpeed(0);
 
 	}
 
@@ -198,7 +197,7 @@ void FightLayer::monsterSpawnUpdate(float delta) {
 		if (!GameData::getInstance()->getIsInTutorial()) {
 			movingDistanceReal += delta * movingVelocity;
 			if (moving_distance > finalDistance) {
-				*backgroundSpeed = 0;
+				backgroundSpawnScheduler->setBackgroundSpeed(0);
 				chest = Chest::create();
 				chest->setParentLayer(this);
 				this->addChild(chest);
@@ -219,7 +218,7 @@ void FightLayer::update(float delta) {
 	redrawDurabilityButton();
 	redrawTexture();
 	monsterSpawnUpdate(delta);
-	backgroundSpawnScheduler.update(delta);
+	backgroundSpawnScheduler->update(delta);
 	redrawGold();
 	redrawHeart();
 	showGameover();
@@ -414,38 +413,19 @@ Chest* FightLayer::getChest() {
 void FightLayer::monsterDead() {
 	this->removeChild(monster);
 	monster = NULL;
-	*backgroundSpeed = -200;
+	backgroundSpawnScheduler->setBackgroundSpeed(-200);
+	daughter->setMovementState(new RunMovementState(daughter));
 }
 
 void FightLayer::chestDead() {
 	this->removeChild(chest);
 	chest = NULL;
-	*backgroundSpeed = -100;
+	backgroundSpawnScheduler->setBackgroundSpeed(-100);
 
 	this->stageClear();
 	CCLOG("stageClear");
 
 }
 
-void FightLayer::createBackgound(EnumBackground::OBJECT object) {
-	if (object == EnumBackground::MOUNTAIN) {
-		BackgroundObject* mountain = BackgroundObject::create();
-		mountain->setImage("Images/mountain.png", Vec2(1, 0.8f), 2.0f, BackgroundObject::CUSTOMIZED_SIZE, BackgroundObject::BOTTOM);
-		mountain->setSpeed(backgroundSpeed, 100, 1);
-		this->addChild(mountain, -105);
-	}
-	if (object == EnumBackground::POLE) {
-		BackgroundObject* pole= BackgroundObject::create();
-		pole->setImage(ImagePath::POLE_IMAGE, Vec2(1, 0.7f), 0.6f, BackgroundObject::CUSTOMIZED_SIZE, BackgroundObject::TOP);
-		pole->setSpeed(backgroundSpeed, 100, 1);
-		this->addChild(pole, -99);
-	}
-	if (object == EnumBackground::TILE) {
-		BackgroundObject *tile = BackgroundObject::create();
-		tile->setImage(ImagePath::TILE_BACKGROUND, Vec2(0.5f, 0.38f), 1.0f, BackgroundObject::CUSTOMIZED_SIZE, BackgroundObject::BOTTOM);
-		tile->setSpeed(backgroundSpeed, 100, 1);
-		this->addChild(tile, -101);
-	}
-}
 
 
