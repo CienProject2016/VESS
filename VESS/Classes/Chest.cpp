@@ -94,7 +94,7 @@ void Chest::damage(int dam) {
 
 	auto currentHp = (Label*)getChildByTag(3);
 	currentHp->setString(StringUtils::format("%d / %d", hp, fullHp));
-
+	GameData::getInstance()->getCurrentStageInfo().setKey(true);
 	log("chest HP is : %d", hp);
 	if (hp <= 0) {
 		

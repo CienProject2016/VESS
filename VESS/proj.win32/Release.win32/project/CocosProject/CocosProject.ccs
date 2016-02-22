@@ -1,0 +1,31 @@
+<Solution>
+  <PropertyGroup Name="CocosProject" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Project Name="Hero.csd" Type="Skeleton" />
+        <Image Name="testClothes_0000_shoulder.png" />
+        <Image Name="testClothes_0001_hand.png" />
+        <Image Name="testClothes_0002_underarm.png" />
+        <Image Name="testClothes_0003_upperarm.png" />
+        <Image Name="testClothes_0004_shirt.png" />
+        <Image Name="testClothes_0005_pants.png" />
+        <Image Name="testClothes_0006_upperleg.png" />
+        <Image Name="testClothes_0007_underleg.png" />
+        <Image Name="testClothes_0008_foot.png" />
+        <Image Name="testClothes_0009_sidehair.png" />
+        <Image Name="testClothes_0010_head.png" />
+        <Image Name="testClothes_0011_underbody.png" />
+        <Image Name="testClothes_0012_upperbody.png" />
+        <Image Name="testClothes_0013_fronthair.png" />
+        <Image Name="testClothes_0014_backhair.png" />
+        <Image Name="testClothes_0015_hand_2.png" />
+        <Image Name="testClothes_0016_underarm_2.png" />
+        <Image Name="testClothes_0017_upperarm_2.png" />
+        <Image Name="testClothes_0018_upperleg_2.png" />
+        <Image Name="testClothes_0019_underleg_2.png" />
+        <Image Name="testClothes_0020_foot_2.png" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

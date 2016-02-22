@@ -116,7 +116,6 @@ void Monster::dropItem()
 
 void Monster::damage(int dam) {
 	hp -= dam;
-	log("%f", 100 *hp / fullHp);
 	hpBarDecreasing->setPercentage(100*hp/fullHp);
 	auto currentHp = (Label*)getChildByTag(3);
 	currentHp->setString(StringUtils::format("%d / %d", hp, fullHp));

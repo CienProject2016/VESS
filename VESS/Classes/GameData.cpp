@@ -24,12 +24,30 @@ void GameData::resetInfo() {
 	log("Game Reset");
 	topStage = 0;
 	gold = 15;
-	UserDefault::getInstance()->reset();
+	UserDefault::getInstance()->deleteValueForKey("topStageLevel");
+	UserDefault::getInstance()->deleteValueForKey("gold");
+	UserDefault::getInstance()->deleteValueForKey("swordUpgradeGold");
+	UserDefault::getInstance()->deleteValueForKey("swordDamage");
+	UserDefault::getInstance()->deleteValueForKey("swordDurability");
+	UserDefault::getInstance()->deleteValueForKey("swordMaxDurability");
+	UserDefault::getInstance()->deleteValueForKey("swordRepairGold");
+	UserDefault::getInstance()->deleteValueForKey("swordUpgradeGold");
+	UserDefault::getInstance()->deleteValueForKey("swordSpeed");
+	UserDefault::getInstance()->deleteValueForKey("swordName");
+	UserDefault::getInstance()->deleteValueForKey("shieldUpgradeGold");
+	UserDefault::getInstance()->deleteValueForKey("shieldRepairPercent");
+	UserDefault::getInstance()->deleteValueForKey("shieldUpgradePercent");
+	UserDefault::getInstance()->deleteValueForKey("shieldDurability");
+	UserDefault::getInstance()->deleteValueForKey("shieldMaxDurability");
+	UserDefault::getInstance()->deleteValueForKey("shieldRepairGold");
+	UserDefault::getInstance()->deleteValueForKey("shieldUpgradeGold");
+	UserDefault::getInstance()->deleteValueForKey("shieldName");
+
 	setUpgradeInfo();	
 }
 
 void GameData::loadSaveInfo() {
-	if (UserDefault::getInstance()->isXMLFileExist()){
+	if (!UserDefault::getInstance()->getStringForKey("swordName").empty()){
 		if (topStage != 0) {
 			this->topStage = UserDefault::getInstance()->getIntegerForKey("topStageLevel");
 			this->gold = UserDefault::getInstance()->getIntegerForKey("gold");
