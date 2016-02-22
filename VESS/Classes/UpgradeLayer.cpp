@@ -16,9 +16,11 @@ bool UpgradeLayer::init() {
 	initUpgradeCompleteLayer();
 	initLabelInfo();
 	initItemImage();
+	initPauseButton();
 	hideBeforeUpgradeResources();
 	setUpgradeButtonOpacity(currentUpgradePhase);
 	setListener();
+
 	
 	this->scheduleUpdate();
 	return true;
@@ -308,6 +310,39 @@ void UpgradeLayer::increaseGauge(CCProgressTimer* gauge) {
 	gauge->setPercentage(currentPercent + (float)8);
 }
 
+
+void UpgradeLayer::pauseCallback(cocos2d::Ref* pSender, ui::Widget::TouchEventType type) {
+	switch (type) {
+	case ui::Widget::TouchEventType::BEGAN:
+		break;
+	case ui::Widget::TouchEventType::MOVED:
+		break;
+	case ui::Widget::TouchEventType::ENDED: {
+		auto pauseButton = (ui::Button*)getChildByName("pauseButton");
+		if (!GameData::getInstance()->getIsPause()) {
+			GameData::getInstance()->setIsPause(true);
+			Director::getInstance()->pause();
+			auto grayLayer = CCLayerColor::create(Color4B(0, 0, 0, 255 * 0.5), visibleSize.width, visibleSize.height);
+			grayLayer->setPosition(Vec2(0, 0));
+			this->addChild(grayLayer, GRAY_LAYER, "grayLayer");
+			pauseButton->loadTextures(ImagePath::RESUME_BUTTON, ImagePath::RESUME_BUTTON_ACTIVE, ImagePath::DISABLE_BUTTON_PATH);
+
+		}
+		else {
+			GameData::getInstance()->setIsPause(false);
+			auto grayLayer = getChildByName("grayLayer");
+			removeChild(grayLayer);
+			Director::getInstance()->resume();
+			pauseButton->loadTextures(ImagePath::PAUSE_BUTTON, ImagePath::PAUSE_BUTTON_ACTIVE, ImagePath::DISABLE_BUTTON_PATH);
+
+		}
+	}
+											break;
+	case ui::Widget::TouchEventType::CANCELED:
+		break;
+	}
+}
+
 void UpgradeLayer::increaseGaugeCallback(Ref* sender, ui::Widget::TouchEventType type, CCProgressTimer* gauge)
 {
 	switch (type) {
@@ -479,6 +514,14 @@ void UpgradeLayer::repairClicked(Ref* sender, ui::Widget::TouchEventType type)
 	
 
 
+}
+
+void UpgradeLayer::initPauseButton() {
+	auto pauseButton = ui::Button::create(ImagePath::PAUSE_BUTTON, ImagePath::PAUSE_BUTTON_ACTIVE, ImagePath::DISABLE_BUTTON_PATH);
+	pauseButton->setPosition(Vec2(visibleSize.width * 0.89f, visibleSize.height * 0.93f));
+	pauseButton->addTouchEventListener(CC_CALLBACK_2(UpgradeLayer::pauseCallback, this));
+	pauseButton->setName("pauseButton");
+	this->addChild(pauseButton, ZOrder::PAUSE_BUTTON);
 }
 
 

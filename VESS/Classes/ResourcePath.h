@@ -38,7 +38,10 @@ public:
 	const static string LEVIATHAN_IMAGE;
 	const static string RESET_BUTTON;
 	const static string RESET_BUTTON_ACTIVE;
-	
+	const static string PAUSE_BUTTON;
+	const static string PAUSE_BUTTON_ACTIVE;
+	const static string RESUME_BUTTON;
+	const static string RESUME_BUTTON_ACTIVE;	
 };
 
 struct ActionPath {
