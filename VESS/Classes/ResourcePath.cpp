@@ -49,10 +49,12 @@ const string AudioPath::SOUND_DIMENSION_GATE_PATH = AUDIO_PATH + SOUND + "dimens
 const string AudioPath::SOUND_JUMP_PATH = AUDIO_PATH + SOUND + "jump.mp3";
 const string AudioPath::SOUND_ATTACK_PATH = AUDIO_PATH + SOUND + "jab.mp3";
 const string AudioPath::SOUND_OPEN_DOOR = AUDIO_PATH + SOUND + "open_door.mp3";
+const string AudioPath::SOUND_UPGRADE_COMPLETE = AUDIO_PATH + SOUND + "upgrade_complete.wav";
 const string AudioPath::SOUND_BLOCK = AUDIO_PATH + SOUND + "block.mp3";
 const string AudioPath::BGM_NEO_ROCK = AUDIO_PATH + BGM + "neo_rock.mp3";
 const string AudioPath::BGM_DIALOG = AUDIO_PATH + BGM + "dialog.mp3";
 const string AudioPath::BGM_CLEAR = AUDIO_PATH + BGM + "clear.mp3";
+
 
 //Action Path
 const string ActionPath::HERO_PATH = "character.csb";
@@ -68,6 +70,11 @@ const string ElementName::DURABILITY_NAME = "내구도";
 const string ElementName::LOCKED = "[잠겨있음]";
 const string ElementName::TOUCH_SCREEN = "시작하시려면 화면을 터치하세요";
 const string ElementName::START_MESSAGE = "본격 강화 피지컬 액션 RPG";
+const string ElementName::NOT_ENOUGH_GOLD = "골드가 부족합니다.";
+const string ElementName::UPGRADE_FAILED = "강화 실패!";
+const string ElementName::UPGRADE_PERCENT = "강화 확률";
+const string ElementName::REPAIR_PERCENT = "수리 확률";
+const string ElementName::REPAIR_FAILED = "수리 실패!";
 
 //TutorialPath
 const string TutorialEventPath::DRAG_01 = "drag_01";

@@ -183,6 +183,11 @@ bool UserDefault::getBoolForKey(const char* pKey, bool defaultValue)
     return ret;
 }
 
+void UserDefault::reset(){
+	string strFilePath = FileUtils::sharedFileUtils()->getWritablePath() + XML_FILE_NAME;
+	remove(strFilePath.c_str());
+}
+
 int UserDefault::getIntegerForKey(const char* pKey)
 {
     return getIntegerForKey(pKey, 0);

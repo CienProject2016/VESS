@@ -89,6 +89,7 @@ void AppDelegate::preloadAllSound() {
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_OPEN_DOOR.c_str());
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_ATTACK_PATH.c_str());
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_BLOCK.c_str());
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_UPGRADE_COMPLETE.c_str());
 
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(AudioPath::BGM_NEO_ROCK.c_str());
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(AudioPath::BGM_DIALOG.c_str());

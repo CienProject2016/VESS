@@ -249,11 +249,11 @@ public:
      * @js NA
      */
     static bool isXMLFileExist();
-
+	void reset();
 protected:
     UserDefault();
     virtual ~UserDefault();
-    
+	
 private:
     
     static bool createXMLFile();

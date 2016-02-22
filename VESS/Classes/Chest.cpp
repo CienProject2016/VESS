@@ -81,12 +81,8 @@ Chest* Chest::create()
 
 void Chest::dropItem()
 {
-	auto key = Sprite::create("Images/key.jpg");
-	this->addChild(key);
-	image->setPosition(0, 0);
-	this->setPosition(Vec2(windowSize.width * 0.7f, windowSize.height * 0.4f));
-	GameData::getInstance()->getCurrentStageInfo().setKey(true);
-	// key 생성
+	int currentGold = GameData::getInstance()->getGold();
+	GameData::getInstance()->setGold(currentGold + 30);
 }
 
 void Chest::setParentLayer(FightLayer* layer) {
@@ -101,8 +97,7 @@ void Chest::damage(int dam) {
 
 	log("chest HP is : %d", hp);
 	if (hp <= 0) {
-		int currentGold = GameData::getInstance()->getGold();
-		GameData::getInstance()->setGold(currentGold + 50);
+		
 		field->chestDead();
 	}
 }
