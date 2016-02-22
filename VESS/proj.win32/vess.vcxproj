@@ -193,6 +193,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\UpgradeCompleteLayer.cpp" />
     <ClCompile Include="..\Classes\UpgradeController.cpp" />
     <ClCompile Include="..\Classes\UpgradeLayer.cpp" />
+    <ClCompile Include="..\Classes\PauseLayer.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -218,6 +219,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\MonsterInfo.h" />
     <ClInclude Include="..\Classes\GaugeLockChecker.h" />
     <ClInclude Include="..\Classes\MiniPopupLayer.h" />
+    <ClInclude Include="..\Classes\PauseLayer.h" />
     <ClInclude Include="..\Classes\ResourcePath.h" />
     <ClInclude Include="..\Classes\SaveController.h" />
     <ClInclude Include="..\Classes\Shield.h" />

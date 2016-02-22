@@ -58,7 +58,6 @@ void UpgradeLayer::initMiniPopup(string message) {
 	miniPopup->setName("miniPopup");
 	this->addChild(miniPopup, ZOrder::MINI_POPUP_LAYER);
 }
-
 void UpgradeLayer::initItemImage() {
 	auto gateImage = Sprite::create(ImagePath::DIMENSION_GATE_BUTTON_PATH);
 	gateImage->setPosition(Vec2(visibleSize.width * 0.35f, visibleSize.height * 0.60f));
@@ -361,20 +360,21 @@ void UpgradeLayer::pauseCallback(cocos2d::Ref* pSender, ui::Widget::TouchEventTy
 		if (cheatCount == 5) {
 			GameData::getInstance()->setGold(100000000);
 		}
+		
 		auto pauseButton = (ui::Button*)getChildByName("pauseButton");
 		if (!GameData::getInstance()->getIsPause()) {
 			GameData::getInstance()->setIsPause(true);
 			Director::getInstance()->pause();
-			auto grayLayer = CCLayerColor::create(Color4B(0, 0, 0, 255 * 0.5), visibleSize.width, visibleSize.height);
-			grayLayer->setPosition(Vec2(0, 0));
-			this->addChild(grayLayer, GRAY_LAYER, "grayLayer");
+			PauseLayer* pauseLayer = PauseLayer::create();
+			pauseLayer->setPosition(Vec2(0, 0));
+			this->addChild(pauseLayer, GRAY_LAYER, "pauseLayer");
 			pauseButton->loadTextures(ImagePath::RESUME_BUTTON, ImagePath::RESUME_BUTTON_ACTIVE, ImagePath::DISABLE_BUTTON_PATH);
 
 		}
 		else {
 			GameData::getInstance()->setIsPause(false);
-			auto grayLayer = getChildByName("grayLayer");
-			removeChild(grayLayer);
+			auto pauseLayer = getChildByName("pauseLayer");
+			removeChild(pauseLayer);
 			Director::getInstance()->resume();
 			pauseButton->loadTextures(ImagePath::PAUSE_BUTTON, ImagePath::PAUSE_BUTTON_ACTIVE, ImagePath::DISABLE_BUTTON_PATH);
 

@@ -1,5 +1,6 @@
 #include "Settings.h"
 #include "StartScene.h"
+#include "EnterScene.h"
 USING_NS_CC;
 
 Settings::Settings(){
@@ -59,11 +60,11 @@ bool Settings::init()
 
 void Settings::bgmClicked(Ref* pSender)
 {
-	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("bgm.wav", true);
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(AudioPath::BGM_NEO_ROCK.c_str(), true);
 }
 void Settings::bgmoffClicked(Ref* pSender)
 {
-	CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic("bgm.wav");
+	CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic(AudioPath::BGM_NEO_ROCK.c_str());
 }
 void Settings::effectClicked(Ref* pSender) {
 

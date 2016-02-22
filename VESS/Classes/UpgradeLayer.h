@@ -15,6 +15,7 @@
 #include "UpgradeCompleteLayer.h"
 #include "ResourcePath.h"
 #include "ui/CocosGUI.h"
+#include "PauseLayer.h"
 
 USING_NS_CC;
 using namespace std;

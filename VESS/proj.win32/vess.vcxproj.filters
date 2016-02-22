@@ -222,6 +222,9 @@
     <ClCompile Include="..\Classes\TutorialController.cpp">
       <Filter>src\Controller</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\PauseLayer.cpp">
+      <Filter>src\View\Layer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -390,6 +393,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\TutorialController.h">
       <Filter>src\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PauseLayer.h">
+      <Filter>src\View\Layer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
