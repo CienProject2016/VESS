@@ -3,6 +3,7 @@
 using namespace std;
 struct ImagePath {
 public:
+	const static string BACKGROUND_PATH;
 	const static string MINI_POPUP_IMAGE;
 	const static string UPGRADE_BEFORE_COMPLETE;
 	const static string UPGRADE_BUTTON;
@@ -38,7 +39,15 @@ public:
 	const static string LEVIATHAN_IMAGE;
 	const static string RESET_BUTTON;
 	const static string RESET_BUTTON_ACTIVE;
-	
+	const static string BACKGROUND_CAVE_1_0;
+	const static string BACKGROUND_CAVE_1_1;
+	const static string BACKGROUND_CAVE_1_2;
+	const static string BACKGROUND_CAVE_1_3;
+	const static string BACKGROUND_CAVE_2_0;
+	const static string BACKGROUND_CAVE_2_1;
+	const static string BACKGROUND_CAVE_2_2;
+	const static string BACKGROUND_CAVE_2_3;
+	const static string BACKGROUND_CAVE_2_4;
 };
 
 struct ActionPath {

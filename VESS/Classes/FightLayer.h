@@ -19,7 +19,6 @@ public:
 	virtual bool init();
 	enum ZOrder { SMELTING_IMAGE, HAMMERING_IMAGE, QUENCHING_IMAGE, UPGRADE_IMAGE, REPAIR_IMAGE, COMPLETE_UPGRADE_BUTTON, COMPLETE_REPAIR_BUTTON, DIMENSION_GATE_IMAGE, ITEM_IMAGE, ITEM_NAME, UPGRADE_COMPLETE_LAYER, MINI_POPUP_LAYER };
 
-	void createBackgound(EnumBackground::OBJECT object);
 	void monsterDead();
 	void chestDead();
 	CREATE_FUNC(FightLayer);
@@ -53,8 +52,7 @@ private:
 	void redrawDimensionGate();
 
 	float movingDistanceReal = 0;		
-	float movingVelocity = 50;			
-	float* backgroundSpeed;
+	float movingVelocity = 50;
 	Label* currentGoldLabel;
 	BattleOperator* operator_;		
 	Hero* daughter;
@@ -68,7 +66,7 @@ private:
 	virtual void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 	virtual void onTouchCancelled(cocos2d::Touch* touch, cocos2d::Event* unused_event);
 	virtual void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* unused_event);
-	BackgroundSpawnScheduler backgroundSpawnScheduler;
+	BackgroundSpawnScheduler* backgroundSpawnScheduler;
 
 	void stageClear();
 	void dimensionCallback(cocos2d::Ref*, ui::Widget::TouchEventType);
