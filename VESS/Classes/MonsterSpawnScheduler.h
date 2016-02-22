@@ -6,7 +6,7 @@ using namespace std;
 class MonsterSpawnScheduler
 {
 public:
-	static bool isMonsterSpawnTime(int, const vector<int>);
+	static bool isMonsterSpawnTime(int, int);
 };
 
 #endif

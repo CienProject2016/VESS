@@ -13,6 +13,9 @@
 #define gold "GOLD"
 #define durabilityTag 300
 
+#define monsterSpawnNumber 6
+#define stageEndDistance 1200
+
 bool FightLayer::init()
 {
 	if (!Layer::init())		return false;
@@ -175,11 +178,15 @@ void FightLayer::showGameover()
 }
 void FightLayer::monsterSpawnUpdate(float delta) {
 	int moving_distance = GameData::getInstance()->getMovingDistance();
-	int stageLevel = GameData::getInstance()->getStageLevel();
+	int stageLevel = GameData::getInstance()->getStageLevel();  
 	Stage stageData = GameData::getInstance()->getStageList()->at(stageLevel);
-	vector<int> distance_data = stageData.getMonsterLengthInfo();
 	int monsterHealth = stageData.getHealth();
-	if (MonsterSpawnScheduler::isMonsterSpawnTime(moving_distance, distance_data) && this->monster == NULL) {
+
+	// 현재 스테이지 레벨에서 받아오는게 없지만, 스테이지마다 나오는 몬스터의 수를 달리한다던지 
+	//나오는 시간을 바꾸고싶다면, MonsterSpawnScheduler 의 매개변수에 영향을 줄 수 있는 
+	// 내용을 받아오게 변경할 수 있다.
+
+	if (MonsterSpawnScheduler::isMonsterSpawnTime(moving_distance, monsterSpawnNumber) && this->monster == NULL) {
 		monster = Monster::create(this, Monster::Slime, monsterHealth);
 		this->addChild(monster, 1);
 		if (!GameData::getInstance()->getIsInTutorial()) {
@@ -190,8 +197,7 @@ void FightLayer::monsterSpawnUpdate(float delta) {
 
 	}
 
-
-	int finalDistance = GameData::getInstance()->getCurrentStageInfo().getFinalDistance();
+	int finalDistance = stageEndDistance;
 
 	if (monster == NULL) {
 		if (!GameData::getInstance()->getIsInTutorial()) {
