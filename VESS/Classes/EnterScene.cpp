@@ -60,9 +60,9 @@ bool EnterScene::init()
 		this->addChild(enterStageButton);
 		this->addChild(stageLabel);
 	}
-
-	auto backButton = Sprite::create("Images/back.png");
+	auto backButton = ui::Button::create("Images/back.png","Images/back.png","Images/back.png");
 	backButton->setPosition(Vec2(visibleSize.width * 0.1f, visibleSize.height* 0.9f));
+	backButton->addTouchEventListener(CC_CALLBACK_2(EnterScene::backCallback, this));
 	backButton->setScale(0.2f);
 	this->addChild(backButton,0);
 	this->scheduleUpdate();
@@ -79,6 +79,23 @@ void EnterScene::restartCallback(Ref* sender, ui::Widget::TouchEventType type) {
 	case ui::Widget::TouchEventType::ENDED:
 		GameData::getInstance()->resetInfo();
 		break;		
+	case ui::Widget::TouchEventType::CANCELED:
+		break;
+	}
+}
+
+void EnterScene::backCallback(Ref* sender, ui::Widget::TouchEventType type) {
+	switch (type) {
+	case ui::Widget::TouchEventType::BEGAN:
+		break;
+	case ui::Widget::TouchEventType::MOVED:
+		break;
+	case ui::Widget::TouchEventType::ENDED:
+		{
+		Scene* startScene = StartScene::createScene();
+		Director::getInstance()->replaceScene(TransitionFade::create(0.5, startScene, Color3B(255, 255, 255)));
+		}
+		break;
 	case ui::Widget::TouchEventType::CANCELED:
 		break;
 	}
