@@ -4,12 +4,14 @@
 #include "cocos2d.h"
 #include "DialogScene.h"
 #include "ui/CocosGUI.h"
+#include "StartScene.h"
 
 class EnterScene : public cocos2d::Layer
 {
 private:
 	void enterCallback(Ref*, ui::Widget::TouchEventType, int);
 	void restartCallback(Ref*, ui::Widget::TouchEventType);
+	void backCallback(Ref*, ui::Widget::TouchEventType);
 	const static int STAGE_DOOR = 1;
 	
 	const static int STAGE_LABEL = 100;
