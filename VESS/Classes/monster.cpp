@@ -43,7 +43,8 @@ void Monster::initImage() {
 		image->setPosition(0, 0);
 		image->runAction(action);
 		action->gotoFrameAndPlay(26, 32, true);
-		this->setPosition(Vec2(windowSize.width * 0.7f, windowSize.height * 0.38f));
+		targetPosition = windowSize.width * 0.7f;
+		this->setPosition(Vec2(windowSize.width, windowSize.height * 0.38f));
 		break;
 	case Slime:
 		anim = new MonsterAnimation(this);
@@ -52,7 +53,8 @@ void Monster::initImage() {
 		image->setScale(2.8f);
 		this->addChild(image);
 		anim->playStand();
-		this->setPosition(Vec2(windowSize.width * 0.6f, windowSize.height * 0.41f));
+		targetPosition = windowSize.width * 0.6f;
+		this->setPosition(Vec2(windowSize.width * 0.85f, windowSize.height * 0.41f));
 		break;
 	}
 }
@@ -64,10 +66,17 @@ void Monster::initBehavior() {
 //예시 함수.
 void sangTeaESangUpdate() {}
 
+void Monster::positionUpdate(float delta) {
+	Vec2 pos = this->getPosition();
+	float x = (pos.x - targetPosition) * delta * 5;
+	pos.x -= x;
+	this->setPosition(pos);
+}
+
 void Monster::update(float delta) {
 
 	sangTeaESangUpdate();	//ex 상태이상.
-
+	positionUpdate(delta);
 	//행동패턴 업데이트 부분.
 	//나중에 추가될 상태이상 처리라던지의 내용은 행동패턴에 들어가기 알맞지 않으므로.
 	//몬스터의 업데이트에서 behavior 로 update 를 전달함으로써

@@ -46,6 +46,8 @@ private:
 	void initBehavior();
 	Size windowSize;
 	Vec2 origin;
+	float targetPosition;	// 몬스터 생성시 뒤에서 생성 되었다가, 있어야 할 자리까지 가려고 할 때, 몬스터가 가려고 하는 위치.
+	void positionUpdate(float delta);
 };
 
 #endif // __MONSTER_H__

@@ -134,7 +134,7 @@ BackgroundSpawnScheduler::BackgroundSpawnScheduler(FightLayer* field) {
 	cave[6] = BackgroundSpawnSchedulerTimer(EnumBackground::CAVE_2_2, field, this, 3, EnumBackground::ArrangePosition::RANDOM);
 	cave[7] = BackgroundSpawnSchedulerTimer(EnumBackground::CAVE_2_3, field, this, 3, EnumBackground::ArrangePosition::RANDOM);
 	cave[8] = BackgroundSpawnSchedulerTimer(EnumBackground::CAVE_2_4, field, this, 5, EnumBackground::ArrangePosition::RANDOM);
-	pole = BackgroundSpawnSchedulerTimer(EnumBackground::POLE, field, this, 2, EnumBackground::ArrangePosition::RANDOM);
+	pole = BackgroundSpawnSchedulerTimer(EnumBackground::POLE, field, this, 2, EnumBackground::ArrangePosition::FIXED);
 	tile = BackgroundSpawnSchedulerTimer(EnumBackground::TILE, field, this, 0.5f, EnumBackground::ArrangePosition::FIXED);
 	tile.setTimer(1.5);
 	backgroundSpeed = new float(-100);
