@@ -59,7 +59,6 @@ public:
 	const static int HERO_RUN_END_FRAME;
 	const static string SWORD_PATH;
 	const static string SHIELD_PATH;
-	
 };
 
 struct AudioPath {
@@ -75,6 +74,7 @@ public:
 	const static string BGM_NEO_ROCK;
 	const static string BGM_DIALOG;
 	const static string BGM_CLEAR;
+	const static string SOUND_SLIME_DEAD;
 };
 
 struct ElementName {

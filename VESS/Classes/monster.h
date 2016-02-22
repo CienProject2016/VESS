@@ -6,6 +6,7 @@
 #include "Unit.h"
 #include <string>
 #include "cocostudio\CocoStudio.h"
+#include "EffectFactory.h"
 
 using namespace std;
 using namespace cocostudio;

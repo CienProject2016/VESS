@@ -224,5 +224,9 @@ void Hero::setMovementState(HeroMovementState* state) {
 void Hero::decreaseHp(int hpSize)
 {
 	this->hp -= hpSize;
-	
+	EffectFactory* effect0 = EffectFactory::create(EffectFactory::DamageEffect0, Vec2(0, 200));
+	this->addChild(effect0);
+
+	EffectFactory* effect1 = EffectFactory::create(EffectFactory::DamageEffect1, Vec2(500, 500));
+	field->addChild(effect1);
 }

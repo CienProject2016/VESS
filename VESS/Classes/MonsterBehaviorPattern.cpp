@@ -21,10 +21,16 @@ void MonsterBehaviorPattern::setStateAndTimer(MonsterState state, float maxTimer
 }
 
 void MonsterBehaviorPattern::setStateAndTimer(MonsterState state, float maxTimer, float attackTimer) {
+	setStateAndTimer(state, maxTimer, 10000, 10000);
+}
+
+void MonsterBehaviorPattern::setStateAndTimer(MonsterState state, float maxTimer, float attackTimer, float effectTimer) {
 	this->state = state;
 	this->maxTimer = maxTimer;
 	this->attackTimer = attackTimer;
+	this->effectTimer = effectTimer;
 	isOneAnimationAttack = false;
+	isOneAttackEffect = false;
 }
 
 void MonsterBehaviorPattern::decisionBehavior() {
@@ -32,7 +38,7 @@ void MonsterBehaviorPattern::decisionBehavior() {
 	case Monster::Tauren:
 		break;
 	case Monster::Slime:
-		if (state == stand)		setStateAndTimer(attack0, 1, 0.5f);
+		if (state == stand)		setStateAndTimer(attack0, 1, 0.5f, 0.1f);
 		else if (state == attack0)	setStateAndTimer(attack1, 3.36f, 2);
 		else if (state == attack1)	setStateAndTimer(stand, 1);
 		playAnimationForState();
@@ -68,15 +74,20 @@ void MonsterBehaviorPattern::attackToHero() {
 	case Monster::Tauren:
 		break;
 	case Monster::Slime:
-		if (state == attack0)	monster->field->getDaughter()->monsterAttackToHero(new HitArea(HitArea::center + HitArea::left));
+		if (state == attack0)	monster->field->getDaughter()->monsterAttackToHero(new HitArea(HitArea::center + HitArea::right));
 		else if (state == attack1) {
-			monster->field->getDaughter()->monsterAttackToHero(new HitArea(HitArea::center + HitArea::left));
+			monster->field->getDaughter()->monsterAttackToHero(new HitArea(HitArea::center + HitArea::right));
 			if (!TutorialController::checkTutorialEvent("evade_01")) {
 				TutorialController::checkTutorialEvent("evade_02");
 			}
 		}
 		break;
 	}
+}
+
+void MonsterBehaviorPattern::createEffect() {
+	EffectFactory* effect = EffectFactory::create(EffectFactory::SlimeAttack0, Vec2(0, 0));
+	monster->addChild(effect);
 }
 
 void MonsterBehaviorPattern::update(float delta) {
@@ -89,5 +100,10 @@ void MonsterBehaviorPattern::update(float delta) {
 	if (!isOneAnimationAttack && attackTimer < timer) {
 		isOneAnimationAttack = true;
 		attackToHero();
+	}
+
+	if (!isOneAttackEffect && attackTimer < timer) {
+		isOneAttackEffect = true;
+		createEffect();
 	}
 }

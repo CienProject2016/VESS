@@ -4,16 +4,6 @@
 
 MonsterAnimation::MonsterAnimation(Monster* monster) {
 	this->monster = monster;
-	switch (monster->kind) {
-	case Monster::Tauren:
-		break;
-	case Monster::Slime:
-		ReadyForPlist("animation/basic_slime/stand/basic_slime_stand.plist");
-		ReadyForPlist("animation/basic_slime/attack1/basic_slime_attack0.plist");
-		ReadyForPlist("animation/basic_slime/attack2/basic_slime_attack1_0.plist");
-		ReadyForPlist("animation/basic_slime/attack2/basic_slime_attack1_1.plist");
-		break;
-	}
 }
 
 void MonsterAnimation::changePlistAction(MonsterInfo::AnimName anim) {
@@ -43,12 +33,6 @@ void MonsterAnimation::playStand() {
 		changePlistAction(MonsterInfo::stand);
 		break;
 	}
-}
-
-void MonsterAnimation::ReadyForPlist(char* plist) {
-	//plist 를 읽어 각각의 이미지들, 즉 fdsa01.png, fdsa02.png...를 캐시에 넣는다.
-	//ex) SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animation/basic_slime/stand/basic_slime_stand.plist");
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile(plist);
 }
 
 RepeatForever* MonsterAnimation::makeAction(MakeAnimationInfo* info) {

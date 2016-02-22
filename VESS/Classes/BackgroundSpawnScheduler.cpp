@@ -105,8 +105,8 @@ void BackgroundSpawnScheduler::initBackground() {
 	fwidth = 1;
 	while (0 < fwidth) {
 		BackgroundObject* pole = BackgroundObject::create();
-		pole->setImage(ImagePath::POLE_IMAGE, Vec2(1, 0.7f), 0.6f, BackgroundObject::CUSTOMIZED_SIZE, BackgroundObject::TOP);
-		pole->setSpeed(backgroundSpeed, 500, 3);
+		pole->setImage(ImagePath::POLE_IMAGE, Vec2(1, 0.74f), 0.6f, BackgroundObject::CUSTOMIZED_SIZE, BackgroundObject::TOP);
+		pole->setSpeed(backgroundSpeed, 500, 2);
 		fwidth = pole->initBackgroundObject(fwidth, 3);
 		pole->setNoAccelSpeed();
 		field->addChild(pole, -99);
@@ -115,7 +115,7 @@ void BackgroundSpawnScheduler::initBackground() {
 	while (0 < fwidth) {
 		BackgroundObject *tile = BackgroundObject::create();
 		tile->setImage(ImagePath::TILE_BACKGROUND, Vec2(1.3f, 0.38f), 1.0f, BackgroundObject::CUSTOMIZED_SIZE, BackgroundObject::BOTTOM);
-		tile->setSpeed(backgroundSpeed, 500, 3);
+		tile->setSpeed(backgroundSpeed, 500, 2);
 		fwidth = tile->initBackgroundObject(fwidth, 1);
 		tile->setNoAccelSpeed();
 		field->addChild(tile, -101);
@@ -146,15 +146,15 @@ void BackgroundSpawnScheduler::createBackgound(EnumBackground::OBJECT object) {
 	switch (object) {
 	case EnumBackground::POLE:
 		obj = BackgroundObject::create();
-		obj->setImage(ImagePath::POLE_IMAGE, Vec2(1, 0.7f), 0.6f, BackgroundObject::CUSTOMIZED_SIZE, BackgroundObject::TOP);
-		obj->setSpeed(backgroundSpeed, 500, 3);
+		obj->setImage(ImagePath::POLE_IMAGE, Vec2(1, 0.74f), 0.6f, BackgroundObject::CUSTOMIZED_SIZE, BackgroundObject::TOP);
+		obj->setSpeed(backgroundSpeed, 500, 2);
 		obj->setNoAccelSpeed();
 		field->addChild(obj, -99);
 		break;
 	case EnumBackground::TILE:
 		obj = BackgroundObject::create();
 		obj->setImage(ImagePath::TILE_BACKGROUND, Vec2(1.3f, 0.38f), 1.0f, BackgroundObject::CUSTOMIZED_SIZE, BackgroundObject::BOTTOM);
-		obj->setSpeed(backgroundSpeed, 500, 3);
+		obj->setSpeed(backgroundSpeed, 500, 2);
 		obj->setNoAccelSpeed();
 		field->addChild(obj, -101);
 		break;

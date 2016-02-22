@@ -161,6 +161,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\DialogScene.cpp" />
     <ClCompile Include="..\Classes\DimensionGateController.cpp" />
     <ClCompile Include="..\Classes\DurabilityController.cpp" />
+    <ClCompile Include="..\Classes\EffectFactory.cpp" />
     <ClCompile Include="..\Classes\EnterScene.cpp" />
     <ClCompile Include="..\Classes\FightLayer.cpp" />
     <ClCompile Include="..\Classes\GameoverPopupLayer.cpp" />
@@ -208,6 +209,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\DialogScene.h" />
     <ClInclude Include="..\Classes\DimensionGateController.h" />
     <ClInclude Include="..\Classes\DurabilityController.h" />
+    <ClInclude Include="..\Classes\EffectFactory.h" />
     <ClInclude Include="..\Classes\EnterScene.h" />
     <ClInclude Include="..\Classes\FightLayer.h" />
     <ClInclude Include="..\Classes\GameData.h" />

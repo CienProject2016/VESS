@@ -127,6 +127,11 @@ void Monster::damage(int dam) {
 		int currentStageLevel = GameData::getInstance()->getStageLevel();
 		int monsterGold = GameData::getInstance()->getStageList()->at(currentStageLevel).getGold();
 		GameData::getInstance()->setGold(currentGold + monsterGold);
+		if (kind == Slime) {
+			EffectFactory* dead = EffectFactory::create(EffectFactory::SlimeDeadAnimation, Vec2(0, 0));
+			field->addChild(dead);
+			dead->setPosition(this->getPosition());
+		}
 		field->monsterDead();
 	}
 }

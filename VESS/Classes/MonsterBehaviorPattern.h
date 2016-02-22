@@ -8,16 +8,18 @@
 class MonsterBehaviorPattern {
 private:
 	float timer;
-	float maxTimer, attackTimer;
-	bool isOneAnimationAttack;
+	float maxTimer, attackTimer, effectTimer;
+	bool isOneAnimationAttack, isOneAttackEffect;
 	Monster* monster;
 	MonsterBehaviorPattern();
 	enum MonsterState { stand, attack0, attack1, attack2, attack3, dead };
 	void decisionBehavior();
 	void attackToHero();
+	void createEffect();
 	void playAnimationForState();
 	void setStateAndTimer(MonsterState state, float maxTimer);
 	void setStateAndTimer(MonsterState state, float maxTimer, float attackTimer);
+	void setStateAndTimer(MonsterState state, float maxTimer, float attackTimer, float effectTimer);
 public:
 	MonsterState state;
 	MonsterBehaviorPattern(Monster* parent);

@@ -59,6 +59,7 @@ const string AudioPath::SOUND_BLOCK = AUDIO_PATH + SOUND + "block.mp3";
 const string AudioPath::BGM_NEO_ROCK = AUDIO_PATH + BGM + "neo_rock.mp3";
 const string AudioPath::BGM_DIALOG = AUDIO_PATH + BGM + "dialog.mp3";
 const string AudioPath::BGM_CLEAR = AUDIO_PATH + BGM + "clear.mp3";
+const string AudioPath::SOUND_SLIME_DEAD = AUDIO_PATH + "sound_slime_dead.mp3";
 
 //Action Path
 const string ActionPath::HERO_PATH = "character.csb";

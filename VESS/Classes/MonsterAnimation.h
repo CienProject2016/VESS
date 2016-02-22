@@ -7,7 +7,6 @@
 
 class MonsterAnimation {
 private:
-	void ReadyForPlist(char* plist);
 	RepeatForever* makeAction(MakeAnimationInfo* info);
 	Monster* monster;
 	MonsterAnimation();

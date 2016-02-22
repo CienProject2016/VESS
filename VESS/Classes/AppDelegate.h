@@ -13,10 +13,10 @@ class  AppDelegate : private cocos2d::Application
 public:
     AppDelegate();
 	void preloadAllSound();
+	void preloadAllPlists();
     virtual ~AppDelegate();
 
     virtual void initGLContextAttrs();
-
     /**
     @brief    Implement Director and Scene init code here.
     @return true    Initialize success, app continue.
