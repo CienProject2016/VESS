@@ -7,7 +7,7 @@
 class UpgradeController {
 private :
 	static void upgradeSword(int upgradeCoefficient);
-	static void upgradeShield();
+	static void upgradeShield(int upgradeCoefficient);
 	static void repairSword();
 	static void repairShield();
 public:

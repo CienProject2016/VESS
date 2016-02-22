@@ -20,7 +20,7 @@ bool UpgradeController::upgradeItem(GameData::ItemMode itemMode,int upgradeCoeff
 		break;
 	case GameData::ItemMode::SHIELD:
 		log("ShieldUpgradePhase");
-		upgradeShield();		
+		upgradeShield(upgradeCoefficient);		
 		break;
 	default : 
 		log("Item Mode 정보 오류");
@@ -58,7 +58,7 @@ void UpgradeController::upgradeSword(int upgradeCoefficient) {
 		newSword->setDamage(oldSword->getDamage()+((newSword->getDamage())/10)*upgradeCoefficient);
 		newSword->setName(newSword->getName());
 		newSword->setSpeed(newSword->getSpeed());
-		//newSword->setMaxDurability(newSword->getMaxDurability());
+		newSword->setMaxDurability(newSword->getMaxDurability());
 		newSword->setDurability(newSword->getMaxDurability());
 		newSword->setUpgradeGold(newSword->getUpgradeGold());
 		newSword->setRepairGold(newSword->getRepairGold());
@@ -78,7 +78,7 @@ void UpgradeController::repairShield() {
 	GameData::getInstance()->setShield(oldShield);
 }
 
-void UpgradeController::upgradeShield() {
+void UpgradeController::upgradeShield(int upgradeCoefficient) {
 	Shield* oldShield = GameData::getInstance()->getShield();
 
 	int upgradeId = oldShield->getUpgradeId() + 1;
@@ -87,6 +87,13 @@ void UpgradeController::upgradeShield() {
 	if (shieldList->size() > upgradeId-1) {
 		Shield* newShield = shieldList->at(upgradeId-1);
 		newShield->setUpgradeId(upgradeId);
+		newShield->setDefense(oldShield->getDefense() + ((newShield->getDefense())*(upgradeCoefficient))/10);
+		newShield->setName(newShield->getName());
+		newShield->setSpeed(newShield->getSpeed());
+		newShield->setMaxDurability(newShield->getMaxDurability());
+		newShield->setDurability(newShield->getDurability());
+		newShield->setUpgradeGold(newShield->getUpgradeGold());
+		newShield->setRepairGold(newShield->getRepairGold());
 		GameData::getInstance()->setShield(newShield);
 		log("%s", GameData::getInstance()->getShield()->getName().c_str());
 	}
