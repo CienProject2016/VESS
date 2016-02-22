@@ -75,9 +75,9 @@ const string AudioPath::BGM_ENTER = AUDIO_PATH + BGM + "enter.mp3";
 const string AudioPath::SOUND_SLIME_DEAD = AUDIO_PATH + "sound_slime_dead.mp3";
 
 //Action Path
-const string ActionPath::HERO_PATH = "character.csb";
-const string ActionPath::SWORD_PATH = "weapon_sword.csb";
-const string ActionPath::SHIELD_PATH = "weapon_shield.csb";
+const string ActionPath::HERO_PATH = "hero_csb/character.csb";
+const string ActionPath::SWORD_PATH = "hero_csb/weapon_sword.csb";
+const string ActionPath::SHIELD_PATH = "hero_csb/weapon_shield.csb";
 const int ActionPath::HERO_DEFENSE_START_FRAME = 18;
 const int ActionPath::HERO_DEFENSE_END_FRAME = 25;
 const int ActionPath::HERO_RUN_START_FRAME = 0;

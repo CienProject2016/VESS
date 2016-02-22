@@ -14,21 +14,21 @@ bool Hero::init()
 	{
 		windowSize = fightLayerSize;
 		origin = fightLayerOrigin;
-		Node* node = CSLoader::createNode("character.csb");
+		Node* node = CSLoader::createNode("hero_csb/character.csb");
 		node->setScale(0.8f);
 		node->setName("actionNode");
 		this->addChild(node); //get animation data 
-		action = CSLoader::createTimeline("character.csb");
+		action = CSLoader::createTimeline("hero_csb/character.csb");
 		action->setTag(ANIMATION);
 		node->setPosition(0, 0);
 		node->runAction(action);
 		action->gotoFrameAndPlay(0, 16, true);
 
-		itemNode = CSLoader::createNode("weapon_sword.csb");
+		itemNode = CSLoader::createNode("hero_csb/weapon_sword.csb");
 		itemNode->setName("itemNode");
 		itemNode->setScale(0.8f);
 		this->addChild(itemNode);
-		itemAction = CSLoader::createTimeline("weapon_sword.csb");
+		itemAction = CSLoader::createTimeline("hero_csb/weapon_sword.csb");
 		itemNode->setPosition(0, 0);
 		itemNode->runAction(itemAction);
 		itemAction->gotoFrameAndPlay(0, 16, true);
@@ -39,6 +39,7 @@ bool Hero::init()
 		heroPosition = new HitArea();
 		fullHp = 3;
 		hp = fullHp;
+		attackCount = 0;
 		setMovementState(new StayMovementState(this));
 		return true;
 	}
@@ -48,8 +49,11 @@ bool Hero::init()
 void Hero::setAnimation(HeroMovementState::State anim) {
 	switch(anim) {
 	case HeroMovementState::attack0:{
-		int randomNum = rand() % 3;
-		switch (randomNum) {
+		attackCount++;
+		if (attackCount > 2) {
+			attackCount = 0;
+		}
+		switch(attackCount){
 		case 0:
 			action->gotoFrameAndPlay(37, 49, false);//공격1
 			itemAction->gotoFrameAndPlay(37, 49, false);

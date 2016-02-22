@@ -37,6 +37,7 @@ public:
 	void changeItemAction(Item::Type itemType);
 	void setAnimation(HeroMovementState::State state);
 private:
+	int attackCount;
 	HitArea* heroPosition;
 	const int SIZE_OF_LIFE = 3;
 	HeroMovementState* movementState;
