@@ -91,17 +91,21 @@ void AppDelegate::preloadAllSound() {
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_BLOCK.c_str());
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_UPGRADE_COMPLETE.c_str());
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_PUI.c_str());
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_QUENCHING.c_str());
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_SMELTING.c_str());
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(AudioPath::SOUND_HAMMER.c_str());
+
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(AudioPath::BGM_NEO_ROCK.c_str());
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(AudioPath::BGM_DIALOG.c_str());
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(AudioPath::BGM_CLEAR.c_str());
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(AudioPath::BGM_ENTER.c_str());
-
+	
 }
 
 // This function will be called when the app is inactive. When comes a phone call,it's be invoked too
 void AppDelegate::applicationDidEnterBackground() {
     Director::getInstance()->stopAnimation();
-
+	CocosDenshion::SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
     // if you use SimpleAudioEngine, it must be pause
     // SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 }
@@ -109,7 +113,7 @@ void AppDelegate::applicationDidEnterBackground() {
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground() {
     Director::getInstance()->startAnimation();
-
+	CocosDenshion::SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
     // if you use SimpleAudioEngine, it must resume here
     // SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
 }

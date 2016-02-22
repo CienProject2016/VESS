@@ -40,6 +40,9 @@ const string ImagePath::PAUSE_BUTTON = IMAGE_PATH + "pause_button.png";
 const string ImagePath::PAUSE_BUTTON_ACTIVE = IMAGE_PATH + "pause_button_active.png";
 const string ImagePath::RESUME_BUTTON = IMAGE_PATH + "resume_button.png";
 const string ImagePath::RESUME_BUTTON_ACTIVE = IMAGE_PATH + "resume_button_active.png";
+const string ImagePath::BAR_1 = IMAGE_PATH + "bar1.png";
+const string ImagePath::BAR_2 = IMAGE_PATH + "bar2.png";
+const string ImagePath::BAR_3 = IMAGE_PATH + "bar3.png";
 
 //Audio Resources
 const string AudioPath::AUDIO_PATH = "audio/";
@@ -52,6 +55,9 @@ const string AudioPath::SOUND_OPEN_DOOR = AUDIO_PATH + SOUND + "open_door.mp3";
 const string AudioPath::SOUND_UPGRADE_COMPLETE = AUDIO_PATH + SOUND + "upgrade_complete.wav";
 const string AudioPath::SOUND_PUI = AUDIO_PATH + SOUND + "pui.mp3";
 const string AudioPath::SOUND_BLOCK = AUDIO_PATH + SOUND + "block.mp3";
+const string AudioPath::SOUND_HAMMER = AUDIO_PATH + SOUND + "hammer.mp3";
+const string AudioPath::SOUND_QUENCHING = AUDIO_PATH + SOUND + "quenching.mp3";
+const string AudioPath::SOUND_SMELTING = AUDIO_PATH + SOUND + "smelting.mp3";
 const string AudioPath::BGM_NEO_ROCK = AUDIO_PATH + BGM + "neo_rock.mp3";
 const string AudioPath::BGM_DIALOG = AUDIO_PATH + BGM + "dialog.mp3";
 const string AudioPath::BGM_CLEAR = AUDIO_PATH + BGM + "clear.mp3";

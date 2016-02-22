@@ -1,5 +1,0 @@
-idle:0-23
-run:25-37
-attack:38-57
-smitten:58-66
-death:67-99

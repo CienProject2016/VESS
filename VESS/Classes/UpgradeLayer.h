@@ -24,7 +24,7 @@ class UpgradeLayer : public Layer
 public:
 	enum ZOrder {SMELTING_IMAGE, HAMMERING_IMAGE, QUENCHING_IMAGE, UPGRADE_IMAGE, REPAIR_IMAGE, COMPLETE_UPGRADE_BUTTON, COMPLETE_REPAIR_BUTTON, DIMENSION_GATE_IMAGE, ITEM_IMAGE, ITEM_NAME,UPGRADE_COMPLETE_LAYER, MINI_POPUP_LAYER, GRAY_LAYER, PAUSE_BUTTON};
 	enum UpgradePhase { NONE, UPGRADE, REPAIR };
-	enum Gauge {SMELTING_GAUGE, HAMMERING_GAUGE, QUENCHING_GAUGE};
+	enum GaugeType {SMELTING, HAMMERING, QUENCHING};
 	virtual bool init();
 	virtual void update(float delta);
 
@@ -40,10 +40,11 @@ public:
 	void initPercentageLabel();
 	void setListener();
 
+	void showSoundEffect(GaugeType);
 	void updatePercentLabel();
 	void redrawUpgradeGoldLabel();
 	void increaseGauge(CCProgressTimer* gauge);
-	void increaseGaugeCallback(Ref*, ui::Widget::TouchEventType, CCProgressTimer* gauge);
+	void increaseGaugeCallback(Ref*, ui::Widget::TouchEventType, CCProgressTimer* gauge, GaugeType gaugeType);
 	void gaugeChecker();
 	void upgradeClicked(Ref*, ui::Widget::TouchEventType);
 	void repairClicked(Ref*, ui::Widget::TouchEventType);

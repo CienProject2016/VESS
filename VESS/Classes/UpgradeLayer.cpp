@@ -139,7 +139,7 @@ void UpgradeLayer::initSmithAndBackground() {
 
 void UpgradeLayer::initGaugeBar() {
 	//smelting bar create
-	Sprite *smeltingTimeBar = Sprite::create("timebar.png");
+	Sprite *smeltingTimeBar = Sprite::create(ImagePath::BAR_1);
 	smeltingBarGauge = ProgressTimer::create(smeltingTimeBar);
 	smeltingBarGauge->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.95));
 	smeltingBarGauge->setPercentage(0);
@@ -151,7 +151,7 @@ void UpgradeLayer::initGaugeBar() {
 	smeltingGaugeDownSpeed = 5;
 
 	//hammering bar create
-	Sprite *hammeringTimeBar = Sprite::create("timebar.png");
+	Sprite *hammeringTimeBar = Sprite::create(ImagePath::BAR_2);
 	hammeringBarGauge = ProgressTimer::create(hammeringTimeBar);
 	hammeringBarGauge->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.9));
 	hammeringBarGauge->setPercentage(0);
@@ -163,7 +163,7 @@ void UpgradeLayer::initGaugeBar() {
 	hammeringGaugeDownSpeed = 10;
 
 	//quenching bar create
-	Sprite *quenchingTimeBar = Sprite::create("timebar.png");
+	Sprite *quenchingTimeBar = Sprite::create(ImagePath::BAR_3);
 	quenchingBarGauge = ProgressTimer::create(quenchingTimeBar);
 	quenchingBarGauge->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.85));
 	quenchingBarGauge->setPercentage(0);
@@ -207,9 +207,9 @@ void UpgradeLayer::initButtonUi() {
 	quenchingButton->setPosition(Vec2(origin.x + visibleSize.width * 0.32f, origin.y + visibleSize.height*0.4f));
 	quenchingButton->setScale(1.0f);
 
-	smeltingButton->addTouchEventListener(CC_CALLBACK_2(UpgradeLayer::increaseGaugeCallback, this, smeltingBarGauge));
-	hammeringButton->addTouchEventListener(CC_CALLBACK_2(UpgradeLayer::increaseGaugeCallback, this, hammeringBarGauge));
-	quenchingButton->addTouchEventListener(CC_CALLBACK_2(UpgradeLayer::increaseGaugeCallback, this, quenchingBarGauge));
+	smeltingButton->addTouchEventListener(CC_CALLBACK_2(UpgradeLayer::increaseGaugeCallback, this, smeltingBarGauge, GaugeType::SMELTING));
+	hammeringButton->addTouchEventListener(CC_CALLBACK_2(UpgradeLayer::increaseGaugeCallback, this, hammeringBarGauge, GaugeType::HAMMERING));
+	quenchingButton->addTouchEventListener(CC_CALLBACK_2(UpgradeLayer::increaseGaugeCallback, this, quenchingBarGauge, GaugeType::QUENCHING));
 	
 	smeltingButton->setTag(ZOrder::SMELTING_IMAGE);
 	hammeringButton->setTag(ZOrder::HAMMERING_IMAGE);
@@ -380,26 +380,42 @@ void UpgradeLayer::pauseCallback(cocos2d::Ref* pSender, ui::Widget::TouchEventTy
 
 		}
 	}
-											break;
+	break;
 	case ui::Widget::TouchEventType::CANCELED:
 		break;
 	}
 }
 
-void UpgradeLayer::increaseGaugeCallback(Ref* sender, ui::Widget::TouchEventType type, CCProgressTimer* gauge)
+void UpgradeLayer::increaseGaugeCallback(Ref* sender, ui::Widget::TouchEventType type, CCProgressTimer* gauge, GaugeType gaugeType)
 {
 	switch (type) {
 	case ui::Widget::TouchEventType::BEGAN:
+		showSoundEffect(gaugeType);
 		break;
 	case ui::Widget::TouchEventType::MOVED:
 		break;
 	case ui::Widget::TouchEventType::ENDED:
+		
 		increaseGauge(gauge);
 		break;
 	case ui::Widget::TouchEventType::CANCELED:
 		break;
 	}
 
+}
+
+void UpgradeLayer::showSoundEffect(GaugeType gaugeType) {
+	switch (gaugeType) {
+	case HAMMERING:
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_HAMMER.c_str());
+		break;
+	case QUENCHING:
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_QUENCHING.c_str());
+		break;
+	case SMELTING:
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_SMELTING.c_str());
+		break;
+	}
 }
 
 void UpgradeLayer::showUiButton(UpgradePhase upgradePhase) {

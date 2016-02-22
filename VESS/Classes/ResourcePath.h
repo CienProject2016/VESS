@@ -42,6 +42,9 @@ public:
 	const static string PAUSE_BUTTON_ACTIVE;
 	const static string RESUME_BUTTON;
 	const static string RESUME_BUTTON_ACTIVE;	
+	const static string BAR_1;
+	const static string BAR_2;
+	const static string BAR_3;
 };
 
 struct ActionPath {
@@ -72,6 +75,9 @@ public:
 	const static string BGM_DIALOG;
 	const static string BGM_CLEAR;
 	const static string BGM_ENTER;
+	const static string SOUND_QUENCHING;
+	const static string SOUND_HAMMER;
+	const static string SOUND_SMELTING;
 };
 
 struct ElementName {

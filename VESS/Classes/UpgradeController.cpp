@@ -98,8 +98,8 @@ bool UpgradeController::upgradeShield() {
 			Shield* newShield = shieldList->at(upgradeId - 1);
 			newShield->setUpgradeId(upgradeId);
 			newShield->setName(newShield->getName());
-			newShield->setMaxDurability(newShield->getMaxDurability()+oldShield->getDurability());
-			newShield->setDurability(newShield->getDurability()+oldShield->getDurability());
+			newShield->setMaxDurability(newShield->getMaxDurability());
+			newShield->setDurability(newShield->getDurability());
 			newShield->setUpgradeGold(newShield->getUpgradeGold());
 			newShield->setRepairGold(newShield->getRepairGold());
 			GameData::getInstance()->setShield(newShield);
