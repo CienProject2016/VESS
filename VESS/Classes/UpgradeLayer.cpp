@@ -58,7 +58,6 @@ void UpgradeLayer::initMiniPopup(string message) {
 	miniPopup->setName("miniPopup");
 	this->addChild(miniPopup, ZOrder::MINI_POPUP_LAYER);
 }
-
 void UpgradeLayer::initItemImage() {
 	auto gateImage = Sprite::create(ImagePath::DIMENSION_GATE_BUTTON_PATH);
 	gateImage->setPosition(Vec2(visibleSize.width * 0.35f, visibleSize.height * 0.60f));
@@ -115,7 +114,7 @@ void UpgradeLayer::setListener() {
 }
 
 void UpgradeLayer::initSmithAndBackground() {
-	auto backgroundImage = Sprite::create("Images/background_image.png");
+	auto backgroundImage = Sprite::create("Images/smith_background.png");
 	auto background2Image = Sprite::create("Images/background2_image.png");
 	
 	smithNode = CSLoader::createNode("smith.csb");
@@ -127,8 +126,9 @@ void UpgradeLayer::initSmithAndBackground() {
 	this->scheduleUpdate();
 
 	// position the sprite on the center of the screen
-	backgroundImage->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.4f));
-	backgroundImage->setScale(2.4f);
+	backgroundImage->setPosition(Vec2(origin.x + 0, origin.x +0));
+	backgroundImage->setAnchorPoint(Vec2(0, 0));
+	smithImage->setScale(1.0f);
 
 	background2Image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.4f));
 	background2Image->setScale(2.0f);
@@ -144,42 +144,54 @@ void UpgradeLayer::initSmithAndBackground() {
 }
 
 void UpgradeLayer::initGaugeBar() {
+	weakFire = Sprite::create(ImagePath::WEAK_FIRE);
+	middleFire = Sprite::create(ImagePath::MIDDLE_FIRE);
+	strongFire = Sprite::create(ImagePath::STRONG_FIRE);
+
+	weakFire->setPosition(Vec2(visibleSize.width * 0.1f, visibleSize.height * 0.96f));
+	middleFire->setPosition(Vec2(visibleSize.width * 0.23f, visibleSize.height *0.96f));
+	strongFire->setPosition(Vec2(visibleSize.width * 0.36f, visibleSize.height *0.96f));
+
+
 	//smelting bar create
 	Sprite *smeltingTimeBar = Sprite::create(ImagePath::BAR_1);
 	smeltingBarGauge = ProgressTimer::create(smeltingTimeBar);
-	smeltingBarGauge->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.95));
+	smeltingBarGauge->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.92));
 	smeltingBarGauge->setPercentage(0);
 	smeltingBarGauge->setMidpoint(ccp(0, 0.5));
 	smeltingBarGauge->setBarChangeRate(ccp(1, 0));
 	smeltingBarGauge->setType(kCCProgressTimerTypeBar);
 	smeltingTimeOutLine = Sprite::create("timeoutline.png");
-	smeltingTimeOutLine->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.95));
+	smeltingTimeOutLine->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.92));
 	smeltingGaugeDownSpeed = 5;
 
 	//hammering bar create
 	Sprite *hammeringTimeBar = Sprite::create(ImagePath::BAR_2);
 	hammeringBarGauge = ProgressTimer::create(hammeringTimeBar);
-	hammeringBarGauge->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.9));
+	hammeringBarGauge->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.87));
 	hammeringBarGauge->setPercentage(0);
 	hammeringBarGauge->setMidpoint(ccp(0, 0.5));
 	hammeringBarGauge->setBarChangeRate(ccp(1, 0));
 	hammeringBarGauge->setType(kCCProgressTimerTypeBar);
 	hammeringTimeOutLine = Sprite::create("timeoutline.png");
-	hammeringTimeOutLine->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.9));
+	hammeringTimeOutLine->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.87));
 	hammeringGaugeDownSpeed = 10;
 
 	//quenching bar create
 	Sprite *quenchingTimeBar = Sprite::create(ImagePath::BAR_3);
 	quenchingBarGauge = ProgressTimer::create(quenchingTimeBar);
-	quenchingBarGauge->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.85));
+	quenchingBarGauge->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.82));
 	quenchingBarGauge->setPercentage(0);
 	quenchingBarGauge->setMidpoint(ccp(0, 0.5));
 	quenchingBarGauge->setBarChangeRate(ccp(1, 0));
 	quenchingBarGauge->setType(kCCProgressTimerTypeBar);
 	quenchingTimeOutLine = Sprite::create("timeoutline.png");
-	quenchingTimeOutLine->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.85));
+	quenchingTimeOutLine->setPosition(Vec2(origin.x + visibleSize.width * 0.22, origin.y + visibleSize.height*0.82));
 	quenchingGaugeDownSpeed = 15;
 
+	this->addChild(strongFire,3);
+	this->addChild(middleFire,3);
+	this->addChild(weakFire,3);
 	this->addChild(smeltingBarGauge, 2);
 	this->addChild(smeltingTimeOutLine);
 	this->addChild(hammeringBarGauge, 2);
@@ -202,15 +214,15 @@ void UpgradeLayer::initButtonUi() {
 	repairButton->addTouchEventListener(CC_CALLBACK_2(UpgradeLayer::repairClicked, this));
 
 	smeltingButton = cocos2d::ui::Button::create(ImagePath::SMELTING_BUTTON, ImagePath::SMELTING_BUTTON_ACTIVE, ImagePath::DISABLE_BUTTON_PATH);
-	smeltingButton->setPosition(Vec2(origin.x + visibleSize.width * 0.12f, origin.y + visibleSize.height*0.4f));
+	smeltingButton->setPosition(Vec2(origin.x + visibleSize.width * 0.12f, origin.y + visibleSize.height*0.45f));
 	smeltingButton->setScale(1.0f);
 
 	hammeringButton = cocos2d::ui::Button::create(ImagePath::HAMMERING_BUTTON, ImagePath::HAMMERING_BUTTON_ACTIVE, ImagePath::DISABLE_BUTTON_PATH);
-	hammeringButton->setPosition(Vec2(origin.x + visibleSize.width * 0.22f, origin.y + visibleSize.height*0.2f));
+	hammeringButton->setPosition(Vec2(origin.x + visibleSize.width * 0.22f, origin.y + visibleSize.height*0.3f));
 	hammeringButton->setScale(1.0f);
 
 	quenchingButton = cocos2d::ui::Button::create(ImagePath::QUENCHING_BUTTON, ImagePath::QUENCHING_BUTTON_ACTIVE, ImagePath::DISABLE_BUTTON_PATH);
-	quenchingButton->setPosition(Vec2(origin.x + visibleSize.width * 0.32f, origin.y + visibleSize.height*0.4f));
+	quenchingButton->setPosition(Vec2(origin.x + visibleSize.width * 0.32f, origin.y + visibleSize.height*0.15f));
 	quenchingButton->setScale(1.0f);
 
 	smeltingButton->addTouchEventListener(CC_CALLBACK_2(UpgradeLayer::increaseGaugeCallback, this, smeltingBarGauge, GaugeType::SMELTING));
@@ -367,20 +379,21 @@ void UpgradeLayer::pauseCallback(cocos2d::Ref* pSender, ui::Widget::TouchEventTy
 		if (cheatCount == 5) {
 			GameData::getInstance()->setGold(100000000);
 		}
+		
 		auto pauseButton = (ui::Button*)getChildByName("pauseButton");
 		if (!GameData::getInstance()->getIsPause()) {
 			GameData::getInstance()->setIsPause(true);
 			Director::getInstance()->pause();
-			auto grayLayer = CCLayerColor::create(Color4B(0, 0, 0, 255 * 0.5), visibleSize.width, visibleSize.height);
-			grayLayer->setPosition(Vec2(0, 0));
-			this->addChild(grayLayer, GRAY_LAYER, "grayLayer");
+			PauseLayer* pauseLayer = PauseLayer::create();
+			pauseLayer->setPosition(Vec2(0, 0));
+			this->addChild(pauseLayer, GRAY_LAYER, "pauseLayer");
 			pauseButton->loadTextures(ImagePath::RESUME_BUTTON, ImagePath::RESUME_BUTTON_ACTIVE, ImagePath::DISABLE_BUTTON_PATH);
 
 		}
 		else {
 			GameData::getInstance()->setIsPause(false);
-			auto grayLayer = getChildByName("grayLayer");
-			removeChild(grayLayer);
+			auto pauseLayer = getChildByName("pauseLayer");
+			removeChild(pauseLayer);
 			Director::getInstance()->resume();
 			pauseButton->loadTextures(ImagePath::PAUSE_BUTTON, ImagePath::PAUSE_BUTTON_ACTIVE, ImagePath::DISABLE_BUTTON_PATH);
 
@@ -443,6 +456,9 @@ void UpgradeLayer::showUiButton(UpgradePhase upgradePhase) {
 		hammeringTimeOutLine->setVisible(false);
 		quenchingBarGauge->setVisible(false);
 		quenchingTimeOutLine->setVisible(false);
+		strongFire->setVisible(false);
+		weakFire->setVisible(false);
+		middleFire->setVisible(false);
 	}
 	else if(upgradePhase == UpgradePhase::UPGRADE){
 		upgradePercentLabel->setVisible(false);
@@ -460,6 +476,9 @@ void UpgradeLayer::showUiButton(UpgradePhase upgradePhase) {
 		hammeringTimeOutLine->setVisible(true);
 		quenchingBarGauge->setVisible(true);
 		quenchingTimeOutLine->setVisible(true);
+		strongFire->setVisible(true);
+		weakFire->setVisible(true);
+		middleFire->setVisible(true);
 	}
 	else if (upgradePhase == UpgradePhase::REPAIR) {
 		upgradePercentLabel->setVisible(false);
@@ -473,6 +492,9 @@ void UpgradeLayer::showUiButton(UpgradePhase upgradePhase) {
 		repairLabel->setVisible(false);
 		hammeringBarGauge->setVisible(true);
 		hammeringTimeOutLine->setVisible(true);
+		strongFire->setVisible(true);
+		weakFire->setVisible(true);
+		middleFire->setVisible(true);
 	}
 }
 void UpgradeLayer::gaugeChecker()

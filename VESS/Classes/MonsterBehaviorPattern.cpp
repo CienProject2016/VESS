@@ -21,7 +21,7 @@ void MonsterBehaviorPattern::setStateAndTimer(MonsterState state, float maxTimer
 }
 
 void MonsterBehaviorPattern::setStateAndTimer(MonsterState state, float maxTimer, float attackTimer) {
-	setStateAndTimer(state, maxTimer, 10000, 10000);
+	setStateAndTimer(state, maxTimer, attackTimer, 10000);
 }
 
 void MonsterBehaviorPattern::setStateAndTimer(MonsterState state, float maxTimer, float attackTimer, float effectTimer) {
@@ -36,14 +36,18 @@ void MonsterBehaviorPattern::setStateAndTimer(MonsterState state, float maxTimer
 void MonsterBehaviorPattern::decisionBehavior() {
 	switch (monster->kind) {
 	case Monster::Tauren:
+		if (state == stand)		setStateAndTimer(attack0, 1, 0.7f);
+		else if (state == attack0)	setStateAndTimer(attack1, 0.7f, 0.4f);
+		else if (state == attack1)	setStateAndTimer(attack2, 0.7f, 0.4f);
+		else if (state == attack2)	setStateAndTimer(stand, 1);
 		break;
 	case Monster::Slime:
 		if (state == stand)		setStateAndTimer(attack0, 1, 0.5f, 0.1f);
 		else if (state == attack0)	setStateAndTimer(attack1, 3.36f, 2);
 		else if (state == attack1)	setStateAndTimer(stand, 1);
-		playAnimationForState();
 		break;
 	}
+	playAnimationForState();
 }
 
 void MonsterBehaviorPattern::playAnimationForState() {
@@ -72,6 +76,9 @@ void MonsterBehaviorPattern::playAnimationForState() {
 void MonsterBehaviorPattern::attackToHero() {
 	switch (monster->kind) {
 	case Monster::Tauren:
+		if (state == attack0)		monster->field->getDaughter()->monsterAttackToHero(new HitArea(HitArea::center + HitArea::right));
+		else if (state == attack1)	monster->field->getDaughter()->monsterAttackToHero(new HitArea(HitArea::center + HitArea::right));
+		else if (state == attack2)	monster->field->getDaughter()->monsterAttackToHero(new HitArea(HitArea::center + HitArea::right));
 		break;
 	case Monster::Slime:
 		if (state == attack0)	monster->field->getDaughter()->monsterAttackToHero(new HitArea(HitArea::center + HitArea::right));
@@ -86,8 +93,17 @@ void MonsterBehaviorPattern::attackToHero() {
 }
 
 void MonsterBehaviorPattern::createEffect() {
-	EffectFactory* effect = EffectFactory::create(EffectFactory::SlimeAttack0, Vec2(0, 0));
-	monster->addChild(effect);
+	switch (monster->kind) {
+	case Monster::Tauren:
+		break;
+	case Monster::Slime:
+		if (state == attack0) {
+			EffectFactory* effect = EffectFactory::create(EffectFactory::SlimeAttack0, Vec2(0, 0));
+			monster->addChild(effect);
+		}
+		break;
+	}
+
 }
 
 void MonsterBehaviorPattern::update(float delta) {

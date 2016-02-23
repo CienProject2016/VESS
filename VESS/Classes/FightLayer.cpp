@@ -16,7 +16,7 @@
 bool FightLayer::init()
 {
 	if (!Layer::init())		return false;
-	
+	monsterIsDead = true;
 	visibleSize = Director::getInstance()->getVisibleSize();
 	origin = Director::getInstance()->getVisibleOrigin();
 
@@ -173,38 +173,59 @@ void FightLayer::showGameover()
 	}
 
 }
+bool FightLayer::isMonsterNotExist() {
+	return monsterIsDead;
+}
+void FightLayer::setMonsterNotExist(bool notExist) {
+	monsterIsDead = notExist;
+}
+
 void FightLayer::monsterSpawnUpdate(float delta) {
 	int moving_distance = GameData::getInstance()->getMovingDistance();
 	int stageLevel = GameData::getInstance()->getStageLevel();
 	Stage stageData = GameData::getInstance()->getStageList()->at(stageLevel);
 	vector<int> distance_data = stageData.getMonsterLengthInfo();
 	int monsterHealth = stageData.getHealth();
-	if (MonsterSpawnScheduler::isMonsterSpawnTime(moving_distance, distance_data) && this->monster == NULL) {
-		monster = Monster::create(this, Monster::Slime, monsterHealth);
-		this->addChild(monster, 1);
+	if (MonsterSpawnScheduler::isMonsterSpawnTime(moving_distance, distance_data) && isMonsterNotExist()) {
+
+		//이부분이 실제 몬스터를 추가하는 로직..
+		monsterCount++;
+		if (monsterCount > 1) {
+			monsterCount = 0;
+		}
+		if (monsterCount == 0) {
+			auto monster = Monster::create(this, Monster::Tauren, monsterHealth);
+			this->addChild(monster, 1, "monster");
+		}
+		else {
+			auto monster = Monster::create(this, Monster::Slime, monsterHealth);
+			this->addChild(monster, 1, "monster");
+		}
+
+			
+		//여기까지가 실제 몬스터를 추가하는 로직.
+		//몬스터::크리에이트(디스, 몬스터::이름, 헬뜨) 에서 몬스터::이름 만 변경하면 몬스터의 종류가 바뀐다!!
+
 		if (!GameData::getInstance()->getIsInTutorial()) {
 			GameData::getInstance()->setMovingDistance(moving_distance + 1);
 		}
 		daughter->setMovementState(new StayMovementState(daughter));
 		backgroundSpawnScheduler->setBackgroundSpeed(0);
-
 	}
-
 
 	int finalDistance = GameData::getInstance()->getCurrentStageInfo().getFinalDistance();
 
-	if (monster == NULL) {
+	if (isMonsterNotExist()) {
 		if (!GameData::getInstance()->getIsInTutorial()) {
 			movingDistanceReal += delta * movingVelocity;
 			if (moving_distance > finalDistance) {
+				movingVelocity = 0;
+				moving_distance -= 100;
 				backgroundSpawnScheduler->setBackgroundSpeed(0);
 				chest = Chest::create();
 				chest->setParentLayer(this);
 				this->addChild(chest);
 				daughter->setMovementState(new StayMovementState(daughter));
-			}
-			if (GameData::getInstance()->getCurrentStageInfo().getKey()) {
-				this->stageClear();
 			}
 		}
 	}
@@ -401,6 +422,7 @@ void FightLayer::redrawDimensionGate() {
 }
 
 Monster* FightLayer::getMonster() {
+	auto monster = (Monster*)getChildByName("monster");
 	return monster;
 }
 Hero* FightLayer::getDaughter() {
@@ -412,15 +434,17 @@ Chest* FightLayer::getChest() {
 
 
 void FightLayer::monsterDead() {
-	this->removeChild(monster);
-	monster = NULL;
+	auto monster = (Monster*)getChildByName("monster");
+	if (monster->kind == Monster::Slime) {
+		this->removeChild(monster);
+	}
+	setMonsterNotExist(true);
 	backgroundSpawnScheduler->setBackgroundSpeed(-200);
 	daughter->setMovementState(new RunMovementState(daughter));
 }
 
 void FightLayer::chestDead() {
 	this->removeChild(chest);
-	chest = NULL;
 	backgroundSpawnScheduler->setBackgroundSpeed(-100);
 
 	this->stageClear();

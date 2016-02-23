@@ -36,6 +36,7 @@ void HitArea::setArea(Area area) {
 int HitArea::getArea() {
 	return this->area;
 }
+/*
 bool HitArea::isCenter(int area) {
 	int buf = area;		//어떤 버퍼에 인수값을 받고.
 	buf %= 10;			//해당 자릿수만큼 남기고,
@@ -64,7 +65,7 @@ bool HitArea::isRight(int area) {
 	int buf = area;		//어떤 버퍼에 인수값을 받고.
 	buf /= 10000;		//해당 자릿수만큼 버리면,
 	return (0 < buf);	//내가 원하는 지점의 지역만 남게된다.
-}
+}*/
 bool HitArea::isIn(int heroArea, int hitArea) {
 	int buf = heroArea + hitArea;
 	int iljaritsu = 0;
@@ -100,4 +101,22 @@ MakeAnimationInfo* MonsterInfo::getAnimationInfo(Monster::Kind monster, AnimName
 		else if (anim == damage) {}
 		break;
 	}
+	return new MakeAnimationInfo(10000, "error", 0.1f);
+}
+
+CsbFrameTimeInfo* MonsterInfo::getCsbActionInfo(Monster::Kind monster, AnimName anim) {
+	switch (monster) {
+	case Monster::Tauren:
+		if (anim == stand)			return new CsbFrameTimeInfo(0, 23);
+		else if (anim == attack0)	return new CsbFrameTimeInfo(38, 57);	//아래로 공격
+		else if (anim == attack1)	return new CsbFrameTimeInfo(100, 112);	//중간 공격
+		else if (anim == attack2)	return new CsbFrameTimeInfo(115, 130);	//위로 공격
+		else if (anim == attack3) {}
+		else if (anim == dead)		return new CsbFrameTimeInfo(67, 99);
+		else if (anim == damage)	return new CsbFrameTimeInfo(42, 0.08f);
+		break;
+	case Monster::Slime:
+		break;
+	}
+	return new CsbFrameTimeInfo(10, 20);
 }
