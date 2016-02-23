@@ -48,7 +48,7 @@ void GameData::resetInfo() {
 
 void GameData::loadSaveInfo() {
 	if (!UserDefault::getInstance()->getStringForKey("swordName").empty()){
-		if (topStage != 0) {
+		if (UserDefault::getInstance()->getIntegerForKey("topStageLevel")!= 0) {
 			this->topStage = UserDefault::getInstance()->getIntegerForKey("topStageLevel");
 			this->gold = UserDefault::getInstance()->getIntegerForKey("gold");
 			sword->setUpgradeId(UserDefault::getInstance()->getIntegerForKey("swordUpgradeGold"));
@@ -67,7 +67,10 @@ void GameData::loadSaveInfo() {
 			shield->setRepairGold(UserDefault::getInstance()->getIntegerForKey("shieldRepairGold"));
 			shield->setUpgradeGold(UserDefault::getInstance()->getIntegerForKey("shieldUpgradeGold"));
 			shield->setName(UserDefault::getInstance()->getStringForKey("shieldName"));
-		}		
+		}
+		else {
+			resetInfo();
+		}
 	}
 }
 

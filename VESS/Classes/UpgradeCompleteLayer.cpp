@@ -53,14 +53,14 @@ void UpgradeCompleteLayer::showUpgradeInfo() {
 		statusLabel = Label::createWithSystemFont("", "Arial", 50);
 		statusLabel->setString(StringUtils::format("%s : %d", ATTACK_NAME, GameData::getInstance()->getSword()->getDamage()));
 		durabilityLabel = Label::createWithSystemFont("", "Arial", 50);
-		durabilityLabel->setString(StringUtils::format("%s : %d", MAX_DURABILITY_NAME, GameData::getInstance()->getSword()->getDurability()));
+		durabilityLabel->setString(StringUtils::format("%s : %d", MAX_DURABILITY_NAME, GameData::getInstance()->getSword()->getMaxDurability()));
 		break;
 	case GameData::ItemMode::SHIELD:
 		nameLabel = Label::createWithSystemFont("", "Arial", 50);
 		nameLabel->setString(StringUtils::format("%s : %s", SHIELD_NAME, GameData::getInstance()->getShield()->getName().c_str()));
 		statusLabel = Label::createWithSystemFont("", "Arial", 50);
 		durabilityLabel = Label::createWithSystemFont("", "Arial", 50);
-		durabilityLabel->setString(StringUtils::format("%s : %d", MAX_DURABILITY_NAME, GameData::getInstance()->getShield()->getDurability()));
+		durabilityLabel->setString(StringUtils::format("%s : %d", MAX_DURABILITY_NAME, GameData::getInstance()->getShield()->getMaxDurability()));
 		break;
 	}
 
@@ -123,6 +123,7 @@ void UpgradeCompleteLayer::updateUpgradeInfo() {
 	auto nameLabel = (Label*)getChildByName("nameLabel");
 	auto statusLabel = (Label*)getChildByName("statusLabel");
 	auto upgradeCompleteFrameImage = (Sprite*)getChildByName("upgradeCompleteFrameImage");
+	auto durabilityLabel = (Label*)getChildByName("durabilityLabel");
 	upgradeCompleteFrameImage->setTexture(ImagePath::UPGRADE_COMPLETE_POPUP_FRAME_PATH);
 	switch (GameData::getInstance()->getUpgradeItemMode()) {
 	case GameData::ItemMode::SWORD: {
@@ -131,11 +132,15 @@ void UpgradeCompleteLayer::updateUpgradeInfo() {
 		gradeLabel->setVisible(true);
 		nameLabel->setString(StringUtils::format("%s : %s", SWORD_NAME, GameData::getInstance()->getSword()->getName().c_str()));
 		statusLabel->setString(StringUtils::format("%s : %d", ATTACK_NAME, GameData::getInstance()->getSword()->getDamage()));
+		durabilityLabel->setString(StringUtils::format("%s : %d", DURABILITY_NAME, GameData::getInstance()->getSword()->getDurability()));
+
 	}
 		break;
 	case GameData::ItemMode::SHIELD:
 		gradeLabel->setVisible(false);
 		nameLabel->setString(StringUtils::format("%s : %s", SHIELD_NAME, GameData::getInstance()->getShield()->getName().c_str()));
+		durabilityLabel->setString(StringUtils::format("%s : %d", DURABILITY_NAME, GameData::getInstance()->getShield()->getDurability()));
+
 		break;
 	}
 }

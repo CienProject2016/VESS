@@ -167,6 +167,7 @@ void FightLayer::showGameover()
 {
 	if (daughter->getHp()==0)
 	{
+		GameData::getInstance()->loadSaveInfo();
 		auto gameoverPopup = (GameoverPopupLayer*)getChildByName("gameover");
 		gameoverPopup->setVisible(true);
 		gameoverPopup->setGameEnd(true);
