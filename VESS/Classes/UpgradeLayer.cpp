@@ -117,8 +117,14 @@ void UpgradeLayer::setListener() {
 void UpgradeLayer::initSmithAndBackground() {
 	auto backgroundImage = Sprite::create("Images/background_image.png");
 	auto background2Image = Sprite::create("Images/background2_image.png");
-	auto smithImage = Sprite::create("Images/smith_image.png");
-
+	
+	smithNode = CSLoader::createNode("smith.csb");
+	smithNode->setName("smithNode");
+	smithAction = CSLoader::createTimeline("smith.csb");
+	smithNode->runAction(smithAction);
+	smithAction->gotoFrameAndPlay(0, 0, false);
+	
+	this->scheduleUpdate();
 
 	// position the sprite on the center of the screen
 	backgroundImage->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.4f));
@@ -127,14 +133,14 @@ void UpgradeLayer::initSmithAndBackground() {
 	background2Image->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.4f));
 	background2Image->setScale(2.0f);
 
-	smithImage->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.4f));
-	smithImage->setScale(2.0f);
+	smithNode->setPosition(Vec2(origin.x + visibleSize.width * 0.2f, origin.y + visibleSize.height*0.4f));
+	
 
 
 	// add the sprite as a child to this layer
 	this->addChild(backgroundImage);
 	this->addChild(background2Image);
-	this->addChild(smithImage);
+	this->addChild(smithNode);
 }
 
 void UpgradeLayer::initGaugeBar() {
@@ -391,6 +397,7 @@ void UpgradeLayer::increaseGaugeCallback(Ref* sender, ui::Widget::TouchEventType
 	switch (type) {
 	case ui::Widget::TouchEventType::BEGAN:
 		showSoundEffect(gaugeType);
+		smithAction->gotoFrameAndPlay(0, 15, false);
 		break;
 	case ui::Widget::TouchEventType::MOVED:
 		break;

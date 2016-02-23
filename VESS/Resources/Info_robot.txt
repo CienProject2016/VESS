@@ -1,0 +1,5 @@
+5-20 idle
+27-59 attack down
+67-107 attack middle
+111-137 attack up
+139-155 die
