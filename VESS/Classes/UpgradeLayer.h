@@ -84,6 +84,8 @@ private:
 	bool isUpgrade = true;
 	char attribute;	
 	UpgradePhase currentUpgradePhase;
+	Node* smithNode;
+	timeline::ActionTimeline* smithAction;
 
 	ProgressTimer *smeltingBarGauge, *hammeringBarGauge, *quenchingBarGauge;
 	Sprite* smeltingTimeOutLine, *hammeringTimeOutLine, *quenchingTimeOutLine;

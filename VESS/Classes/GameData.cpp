@@ -2,7 +2,7 @@
 
 GameData* GameData::instance_ = nullptr;
 
-GameData::GameData() : currentUpgradeGrade(Item::Grade::A), isPause(false), isInTutorial(false), isTutorial(false), topStage(0), stageLevel(0), movingDistance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), gold(15), costume(0), key(1)
+GameData::GameData() : currentUpgradeGrade(Item::Grade::A), isPause(false), isInTutorial(false), isTutorial(false), topStage(0), stageLevel(0), movingDistance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), gold(600), costume(0), key(1)
 
 {
 
@@ -48,7 +48,7 @@ void GameData::resetInfo() {
 
 void GameData::loadSaveInfo() {
 	if (!UserDefault::getInstance()->getStringForKey("swordName").empty()){
-		if (topStage != 0) {
+		if (UserDefault::getInstance()->getIntegerForKey("topStageLevel")!= 0) {
 			this->topStage = UserDefault::getInstance()->getIntegerForKey("topStageLevel");
 			this->gold = UserDefault::getInstance()->getIntegerForKey("gold");
 			sword->setUpgradeId(UserDefault::getInstance()->getIntegerForKey("swordUpgradeGold"));
@@ -67,7 +67,10 @@ void GameData::loadSaveInfo() {
 			shield->setRepairGold(UserDefault::getInstance()->getIntegerForKey("shieldRepairGold"));
 			shield->setUpgradeGold(UserDefault::getInstance()->getIntegerForKey("shieldUpgradeGold"));
 			shield->setName(UserDefault::getInstance()->getStringForKey("shieldName"));
-		}		
+		}
+		else {
+			resetInfo();
+		}
 	}
 }
 

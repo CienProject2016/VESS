@@ -168,6 +168,13 @@ void Hero::monsterAttackToHero(HitArea* attackArea) {
 			decreaseHp(1);
 		}	
 	}
+	else if(hp==0){
+		
+			itemAction->gotoFrameAndPlay(145, 174, false);
+			action->gotoFrameAndPlay(145, 174, false);
+
+		
+	}
 }
 
 void Hero::setHitArea(int area) {
@@ -250,4 +257,5 @@ void Hero::decreaseHp(int hpSize)
 
 	EffectFactory* effect1 = EffectFactory::create(EffectFactory::DamageEffect1, Vec2(500, 500));
 	field->addChild(effect1);
+	
 }
