@@ -418,8 +418,8 @@ void FightLayer::monsterDead() {
 }
 
 void FightLayer::chestDead() {
-	this->removeChild(chest);
-	chest = NULL;
+	//this->removeChild(chest);
+	//chest = NULL;
 	backgroundSpawnScheduler->setBackgroundSpeed(-100);
 
 	this->stageClear();

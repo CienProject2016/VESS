@@ -33,9 +33,9 @@ void Chest::initWindowSize() {
 
 void Chest::initImage() {
 
-	image = Sprite::create("Images/chest.png");
-	this->addChild(image); //get animation data 
-	image->setPosition(0, 0);
+	chest = Sprite::create("Images/chest.png");
+	this->addChild(chest); //get animation data 
+	chest->setPosition(0, 0);
 	this->setPosition(Vec2(windowSize.width * 0.7f, windowSize.height * 0.4f));
 }
 
@@ -61,7 +61,6 @@ bool Chest::isDead()
 {
 	if (this->hp <= 0)
 	{
-		dropItem();
 		return true;
 	}
 	return false;
@@ -97,6 +96,18 @@ void Chest::damage(int dam) {
 
 	log("chest HP is : %d", hp);
 	if (hp <= 0) {
+		newChest = Sprite::create("Images/chest.png");
+		newChest->setPosition(0, 0);
+		this->setPosition(Vec2(windowSize.width * 0.7f, windowSize.height * 0.4f));
+		this->removeChild(chest);
+
+		chest = new Chest;
+		chest = newChest;
+		this->setPosition(Vec2(windowSize.width * 0.7f, windowSize.height * 0.4f));
+
+		this->addChild(chest);
+
+		dropItem();
 		
 		field->chestDead();
 	}

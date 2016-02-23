@@ -46,6 +46,10 @@ void EffectFactory::update(float delta) {
 	timer += delta;
 	if (maxTimer <= timer) {
 		removeFromParent();
+		
+		EffectFactory* newEfxFactory = create(SlimeDeadAnimation, Vec2(0, 0));
+		EffectFactory* effectFactory = new EffectFactory();
+		effectFactory = newEfxFactory;
 	}
 	else {
 		if (kind == SlimeDeadAnimation) {
