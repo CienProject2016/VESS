@@ -20,6 +20,7 @@ void Monster::init(FightLayer* layer, Monster::Kind kind, int health){
 	{
 		this->kind = kind;
 		field = layer;
+		field->setMonsterNotExist(false);
 		isDead = false;
 		initWindowSize();
 		initImage();

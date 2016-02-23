@@ -53,6 +53,9 @@ const string ImagePath::BACKGROUND_CAVE_2_1 = BACKGROUND_PATH + "background2_1.p
 const string ImagePath::BACKGROUND_CAVE_2_2 = BACKGROUND_PATH + "background2_2.png";
 const string ImagePath::BACKGROUND_CAVE_2_3 = BACKGROUND_PATH + "background2_3.png";
 const string ImagePath::BACKGROUND_CAVE_2_4 = BACKGROUND_PATH + "background2_4.png";
+const string ImagePath::STRONG_FIRE = IMAGE_PATH + "strong_fire.png";
+const string ImagePath::MIDDLE_FIRE = IMAGE_PATH + "middle_fire.png";
+const string ImagePath::WEAK_FIRE = IMAGE_PATH + "weak_fire.png";
 
 //Audio Resources
 const string AudioPath::AUDIO_PATH = "audio/";

@@ -15,6 +15,7 @@
 #include "UpgradeCompleteLayer.h"
 #include "ResourcePath.h"
 #include "ui/CocosGUI.h"
+#include "PauseLayer.h"
 
 USING_NS_CC;
 using namespace std;
@@ -71,7 +72,8 @@ private:
 	Label* upgradeLabel;
 	Label* repairLabel;
 	Label *repairPercentLabel, *upgradePercentLabel;
-	Sprite* itemImage;	
+	Sprite* itemImage;
+	Sprite *strongFire, *weakFire, *middleFire;
 	Sword getSword;
 	int upgradeGold;
 	int repairGold;

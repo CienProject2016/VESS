@@ -55,6 +55,9 @@ public:
 	const static string BACKGROUND_CAVE_2_2;
 	const static string BACKGROUND_CAVE_2_3;
 	const static string BACKGROUND_CAVE_2_4;
+	const static string STRONG_FIRE;
+	const static string MIDDLE_FIRE;
+	const static string WEAK_FIRE;
 };
 
 struct ActionPath {
