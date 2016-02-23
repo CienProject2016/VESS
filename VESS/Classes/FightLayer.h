@@ -26,14 +26,16 @@ public:
 	void monsterSpawnUpdate(float delta);
 	void initGameoverPopup(string);
 	void showGameover();
-
+	bool isMonsterNotExist();
+	void setMonsterNotExist(bool);
 	Monster* getMonster();
 	Hero* getDaughter();
 	Chest* getChest();
 private: 
 	Size visibleSize;
 	Vec2 origin;
-
+	bool monsterIsDead;
+	
 	Sprite ** heart;
 
 	void initButton();
@@ -56,7 +58,6 @@ private:
 	Label* currentGoldLabel;
 	BattleOperator* operator_;		
 	Hero* daughter;
-	Monster* monster;
 	Chest* chest;
 	Sprite* itemImage;
 	Label* itemName;
@@ -79,6 +80,7 @@ private:
 	const int LIFE_COUNT = 3;
 	int fullLifeCount = LIFE_COUNT;
 	int damage = 20;
+	int monsterCount = 0;
 	int temp;
 };
 
