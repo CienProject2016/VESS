@@ -63,27 +63,31 @@ void UpgradeCompleteLayer::showUpgradeInfo() {
 		durabilityLabel->setString(StringUtils::format("%s : %d", MAX_DURABILITY_NAME, GameData::getInstance()->getShield()->getMaxDurability()));
 		break;
 	}
+	/*if (GameData::getInstance()->getUpgradeItemMode() == GameData::ItemMode::SWORD) {
+		this->addChild(statusLabel);
+	}*/
+		gradeLabel = Label::createWithSystemFont("", "Arial", 50);
+		gradeLabel->setColor(Color3B(0, 0, 0));
+		gradeLabel->setPosition(Vec2(visibleSize.width * 0.272f, visibleSize.height*0.33f));
 
-	gradeLabel = Label::createWithSystemFont("", "Arial", 50);
-	gradeLabel->setColor(Color3B(0, 0, 0));
-	gradeLabel->setPosition(Vec2(visibleSize.width * 0.272f, visibleSize.height*0.33f));
-
-	nameLabel->setAnchorPoint(Vec2(0, 0));
-	statusLabel->setAnchorPoint(Vec2(0, 0));
-	durabilityLabel->setAnchorPoint(Vec2(0, 0));
-	nameLabel->setColor(Color3B(0, 0, 0));
-	statusLabel->setColor(Color3B(0, 0, 0));
-	nameLabel->setPosition(Vec2(visibleSize.width * 0.21f, visibleSize.height*0.26f));
-	statusLabel->setPosition(Vec2(visibleSize.width * 0.21f, visibleSize.height*0.22f));
-	nameLabel->setName("nameLabel");
-	statusLabel->setName("statusLabel");
-	durabilityLabel->setName("durabilityLabel");
-	durabilityLabel->setPosition(Vec2(visibleSize.width * 0.21f, visibleSize.height * 0.34f));
-	durabilityLabel->setColor(Color3B(0, 0, 0));
-	this->addChild(gradeLabel);
-	this->addChild(durabilityLabel);
-	this->addChild(nameLabel);
-	this->addChild(statusLabel);
+		nameLabel->setAnchorPoint(Vec2(0, 0));
+		statusLabel->setAnchorPoint(Vec2(0, 0));
+		durabilityLabel->setAnchorPoint(Vec2(0, 0));
+		nameLabel->setColor(Color3B(0, 0, 0));
+		statusLabel->setColor(Color3B(0, 0, 0));
+		nameLabel->setPosition(Vec2(visibleSize.width * 0.21f, visibleSize.height*0.26f));
+		statusLabel->setPosition(Vec2(visibleSize.width * 0.21f, visibleSize.height*0.22f));
+		nameLabel->setName("nameLabel");
+		statusLabel->setName("statusLabel");
+		durabilityLabel->setName("durabilityLabel");
+		durabilityLabel->setPosition(Vec2(visibleSize.width * 0.21f, visibleSize.height * 0.34f));
+		durabilityLabel->setColor(Color3B(0, 0, 0));
+		this->addChild(statusLabel);
+		this->addChild(gradeLabel);
+		this->addChild(durabilityLabel);
+		this->addChild(nameLabel);
+		
+	
 }
 
 void UpgradeCompleteLayer::update(float delta) {
