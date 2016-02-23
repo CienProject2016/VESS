@@ -26,6 +26,13 @@ bool UpgradeCompleteLayer::init()
 	upgradeCompleteFrameImage->setName("upgradeCompleteFrameImage");
 	this->addChild(upgradeCompleteFrameImage);
 
+	auto itemImage = Sprite::create(ImagePath::SWORD_ICON);
+	itemImage->setAnchorPoint(Vec2(0, 0));
+	itemImage->setPosition(Vec2(95, 120));
+	itemImage->setName("itemImage");
+	itemImage->setScale(2.0f);
+	this->addChild(itemImage);
+
 	showUpgradeInfo();
 
 
@@ -53,36 +60,41 @@ void UpgradeCompleteLayer::showUpgradeInfo() {
 		statusLabel = Label::createWithSystemFont("", "Arial", 50);
 		statusLabel->setString(StringUtils::format("%s : %d", ATTACK_NAME, GameData::getInstance()->getSword()->getDamage()));
 		durabilityLabel = Label::createWithSystemFont("", "Arial", 50);
-		durabilityLabel->setString(StringUtils::format("%s : %d", MAX_DURABILITY_NAME, GameData::getInstance()->getSword()->getDurability()));
+		durabilityLabel->setString(StringUtils::format("%s : %d", MAX_DURABILITY_NAME, GameData::getInstance()->getSword()->getMaxDurability()));
 		break;
 	case GameData::ItemMode::SHIELD:
 		nameLabel = Label::createWithSystemFont("", "Arial", 50);
 		nameLabel->setString(StringUtils::format("%s : %s", SHIELD_NAME, GameData::getInstance()->getShield()->getName().c_str()));
 		statusLabel = Label::createWithSystemFont("", "Arial", 50);
 		durabilityLabel = Label::createWithSystemFont("", "Arial", 50);
-		durabilityLabel->setString(StringUtils::format("%s : %d", MAX_DURABILITY_NAME, GameData::getInstance()->getShield()->getDurability()));
+		durabilityLabel->setString(StringUtils::format("%s : %d", MAX_DURABILITY_NAME, GameData::getInstance()->getShield()->getMaxDurability()));
 		break;
 	}
+	/*if (GameData::getInstance()->getUpgradeItemMode() == GameData::ItemMode::SWORD) {
+		this->addChild(statusLabel);
+	}*/
+		gradeLabel = Label::createWithSystemFont("", "Arial", 50);
+		gradeLabel->setColor(Color3B(0, 0, 0));
+		gradeLabel->setPosition(Vec2(visibleSize.width * 0.272f, visibleSize.height*0.33f));
 
-	gradeLabel = Label::createWithSystemFont("", "Arial", 60);
+		nameLabel->setAnchorPoint(Vec2(0, 0));
+		statusLabel->setAnchorPoint(Vec2(0, 0));
+		durabilityLabel->setAnchorPoint(Vec2(0, 0));
+		nameLabel->setColor(Color3B(0, 0, 0));
+		statusLabel->setColor(Color3B(0, 0, 0));
+		nameLabel->setPosition(Vec2(visibleSize.width * 0.21f, visibleSize.height*0.26f));
+		statusLabel->setPosition(Vec2(visibleSize.width * 0.21f, visibleSize.height*0.22f));
+		nameLabel->setName("nameLabel");
+		statusLabel->setName("statusLabel");
+		durabilityLabel->setName("durabilityLabel");
+		durabilityLabel->setPosition(Vec2(visibleSize.width * 0.21f, visibleSize.height * 0.34f));
+		durabilityLabel->setColor(Color3B(0, 0, 0));
+		this->addChild(statusLabel);
+		this->addChild(gradeLabel);
+		this->addChild(durabilityLabel);
+		this->addChild(nameLabel);
+		
 	
-	gradeLabel->setPosition(Vec2(visibleSize.width * 0.25f, visibleSize.height*0.38f));
-
-	nameLabel->setAnchorPoint(Vec2(0, 0));
-	statusLabel->setAnchorPoint(Vec2(0, 0));
-	durabilityLabel->setAnchorPoint(Vec2(0, 0));
-	nameLabel->setColor(Color3B(0, 0, 0));
-	statusLabel->setColor(Color3B(0, 0, 0));
-	nameLabel->setPosition(Vec2(visibleSize.width * 0.23f, visibleSize.height*0.32f));
-	statusLabel->setPosition(Vec2(visibleSize.width * 0.23f, visibleSize.height*0.22f));
-	nameLabel->setName("nameLabel");
-	statusLabel->setName("statusLabel");
-	durabilityLabel->setName("durabilityLabel");
-	durabilityLabel->setPosition(Vec2(visibleSize.width * 0.23f, visibleSize.height * 0.42f));
-	this->addChild(gradeLabel);
-	this->addChild(durabilityLabel);
-	this->addChild(nameLabel);
-	this->addChild(statusLabel);
 }
 
 void UpgradeCompleteLayer::update(float delta) {
@@ -106,12 +118,19 @@ void UpgradeCompleteLayer::updateRepairInfo() {
 	upgradeCompleteFrameImage->setTexture(ImagePath::REPAIR_COMPLETE_POPUP_FRAME_PATH);
 	switch (GameData::getInstance()->getUpgradeItemMode()) {
 	case GameData::ItemMode::SWORD:
-
+		{
+		auto itemImage = (Sprite*)getChildByName("itemImage");
+		itemImage->setTexture(ImagePath::SWORD_ICON);
+		}
 		gradeLabel->setVisible(false);
 		nameLabel->setString(StringUtils::format("%s : %s", SWORD_NAME, GameData::getInstance()->getSword()->getName().c_str()));
 		durabilityLabel->setString(StringUtils::format("%s : %d", DURABILITY_NAME, GameData::getInstance()->getSword()->getDurability()));
 		break;
 	case GameData::ItemMode::SHIELD:
+	{
+		auto itemImage = (Sprite*)getChildByName("itemImage");
+		itemImage->setTexture(ImagePath::SHIELD_ICON);
+	}
 		gradeLabel->setVisible(false);
 		nameLabel->setString(StringUtils::format("%s : %s", SHIELD_NAME, GameData::getInstance()->getShield()->getName().c_str()));
 		durabilityLabel->setString(StringUtils::format("%s : %d", DURABILITY_NAME, GameData::getInstance()->getShield()->getDurability()));
@@ -123,19 +142,32 @@ void UpgradeCompleteLayer::updateUpgradeInfo() {
 	auto nameLabel = (Label*)getChildByName("nameLabel");
 	auto statusLabel = (Label*)getChildByName("statusLabel");
 	auto upgradeCompleteFrameImage = (Sprite*)getChildByName("upgradeCompleteFrameImage");
+	auto durabilityLabel = (Label*)getChildByName("durabilityLabel");
 	upgradeCompleteFrameImage->setTexture(ImagePath::UPGRADE_COMPLETE_POPUP_FRAME_PATH);
 	switch (GameData::getInstance()->getUpgradeItemMode()) {
 	case GameData::ItemMode::SWORD: {
+		{
+			auto itemImage = (Sprite*)getChildByName("itemImage");
+			itemImage->setTexture(ImagePath::SWORD_ICON);
+		}
 		string grade = setGrade();
 		gradeLabel->setString(StringUtils::format("%s : %s", UPGRADE_GRADE, grade.c_str()));
 		gradeLabel->setVisible(true);
 		nameLabel->setString(StringUtils::format("%s : %s", SWORD_NAME, GameData::getInstance()->getSword()->getName().c_str()));
 		statusLabel->setString(StringUtils::format("%s : %d", ATTACK_NAME, GameData::getInstance()->getSword()->getDamage()));
+		durabilityLabel->setString(StringUtils::format("%s : %d", DURABILITY_NAME, GameData::getInstance()->getSword()->getDurability()));
+
 	}
 		break;
 	case GameData::ItemMode::SHIELD:
+	{
+		auto itemImage = (Sprite*)getChildByName("itemImage");
+		itemImage->setTexture(ImagePath::SHIELD_ICON);
+	}
 		gradeLabel->setVisible(false);
 		nameLabel->setString(StringUtils::format("%s : %s", SHIELD_NAME, GameData::getInstance()->getShield()->getName().c_str()));
+		durabilityLabel->setString(StringUtils::format("%s : %d", DURABILITY_NAME, GameData::getInstance()->getShield()->getDurability()));
+
 		break;
 	}
 }

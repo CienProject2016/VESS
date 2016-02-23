@@ -65,7 +65,7 @@ void UpgradeController::upgradeSword(Item::Grade upgradeCoefficient) {
 		newSword->setName(newSword->getName());
 		newSword->setSpeed(newSword->getSpeed());
 		newSword->setMaxDurability(newSword->getMaxDurability());
-		newSword->setDurability(newSword->getMaxDurability());
+		newSword->setDurability(newSword->getDurability());
 		newSword->setUpgradeGold(newSword->getUpgradeGold());
 		newSword->setRepairGold(newSword->getRepairGold());
 		GameData::getInstance()->setSword(newSword);

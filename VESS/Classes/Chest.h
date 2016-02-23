@@ -17,7 +17,8 @@ protected:
 	void initHp(int hp);
 	void initWindowSize();
 	virtual void initImage();
-	Node* image;
+	Node* chest;
+	Node* newChest;
 	Size windowSize;
 	Vec2 origin;
 public:
