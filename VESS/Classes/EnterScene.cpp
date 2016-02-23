@@ -81,15 +81,6 @@ bool EnterScene::init()
 	goldIcon->setPosition(Vec2(origin.x + visibleSize.width*0.41f, origin.y + visibleSize.height * 0.935f));
 	this->addChild(goldIcon);
 	
-	
-	GameData::getInstance()->getSword()->getName();
-	itemName = Label::createWithTTF("", "fonts/arial.ttf", 50);
-	itemName->setString(StringUtils::format("%s", itemName));
-	itemName->setPosition(Vec2(origin.x + visibleSize.width * 0.450f, origin.y + visibleSize.height*0.935f));
-	itemName->setColor(Color3B(250, 250, 250));
-	this->addChild(itemName);
-
-
 
 	return true;
 }

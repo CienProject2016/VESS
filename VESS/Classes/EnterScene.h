@@ -15,7 +15,7 @@ private:
 	void initGoldLabel();
 	void redrawGold();
 	Label* currentGoldLabel;
-	Label* itemName;
+	Label* itemNameLabel;
 
 
 
