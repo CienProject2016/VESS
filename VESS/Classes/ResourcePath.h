@@ -26,7 +26,9 @@ public:
 	const static string QUENCHING_BUTTON_ACTIVE;
 	const static string HAMMERING_BUTTON;
 	const static string HAMMERING_BUTTON_ACTIVE;
+	const static string SWORD_ICON;
 	const static string SWORD_DURABILITY_ICON;
+	const static string SHIELD_ICON;
 	const static string SHIELD_DURABILITY_ICON;
 	const static string DUNGEON_DOOR_BEFORE;
 	const static string DUNGEON_DOOR_AFTER;
