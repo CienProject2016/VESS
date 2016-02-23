@@ -33,7 +33,7 @@ void Chest::initWindowSize() {
 
 void Chest::initImage() {
 
-	image = Sprite::create("Images/chest.png");
+	auto image = Sprite::create("Images/chest.png");
 	this->addChild(image); //get animation data 
 	image->setPosition(0, 0);
 	this->setPosition(Vec2(windowSize.width * 0.7f, windowSize.height * 0.4f));
