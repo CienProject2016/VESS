@@ -40,7 +40,6 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 					../../../Classes/MonsterBehaviorPattern.cpp \
 					../../../Classes/MonsterInfo.cpp \
                    ../../../Classes/MonsterSpawnScheduler.cpp \
-				   ../../../Classes/PauseLayer.cpp \
 				   ../../../Classes/ResourcePath.cpp \
 				   ../../../Classes/SaveController.cpp \
 				   ../../../Classes/Shield.cpp \
