@@ -26,6 +26,13 @@ bool UpgradeCompleteLayer::init()
 	upgradeCompleteFrameImage->setName("upgradeCompleteFrameImage");
 	this->addChild(upgradeCompleteFrameImage);
 
+	auto itemImage = Sprite::create(ImagePath::SWORD_ICON);
+	itemImage->setAnchorPoint(Vec2(0, 0));
+	itemImage->setPosition(Vec2(95, 120));
+	itemImage->setName("itemImage");
+	itemImage->setScale(2.0f);
+	this->addChild(itemImage);
+
 	showUpgradeInfo();
 
 
@@ -111,12 +118,19 @@ void UpgradeCompleteLayer::updateRepairInfo() {
 	upgradeCompleteFrameImage->setTexture(ImagePath::REPAIR_COMPLETE_POPUP_FRAME_PATH);
 	switch (GameData::getInstance()->getUpgradeItemMode()) {
 	case GameData::ItemMode::SWORD:
-
+		{
+		auto itemImage = (Sprite*)getChildByName("itemImage");
+		itemImage->setTexture(ImagePath::SWORD_ICON);
+		}
 		gradeLabel->setVisible(false);
 		nameLabel->setString(StringUtils::format("%s : %s", SWORD_NAME, GameData::getInstance()->getSword()->getName().c_str()));
 		durabilityLabel->setString(StringUtils::format("%s : %d", DURABILITY_NAME, GameData::getInstance()->getSword()->getDurability()));
 		break;
 	case GameData::ItemMode::SHIELD:
+	{
+		auto itemImage = (Sprite*)getChildByName("itemImage");
+		itemImage->setTexture(ImagePath::SHIELD_ICON);
+	}
 		gradeLabel->setVisible(false);
 		nameLabel->setString(StringUtils::format("%s : %s", SHIELD_NAME, GameData::getInstance()->getShield()->getName().c_str()));
 		durabilityLabel->setString(StringUtils::format("%s : %d", DURABILITY_NAME, GameData::getInstance()->getShield()->getDurability()));
@@ -132,6 +146,10 @@ void UpgradeCompleteLayer::updateUpgradeInfo() {
 	upgradeCompleteFrameImage->setTexture(ImagePath::UPGRADE_COMPLETE_POPUP_FRAME_PATH);
 	switch (GameData::getInstance()->getUpgradeItemMode()) {
 	case GameData::ItemMode::SWORD: {
+		{
+			auto itemImage = (Sprite*)getChildByName("itemImage");
+			itemImage->setTexture(ImagePath::SWORD_ICON);
+		}
 		string grade = setGrade();
 		gradeLabel->setString(StringUtils::format("%s : %s", UPGRADE_GRADE, grade.c_str()));
 		gradeLabel->setVisible(true);
@@ -142,6 +160,10 @@ void UpgradeCompleteLayer::updateUpgradeInfo() {
 	}
 		break;
 	case GameData::ItemMode::SHIELD:
+	{
+		auto itemImage = (Sprite*)getChildByName("itemImage");
+		itemImage->setTexture(ImagePath::SHIELD_ICON);
+	}
 		gradeLabel->setVisible(false);
 		nameLabel->setString(StringUtils::format("%s : %s", SHIELD_NAME, GameData::getInstance()->getShield()->getName().c_str()));
 		durabilityLabel->setString(StringUtils::format("%s : %d", DURABILITY_NAME, GameData::getInstance()->getShield()->getDurability()));

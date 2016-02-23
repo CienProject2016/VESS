@@ -2,7 +2,7 @@
 
 GameData* GameData::instance_ = nullptr;
 
-GameData::GameData() : currentUpgradeGrade(Item::Grade::A), isPause(false), isInTutorial(false), isTutorial(false), topStage(0), stageLevel(0), movingDistance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), gold(15), costume(0), key(1)
+GameData::GameData() : currentUpgradeGrade(Item::Grade::A), isPause(false), isInTutorial(false), isTutorial(false), topStage(0), stageLevel(0), movingDistance(0), sword(), shield(), itemMode(ItemMode::SWORD), stage(), gold(600), costume(0), key(1)
 
 {
 
