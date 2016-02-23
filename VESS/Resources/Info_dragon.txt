@@ -1,0 +1,5 @@
+
+upattack 15 -34
+downattack 37 -56
+idle 76 -90
+middleattack 97 -105
