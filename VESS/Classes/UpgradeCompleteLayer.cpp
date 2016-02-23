@@ -64,21 +64,22 @@ void UpgradeCompleteLayer::showUpgradeInfo() {
 		break;
 	}
 
-	gradeLabel = Label::createWithSystemFont("", "Arial", 60);
-	
-	gradeLabel->setPosition(Vec2(visibleSize.width * 0.25f, visibleSize.height*0.38f));
+	gradeLabel = Label::createWithSystemFont("", "Arial", 50);
+	gradeLabel->setColor(Color3B(0, 0, 0));
+	gradeLabel->setPosition(Vec2(visibleSize.width * 0.272f, visibleSize.height*0.33f));
 
 	nameLabel->setAnchorPoint(Vec2(0, 0));
 	statusLabel->setAnchorPoint(Vec2(0, 0));
 	durabilityLabel->setAnchorPoint(Vec2(0, 0));
 	nameLabel->setColor(Color3B(0, 0, 0));
 	statusLabel->setColor(Color3B(0, 0, 0));
-	nameLabel->setPosition(Vec2(visibleSize.width * 0.23f, visibleSize.height*0.32f));
-	statusLabel->setPosition(Vec2(visibleSize.width * 0.23f, visibleSize.height*0.22f));
+	nameLabel->setPosition(Vec2(visibleSize.width * 0.21f, visibleSize.height*0.26f));
+	statusLabel->setPosition(Vec2(visibleSize.width * 0.21f, visibleSize.height*0.22f));
 	nameLabel->setName("nameLabel");
 	statusLabel->setName("statusLabel");
 	durabilityLabel->setName("durabilityLabel");
-	durabilityLabel->setPosition(Vec2(visibleSize.width * 0.23f, visibleSize.height * 0.42f));
+	durabilityLabel->setPosition(Vec2(visibleSize.width * 0.21f, visibleSize.height * 0.34f));
+	durabilityLabel->setColor(Color3B(0, 0, 0));
 	this->addChild(gradeLabel);
 	this->addChild(durabilityLabel);
 	this->addChild(nameLabel);
