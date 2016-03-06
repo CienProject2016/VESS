@@ -22,7 +22,7 @@ private:
 	~EffectFactory();
 	Node* image;
 	EffectKind kind;
-	bool stopOnce;	//¾Ö´Ï¸ŞÀÌ¼ÇÀ» ÇÑ¹ø ¸ØÃß±âÀ§ÇØ ¼³Á¤.
+	bool stopOnce;	//ì• ë‹ˆë©”ì´ì…˜ì„ í•œë²ˆ ë©ˆì¶”ê¸°ìœ„í•´ ì„¤ì •.
 	float timer;
 	float maxTimer;
 	virtual void update(float delta);

@@ -384,16 +384,16 @@ void UpgradeLayer::pauseCallback(cocos2d::Ref* pSender, ui::Widget::TouchEventTy
 		if (!GameData::getInstance()->getIsPause()) {
 			GameData::getInstance()->setIsPause(true);
 			Director::getInstance()->pause();
-			PauseLayer* pauseLayer = PauseLayer::create();
-			pauseLayer->setPosition(Vec2(0, 0));
-			this->addChild(pauseLayer, GRAY_LAYER, "pauseLayer");
+			//PauseLayer* pauseLayer = PauseLayer::create();
+			//pauseLayer->setPosition(Vec2(0, 0));
+			//this->addChild(pauseLayer, GRAY_LAYER, "pauseLayer");
 			pauseButton->loadTextures(ImagePath::RESUME_BUTTON, ImagePath::RESUME_BUTTON_ACTIVE, ImagePath::DISABLE_BUTTON_PATH);
 
 		}
 		else {
 			GameData::getInstance()->setIsPause(false);
-			auto pauseLayer = getChildByName("pauseLayer");
-			removeChild(pauseLayer);
+			//auto pauseLayer = getChildByName("pauseLayer");
+			//removeChild(pauseLayer);
 			Director::getInstance()->resume();
 			pauseButton->loadTextures(ImagePath::PAUSE_BUTTON, ImagePath::PAUSE_BUTTON_ACTIVE, ImagePath::DISABLE_BUTTON_PATH);
 
