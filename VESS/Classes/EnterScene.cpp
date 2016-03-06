@@ -19,7 +19,7 @@ bool EnterScene::init()
 	{
 		return false;
 	}
-
+	StageLevelController::initiateProperty();
 	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(AudioPath::BGM_ENTER.c_str());
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();

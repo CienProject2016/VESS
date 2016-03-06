@@ -3,7 +3,12 @@
 #include "SaveController.h"
 
 void StageLevelController::setStageLevel(int level) {
-	GameData::getInstance()->setStageLevel(level);
+	GameData::getInstance()->setStageLevel(level);	
+}
+
+void StageLevelController::initiateProperty() {
+	GameData::getInstance()->getSword()->setDurability(GameData::getInstance()->getSword()->getMaxDurability());
+	GameData::getInstance()->getShield()->setDurability(GameData::getInstance()->getShield()->getMaxDurability());
 }
 
 void StageLevelController::clearStage(int level) {
