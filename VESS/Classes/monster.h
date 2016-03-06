@@ -48,7 +48,7 @@ private:
 	void initBehavior();
 	Size windowSize;
 	Vec2 origin;
-	void update_forDead(float delta);
+	void updateIfDead(float delta);
 	float targetPosition;	// 몬스터 생성시 뒤에서 생성 되었다가, 있어야 할 자리까지 가려고 할 때, 몬스터가 가려고 하는 위치.
 	bool isDead;
 	void positionUpdate(float delta);

@@ -83,7 +83,7 @@ void Monster::positionUpdate(float delta) {
 	}
 }
 
-void Monster::update_forDead(float delta) {
+void Monster::updateIfDead(float delta) {
 	if (isDead) {
 		int op = this->image->getOpacity();
 		op -= delta * 200;
@@ -101,7 +101,7 @@ void Monster::update(float delta) {
 	//몬스터의 업데이트에서 behavior 로 update 를 전달함으로써
 	//프로그래머가 직관적으로 무엇이 먼저 실행될지를 알 수 있다.
 	if(!isDead)	behavior->update(delta);	
-	update_forDead(delta);
+	updateIfDead(delta);
 }
 
 void Monster::initHp(int health) {

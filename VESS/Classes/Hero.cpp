@@ -169,11 +169,8 @@ void Hero::monsterAttackToHero(HitArea* attackArea) {
 		}	
 	}
 	else if(hp==0){
-		
 			itemAction->gotoFrameAndPlay(145, 174, false);
 			action->gotoFrameAndPlay(145, 174, false);
-
-		
 	}
 }
 

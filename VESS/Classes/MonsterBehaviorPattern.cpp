@@ -107,7 +107,9 @@ void MonsterBehaviorPattern::createEffect() {
 }
 
 void MonsterBehaviorPattern::update(float delta) {
-	timer += delta;
+	if (GameData::getInstance()->getIsInTutorial() == false) {
+		timer += delta;
+	}	
 	if (maxTimer < timer) {
 		timer = 0;
 		decisionBehavior();
