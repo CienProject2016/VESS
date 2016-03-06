@@ -228,8 +228,12 @@ void Hero::attackDamage() {
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_ATTACK_PATH.c_str());
 	}
 	else if (field->getChest() != NULL) {
-		field->getChest()->damage(30);
-		attackEffect(30);
+		int damage = GameData::getInstance()->getSword()->getDamage();
+		if (GameData::getInstance()->getSword()->getDurability() <= 0) {
+			damage *= 0.2;
+		}
+		field->getChest()->damage(damage);
+		attackEffect(damage);
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(AudioPath::SOUND_ATTACK_PATH.c_str());
 	}
 }
@@ -242,9 +246,6 @@ void Hero::setParentLayer(FightLayer* layer) {
 }
 
 void Hero::setMovementState(HeroMovementState* state) {
-	if (this->movementState != NULL) {
-		delete movementState;
-	}
 	movementState = state;
 	setAnimation(movementState->state);
 }

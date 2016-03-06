@@ -56,7 +56,7 @@ void EffectFactory::update(float delta) {
 			Vec2 pos = getPosition();
 			pos.x -= delta * 500;
 			setPosition(pos);
-			if (1.1f < timer) {	//¾Ö´Ï¸ŞÀÌ¼Ç ½ÇÇàÀÌ ³¡³ª¸é.
+			if (1.1f < timer) {	//ì• ë‹ˆë©”ì´ì…˜ ì‹¤í–‰ì´ ëë‚˜ë©´.
 				if (!stopOnce) {
 					stopOnce = true;
 					image->stopAllActions();
@@ -75,17 +75,17 @@ EffectFactory* EffectFactory::create(EffectKind effect, Vec2 pos) {
 }
 
 RepeatForever* EffectFactory::makeAction(MakeAnimationInfo* info) {
-	cocos2d::Vector<SpriteFrame*> animFrames;	// °¢°¢ÀÇ ÀÌ¹ÌÁö¸¦ ´ãÀ» °ø°£
-	char str[100] = { 0 };						// ÆÄÀÏ¸í º¯¼ö.
+	cocos2d::Vector<SpriteFrame*> animFrames;	// ê°ê°ì˜ ì´ë¯¸ì§€ë¥¼ ë‹´ì„ ê³µê°„
+	char str[100] = { 0 };						// íŒŒì¼ëª… ë³€ìˆ˜.
 
 	for (int i = 0; i < info->imageCount; i++) {
-		sprintf(str, "%s%02d.png", info->imageName, i); // i °ª¿¡ µû¶ó basic00.png, basic01.png..µîÀÌ µÈ´Ù.
+		sprintf(str, "%s%02d.png", info->imageName, i); // i ê°’ì— ë”°ë¼ basic00.png, basic01.png..ë“±ì´ ëœë‹¤.
 		SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(str);
-		animFrames.pushBack(frame);		// ¸¸µé¾îÁø ÆÄÀÏ¸íÀÇ ÀÌ¹ÌÁö¸¦ Ä³½Ã¿¡¼­ °¡Á®¿Í¼­ animFrames ¿¡´Ù°¡ ³Ö´Â´Ù.
+		animFrames.pushBack(frame);		// ë§Œë“¤ì–´ì§„ íŒŒì¼ëª…ì˜ ì´ë¯¸ì§€ë¥¼ ìºì‹œì—ì„œ ê°€ì ¸ì™€ì„œ animFrames ì—ë‹¤ê°€ ë„£ëŠ”ë‹¤.
 	}
 
-	Animation *animation = Animation::createWithSpriteFrames(animFrames, info->frameTime);	// ÁØºñµÈ ÀÌ¹ÌÁö ÇÁ·¹ÀÓµéÀ» frameTime (s) ¸¶´Ù ¹Ù²ãº¸¿©ÁÖµµ·Ï ¼³Á¤ÇØ¼­ animationÀ» ¸¸µç´Ù.   
-	Animate *animate = Animate::create(animation);	// animation ¼³Á¤À» ÀÌ¿ëÇØ¼­ Animate ¾×¼ÇÀ» ¸¸µç´Ù.
+	Animation *animation = Animation::createWithSpriteFrames(animFrames, info->frameTime);	// ì¤€ë¹„ëœ ì´ë¯¸ì§€ í”„ë ˆì„ë“¤ì„ frameTime (s) ë§ˆë‹¤ ë°”ê¿”ë³´ì—¬ì£¼ë„ë¡ ì„¤ì •í•´ì„œ animationì„ ë§Œë“ ë‹¤.   
+	Animate *animate = Animate::create(animation);	// animation ì„¤ì •ì„ ì´ìš©í•´ì„œ Animate ì•¡ì…˜ì„ ë§Œë“ ë‹¤.
 	delete info;
-	return RepeatForever::create(animate);	// °è¼Ó ¿òÁ÷ÀÌµµ·Ï RepeatForever ·Î Àâ¾ÆÁØ´Ù.  
+	return RepeatForever::create(animate);	// ê³„ì† ì›€ì§ì´ë„ë¡ RepeatForever ë¡œ ì¡ì•„ì¤€ë‹¤.  
 }

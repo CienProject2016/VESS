@@ -23,7 +23,7 @@ const string ImagePath::SMELTING_BUTTON_ACTIVE = IMAGE_PATH + "smelting_button_a
 const string ImagePath::QUENCHING_BUTTON = IMAGE_PATH + "quenching_button.png";
 const string ImagePath::QUENCHING_BUTTON_ACTIVE = IMAGE_PATH + "quenching_button_active.png";
 const string ImagePath::HAMMERING_BUTTON = IMAGE_PATH + "hammering_button.png";
-const string ImagePath::HAMMERING_BUTTON_ACTIVE = IMAGE_PATH + "hammering_button_active.png"; 
+const string ImagePath::HAMMERING_BUTTON_ACTIVE = IMAGE_PATH + "hammering_button_active.png";
 const string ImagePath::SWORD_DURABILITY_ICON = IMAGE_PATH + "sword_durability_icon.png";
 const string ImagePath::SWORD_ICON = IMAGE_PATH + "sword.png";
 const string ImagePath::SHIELD_ICON = IMAGE_PATH + "shield.png";
@@ -88,16 +88,16 @@ const int ActionPath::HERO_DEFENSE_END_FRAME = 25;
 const int ActionPath::HERO_RUN_START_FRAME = 0;
 
 //Element Names
+const string ElementName::UPGRADE_FAILED = "강화 실패!";
+const string ElementName::UPGRADE_PERCENT = "강화 확률";
+const string ElementName::REPAIR_PERCENT = "수리 확률";
+const string ElementName::REPAIR_FAILED = "수리 실패!";
 const string ElementName::UPGRADE_COMPLETE_LAYER = "UpgradeCompleteLayer";
 const string ElementName::DURABILITY_NAME = "내구도";
 const string ElementName::LOCKED = "[잠겨있음]";
 const string ElementName::TOUCH_SCREEN = "시작하시려면 화면을 터치하세요";
 const string ElementName::START_MESSAGE = "본격 강화 피지컬 액션 RPG";
 const string ElementName::NOT_ENOUGH_GOLD = "골드가 부족합니다.";
-const string ElementName::UPGRADE_FAILED = "강화 실패!";
-const string ElementName::UPGRADE_PERCENT = "강화 확률";
-const string ElementName::REPAIR_PERCENT = "수리 확률";
-const string ElementName::REPAIR_FAILED = "수리 실패!";
 
 //TutorialPath
 const string TutorialEventPath::DRAG_01 = "drag_01";
