@@ -2,7 +2,7 @@
 VeryExpensiveSword&amp;Shield (VESS)
 2015 ~ 2016 Game Making Project
 
-#Play Demo
+#Play Demo Video
 [![Screenshot](http://img.youtube.com/vi/fC2No9jUI5E/0.jpg)](https://www.youtube.com/watch?v=fC2No9jUI5E)
 
 # How to setup
